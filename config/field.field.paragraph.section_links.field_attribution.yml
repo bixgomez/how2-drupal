@@ -1,0 +1,19 @@
+uuid: ce3a0f8f-80f1-41c4-8bfb-4003a28b986f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_attribution
+    - paragraphs.paragraphs_type.section_links
+id: paragraph.section_links.field_attribution
+field_name: field_attribution
+entity_type: paragraph
+bundle: section_links
+label: Author/attribution
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

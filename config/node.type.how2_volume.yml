@@ -1,0 +1,17 @@
+uuid: 42df64dc-f98d-4226-aad0-b16a721c0056
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'How2 Volume'
+type: how2_volume
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

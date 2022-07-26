@@ -1,0 +1,29 @@
+uuid: 5ae4d75a-9078-4553-917a-6f31350a4790
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_how2_issue
+    - node.type.how2_issue
+    - node.type.how2_volume
+id: node.how2_volume.field_how2_issue
+field_name: field_how2_issue
+entity_type: node
+bundle: how2_volume
+label: 'How2 Issue'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      how2_issue: how2_issue
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

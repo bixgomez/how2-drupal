@@ -1,0 +1,37 @@
+uuid: 8f30a340-930e-4cc4-80ab-b9b61808c7d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_file_unit
+    - media.type.audio
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.video
+    - paragraphs.paragraphs_type.how2_section_links
+id: paragraph.how2_section_links.field_file_unit
+field_name: field_file_unit
+entity_type: paragraph
+bundle: how2_section_links
+label: 'Link to a file'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      audio: audio
+      document: document
+      image: image
+      remote_video: remote_video
+      video: video
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: audio
+field_type: entity_reference

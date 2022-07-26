@@ -1,0 +1,5 @@
+<?php
+
+function how2_preprocess_node(&$variables, $hook) {
+    $t = 1;
+}

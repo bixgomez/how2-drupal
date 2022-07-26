@@ -1,0 +1,73 @@
+uuid: 628f9179-c9d4-421a-9acd-152ea1cd351d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.how2_issue.field_archive_url
+    - field.field.node.how2_issue.field_issue_number
+    - field.field.node.how2_issue.field_people
+    - field.field.node.how2_issue.field_publication_date
+    - field.field.node.how2_issue.field_section
+    - node.type.how2_issue
+  module:
+    - datetime
+    - link
+    - user
+id: node.how2_issue.default
+targetEntityType: node
+bundle: how2_issue
+mode: default
+content:
+  field_archive_url:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_issue_number:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_people:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_publication_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_section:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  search_api_excerpt: true

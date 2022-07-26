@@ -1,0 +1,39 @@
+uuid: b9d6a5fc-f354-4585-a986-3af226ece109
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.however_volume.field_how_ever_issue
+    - field.field.node.however_volume.field_volume_number
+    - node.type.however_volume
+  module:
+    - user
+id: node.however_volume.default
+targetEntityType: node
+bundle: however_volume
+mode: default
+content:
+  field_how_ever_issue:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_volume_number:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,28 @@
+uuid: f6ded048-9041-4b83-9a6d-6a2acad9ab96
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_section
+    - node.type.how2_issue
+id: node.how2_issue.field_section
+field_name: field_section
+entity_type: node
+bundle: how2_issue
+label: Section
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      how2_issue: how2_issue
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

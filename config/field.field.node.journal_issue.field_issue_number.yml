@@ -1,0 +1,23 @@
+uuid: 6369bfbf-c459-4064-a5ff-eddb7d051a97
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_issue_number
+    - node.type.journal_issue
+id: node.journal_issue.field_issue_number
+field_name: field_issue_number
+entity_type: node
+bundle: journal_issue
+label: 'Issue Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

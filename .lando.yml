@@ -1,0 +1,18 @@
+name: however-demo
+recipe: pantheon
+config:
+  framework: drupal8
+  site: however-demo
+  id: 78d5fc9a-da95-4e48-911f-51edc37d0838
+  xdebug: true
+  config:
+    php: .lando.php.ini
+services:
+  appserver:
+    xdebug: true
+    config:
+      php: .lando.php.ini
+    type: php:7.4
+    overrides:
+      environment:
+        PHP_IDE_CONFIG: "serverName=appserver"

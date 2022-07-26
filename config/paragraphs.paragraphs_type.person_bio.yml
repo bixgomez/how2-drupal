@@ -1,0 +1,10 @@
+uuid: 7aece1d3-f1ba-4a78-a444-0860fc76d07a
+langcode: en
+status: true
+dependencies: {  }
+id: person_bio
+label: 'Person & Bio'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

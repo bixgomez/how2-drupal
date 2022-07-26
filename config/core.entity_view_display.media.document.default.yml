@@ -1,0 +1,35 @@
+uuid: e1f2292a-b1d5-45e9-8b1f-ba138e70f04a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.document.field_media_document
+    - media.type.document
+  module:
+    - pdf
+_core:
+  default_config_hash: XxUyhaTuM0OUUZpr8G6jdrFBEh5eag7auWxBKhm6cvY
+id: media.document.default
+targetEntityType: media
+bundle: document
+mode: default
+content:
+  field_media_document:
+    type: pdf_default
+    label: visually_hidden
+    settings:
+      keep_pdfjs: true
+      width: 100%
+      height: ''
+      page: null
+      zoom: null
+      custom_zoom: null
+      pagemode: null
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  created: true
+  name: true
+  thumbnail: true
+  uid: true

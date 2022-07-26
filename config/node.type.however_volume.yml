@@ -1,0 +1,17 @@
+uuid: 2590fce6-a450-4049-9d61-fbadda1710e1
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'HOW(ever) Volume'
+type: however_volume
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

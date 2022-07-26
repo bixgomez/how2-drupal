@@ -1,0 +1,20 @@
+uuid: 20424e10-7e1d-4b6a-b077-db7b9b3a3c2d
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - node
+id: node.field_journal_pdf
+field_name: field_journal_pdf
+entity_type: node
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

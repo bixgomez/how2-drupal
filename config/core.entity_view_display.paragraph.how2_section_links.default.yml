@@ -1,0 +1,49 @@
+uuid: eaa4fed2-4af2-4938-b75b-f2d092f6d547
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.how2_section_links.field_attribution
+    - field.field.paragraph.how2_section_links.field_file_unit
+    - field.field.paragraph.how2_section_links.field_link_text
+    - field.field.paragraph.how2_section_links.field_unit
+    - paragraphs.paragraphs_type.how2_section_links
+id: paragraph.how2_section_links.default
+targetEntityType: paragraph
+bundle: how2_section_links
+mode: default
+content:
+  field_attribution:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_file_unit:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_link_text:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_unit:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  search_api_excerpt: true

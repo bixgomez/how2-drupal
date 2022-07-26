@@ -1,0 +1,37 @@
+uuid: 1fe3ca03-25a7-459b-a2f1-70d2278ee098
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_how_ever_piece
+    - node.type.how_ever_section
+    - paragraphs.paragraphs_type.section_links
+  module:
+    - entity_reference_revisions
+id: node.how_ever_section.field_how_ever_piece
+field_name: field_how_ever_piece
+entity_type: node
+bundle: how_ever_section
+label: 'HOW(ever) pieces'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      section_links: section_links
+    negate: 0
+    target_bundles_drag_drop:
+      how2_section_links:
+        weight: 3
+        enabled: false
+      photo_caption:
+        weight: 5
+        enabled: false
+      section_links:
+        weight: 4
+        enabled: true
+field_type: entity_reference_revisions

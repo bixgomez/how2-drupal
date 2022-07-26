@@ -1,0 +1,50 @@
+uuid: bac22796-8bf7-46c4-a747-5114bccc8ed4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.section_links.field_attribution
+    - field.field.paragraph.section_links.field_file_unit
+    - field.field.paragraph.section_links.field_link_text
+    - field.field.paragraph.section_links.field_unit
+    - paragraphs.paragraphs_type.section_links
+id: paragraph.section_links.default
+targetEntityType: paragraph
+bundle: section_links
+mode: default
+content:
+  field_attribution:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_file_unit:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_link_text:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_unit:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  search_api_excerpt: true

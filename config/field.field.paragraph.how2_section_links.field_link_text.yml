@@ -1,0 +1,19 @@
+uuid: 17b37ce0-535f-44c5-bfd3-4735c02b6875
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_link_text
+    - paragraphs.paragraphs_type.how2_section_links
+id: paragraph.how2_section_links.field_link_text
+field_name: field_link_text
+entity_type: paragraph
+bundle: how2_section_links
+label: 'Link text'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
