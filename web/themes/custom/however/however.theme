@@ -1,0 +1,16 @@
+<?php
+
+function however_preprocess_page(&$variables, $hook) {
+    $t = 1;
+}
+
+function however_preprocess_node(&$variables, $hook) {
+
+//    $nid = 19;
+//    $query = \Drupal::entityQuery('node')
+//            ->condition('status', 1)
+//            ->condition('type', 'how2_issue')
+//            ->condition('field_how_2_sections.entity:node.nid', $nid)
+//            ->execute();
+
+}

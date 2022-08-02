@@ -1,0 +1,20 @@
+name: HOW(ever) Theme
+description: HOW(ever) theme based on Classy.
+core_version_requirement: ^8 || ^9
+type: theme
+base theme: classy
+logo: assets/images/logo.png
+libraries:
+  - however/global-styling
+
+regions:
+  branding: 'Branding'
+  navigation: 'Main Navigation'
+  title_banner: 'Title Banner'
+  content_top: 'Content Top'
+  content: 'Content'
+  content_bottom: 'Content Bottom'
+  sidebar: 'Sidebar'
+  footer: 'Footer'
+  footer_bottom: 'Footer Bottom'
+  mobile_navigation: 'Mobile Navigation'

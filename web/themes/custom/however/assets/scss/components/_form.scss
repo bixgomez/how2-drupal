@@ -1,0 +1,25 @@
+input[type=text],
+input[type=password],
+input[type=search],
+input[type=address],
+input[type=email],
+input[type=url],
+input[type=tel] {
+  height: 34px;
+  border: 1px solid #444444;
+  padding: 0 16px;
+  color: $text-color;
+  box-sizing: border-box;
+  &::placeholder {
+    color: $text-color;
+  }
+}
+
+.webform-submission-form .form-item {
+  margin-bottom: 6px;
+}
+
+.form-item > label {
+  display: block;
+  font-weight: 700;
+}

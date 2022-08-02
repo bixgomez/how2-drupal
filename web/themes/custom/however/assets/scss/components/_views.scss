@@ -1,0 +1,26 @@
+.block-views-blockresource-databases-block-2 > h2 {
+  text-align: center;
+}
+
+.view-resource-databases.view-display-id-block_2 .slick-track {
+  display: flex;
+}
+
+.view-resource-databases.view-display-id-block_2 .slick-slider .views-row {
+  padding: 0 12px;
+  display: flex;
+  height: auto;
+}
+
+.view-download-streaming-services .view-content {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  .views-row {
+    max-width: 100%;
+    article {
+      height: 100%;
+    }
+  }
+}

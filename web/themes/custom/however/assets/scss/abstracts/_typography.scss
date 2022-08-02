@@ -1,0 +1,70 @@
+@import "variables";
+
+body {
+  font-family: $base-font;
+  font-weight: 400;
+  color: $text-color;
+  font-size: 16px;
+}
+
+// 54, 36, 24, 16
+
+h1, %h1 {
+  font-size: 22px;
+  font-weight: 700;
+  @media all and (min-width: 768px) {
+    font-size: 30px;
+  }
+  @media all and (min-width: 1024px) {
+    font-size: 36px;
+  }
+}
+
+h1.page-banner {
+  font-size: 54px;
+  font-weight: 900;
+}
+
+h2, %h2 {
+  font-size: 18px;
+  font-weight: 700;
+  @media all and (min-width: 768px) {
+    font-size: 20px;
+  }
+  @media all and (min-width: 1024px) {
+    font-size: 24px;
+  }
+}
+
+.block-layout-builder > h2 {
+  font-size: 22px;
+  color: $blue-dark;
+  margin: 0 0 .5em 0;
+  @media all and (min-width: 768px) {
+    font-size: 30px;
+  }
+  @media all and (min-width: 1024px) {
+    font-size: 36px;
+  }
+}
+
+h3, %h3 {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+h4, %h4 {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+a, a:link, a:visited, a:focus {
+  color: $link-color;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+p {
+  line-height: 1.4;
+}

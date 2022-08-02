@@ -10,9 +10,3 @@ config:
 services:
   appserver:
     xdebug: true
-    config:
-      php: .lando.php.ini
-    type: php:7.4
-    overrides:
-      environment:
-        PHP_IDE_CONFIG: "serverName=appserver"

@@ -1,0 +1,11 @@
+.layout-container, %layout-container {
+  width: 94%;
+  margin: 0 auto;
+  max-width: 1252px;
+}
+
+@media all and (min-width: 960px) {
+  .layout-container, %layout-container {
+    width: 96%;
+  }
+}

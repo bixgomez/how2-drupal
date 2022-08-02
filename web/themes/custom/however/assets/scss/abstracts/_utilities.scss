@@ -1,0 +1,49 @@
+.full-width, %full-width {
+  width: 100vw;
+  position: relative;
+  margin-left: -50vw !important;
+  left: 50%;
+}
+
+.star-pattern-background, %star-pattern-background {
+  @extend %full-width;
+  background: url('/themes/custom/ufl/assets/images/star-pattern--yellow.png');
+  background-size: 132px;
+}
+
+.sr-only {
+  position:absolute;
+  left:-10000px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+
+a.more, %more {
+  font-size: 14px;
+  font-weight: 700;
+  color: $blue;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  &:after {
+    content: '⇨';
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 18px;
+    position: absolute;
+    top: -6px;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.clearfix, %clearfix {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
