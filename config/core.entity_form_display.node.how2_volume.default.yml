@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.how2_volume.field_volume_number
     - node.type.how2_volume
   module:
+    - inline_entity_form
     - link
     - path
 id: node.how2_volume.default
@@ -30,14 +31,21 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
   field_how2_issue:
-    type: entity_reference_autocomplete
+    type: inline_entity_form_complex
     weight: 121
     region: content
     settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
     third_party_settings: {  }
   field_volume_number:
     type: number

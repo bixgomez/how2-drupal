@@ -1,6 +1,6 @@
 uuid: e5614499-3fa8-4987-b615-6590f321f7f3
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.footer
@@ -12,7 +12,7 @@ _core:
   default_config_hash: pnCK21YFjH7iB4XDeokSq3N3XSr6qX8BsqMs9nmip6E
 id: how2_footer
 theme: how2
-region: footer_fifth
+region: branding
 weight: 0
 provider: null
 plugin: 'system_menu_block:footer'

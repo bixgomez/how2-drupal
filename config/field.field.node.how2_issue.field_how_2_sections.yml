@@ -1,15 +1,16 @@
-uuid: f6ded048-9041-4b83-9a6d-6a2acad9ab96
+uuid: 9ba26aff-63a8-4aa0-af60-9e1ad6939d99
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_section
+    - field.storage.node.field_how_2_sections
     - node.type.how2_issue
-id: node.how2_issue.field_section
-field_name: field_section
+    - node.type.how_ever_section
+id: node.how2_issue.field_how_2_sections
+field_name: field_how_2_sections
 entity_type: node
 bundle: how2_issue
-label: Section
+label: 'How 2 Sections'
 description: ''
 required: false
 translatable: false
@@ -19,7 +20,7 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
-      how2_issue: how2_issue
+      how_ever_section: how_ever_section
     sort:
       field: _none
       direction: ASC

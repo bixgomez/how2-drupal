@@ -12,7 +12,7 @@ id: node.how2_section.field_how2_piece
 field_name: field_how2_piece
 entity_type: node
 bundle: how2_section
-label: 'How2 Piece'
+label: 'How2 Section Links'
 description: ''
 required: false
 translatable: false
@@ -28,6 +28,12 @@ settings:
       how2_section_links:
         weight: 3
         enabled: true
+      person_bio:
+        weight: 6
+        enabled: false
+      photo_caption:
+        weight: 7
+        enabled: false
       section_links:
         weight: 4
         enabled: false

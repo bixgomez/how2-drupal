@@ -6,7 +6,9 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
+    - field.field.node.how2_article.field_media_type
     - field.field.node.how2_article.field_person_bio
+    - field.field.node.how2_article.field_tags
     - node.type.how2_article
   module:
     - text
@@ -31,5 +33,7 @@ content:
     region: content
 hidden:
   field_archive_url: true
+  field_media_type: true
   field_person_bio: true
+  field_tags: true
   search_api_excerpt: true

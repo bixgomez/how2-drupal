@@ -1,6 +1,6 @@
 uuid: f6129213-433e-4f6c-9812-4ebab12b622d
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - system
@@ -10,7 +10,7 @@ _core:
   default_config_hash: y0bXRvKYQQKkf_RVxA3aOPGpIfKKsDOzzrWYCgjxJ9Y
 id: how2_breadcrumbs
 theme: how2
-region: breadcrumb
+region: branding
 weight: 0
 provider: null
 plugin: system_breadcrumb_block

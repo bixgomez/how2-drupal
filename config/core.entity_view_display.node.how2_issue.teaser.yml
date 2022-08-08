@@ -5,10 +5,10 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.how2_issue.field_archive_url
+    - field.field.node.how2_issue.field_how_2_sections
     - field.field.node.how2_issue.field_issue_number
     - field.field.node.how2_issue.field_people
     - field.field.node.how2_issue.field_publication_date
-    - field.field.node.how2_issue.field_section
     - node.type.how2_issue
   module:
     - user
@@ -24,8 +24,8 @@ content:
     region: content
 hidden:
   field_archive_url: true
+  field_how_2_sections: true
   field_issue_number: true
   field_people: true
   field_publication_date: true
-  field_section: true
   search_api_excerpt: true

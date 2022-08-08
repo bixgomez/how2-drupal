@@ -5,7 +5,9 @@ dependencies:
   config:
     - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
+    - field.field.node.how2_article.field_media_type
     - field.field.node.how2_article.field_person_bio
+    - field.field.node.how2_article.field_tags
     - node.type.how2_article
   module:
     - link
@@ -41,6 +43,16 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+  field_media_type:
+    type: entity_reference_autocomplete
+    weight: 27
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_person_bio:
     type: paragraphs
     weight: 7
@@ -58,6 +70,16 @@ content:
       features:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
+    third_party_settings: {  }
+  field_tags:
+    type: entity_reference_autocomplete_tags
+    weight: 26
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   path:
     type: path

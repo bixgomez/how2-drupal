@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.person_bio.field_override_bio
+    - field.field.paragraph.person_bio.field_override_role
     - field.field.paragraph.person_bio.field_person
     - paragraphs.paragraphs_type.person_bio
   module:
@@ -19,6 +20,16 @@ content:
     region: content
     settings:
       rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_override_role:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
       placeholder: ''
     third_party_settings: {  }
   field_person:

@@ -19,6 +19,7 @@ module:
   dynamic_page_cache: 0
   editor: 0
   entity_reference_revisions: 0
+  facets: 0
   field: 0
   field_group: 0
   field_ui: 0
@@ -27,6 +28,7 @@ module:
   help: 0
   history: 0
   image: 0
+  inline_entity_form: 0
   link: 0
   media: 0
   media_library: 0
@@ -58,4 +60,7 @@ theme:
   seven: 0
   claro: 0
   how2: 0
+  stable: 0
+  classy: 0
+  however: 0
 profile: standard

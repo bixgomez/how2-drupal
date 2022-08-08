@@ -8,6 +8,8 @@ dependencies:
     - field.field.node.how2_section.field_how2_piece
     - field.field.node.how2_section.field_image_caption
     - field.field.node.how2_section.field_links_section_title
+    - field.field.node.how2_section.field_person_bio
+    - field.field.node.how2_section.field_tags
     - node.type.how2_section
   module:
     - entity_reference_revisions
@@ -63,6 +65,23 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 106
+    region: content
+  field_person_bio:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 108
     region: content
   links:
     settings: {  }

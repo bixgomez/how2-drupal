@@ -1,6 +1,6 @@
 uuid: 1cdf4da9-cdb5-416d-a143-1bf6954db9c7
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - search
@@ -10,7 +10,7 @@ _core:
   default_config_hash: jQ-C8l3dJPqYCGST1e-kSjR14PDP4wq-iFbp8dMFcRo
 id: how2_search
 theme: how2
-region: header
+region: branding
 weight: -1
 provider: null
 plugin: search_form_block

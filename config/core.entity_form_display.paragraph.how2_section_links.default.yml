@@ -8,6 +8,8 @@ dependencies:
     - field.field.paragraph.how2_section_links.field_link_text
     - field.field.paragraph.how2_section_links.field_unit
     - paragraphs.paragraphs_type.how2_section_links
+  module:
+    - media_library
 id: paragraph.how2_section_links.default
 targetEntityType: paragraph
 bundle: how2_section_links
@@ -22,14 +24,11 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_file_unit:
-    type: entity_reference_autocomplete
+    type: media_library_widget
     weight: 3
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      media_types: {  }
     third_party_settings: {  }
   field_link_text:
     type: string_textfield

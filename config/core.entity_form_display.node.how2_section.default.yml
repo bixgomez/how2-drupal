@@ -8,6 +8,8 @@ dependencies:
     - field.field.node.how2_section.field_how2_piece
     - field.field.node.how2_section.field_image_caption
     - field.field.node.how2_section.field_links_section_title
+    - field.field.node.how2_section.field_person_bio
+    - field.field.node.how2_section.field_tags
     - node.type.how2_section
   module:
     - field_group
@@ -24,7 +26,7 @@ third_party_settings:
       label: 'Links Section'
       region: content
       parent_name: ''
-      weight: 11
+      weight: 9
       format_type: fieldset
       format_settings:
         classes: ''
@@ -39,7 +41,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 7
+    weight: 8
     region: content
     settings:
       rows: 9
@@ -55,7 +57,7 @@ content:
     third_party_settings: {  }
   field_archive_url:
     type: link_default
-    weight: 9
+    weight: 7
     region: content
     settings:
       placeholder_url: ''
@@ -63,7 +65,7 @@ content:
     third_party_settings: {  }
   field_how2_piece:
     type: paragraphs
-    weight: 13
+    weight: 28
     region: content
     settings:
       title: Paragraph
@@ -81,7 +83,7 @@ content:
     third_party_settings: {  }
   field_image_caption:
     type: paragraphs
-    weight: 10
+    weight: 6
     region: content
     settings:
       title: Paragraph
@@ -99,33 +101,47 @@ content:
     third_party_settings: {  }
   field_links_section_title:
     type: string_textfield
-    weight: 12
+    weight: 27
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_person_bio:
+    type: paragraphs
+    weight: 5
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_tags:
+    type: entity_reference_autocomplete_tags
+    weight: 29
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   path:
     type: path
-    weight: 5
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
-  promote:
-    type: boolean_checkbox
-    weight: 3
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   status:
-    type: boolean_checkbox
-    weight: 6
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  sticky:
     type: boolean_checkbox
     weight: 4
     region: content
@@ -150,4 +166,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  promote: true
+  sticky: true

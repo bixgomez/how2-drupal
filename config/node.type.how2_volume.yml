@@ -6,8 +6,9 @@ dependencies:
     - menu_ui
 third_party_settings:
   menu_ui:
-    available_menus: {  }
-    parent: ''
+    available_menus:
+      - main
+    parent: 'main:views_view:views.journal_volumes.page_2'
 name: 'How2 Volume'
 type: how2_volume
 description: ''

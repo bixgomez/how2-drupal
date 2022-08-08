@@ -1,6 +1,6 @@
 uuid: 49d111c7-08f4-4b4c-b76d-bcb139389074
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - system
@@ -10,7 +10,7 @@ _core:
   default_config_hash: I6Esh8cDlPdl2POZg4MOSRUrQNYA1UNCJCxL2yqT_wc
 id: how2_powered
 theme: how2
-region: footer_fifth
+region: branding
 weight: 10
 provider: null
 plugin: system_powered_by_block

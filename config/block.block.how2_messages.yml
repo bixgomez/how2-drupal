@@ -1,6 +1,6 @@
 uuid: dfcc3c93-bd5f-4e0f-baa9-22e16afe3e8e
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - system
@@ -10,7 +10,7 @@ _core:
   default_config_hash: KC12e0aosUnBBs5bd374JVcQjJaFNOSIHzu0dUGf22o
 id: how2_messages
 theme: how2
-region: highlighted
+region: branding
 weight: 0
 provider: null
 plugin: system_messages_block

@@ -4,10 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.node.how2_issue.field_archive_url
+    - field.field.node.how2_issue.field_how_2_sections
     - field.field.node.how2_issue.field_issue_number
     - field.field.node.how2_issue.field_people
     - field.field.node.how2_issue.field_publication_date
-    - field.field.node.how2_issue.field_section
     - node.type.how2_issue
   module:
     - datetime
@@ -29,6 +29,15 @@ content:
       target: ''
     third_party_settings: {  }
     weight: 101
+    region: content
+  field_how_2_sections:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    weight: 106
     region: content
   field_issue_number:
     type: number_integer
@@ -55,14 +64,6 @@ content:
       format_type: medium
     third_party_settings: {  }
     weight: 103
-    region: content
-  field_section:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 102
     region: content
   links:
     settings: {  }

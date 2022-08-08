@@ -4,8 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.how_ever_article.body
+    - field.field.node.how_ever_article.field_person_bio
+    - field.field.node.how_ever_article.field_tags
     - node.type.how_ever_article
   module:
+    - entity_reference_revisions
     - text
     - user
 id: node.how_ever_article.default
@@ -19,6 +22,23 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 101
+    region: content
+  field_person_bio:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
     region: content
   links:
     settings: {  }

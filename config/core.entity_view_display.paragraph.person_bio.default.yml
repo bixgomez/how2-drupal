@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.person_bio.field_override_bio
+    - field.field.paragraph.person_bio.field_override_role
     - field.field.paragraph.person_bio.field_person
     - paragraphs.paragraphs_type.person_bio
   module:
@@ -15,14 +16,22 @@ mode: default
 content:
   field_override_bio:
     type: text_default
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 1
     region: content
-  field_person:
+  field_override_role:
     type: entity_reference_label
     label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_person:
+    type: entity_reference_label
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }

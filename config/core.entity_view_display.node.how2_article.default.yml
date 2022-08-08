@@ -5,7 +5,9 @@ dependencies:
   config:
     - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
+    - field.field.node.how2_article.field_media_type
     - field.field.node.how2_article.field_person_bio
+    - field.field.node.how2_article.field_tags
     - node.type.how2_article
   module:
     - entity_reference_revisions
@@ -36,6 +38,14 @@ content:
     third_party_settings: {  }
     weight: 102
     region: content
+  field_media_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 105
+    region: content
   field_person_bio:
     type: entity_reference_revisions_entity_view
     label: above
@@ -44,6 +54,14 @@ content:
       link: ''
     third_party_settings: {  }
     weight: 103
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
     region: content
   links:
     settings: {  }

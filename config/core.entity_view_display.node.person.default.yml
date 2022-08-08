@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.person.body
     - field.field.node.person.field_headshot
+    - field.field.node.person.field_override_role
     - node.type.person
   module:
     - image
@@ -28,8 +29,18 @@ content:
     settings:
       image_link: ''
       image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 102
+    region: content
+  field_override_role:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
     region: content
   links:
     settings: {  }

@@ -14,26 +14,19 @@ bundle: however_volume
 mode: default
 content:
   field_how_ever_issue:
-    type: entity_reference_label
-    label: above
+    type: entity_reference_entity_view
+    label: hidden
     settings:
-      link: true
+      view_mode: teaser
+      link: false
     third_party_settings: {  }
-    weight: 101
-    region: content
-  field_volume_number:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 102
+    weight: 1
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
+  field_volume_number: true
   search_api_excerpt: true

@@ -1,0 +1,10 @@
+<?php
+
+/**
+* Implements hook_entity_presave().
+*/
+function drupalbook_examples_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+    if ($entity->getEntityTypeId() == 'node' && $entity->getType() == 'article') {
+        $entity->title->value = $entity->title->value . 'by ' . date('d-m-Y');
+    }
+}
