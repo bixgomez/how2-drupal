@@ -6,9 +6,13 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
+    - field.field.node.how2_article.field_how2_section
+    - field.field.node.how2_article.field_issue_reference
     - field.field.node.how2_article.field_media_type
     - field.field.node.how2_article.field_person_bio
+    - field.field.node.how2_article.field_section_reference
     - field.field.node.how2_article.field_tags
+    - field.field.node.how2_article.field_volume_reference
     - node.type.how2_article
   module:
     - text
@@ -24,16 +28,16 @@ content:
     settings:
       trim_length: 600
     third_party_settings: {  }
-    weight: 101
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
   field_archive_url: true
+  field_how2_section: true
+  field_issue_reference: true
   field_media_type: true
   field_person_bio: true
+  field_section_reference: true
   field_tags: true
+  field_volume_reference: true
+  links: true
   search_api_excerpt: true

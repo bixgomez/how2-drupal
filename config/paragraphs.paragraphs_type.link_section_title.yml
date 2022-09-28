@@ -1,0 +1,10 @@
+uuid: 41cd90e5-edd3-4ec2-8707-18ca8ca394ff
+langcode: en
+status: true
+dependencies: {  }
+id: link_section_title
+label: 'Link Section TItle'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

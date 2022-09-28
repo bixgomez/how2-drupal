@@ -8,8 +8,8 @@ _core:
   default_config_hash: ItFhhiUOoeR7oIq73ZaCV7PAYrOwXZ-9fazMzF5DJXM
 id: however_page_title
 theme: however
-region: content
-weight: -7
+region: content_top
+weight: -9
 provider: null
 plugin: page_title_block
 settings:

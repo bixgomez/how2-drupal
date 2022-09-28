@@ -4,13 +4,36 @@ status: true
 dependencies:
   config:
     - field.field.node.how_ever_article.body
+    - field.field.node.how_ever_article.field_issue_reference
     - field.field.node.how_ever_article.field_person_bio
+    - field.field.node.how_ever_article.field_section_reference
     - field.field.node.how_ever_article.field_tags
+    - field.field.node.how_ever_article.field_volume_reference
     - node.type.how_ever_article
   module:
+    - field_group
     - paragraphs
     - path
     - text
+third_party_settings:
+  field_group:
+    group_issue_metadata:
+      children:
+        - field_volume_reference
+        - field_issue_reference
+        - field_section_reference
+        - field_tags
+      label: Metadata
+      region: content
+      parent_name: ''
+      weight: 11
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
 id: node.how_ever_article.default
 targetEntityType: node
 bundle: how_ever_article
@@ -32,6 +55,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_issue_reference:
+    type: options_select
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_person_bio:
     type: paragraphs
     weight: 6
@@ -50,15 +79,27 @@ content:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
     third_party_settings: {  }
+  field_section_reference:
+    type: options_select
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
-    weight: 7
+    weight: 13
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_volume_reference:
+    type: options_select
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   path:
     type: path

@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.journal_issue.field_people
     - field.field.node.journal_issue.field_publication_date
     - field.field.node.journal_issue.field_section
+    - field.field.node.journal_issue.field_volume_reference
     - node.type.journal_issue
   module:
     - datetime
@@ -69,6 +70,16 @@ content:
   field_section:
     type: entity_reference_autocomplete
     weight: 125
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_volume_reference:
+    type: entity_reference_autocomplete
+    weight: 127
     region: content
     settings:
       match_operator: CONTAINS

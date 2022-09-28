@@ -1,0 +1,21 @@
+uuid: f6ae9d61-481d-4123-90da-7a1633c865c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_notes
+    - paragraphs.paragraphs_type.section_links
+  module:
+    - text
+id: paragraph.section_links.field_notes
+field_name: field_notes
+entity_type: paragraph
+bundle: section_links
+label: Notes
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

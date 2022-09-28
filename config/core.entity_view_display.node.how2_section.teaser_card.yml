@@ -1,0 +1,67 @@
+uuid: 51bfdce2-3c03-4677-9714-885c08243d7e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser_card
+    - field.field.node.how2_section.body
+    - field.field.node.how2_section.field_archive_url
+    - field.field.node.how2_section.field_how2_piece
+    - field.field.node.how2_section.field_image_caption
+    - field.field.node.how2_section.field_issue_reference
+    - field.field.node.how2_section.field_links_section_title
+    - field.field.node.how2_section.field_person_bio
+    - field.field.node.how2_section.field_subtitle
+    - field.field.node.how2_section.field_tags
+    - field.field.node.how2_section.field_volume_reference
+    - node.type.how2_section
+  module:
+    - entity_reference_revisions
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.how2_section.teaser_card
+targetEntityType: node
+bundle: how2_section
+mode: teaser_card
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: visually_hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_how2_piece:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: name_only
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_image_caption:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: node_teaser
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_archive_url: true
+  field_issue_reference: true
+  field_links_section_title: true
+  field_person_bio: true
+  field_subtitle: true
+  field_tags: true
+  field_volume_reference: true
+  links: true
+  search_api_excerpt: true

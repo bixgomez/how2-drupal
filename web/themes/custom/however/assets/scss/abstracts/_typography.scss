@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Urbanist:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700;1,900&display=swap');
 @import "variables";
+
 
 body {
   font-family: $base-font;
@@ -17,34 +19,29 @@ h1, %h1 {
   }
   @media all and (min-width: 1024px) {
     font-size: 36px;
+    &.page-title {
+      font-size: 54px;
+      magin-top: 0;
+    }
   }
-}
-
-h1.page-banner {
-  font-size: 54px;
-  font-weight: 900;
+  a {
+    text-decoration: none;
+    color: $text-color;
+  }
 }
 
 h2, %h2 {
   font-size: 18px;
   font-weight: 700;
+  a {
+    text-decoration: none;
+    color: $red;
+  }
   @media all and (min-width: 768px) {
     font-size: 20px;
   }
   @media all and (min-width: 1024px) {
     font-size: 24px;
-  }
-}
-
-.block-layout-builder > h2 {
-  font-size: 22px;
-  color: $blue-dark;
-  margin: 0 0 .5em 0;
-  @media all and (min-width: 768px) {
-    font-size: 30px;
-  }
-  @media all and (min-width: 1024px) {
-    font-size: 36px;
   }
 }
 
@@ -59,9 +56,9 @@ h4, %h4 {
 }
 
 a, a:link, a:visited, a:focus {
-  color: $link-color;
+  color: $red;
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
   }
 }
 

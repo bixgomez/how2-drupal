@@ -1,0 +1,18 @@
+uuid: 8541ee37-0b0e-4cf1-b367-9e5de7cbcce9
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.journal_issue
+id: node.journal_issue.title
+field_name: title
+entity_type: node
+bundle: journal_issue
+label: 'Issue Name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

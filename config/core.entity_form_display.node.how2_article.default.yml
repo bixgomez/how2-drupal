@@ -5,15 +5,40 @@ dependencies:
   config:
     - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
+    - field.field.node.how2_article.field_how2_section
+    - field.field.node.how2_article.field_issue_reference
     - field.field.node.how2_article.field_media_type
     - field.field.node.how2_article.field_person_bio
+    - field.field.node.how2_article.field_section_reference
     - field.field.node.how2_article.field_tags
+    - field.field.node.how2_article.field_volume_reference
     - node.type.how2_article
   module:
+    - field_group
     - link
     - paragraphs
     - path
     - text
+third_party_settings:
+  field_group:
+    group_issue_metadata:
+      children:
+        - field_volume_reference
+        - field_issue_reference
+        - field_section_reference
+        - field_tags
+        - field_media_type
+      label: Metadata
+      region: content
+      parent_name: ''
+      weight: 6
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
 id: node.how2_article.default
 targetEntityType: node
 bundle: how2_article
@@ -21,7 +46,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 5
+    weight: 4
     region: content
     settings:
       rows: 9
@@ -29,23 +54,23 @@ content:
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
-  created:
-    type: datetime_timestamp
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_archive_url:
     type: link_default
-    weight: 6
+    weight: 2
     region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+  field_issue_reference:
+    type: options_select
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_media_type:
-    type: entity_reference_autocomplete
-    weight: 27
+    type: entity_reference_autocomplete_tags
+    weight: 11
     region: content
     settings:
       match_operator: CONTAINS
@@ -55,7 +80,7 @@ content:
     third_party_settings: {  }
   field_person_bio:
     type: paragraphs
-    weight: 7
+    weight: 5
     region: content
     settings:
       title: Paragraph
@@ -71,15 +96,27 @@ content:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
     third_party_settings: {  }
+  field_section_reference:
+    type: options_select
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
-    weight: 26
+    weight: 10
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_volume_reference:
+    type: options_select
+    weight: 7
+    region: content
+    settings: {  }
     third_party_settings: {  }
   path:
     type: path
@@ -89,7 +126,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 4
+    weight: 1
     region: content
     settings:
       display_label: true
@@ -102,16 +139,9 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  uid:
-    type: entity_reference_autocomplete
-    weight: 1
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
 hidden:
+  created: true
+  field_how2_section: true
   promote: true
   sticky: true
+  uid: true

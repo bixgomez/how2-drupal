@@ -1,0 +1,23 @@
+uuid: 4919d44a-97da-41c4-b9d3-44ba11093ff9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.link_section_title.field_link_section_title
+    - paragraphs.paragraphs_type.link_section_title
+id: paragraph.link_section_title.default
+targetEntityType: paragraph
+bundle: link_section_title
+mode: default
+content:
+  field_link_section_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

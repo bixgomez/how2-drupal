@@ -29,7 +29,8 @@
         "drupal/field_group": "^3.2",
         "drupal/paragraphs": "^1.14",
         "drupal/inline_entity_form": "^1.0@RC",
-        "drupal/cer": "^4.0@alpha"
+        "drupal/cer": "^4.0@alpha",
+        "drupal/search_api_page": "^1.0@beta"
     },
     "require-dev": {
         "drupal/core-dev": "^9.2"
@@ -51,7 +52,10 @@
                 "[project-root]/.editorconfig": false,
                 "[project-root]/pantheon.upstream.yml": false,
                 "[project-root]/.gitattributes": false
-            }
+            },
+            "excludes": [
+                "sites/development.services.yml"
+            ]
         },
         "installer-paths": {
             "web/core": ["type:drupal-core"],

@@ -1,0 +1,10 @@
+uuid: e3dafd85-a0e2-421e-990c-e4a3dae065be
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.inline_article_form
+label: 'Inline article form'
+targetEntityType: node
+cache: true

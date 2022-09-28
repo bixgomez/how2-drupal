@@ -3,9 +3,20 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.body
+    - field.storage.node.field_image_caption
+    - field.storage.paragraph.field_caption
+    - field.storage.node.field_issue_reference
+    - field.storage.node.field_issue_number
+    - field.storage.node.field_person_bio
+    - field.storage.paragraph.field_person
+    - field.storage.node.field_tags
+    - field.storage.node.field_volume_reference
     - search_api.server.default
+    - core.entity_view_mode.node.full
   module:
     - node
+    - paragraphs
     - search_api
 id: default
 name: Default
@@ -19,28 +30,105 @@ field_settings:
     configuration:
       type: union
       fields: {  }
+  body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  contributor_name:
+    label: 'Contributor Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_person_bio:entity:field_person:entity:title'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_person_bio
+        - field.storage.paragraph.field_person
+      module:
+        - node
+        - paragraphs
+  field_caption:
+    label: caption
+    datasource_id: 'entity:node'
+    property_path: 'field_image_caption:entity:field_caption'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_image_caption
+        - field.storage.paragraph.field_caption
+      module:
+        - paragraphs
+  field_issue_number:
+    label: 'Issue Number'
+    datasource_id: 'entity:node'
+    property_path: field_issue_number
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_issue_number
+  field_issue_reference:
+    label: Issue
+    datasource_id: 'entity:node'
+    property_path: field_issue_reference
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_issue_reference
+  field_person:
+    label: Person
+    datasource_id: 'entity:node'
+    property_path: 'field_person_bio:entity:field_person'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_person_bio
+        - field.storage.paragraph.field_person
+      module:
+        - paragraphs
+  field_tags:
+    label: Tags
+    datasource_id: 'entity:node'
+    property_path: field_tags
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_tags
+  field_volume_reference:
+    label: Volume
+    datasource_id: 'entity:node'
+    property_path: field_volume_reference
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_volume_reference
   rendered_item:
     label: 'Rendered HTML output'
     property_path: rendered_item
     type: text
     configuration:
       roles:
-        anonymous: anonymous
+        - anonymous
       view_mode:
         'entity:node':
-          page: default
+          how2_article: full
+          how_ever_article: full
+          how_ever_section: full
+          journal_issue: full
   title:
     label: Title
     datasource_id: 'entity:node'
     property_path: title
-    type: string
+    type: text
     dependencies:
       module:
         - node
-  uid:
-    label: 'Authored by'
+  type:
+    label: 'Content type'
     datasource_id: 'entity:node'
-    property_path: uid
+    property_path: type
     type: string
     dependencies:
       module:
@@ -48,9 +136,11 @@ field_settings:
 datasource_settings:
   'entity:node':
     bundles:
-      default: true
+      default: false
       selected:
         - how2_article
+        - how_ever_article
+        - how_ever_section
         - journal_issue
     languages:
       default: true
@@ -59,8 +149,56 @@ processor_settings:
   add_url: {  }
   aggregated_field: {  }
   entity_type: {  }
+  highlight:
+    weights:
+      postprocess_query: 0
+    prefix: '<strong>'
+    suffix: '</strong>'
+    excerpt: true
+    excerpt_always: false
+    excerpt_length: 256
+    exclude_fields: {  }
+    highlight: always
+    highlight_partial: false
+  ignorecase:
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+    all_fields: false
+    fields:
+      - aggregated_field
+      - body
+      - field_tags
+      - rendered_item
+      - title
+      - type
   language_with_fallback: {  }
   rendered_item: {  }
+  stemmer:
+    weights:
+      preprocess_index: 0
+      preprocess_query: 0
+    all_fields: false
+    fields:
+      - body
+      - rendered_item
+      - title
+    exceptions:
+      mexican: mexic
+      texan: texa
+  tokenizer:
+    weights:
+      preprocess_index: -6
+      preprocess_query: -6
+    all_fields: false
+    fields:
+      - body
+      - rendered_item
+      - title
+    spaces: ''
+    ignored: ._-
+    overlap_cjk: 1
+    minimum_word_size: '3'
 tracker_settings:
   default:
     indexing_order: fifo

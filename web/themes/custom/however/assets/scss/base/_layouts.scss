@@ -45,13 +45,13 @@
   }
   @media all and (min-width: 768px) {
     .layout-content {
-      float: left;
+      float: right;
       width: 66.666666666%;
     }
-    .layout-sidebar-second {
+    .layout-sidebar {
       float: left;
       width: 33.33333333%;
-      padding-left: 60px;
+      padding-right: 60px;
       margin-top: 0;
     }
   }

@@ -7,23 +7,27 @@ nav ul.menu {
 }
 
 .region-navigation {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  flex-grow: 1;
 }
 
 .region-navigation .block-menu {
-  @extend %full-width;
-  justify-content: center;
   flex-wrap: nowrap;
-  align-content: center;
   > ul.menu {
     @extend %layout-container;
-    justify-content: center;
+    justify-content: flex-end;
     gap: 30px;
     li {
       position: relative;
       padding-bottom: 12px;
+      top: 6px;
+      a {
+        color: $text-color;
+        font-weight: bold;
+        text-decoration: none;
+        &:hover, &.active, &.active-trail {
+          text-decoration: underline;
+        }
+      }
     }
   }
   .menu-item--collapsed {
@@ -76,4 +80,22 @@ ul.menu li.menu-item--expanded {
 
 #block-however-main-menu > ul.menu > li.menu-item--expanded:hover > ul {
   display: block;
+}
+
+#page-footer .block-menu ul.menu {
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  li {
+    margin: 0;
+    padding: 0;
+  }
+  li a {
+    color: $text-color;
+    font-weight: bold;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

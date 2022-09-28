@@ -1,0 +1,29 @@
+uuid: 98331099-a3eb-46e6-ae97-fd98cbfe9a27
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.contributors
+  module:
+    - facets
+    - system
+  theme:
+    - however
+id: contributors
+theme: however
+region: sidebar
+weight: -9
+provider: null
+plugin: 'facet_block:contributors'
+settings:
+  id: 'facet_block:contributors'
+  label: Contributors
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: contributors
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/search\r\n/search*"

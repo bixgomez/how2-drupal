@@ -1,0 +1,10 @@
+uuid: 862400a3-c96a-4282-b2fe-298f581e58bf
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.inline_author_form
+label: 'Inline author form'
+targetEntityType: paragraph
+cache: true

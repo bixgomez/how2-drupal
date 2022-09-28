@@ -1,0 +1,49 @@
+.field--name-field-volume-reference,
+.field--name-field-issue-reference,
+.journal-name {
+  a {
+    font-weight: bold;
+    text-decoration: none;
+    color: $text-color;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.field--name-field-tags {
+  margin: 18px 0;
+  .field__items {
+    display: flex;
+    gap: 12px;
+    .field__item {
+      a {
+        color: $text-color;
+        text-decoration: none;
+        background: $yellow-dark;
+        padding: 3px 16px;
+        border-radius: 14px;
+      }
+    }
+  }
+}
+
+.field--name-field-how-2-sections {
+  -webkit-column-count: 3;
+  -moz-column-count:3;
+  column-count: 3;
+  -webkit-column-gap: 1em;
+  -moz-column-gap: 1em;
+  column-gap: 1em;
+  margin: 1.5em;
+  padding: 0;
+  -moz-column-gap: 1.5em;
+  -webkit-column-gap: 1.5em;
+  column-gap: 1.5em;
+  > .field__item {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 18px;
+    box-sizing: border-box;
+  }
+}

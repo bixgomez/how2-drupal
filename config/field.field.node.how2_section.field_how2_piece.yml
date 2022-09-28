@@ -6,6 +6,7 @@ dependencies:
     - field.storage.node.field_how2_piece
     - node.type.how2_section
     - paragraphs.paragraphs_type.how2_section_links
+    - paragraphs.paragraphs_type.link_section_title
   module:
     - entity_reference_revisions
 id: node.how2_section.field_how2_piece
@@ -23,10 +24,14 @@ settings:
   handler_settings:
     target_bundles:
       how2_section_links: how2_section_links
+      link_section_title: link_section_title
     negate: 0
     target_bundles_drag_drop:
       how2_section_links:
         weight: 3
+        enabled: true
+      link_section_title:
+        weight: 7
         enabled: true
       person_bio:
         weight: 6

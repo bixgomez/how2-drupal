@@ -13,7 +13,7 @@ _core:
 id: however_footer
 theme: however
 region: footer
-weight: -6
+weight: -9
 provider: null
 plugin: 'system_menu_block:footer'
 settings:

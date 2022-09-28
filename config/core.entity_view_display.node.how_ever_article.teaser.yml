@@ -5,8 +5,11 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.how_ever_article.body
+    - field.field.node.how_ever_article.field_issue_reference
     - field.field.node.how_ever_article.field_person_bio
+    - field.field.node.how_ever_article.field_section_reference
     - field.field.node.how_ever_article.field_tags
+    - field.field.node.how_ever_article.field_volume_reference
     - node.type.how_ever_article
   module:
     - text
@@ -30,6 +33,9 @@ content:
     weight: 100
     region: content
 hidden:
+  field_issue_reference: true
   field_person_bio: true
+  field_section_reference: true
   field_tags: true
+  field_volume_reference: true
   search_api_excerpt: true

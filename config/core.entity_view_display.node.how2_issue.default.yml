@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.how2_issue.field_issue_number
     - field.field.node.how2_issue.field_people
     - field.field.node.how2_issue.field_publication_date
+    - field.field.node.how2_issue.field_volume_reference
     - node.type.how2_issue
   module:
     - datetime
@@ -20,7 +21,7 @@ mode: default
 content:
   field_archive_url:
     type: link
-    label: above
+    label: hidden
     settings:
       trim_length: 80
       url_only: false
@@ -28,47 +29,51 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 101
+    weight: 0
     region: content
   field_how_2_sections:
     type: entity_reference_entity_view
     label: hidden
     settings:
-      view_mode: teaser
+      view_mode: teaser_card
       link: false
     third_party_settings: {  }
-    weight: 106
+    weight: 5
     region: content
   field_issue_number:
     type: number_integer
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 105
+    weight: 3
     region: content
   field_people:
     type: entity_reference_label
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    weight: 104
+    weight: 2
     region: content
   field_publication_date:
     type: datetime_default
-    label: above
+    label: hidden
     settings:
       timezone_override: ''
       format_type: medium
     third_party_settings: {  }
-    weight: 103
+    weight: 1
     region: content
-  links:
-    settings: {  }
+  field_volume_reference:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
     third_party_settings: {  }
-    weight: 100
+    weight: 4
     region: content
 hidden:
+  links: true
   search_api_excerpt: true

@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.how2_issue.field_issue_number
     - field.field.node.how2_issue.field_people
     - field.field.node.how2_issue.field_publication_date
+    - field.field.node.how2_issue.field_volume_reference
     - node.type.how2_issue
   module:
     - datetime
@@ -24,6 +25,20 @@ third_party_settings:
       region: content
       parent_name: ''
       weight: 8
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_metadata:
+      children:
+        - field_volume_reference
+      label: Metadata
+      region: content
+      parent_name: ''
+      weight: 10
       format_type: fieldset
       format_settings:
         classes: ''
@@ -52,7 +67,7 @@ content:
     third_party_settings: {  }
   field_how_2_sections:
     type: entity_reference_autocomplete
-    weight: 26
+    weight: 9
     region: content
     settings:
       match_operator: CONTAINS
@@ -70,6 +85,12 @@ content:
   field_publication_date:
     type: datetime_default
     weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_volume_reference:
+    type: options_select
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }

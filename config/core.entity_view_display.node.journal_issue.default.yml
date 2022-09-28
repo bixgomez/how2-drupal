@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.journal_issue.field_people
     - field.field.node.journal_issue.field_publication_date
     - field.field.node.journal_issue.field_section
+    - field.field.node.journal_issue.field_volume_reference
     - node.type.journal_issue
   module:
     - datetime
@@ -68,6 +69,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 5
+    region: content
+  field_volume_reference:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 7
     region: content
   links:
     settings: {  }

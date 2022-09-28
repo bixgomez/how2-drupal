@@ -1,308 +1,55 @@
-.node--view-mode-teaser-card {
-  @extend %card;
-}
-
-.node .resource-links {
-  display: flex;
-  gap: 16px;
-}
-
-.node--view-mode-teaser {
-  margin-bottom: 42px;
-}
-
-.node .node__submitted {
-  font-weight: 600;
-  font-size: 14px;
-  font-style: italic;
-  color: lighten($text-color, 15%);
-}
-
-.node--view-mode-teaser .node__content {
-  h2 a {
-    color: $text-color;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
-.node--view-mode-teaser-card {
-  padding: 0;
-  .node__image, .node__content {
-    padding: 32px 28px;
-  }
-  .node__image {
-    border-bottom: 1px solid #515151;
+.article {
+  &__meta .issue-meta {
+    border-top: 1px solid #919191;
+    border-bottom: 1px solid #919191;
     display: flex;
-    align-content: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 228px;
-    .field--name-field-image {
-      text-align: center;
-      img {
-        height: 100%;
-        width: auto;
-      }
-    }
-  }
-  .node__content {
-    h2 {
-      margin-top: 0;
-      font-size: 20px;
-      a {
-        color: $blue;
-        text-decoration: none;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-}
-
-.node--type-research-database.node--view-mode-teaser-card {
-  position: relative;
-  padding: 0;
-  height: 100%;
-  .field--name-field-resource-category {
-    .field__item a {
-      background: $text-color;
-      color: #ffffff;
+    gap: 12px;
+    padding: 8px 0;
+    margin: 18px 0;
+    > div:not(:last-of-type)::after {
+      content: '';
+      height: 10px;
+      width: 10px;
+      background-color: #bbb;
+      border-radius: 50%;
       display: inline-block;
-      position: absolute;
-      top: -1px;
-      left: -1px;
-      border-radius: 4px 0 4px 0;
-      padding: 6px 14px;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 600;
-      &:hover {
-        background: lighten($text-color, 12%);
-        text-decoration: none;
-      }
+      margin-left: 12px;
     }
-    .field__item:not(:first-of-type) {
-      display: none;
-    }
-  }
-  .node__content {
-    padding: 32px 28px 16px 28px;
   }
 }
 
-.node--type-research-database.node--view-mode-teaser {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-around;
-  gap: 22px;
-  flex-direction: column-reverse;
-  border: 1px solid #515151;
-  border-radius: 4px;
-  padding: 22px;
-  @media all and (min-width: 481px) {
-    border: none;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0;
-  }
-  .node__image {
-    max-width: 216px;
-    text-align: center;
-    margin: 0 auto;
-    @media all and (min-width: 481px) {
-      margin: 0 0 0 22px;
-      img {
-        max-width: 180px;
-      }
-    }
-  }
+.node--view-mode-search-result {
+  margin-bottom: 54px;
   h2 {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+  }
+  .article__meta .issue-meta {
+    border: none;
+    padding: 0;
     margin-top: 0;
   }
-  .field--name-body p {
-    margin: 0;
-  }
-  .resource-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-    margin: 8px 0;
-  }
-  .field--name-field-resource-category {
-    display: flex;
-    gap: 12px;
-  }
-  .field--name-field-resource-category .field__item a {
-    font-size: 12px;
-    font-weight: 600;
-    color: $text-color;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
+  .field--name-field-person {
+    &:before {
+      content: 'by';
+      font-style: italic;
+      margin-right: 4px;
     }
   }
 }
 
-.node--type-download-streaming-service.node--view-mode-full {
-  .field--name-field-resource-category .field__item {
-    font-weight: 700;
-    color: lighten($text-color, 10%);
-    font-style: italic;
-    margin: 12px 0;
-  }
-  .field--name-field-app-store-url {
-    float: left;
-    margin-right: 12px;
-  }
-  .field--name-field-downloadable-link {
-    margin: 12px 0;
-  }
-}
-
-.node--type-download-streaming-service.node--view-mode-teaser-card {
-  max-width: 400px;
-  .field--name-field-resource-category {
-    margin-bottom: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 12px;
-    row-gap: 2px;
+.node--view-mode-teaser-card {
+  @extend %card;
+  > h2 {
+    font-size: 16px;
+    border-bottom: 1px solid #979797;
+    padding-bottom: 12px;
+    text-align: center;
     a {
-      color: #666666;
-      font-weight: 700;
-      font-size: 12px;
-      text-transform: uppercase;
-      text-decoration: none;
-      letter-spacing: .5px;
-      @extend %clearfix;
-      &:hover {
-        text-decoration: underline;
-      }
-      &:before {
-        content: '';
-        display: block;
-        width: 14px;
-        height: 14px;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center center;
-        float: left;
-        position: relative;
-        top: 3px;
-        margin-right: 2px;
-      }
-      &.tid-13:before {
-        @include background-svg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#666666" d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>');
-      }
-      &.tid-14:before {
-        @include background-svg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#666666" d="M18 0H6C4.34 0 3 1.34 3 3v18c0 1.66 1.34 3 3 3h12c1.66 0 3-1.34 3-3V3c0-1.66-1.34-3-3-3zm-4 22h-4v-1h4v1zm5.25-3H4.75V3h14.5v16z"/></svg>');
-      }
-      &.tid-15:before {
-        @include background-svg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#666666" d="M12 1c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7c0-4.97-4.03-9-9-9z"/></svg>');
-      }
-      &.tid-16:before {
-        @include background-svg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#666666" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>');
-      }
-      &.tid-17:before {
-        @include background-svg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#666666" d="M13 12h7v1.5h-7zm0-2.5h7V11h-7zm0 5h7V16h-7zM21 4H3c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 15h-9V6h9v13z"/></svg>');
-      }
+      color: $text-color;
     }
   }
-  .resource-links {
-    margin: 12px 0;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
-    .field img {
-      max-width: 90px;
-    }
-  }
-  .field--name-field-downloadable-link a {
-    color: $blue;
-    font-weight: 700;
-    font-size: 14px;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  .more {
-    margin: 8px 0;
-    > a {
-      @extend %more;
-    }
-  }
-}
-
-.node--type-article {
-  .node__submitted {
-    margin-bottom: 1em;
-  }
-  .field--name-field-image {
+  .field--name-field-image-caption {
     text-align: center;
-    @media all and (min-width: 768px) {
-      float: right;
-      margin: 0 0 16px 16px;
-      max-width: 50%;
-    }
-  }
-}
-
-.node--type-article.node--view-mode-teaser {
-  display: flex;
-  flex-direction: column;
-  column-gap: 22px;
-  .node__image {
-    text-align: center;
-    width: 100%;
-  }
-  .node__content {
-    h2 {
-      margin: 0 0 .5em 0;
-    }
-    .field-name-body .field-item p:first-of-type {
-      margin-top: .5em;
-    }
-  }
-  @media all and (min-width: 768px) {
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: space-evenly;
-    .node__image {
-      width: calc(25% - 11px);
-    }
-    .node__content {
-      width: calc(75% - 11px);
-    }
-  }
-}
-
-.node--type-board-meeting-files.node--view-mode-teaser {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  h4 {
-    margin-bottom: 4px;
-    margin: 0;
-    &:after {
-      content: ':';
-    }
-  }
-  .node__content {
-    display: flex;
-    > div:not(:last-of-type) {
-      margin-right: 12px;
-      padding-right: 12px;
-      border-right: 1px solid $text-color;
-    }
+    margin-top: -12px;
   }
 }

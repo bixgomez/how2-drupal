@@ -1,16 +1,33 @@
 <?php
 
+function however_preprocess_html(&$variables, $hook) {
+    if(!empty($variables['page']['sidebar'])) {
+        $variables['attributes']['class'][] = 'has-sidebar';
+    }
+}
+
 function however_preprocess_page(&$variables, $hook) {
-    $t = 1;
+
 }
 
 function however_preprocess_node(&$variables, $hook) {
+    $function = __FUNCTION__ . '__' . $variables['node']->getType();
+    // Each node type can have its own specific function
+    if (function_exists($function)) {
+        $function($variables, $hook);
+    }
+    $function = __FUNCTION__ . '__' . $variables['view_mode'];
+    // Each node type can have its own specific function
+    if (function_exists($function)) {
+        $function($variables, $hook);
+    }
 
-//    $nid = 19;
-//    $query = \Drupal::entityQuery('node')
-//            ->condition('status', 1)
-//            ->condition('type', 'how2_issue')
-//            ->condition('field_how_2_sections.entity:node.nid', $nid)
-//            ->execute();
+    if($variables['view_mode'] == 'contributor_name') {
+        $t = 1;
+    }
+}
 
+function however_preprocess_node__contributor_name(&$variables, $hook) {
+    $t =  1;
+    $variables['title_attributes']['class'][] = 'visually-hidden';
 }

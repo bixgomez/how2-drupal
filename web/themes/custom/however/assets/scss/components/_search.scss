@@ -1,0 +1,43 @@
+#views-exposed-form-search-results-page-1 {
+  .form--inline {
+    display: flex;
+    align-items: center;
+    .form-item {
+      margin: 0;
+    }
+  }
+  .form-type-textfield {
+    label {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}
+
+.block-facets {
+  margin-bottom: 16px;
+}
+
+.block-facets > h2 {
+  font-size: 16px;
+  margin: 0 0 6px 0;
+}
+
+.facets-widget-links ul {
+  padding: 0;
+  margin: 0 0 6px 0;
+  list-style-position: inside;
+}
+.facets-widget-links li.facet-item {
+  a {
+    color: $text-color;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.view-search-results .views-row:first-of-type article h2 {
+  margin-top: 0;
+}

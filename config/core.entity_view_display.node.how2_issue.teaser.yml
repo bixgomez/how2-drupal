@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.how2_issue.field_issue_number
     - field.field.node.how2_issue.field_people
     - field.field.node.how2_issue.field_publication_date
+    - field.field.node.how2_issue.field_volume_reference
     - node.type.how2_issue
   module:
     - user
@@ -28,4 +29,5 @@ hidden:
   field_issue_number: true
   field_people: true
   field_publication_date: true
+  field_volume_reference: true
   search_api_excerpt: true

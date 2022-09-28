@@ -1,0 +1,29 @@
+uuid: e2011a8a-fd0f-4bf4-89a9-29470df7a830
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_how2_section
+    - node.type.how2_article
+    - node.type.how2_section
+id: node.how2_article.field_how2_section
+field_name: field_how2_section
+entity_type: node
+bundle: how2_article
+label: 'How2 Section'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      how2_section: how2_section
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

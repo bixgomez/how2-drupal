@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_how_2_sections
     - node.type.how2_issue
-    - node.type.how_ever_section
+    - node.type.how2_section
 id: node.how2_issue.field_how_2_sections
 field_name: field_how_2_sections
 entity_type: node
@@ -20,10 +20,10 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
-      how_ever_section: how_ever_section
+      how2_section: how2_section
     sort:
       field: _none
       direction: ASC
     auto_create: true
-    auto_create_bundle: ''
+    auto_create_bundle: how_ever_section
 field_type: entity_reference

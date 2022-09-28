@@ -6,9 +6,11 @@ dependencies:
     - field.field.node.how_ever_section.body
     - field.field.node.how_ever_section.field_how_ever_piece
     - field.field.node.how_ever_section.field_image_caption
+    - field.field.node.how_ever_section.field_issue_reference
     - field.field.node.how_ever_section.field_links_section_title
     - field.field.node.how_ever_section.field_person_bio
     - field.field.node.how_ever_section.field_tags
+    - field.field.node.how_ever_section.field_volume_reference
     - node.type.how_ever_section
   module:
     - entity_reference_revisions
@@ -44,6 +46,14 @@ content:
     third_party_settings: {  }
     weight: 103
     region: content
+  field_issue_reference:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 108
+    region: content
   field_links_section_title:
     type: string
     label: above
@@ -68,6 +78,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 106
+    region: content
+  field_volume_reference:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 107
     region: content
   links:
     settings: {  }

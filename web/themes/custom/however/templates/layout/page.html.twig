@@ -42,38 +42,43 @@
  * @see html.html.twig
  */
 #}
-<div class="layout-container">
 
   <header id="page-header" role="banner">
-    {{ page.branding }}
-    {{ page.navigation }}
+    <div class="layout-container">
+      {{ page.branding }}
+      {{ page.navigation }}
+    </div>
   </header>
-
-  <main role="main">
-    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
-
-    <div class="layout-content">
-      {{ page.title_banner }}
+  {% if page.content_top %}
+    <div class="layout-container content-top-container clearfix">
       {{ page.content_top }}
-      {{ page.content }}
-      {{ page.content_bottom }}
-    </div>{# /.layout-content #}
+    </div>
+  {% endif %}
+  <main role="main" class="clearfix">
+    <div class="layout-container clearfix">
+      <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
-    {% if page.sidebar %}
-      <aside class="layout-sidebar" role="complementary">
-        {{ page.sidebar }}
-      </aside>
-    {% endif %}
+      <div class="layout-content">
+        {{ page.title_banner }}
+        {{ page.content }}
+        {{ page.content_bottom }}
+      </div>{# /.layout-content #}
 
+      {% if page.sidebar %}
+        <aside class="layout-sidebar" role="complementary">
+          {{ page.sidebar }}
+        </aside>
+      {% endif %}
+    </div>
   </main>
 
   {% if page.footer %}
-    <footer role="contentinfo">
-      {{ page.footer }}
-      {{ page.footer_bottom }}
+    <footer id="page-footer" role="contentinfo">
+      <div class="layout-container">
+        {{ page.footer }}
+        {{ page.footer_bottom }}
+      </div>
     </footer>
   {% endif %}
-
-</div>{# /.layout-container #}
 
 {{ page.mobile_navigation }}

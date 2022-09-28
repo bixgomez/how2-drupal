@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.journal_issue.field_people
     - field.field.node.journal_issue.field_publication_date
     - field.field.node.journal_issue.field_section
+    - field.field.node.journal_issue.field_volume_reference
     - node.type.journal_issue
   module:
     - text
@@ -38,4 +39,5 @@ hidden:
   field_people: true
   field_publication_date: true
   field_section: true
+  field_volume_reference: true
   search_api_excerpt: true
