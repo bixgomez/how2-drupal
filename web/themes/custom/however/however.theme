@@ -56,9 +56,10 @@ function however_preprocess_node__how2_section(&$variables, $hook) {
     $issue_pub_date = $issue_node->field_publication_date_display->value;
     $variables['issue_pub_date'] =  $issue_pub_date;
 
-    $issue_url = $issue_node->toUrl()->toString();
-    $variables['issue_url'] = $issue_url;
-
+    if($issue_node) {
+        $issue_url = $issue_node->toUrl()->toString();
+        $variables['issue_url'] = $issue_url;
+    }
 
     $volume = null;
     if(!empty($variables['node']->field_volume_reference->getValue())) {

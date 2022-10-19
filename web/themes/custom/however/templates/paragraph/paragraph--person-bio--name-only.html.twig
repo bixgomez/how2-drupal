@@ -50,6 +50,7 @@
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
       {{ content }}
+      {{ dump(paragraph|keys) }}
     {% endblock %}
   </div>
 {% endblock paragraph %}

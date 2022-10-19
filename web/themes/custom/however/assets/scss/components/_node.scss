@@ -95,9 +95,13 @@
   }
   .field--name-field-how2-issue {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     gap: 30px;
+    > .field__item {
+      min-width: 280px;
+    }
     > .field__item > article {
       height: 100%;
     }
@@ -122,6 +126,17 @@
 
 .node--type-how2-issue.node--view-mode-teaser {
   padding: 0;
+  .field--name-field-cover-thumbnail {
+    background: $yellow-lightest;
+    text-align: center;
+    aspect-ratio: 1 / 1;
+    img {
+      object-fit: cover;
+      object-position: center center;
+      height: 100%;
+      margin-bottom: -4px;
+    }
+  }
   .node__content {
     padding: 32px 24px;
     text-align: center;
@@ -159,6 +174,9 @@
 }
 
 .node--type-how2-section.node--view-mode-full {
+  .issue-meta {
+    margin: 54px 0 62px 0;
+  }
   .field--name-field-image-caption {
     float: right;
     width: 40%;

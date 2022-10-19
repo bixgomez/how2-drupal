@@ -116,6 +116,18 @@ a.more:hover {
   display: table;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -579,9 +591,13 @@ ul.menu li.menu-item--expanded {
 }
 .node--type-how2-volume .field--name-field-how2-issue {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   gap: 30px;
+}
+.node--type-how2-volume .field--name-field-how2-issue > .field__item {
+  min-width: 280px;
 }
 .node--type-how2-volume .field--name-field-how2-issue > .field__item > article {
   height: 100%;
@@ -607,6 +623,17 @@ ul.menu li.menu-item--expanded {
 
 .node--type-how2-issue.node--view-mode-teaser {
   padding: 0;
+}
+.node--type-how2-issue.node--view-mode-teaser .field--name-field-cover-thumbnail {
+  background: #FFFCF0;
+  text-align: center;
+  aspect-ratio: 1/1;
+}
+.node--type-how2-issue.node--view-mode-teaser .field--name-field-cover-thumbnail img {
+  object-fit: cover;
+  object-position: center center;
+  height: 100%;
+  margin-bottom: -4px;
 }
 .node--type-how2-issue.node--view-mode-teaser .node__content {
   padding: 32px 24px;
@@ -643,6 +670,9 @@ ul.menu li.menu-item--expanded {
   text-decoration: underline;
 }
 
+.node--type-how2-section.node--view-mode-full .issue-meta {
+  margin: 54px 0 62px 0;
+}
 .node--type-how2-section.node--view-mode-full .field--name-field-image-caption {
   float: right;
   width: 40%;
