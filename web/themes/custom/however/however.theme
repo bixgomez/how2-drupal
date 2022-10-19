@@ -1,5 +1,10 @@
 <?php
 
+use Drupal\node\Entity\NodeType;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\Core\Render\Markup;
+
 function however_preprocess_html(&$variables, $hook) {
     if(!empty($variables['page']['sidebar'])) {
         $variables['attributes']['class'][] = 'has-sidebar';
@@ -21,13 +26,50 @@ function however_preprocess_node(&$variables, $hook) {
     if (function_exists($function)) {
         $function($variables, $hook);
     }
-
-    if($variables['view_mode'] == 'contributor_name') {
-        $t = 1;
-    }
 }
 
 function however_preprocess_node__contributor_name(&$variables, $hook) {
-    $t =  1;
     $variables['title_attributes']['class'][] = 'visually-hidden';
+}
+
+function however_preprocess_node__how2_issue(&$variables, $hook) {
+
+    $volume = null;
+    if(!empty($variables['node']->field_volume_reference->getValue())) {
+        $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
+        $volume = 'vol. ' . $volume_number;
+    }
+
+    $issue = null;
+    if(!empty($variables['node']->field_issue_number->getValue())) {
+        $issue_number = $variables['node']->field_issue_number->getValue();
+        $issue_number = $issue_number[0]['value'];
+        $issue = ', no. ' . $issue_number;
+    }
+
+    $variables['volume_issue'] = $volume . $issue;
+}
+
+function however_preprocess_node__how2_section(&$variables, $hook) {
+
+    $issue_node = $variables['node']->field_issue_reference->entity;
+    $issue_pub_date = $issue_node->field_publication_date_display->value;
+    $variables['issue_pub_date'] =  $issue_pub_date;
+
+    $issue_url = $issue_node->toUrl()->toString();
+    $variables['issue_url'] = $issue_url;
+
+
+    $volume = null;
+    if(!empty($variables['node']->field_volume_reference->getValue())) {
+        $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
+        $volume = 'vol. ' . $volume_number;
+    }
+
+    $issue = null;
+    if(!empty($issue_node)) {
+        $issue_number = $issue_node->get('field_issue_number')->value;
+        $issue = ', no. ' . $issue_number;
+    }
+    $variables['volume_issue'] = $volume . $issue;
 }

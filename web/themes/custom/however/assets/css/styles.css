@@ -247,12 +247,16 @@ body {
   text-align: center;
 }
 
-.block-card, .card, .node--view-mode-teaser-card {
+#block-however-branding {
+  max-width: 200px;
+}
+
+.block-card, .card, .node--type-how2-issue.node--view-mode-teaser, .node--view-mode-teaser-card {
   padding: 36px 24px;
   border: 1px solid #515151;
   box-sizing: border-box;
 }
-.block-card h2, .card h2, .node--view-mode-teaser-card h2 {
+.block-card h2, .card h2, .node--type-how2-issue.node--view-mode-teaser h2, .node--view-mode-teaser-card h2 {
   font-size: 24px;
 }
 
@@ -291,7 +295,7 @@ body {
   -webkit-column-gap: 1em;
   -moz-column-gap: 1em;
   column-gap: 1em;
-  margin: 1.5em;
+  margin: 1.5em 0;
   padding: 0;
   -moz-column-gap: 1.5em;
   -webkit-column-gap: 1.5em;
@@ -302,6 +306,22 @@ body {
   width: 100%;
   margin-bottom: 18px;
   box-sizing: border-box;
+}
+
+.field--name-field-archive-url a {
+  font-weight: 600;
+  color: #333333;
+  text-decoration: none;
+}
+.field--name-field-archive-url a:hover {
+  text-decoration: underline;
+}
+
+.field--name-field-caption p {
+  text-align: center;
+  margin-top: 0;
+  color: #424242;
+  font-size: 12px;
 }
 
 #page-footer {
@@ -474,15 +494,13 @@ ul.menu li.menu-item--expanded {
   text-decoration: underline;
 }
 
-.article__meta .issue-meta {
-  border-top: 1px solid #919191;
-  border-bottom: 1px solid #919191;
+.node .issue-meta {
   display: flex;
   gap: 12px;
-  padding: 8px 0;
   margin: 18px 0;
+  font-weight: 700;
 }
-.article__meta .issue-meta > div:not(:last-of-type)::after {
+.node .issue-meta > div:not(:last-of-type)::after {
   content: "";
   height: 10px;
   width: 10px;
@@ -490,6 +508,18 @@ ul.menu li.menu-item--expanded {
   border-radius: 50%;
   display: inline-block;
   margin-left: 12px;
+}
+.node .issue-meta a {
+  color: #333333;
+  text-decoration: none;
+}
+.node .issue-meta a:hover {
+  text-decoration: underline;
+}
+.node.node--view-mode-full > .issue-meta {
+  border-top: 1px solid #919191;
+  border-bottom: 1px solid #919191;
+  padding: 8px 0;
 }
 
 .node--view-mode-search-result {
@@ -521,6 +551,102 @@ ul.menu li.menu-item--expanded {
 .node--view-mode-teaser-card .field--name-field-image-caption {
   text-align: center;
   margin-top: -12px;
+}
+.node--view-mode-teaser-card .field--name-field-subtitle {
+  text-align: center;
+}
+
+@media all and (min-width: 960px) {
+  .issue-top-content {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    align-items: center;
+    max-width: 92%;
+    margin: 0 auto;
+  }
+  .issue-top-content .image {
+    width: 25%;
+  }
+  .issue-top-content .issue-title-meta {
+    width: calc(75% - 36px);
+  }
+}
+
+.node--type-how2-volume .field--name-field-archive-url {
+  margin-bottom: 2em;
+  text-align: center;
+}
+.node--type-how2-volume .field--name-field-how2-issue {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+.node--type-how2-volume .field--name-field-how2-issue > .field__item > article {
+  height: 100%;
+}
+@media all and (min-width: 480px) {
+  .node--type-how2-volume .field--name-field-how2-issue {
+    flex-direction: row;
+  }
+  .node--type-how2-volume .field--name-field-how2-issue > .field__item {
+    width: calc(50% - 30px);
+  }
+}
+@media all and (min-width: 768px) {
+  .node--type-how2-volume .field--name-field-how2-issue > .field__item {
+    width: calc(33% - 30px);
+  }
+}
+@media all and (min-width: 1024px) {
+  .node--type-how2-volume .field--name-field-how2-issue > .field__item {
+    width: calc(25% - 30px);
+  }
+}
+
+.node--type-how2-issue.node--view-mode-teaser {
+  padding: 0;
+}
+.node--type-how2-issue.node--view-mode-teaser .node__content {
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+}
+.node--type-how2-issue.node--view-mode-teaser .field--name-field-issue-number {
+  display: inline-block;
+  background: #2E2E2E;
+  font-size: 48px;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 30px;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  position: absolute;
+  top: -38px;
+  left: 40%;
+  right: 40%;
+}
+.node--type-how2-issue.node--view-mode-teaser .issue-meta {
+  justify-content: center;
+  font-weight: normal;
+}
+.node--type-how2-issue.node--view-mode-teaser h2 {
+  font-size: 18px;
+  margin-bottom: 0;
+}
+.node--type-how2-issue.node--view-mode-teaser h2 a {
+  color: #333333;
+}
+.node--type-how2-issue.node--view-mode-teaser h2 a:hover {
+  text-decoration: underline;
+}
+
+.node--type-how2-section.node--view-mode-full .field--name-field-image-caption {
+  float: right;
+  width: 40%;
+  max-width: 300px;
 }
 
 .paragraph--type--person-bio.paragraph--view-mode--name-only {

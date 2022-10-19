@@ -1,3 +1,9 @@
+featherlight:
+  css:
+    theme:
+      vendor/featherlight/release/featherlight.min.css: {}
+  js:
+    vendor/featherlight/release/featherlight.min.js: {}
 global-styling:
   css:
     base:

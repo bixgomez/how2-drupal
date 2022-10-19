@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Bartik's theme implementation to display a node.
+ * Theme override to display a node.
  *
  * Available variables:
  * - node: The node entity with limited access to object properties and methods.
@@ -64,6 +64,7 @@
  *   is an administrator.
  *
  * @see template_preprocess_node()
+ *
  */
 #}
 {%
@@ -74,30 +75,42 @@
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'clearfix',
   ]
 %}
-{{ attach_library('bartik/classy.node') }}
+{{ attach_library('classy/node') }}
 <article{{ attributes.addClass(classes) }}>
-  <header>
-    {{ title_prefix }}
-      {% if label and not page %}
-      <h2{{ title_attributes.addClass('node__title') }}>
-        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-      </h2>
-    {% endif %}
-    {{ title_suffix }}
-    {% if display_submitted %}
-      <div class="node__meta">
-        {{ author_picture }}
-        <span{{ author_attributes }}>
-          {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-        </span>
-        {{ metadata }}
+  <div class="issue-top-content node__meta">
+      {% if content.field_cover_thumbnail %}
+        <div class="image">
+          {{ content.field_cover_thumbnail }}
+        </div>
+      {% endif %}
+    <div class="issue-title-meta">
+        {{ title_prefix }}
+        <h1{{ title_attributes }}>
+          {{ label }}
+        </h1>
+        {{ title_suffix }}
+      <div class="issue-meta">
+        <div class="journal-name"><a href="/how2">How2</a></div>
+        <div class="issue-volume-number">{{ volume_issue }}</div>
+        {{ content.field_publication_date_display }}
+        {% if content.field_masthead %}
+          <div class="masthead-link"><a href="#masthead" data-featherlight="#masthead">masthead</a></div>
+        {% endif %}
+        {{ content.field_archive_url }}
       </div>
-    {% endif %}
-  </header>
-  <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-    {{ content }}
+    </div>
   </div>
+
+  <div{{ content_attributes.addClass('node__content') }}>
+    {{ content.field_how_2_sections }}
+  </div>
+
+  {% if content.field_masthead %}
+    <div id="masthead">
+      {{ content.field_masthead }}
+    </div>
+  {% endif %}
+
 </article>

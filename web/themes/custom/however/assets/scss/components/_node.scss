@@ -1,11 +1,9 @@
-.article {
-  &__meta .issue-meta {
-    border-top: 1px solid #919191;
-    border-bottom: 1px solid #919191;
+.node {
+  .issue-meta {
     display: flex;
     gap: 12px;
-    padding: 8px 0;
     margin: 18px 0;
+    font-weight: 700;
     > div:not(:last-of-type)::after {
       content: '';
       height: 10px;
@@ -15,6 +13,18 @@
       display: inline-block;
       margin-left: 12px;
     }
+    a {
+      color: $text-color;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  &.node--view-mode-full > .issue-meta {
+    border-top: 1px solid #919191;
+    border-bottom: 1px solid #919191;
+    padding: 8px 0;
   }
 }
 
@@ -51,5 +61,107 @@
   .field--name-field-image-caption {
     text-align: center;
     margin-top: -12px;
+  }
+  .field--name-field-subtitle {
+    text-align: center;
+  }
+}
+
+.issue-top-content {
+  @media all and (min-width: 960px) {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    align-items: center;
+    max-width: 92%;
+    margin: 0 auto;
+    .image {
+      width: 25%;
+    }
+    .issue-title-meta {
+      width: calc(75% - 36px);
+    }
+  }
+}
+
+.node--type-how2-issue.node--view-mode-teaser {
+  @extend %card;
+}
+
+.node--type-how2-volume {
+  .field--name-field-archive-url {
+    margin-bottom: 2em;
+    text-align: center;
+  }
+  .field--name-field-how2-issue {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    > .field__item > article {
+      height: 100%;
+    }
+    @media all and (min-width: 480px) {
+      flex-direction: row;
+      > .field__item {
+        width: calc(50% - 30px);
+      }
+    }
+    @media all and (min-width: 768px) {
+      > .field__item {
+        width: calc(33% - 30px);
+      }
+    }
+    @media all and (min-width: 1024px) {
+      > .field__item {
+        width: calc(25% - 30px);
+      }
+    }
+  }
+}
+
+.node--type-how2-issue.node--view-mode-teaser {
+  padding: 0;
+  .node__content {
+    padding: 32px 24px;
+    text-align: center;
+    position: relative;
+  }
+  .field--name-field-issue-number {
+    display: inline-block;
+    background: #2E2E2E;
+    font-size: 48px;
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    position: absolute;
+    top: -38px;
+    left: 40%;
+    right: 40%;
+  }
+  .issue-meta {
+    justify-content: center;
+    font-weight: normal;
+  }
+  h2 {
+    font-size: 18px;
+    margin-bottom: 0;
+    a {
+      color: $text-color;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.node--type-how2-section.node--view-mode-full {
+  .field--name-field-image-caption {
+    float: right;
+    width: 40%;
+    max-width: 300px;
   }
 }

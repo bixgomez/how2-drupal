@@ -35,7 +35,7 @@
   -webkit-column-gap: 1em;
   -moz-column-gap: 1em;
   column-gap: 1em;
-  margin: 1.5em;
+  margin: 1.5em 0;
   padding: 0;
   -moz-column-gap: 1.5em;
   -webkit-column-gap: 1.5em;
@@ -45,5 +45,23 @@
     width: 100%;
     margin-bottom: 18px;
     box-sizing: border-box;
+  }
+}
+
+.field--name-field-archive-url a {
+  font-weight: 600;
+  color: $text-color;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.field--name-field-caption {
+  p {
+    text-align: center;
+    margin-top: 0;
+    color: #424242;
+    font-size: 12px;
   }
 }
