@@ -81,11 +81,15 @@
 <article{{ attributes.addClass(classes) }}>
     <h2 class="subtitle text-center">{{ content.field_subtitle.0 }}</h2>
     <div class="issue-meta">
+        <div class="left">
         <div class="journal-name"><a href="/how2">How2</a></div>
         <div class="issue-volume-number">{{ volume_issue }}</div>
         <div class="issue-pub-date">{{ issue_pub_date }}</div>
         <div><a href="{{ issue_url }}">table of contents</a></div>
-        {{ content.field_archive_url }}
+        </div>
+        <div class="righ">
+            {{ content.field_archive_url }}
+        </div>
     </div>
 
     <div{{ content_attributes.addClass('node__content') }}>

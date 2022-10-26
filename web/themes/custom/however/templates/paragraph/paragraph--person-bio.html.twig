@@ -39,18 +39,27 @@
  */
 #}
 {%
-  set classes = [
+    set classes = [
     'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
-  ]
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    'clearfix'
+]
 %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
-    {% block content %}
-      {{ content }}
-      {{ dump(paragraph|keys) }}
-    {% endblock %}
-  </div>
+    <div{{ attributes.addClass(classes) }}>
+        {% if paragraph.field_person.0.entity.field_headshot.0 %}
+            <div class="headshot">
+                <img alt="paragraph.field_person.0.entity.field_headshot.0.entity.alt.value" src="{{ file_url(paragraph.field_person.0.entity.field_headshot.0.entity.uri.value) }}" />
+            </div>
+        {% endif %}
+        <div class="bio-content">
+            {% block content %}
+                {{ content.field_person }}
+                {{ content.field_override_role }}
+                {{ content.field_override_bio.0 ? content.field_override_bio : paragraph.field_person.0.entity.body.0.value|raw }}
+            {% endblock %}
+        </div>
+    </div>
 {% endblock paragraph %}

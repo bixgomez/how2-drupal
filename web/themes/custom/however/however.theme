@@ -74,3 +74,28 @@ function however_preprocess_node__how2_section(&$variables, $hook) {
     }
     $variables['volume_issue'] = $volume . $issue;
 }
+
+function however_preprocess_node__how2_article(&$variables, $hook) {
+    $issue_node = $variables['node']->field_issue_reference->entity;
+    $issue_pub_date = $issue_node->field_publication_date_display->value;
+    $variables['issue_pub_date'] =  $issue_pub_date;
+
+    if($issue_node) {
+        $issue_url = $issue_node->toUrl()->toString();
+        $variables['issue_url'] = $issue_url;
+    }
+
+    $volume = null;
+    if(!empty($variables['node']->field_volume_reference->getValue())) {
+        $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
+        $volume = 'vol. ' . $volume_number;
+    }
+
+    $issue = null;
+    if(!empty($issue_node)) {
+        $issue_number = $issue_node->get('field_issue_number')->value;
+        $issue = ', no. ' . $issue_number;
+    }
+    $variables['volume_issue'] = $volume . $issue;
+
+}

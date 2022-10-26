@@ -69,7 +69,6 @@
 #}
 {%
     set classes = [
-    'article',
     'node',
     'node--type-' ~ node.bundle|clean_class,
     node.isPromoted() ? 'node--promoted',
@@ -80,23 +79,13 @@
 %}
 {{ attach_library('classy/node') }}
 <article{{ attributes.addClass(classes) }}>
+    {% if content.field_person_bio['#items']['0'].entity.field_person.0.entity %}
+        <span class="contributor"><strong>{{ content.field_person_bio['#items']['0'].entity.field_person.0.entity.title.value }}</strong></span> &mdash;
+    {% endif %}
     {{ title_prefix }}
-        <h2{{ title_attributes }}>
+        <span{{ title_attributes }}>
             <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-        </h2>
+        </span>
     {{ title_suffix }}
-    <div{{ content_attributes.addClass('node__content') }}>
-        {{ content.field_person_bio }}
-        {{ content.body }}
-    </p>
-    <div class="node__meta">
-        <div class="issue-meta">
-            <div class="left">
-                <div class="journal-name"><a href="/how2">How2</a></div>
-                {{ content.field_volume_reference }}
-                {{ content.field_issue_reference }}
-            </div>
-        </div>
-        {{ content.field_tags }}
-    </div>
+
 </article>

@@ -30,21 +30,21 @@ h1 a {
   color: #333333;
 }
 
-h2 {
+h2, .field--name-field-person-bio .field--name-field-person {
   font-size: 18px;
   font-weight: 700;
 }
-h2 a {
+h2 a, .field--name-field-person-bio .field--name-field-person a {
   text-decoration: none;
   color: #9E2727;
 }
 @media all and (min-width: 768px) {
-  h2 {
+  h2, .field--name-field-person-bio .field--name-field-person {
     font-size: 20px;
   }
 }
 @media all and (min-width: 1024px) {
-  h2 {
+  h2, .field--name-field-person-bio .field--name-field-person {
     font-size: 24px;
   }
 }
@@ -67,7 +67,7 @@ a:hover, a:link:hover, a:visited:hover, a:focus:hover {
 }
 
 p {
-  line-height: 1.4;
+  line-height: 1.6;
 }
 
 .full-width, .star-pattern-background {
@@ -239,7 +239,7 @@ a.more:hover {
 .layout-container, .region-navigation .block-menu > ul.menu {
   width: 94%;
   margin: 0 auto;
-  max-width: 1252px;
+  max-width: 1060px;
 }
 
 @media all and (min-width: 960px) {
@@ -261,6 +261,10 @@ body {
 
 #block-however-branding {
   max-width: 200px;
+}
+
+#block-how2logo {
+  text-align: center;
 }
 
 .block-card, .card, .node--type-how2-issue.node--view-mode-teaser, .node--view-mode-teaser-card {
@@ -334,6 +338,26 @@ body {
   margin-top: 0;
   color: #424242;
   font-size: 12px;
+}
+
+.field--name-field-person-bio {
+  margin-top: 54px;
+  padding: 36px 0;
+  border-top: 3px solid #909090;
+  border-bottom: 3px solid #909090;
+}
+.field--name-field-person-bio .headshot {
+  margin: 0 0 20px 0;
+}
+@media all and (min-width: 768px) {
+  .field--name-field-person-bio .headshot {
+    max-width: 200px;
+    float: left;
+    margin: 0 30px 0 0;
+  }
+}
+.field--name-field-person-bio .field--name-field-override-role {
+  font-weight: 700;
 }
 
 #page-footer {
@@ -508,11 +532,15 @@ ul.menu li.menu-item--expanded {
 
 .node .issue-meta {
   display: flex;
-  gap: 12px;
   margin: 18px 0;
   font-weight: 700;
+  justify-content: space-between;
 }
-.node .issue-meta > div:not(:last-of-type)::after {
+.node .issue-meta .left {
+  display: flex;
+  gap: 12px;
+}
+.node .issue-meta .left > div:not(:last-of-type)::after {
   content: "";
   height: 10px;
   width: 10px;
@@ -531,7 +559,8 @@ ul.menu li.menu-item--expanded {
 .node.node--view-mode-full > .issue-meta {
   border-top: 1px solid #919191;
   border-bottom: 1px solid #919191;
-  padding: 8px 0;
+  padding: 18px 0;
+  margin: 54px 0 62px 0 !important;
 }
 
 .node--view-mode-search-result {
@@ -670,13 +699,39 @@ ul.menu li.menu-item--expanded {
   text-decoration: underline;
 }
 
-.node--type-how2-section.node--view-mode-full .issue-meta {
-  margin: 54px 0 62px 0;
+.node--type-how2-section.node--view-mode-full .node__content {
+  max-width: 748px;
+  margin: 0 auto;
 }
 .node--type-how2-section.node--view-mode-full .field--name-field-image-caption {
   float: right;
   width: 40%;
   max-width: 300px;
+  margin: 0 0 24px 48px;
+}
+.node--type-how2-section.node--view-mode-full .field--name-field-how2-piece {
+  margin-bottom: 54px;
+}
+.node--type-how2-section.node--view-mode-full .field--name-field-how2-piece .paragraph--type--how2-section-links {
+  margin-bottom: 22px;
+  font-family: "Libre Caslon Text", serif;
+}
+.node--type-how2-section.node--view-mode-full .field--name-field-how2-piece .paragraph--type--how2-section-links p {
+  line-height: 1.8;
+}
+
+.node--type-how2-article .view-article-section {
+  text-align: center;
+}
+.node--type-how2-article .node__content {
+  max-width: 748px;
+  margin: 0 auto;
+}
+.node--type-how2-article .field--name-body {
+  font-family: "Libre Caslon Text", serif;
+}
+.node--type-how2-article .field--name-body p {
+  line-height: 1.8;
 }
 
 .paragraph--type--person-bio.paragraph--view-mode--name-only {

@@ -85,8 +85,10 @@
     <div{{ content_attributes.addClass('node__content') }}>
         {{ content.field_issue_number }}
         <div class="issue-meta">
-            <div class="issue-volume-number">{{ volume_issue }}</div>
-            {{ content.field_publication_date_display }}
+            <div class="left">
+                <div class="issue-volume-number">{{ volume_issue }}</div>
+                {{ content.field_publication_date_display }}
+            </div>
         </div>
         {{ title_prefix }}
         {% if label and not page %}

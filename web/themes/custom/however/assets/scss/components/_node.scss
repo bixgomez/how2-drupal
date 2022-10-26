@@ -1,17 +1,24 @@
 .node {
   .issue-meta {
     display: flex;
-    gap: 12px;
     margin: 18px 0;
     font-weight: 700;
-    > div:not(:last-of-type)::after {
-      content: '';
-      height: 10px;
-      width: 10px;
-      background-color: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      margin-left: 12px;
+    justify-content: space-between;
+    .left {
+      display: flex;
+      gap: 12px;
+      > div:not(:last-of-type)::after {
+        content: '';
+        height: 10px;
+        width: 10px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        margin-left: 12px;
+      }
+    }
+    .right {
+
     }
     a {
       color: $text-color;
@@ -24,7 +31,8 @@
   &.node--view-mode-full > .issue-meta {
     border-top: 1px solid #919191;
     border-bottom: 1px solid #919191;
-    padding: 8px 0;
+    padding: 18px 0;
+    margin: 54px 0 62px 0 !important;
   }
 }
 
@@ -174,12 +182,42 @@
 }
 
 .node--type-how2-section.node--view-mode-full {
-  .issue-meta {
-    margin: 54px 0 62px 0;
+  .node__content {
+    max-width: 748px;
+    margin: 0 auto;
   }
   .field--name-field-image-caption {
     float: right;
     width: 40%;
     max-width: 300px;
+    margin: 0 0 24px 48px;
+  }
+  .field--name-field-how2-piece {
+    margin-bottom: 54px;
+    .paragraph--type--how2-section-links {
+      margin-bottom: 22px;
+      font-family: $serif-font;
+      p {
+        line-height: 1.8;
+      }
+    }
   }
 }
+
+.node--type-how2-article {
+  .view-article-section {
+    text-align: center;
+  }
+  .node__content {
+    max-width: 748px;
+    margin: 0 auto;
+  }
+  .field--name-body {
+    font-family: $serif-font;
+    p {
+      line-height: 1.8;
+    }
+  }
+}
+
+

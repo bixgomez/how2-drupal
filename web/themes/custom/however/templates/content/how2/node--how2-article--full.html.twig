@@ -69,7 +69,6 @@
 #}
 {%
     set classes = [
-    'article',
     'node',
     'node--type-' ~ node.bundle|clean_class,
     node.isPromoted() ? 'node--promoted',
@@ -80,23 +79,24 @@
 %}
 {{ attach_library('classy/node') }}
 <article{{ attributes.addClass(classes) }}>
-    {{ title_prefix }}
-        <h2{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-        </h2>
-    {{ title_suffix }}
-    <div{{ content_attributes.addClass('node__content') }}>
-        {{ content.field_person_bio }}
-        {{ content.body }}
-    </p>
-    <div class="node__meta">
-        <div class="issue-meta">
-            <div class="left">
-                <div class="journal-name"><a href="/how2">How2</a></div>
-                {{ content.field_volume_reference }}
-                {{ content.field_issue_reference }}
-            </div>
+
+    {{ drupal_view('article_section', 'block_1', '84') }}
+
+    <div class="issue-meta">
+        <div class="left">
+            <div class="journal-name"><a href="/how2">How2</a></div>
+            <div class="issue-volume-number">{{ volume_issue }}</div>
+            <div class="issue-pub-date">{{ issue_pub_date }}</div>
+            <div><a href="{{ issue_url }}">table of contents</a></div>
         </div>
-        {{ content.field_tags }}
+        <div class="righ">
+            {{ content.field_archive_url }}
+        </div>
     </div>
+
+    <div{{ content_attributes.addClass('node__content') }}>
+        {{ content.body }}
+        {{ content.field_person_bio }}
+    </div>
+
 </article>

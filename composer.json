@@ -30,7 +30,8 @@
         "drupal/paragraphs": "^1.14",
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/cer": "^4.0@alpha",
-        "drupal/search_api_page": "^1.0@beta"
+        "drupal/search_api_page": "^1.0@beta",
+        "drupal/twig_tweak": "^3.2"
     },
     "require-dev": {
         "drupal/core-dev": "^9.2"
