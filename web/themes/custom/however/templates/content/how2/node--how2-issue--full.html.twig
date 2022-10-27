@@ -92,13 +92,15 @@
         </h1>
         {{ title_suffix }}
       <div class="issue-meta">
-        <div class="journal-name"><a href="/how2">How2</a></div>
-        <div class="issue-volume-number">{{ volume_issue }}</div>
-        {{ content.field_publication_date_display }}
-        {% if content.field_masthead %}
-          <div class="masthead-link"><a href="#masthead" data-featherlight="#masthead">masthead</a></div>
-        {% endif %}
-        {{ content.field_archive_url }}
+        <div class="left">
+          <div class="journal-name"><a href="/how2">How2</a></div>
+          <div class="issue-volume-number">{{ volume_issue }}</div>
+          {{ content.field_publication_date_display }}
+          {% if content.field_masthead %}
+            <div class="masthead-link"><a href="#masthead" data-featherlight="#masthead">masthead</a></div>
+          {% endif %}
+          {{ content.field_archive_url }}
+        </div>
       </div>
     </div>
   </div>

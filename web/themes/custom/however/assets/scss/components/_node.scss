@@ -4,9 +4,11 @@
     margin: 18px 0;
     font-weight: 700;
     justify-content: space-between;
+    flex-wrap: wrap;
     .left {
       display: flex;
       gap: 12px;
+      flex-wrap: wrap;
       > div:not(:last-of-type)::after {
         content: '';
         height: 10px;
@@ -94,6 +96,12 @@
 
 .node--type-how2-issue.node--view-mode-teaser {
   @extend %card;
+}
+
+.node--type-how2-issue.node--view-mode-full {
+  #masthead {
+    display: none;
+  }
 }
 
 .node--type-how2-volume {

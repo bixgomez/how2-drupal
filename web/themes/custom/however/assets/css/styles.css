@@ -535,10 +535,12 @@ ul.menu li.menu-item--expanded {
   margin: 18px 0;
   font-weight: 700;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .node .issue-meta .left {
   display: flex;
   gap: 12px;
+  flex-wrap: wrap;
 }
 .node .issue-meta .left > div:not(:last-of-type)::after {
   content: "";
@@ -612,6 +614,10 @@ ul.menu li.menu-item--expanded {
   .issue-top-content .issue-title-meta {
     width: calc(75% - 36px);
   }
+}
+
+.node--type-how2-issue.node--view-mode-full #masthead {
+  display: none;
 }
 
 .node--type-how2-volume .field--name-field-archive-url {
@@ -738,6 +744,9 @@ ul.menu li.menu-item--expanded {
   display: inline;
 }
 
+#views-exposed-form-search-results-page-1 {
+  margin-left: 16px;
+}
 #views-exposed-form-search-results-page-1 .form--inline {
   display: flex;
   align-items: center;
@@ -748,6 +757,20 @@ ul.menu li.menu-item--expanded {
 #views-exposed-form-search-results-page-1 .form-type-textfield label {
   display: none;
   visibility: hidden;
+}
+#views-exposed-form-search-results-page-1 input.form-submit {
+  border: none;
+  background-color: none;
+  appearance: none;
+  text-indent: -1000em;
+  width: 36px;
+  height: 36px;
+  background-position: center center;
+  background-size: cover;
+  background-color: transparent;
+  position: relative;
+  left: 4px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
 }
 
 .block-facets {
