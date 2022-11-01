@@ -1,0 +1,7 @@
+name: CKEditor Footnotes Manager
+type: module
+description: Adds a Footnotes toolbar button.
+core_version_requirement: ^9 || ^10
+package: CKEditor
+dependencies:
+  - ckeditor
