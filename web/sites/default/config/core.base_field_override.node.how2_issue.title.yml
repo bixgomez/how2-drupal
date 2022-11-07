@@ -1,14 +1,14 @@
-uuid: dab1b9cd-2aaa-404b-abab-82e19bdd8097
+uuid: bbc8d1a3-3aba-4108-8e3d-ac90cce708f0
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.person
-id: node.person.title
+    - node.type.how2_issue
+id: node.how2_issue.title
 field_name: title
 entity_type: node
-bundle: person
-label: 'Full Name'
+bundle: how2_issue
+label: 'Back-end description'
 description: ''
 required: true
 translatable: true
