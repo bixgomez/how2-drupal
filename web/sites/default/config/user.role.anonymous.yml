@@ -1,0 +1,16 @@
+uuid: a94b461a-23ef-4dcc-b32d-bdb81b33046b
+langcode: en
+status: true
+dependencies:
+  module:
+    - contact
+    - media
+_core:
+  default_config_hash: 6WavjUYXIegP9AAg2zXGx54MWIVoomC3SZhNiqe-Dyk
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access site-wide contact form'
+  - 'view media'

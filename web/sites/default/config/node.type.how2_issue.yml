@@ -1,0 +1,17 @@
+uuid: f856b91f-6900-4d7f-b90d-bdeda425b050
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'How2 Issue'
+type: how2_issue
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

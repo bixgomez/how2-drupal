@@ -1,0 +1,29 @@
+uuid: 93c19785-9079-42d7-8838-d2dcb137884c
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.issue
+  module:
+    - facets
+    - system
+  theme:
+    - however
+id: issue
+theme: however
+region: sidebar
+weight: -4
+provider: null
+plugin: 'facet_block:issue'
+settings:
+  id: 'facet_block:issue'
+  label: Issue
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: issue
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/search\r\n/search*"

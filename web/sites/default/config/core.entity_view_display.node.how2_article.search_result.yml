@@ -1,0 +1,76 @@
+uuid: 235ad654-4ee3-465f-b393-77de8ccd4886
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.how2_article.body
+    - field.field.node.how2_article.field_archive_url
+    - field.field.node.how2_article.field_issue_reference
+    - field.field.node.how2_article.field_media_type
+    - field.field.node.how2_article.field_person_bio
+    - field.field.node.how2_article.field_section_reference
+    - field.field.node.how2_article.field_tags
+    - field.field.node.how2_article.field_volume_reference
+    - node.type.how2_article
+  module:
+    - entity_reference_revisions
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.how2_article.search_result
+targetEntityType: node
+bundle: how2_article
+mode: search_result
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_issue_reference:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_person_bio:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: name_only
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_volume_reference:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  field_archive_url: true
+  field_media_type: true
+  field_section_reference: true
+  links: true
+  search_api_excerpt: true

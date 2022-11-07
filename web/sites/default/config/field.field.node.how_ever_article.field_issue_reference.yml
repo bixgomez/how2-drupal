@@ -1,0 +1,29 @@
+uuid: ec968547-2cc4-4fc5-b4c7-b0a384783c36
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_issue_reference
+    - node.type.how_ever_article
+    - node.type.journal_issue
+id: node.how_ever_article.field_issue_reference
+field_name: field_issue_reference
+entity_type: node
+bundle: how_ever_article
+label: 'Issue (reference)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      journal_issue: journal_issue
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

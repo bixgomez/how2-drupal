@@ -1,0 +1,32 @@
+uuid: b3223636-e330-4462-9bb3-5cbb08c8b3f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.name_only
+    - field.field.paragraph.how2_section_links.field_notes
+    - field.field.paragraph.how2_section_links.field_unit
+    - paragraphs.paragraphs_type.how2_section_links
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: paragraph.how2_section_links.name_only
+targetEntityType: paragraph
+bundle: how2_section_links
+mode: name_only
+content:
+  field_unit:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: contributor_name
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_notes: true
+  search_api_excerpt: true

@@ -1,0 +1,45 @@
+uuid: ecad5641-b01d-43e2-8996-65f21d3d6326
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.how_ever_section.body
+    - field.field.node.how_ever_section.field_how_ever_piece
+    - field.field.node.how_ever_section.field_image_caption
+    - field.field.node.how_ever_section.field_issue_reference
+    - field.field.node.how_ever_section.field_links_section_title
+    - field.field.node.how_ever_section.field_person_bio
+    - field.field.node.how_ever_section.field_tags
+    - field.field.node.how_ever_section.field_volume_reference
+    - node.type.how_ever_section
+  module:
+    - text
+    - user
+id: node.how_ever_section.teaser
+targetEntityType: node
+bundle: how_ever_section
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_how_ever_piece: true
+  field_image_caption: true
+  field_issue_reference: true
+  field_links_section_title: true
+  field_person_bio: true
+  field_tags: true
+  field_volume_reference: true
+  search_api_excerpt: true

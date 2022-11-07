@@ -1,0 +1,10 @@
+uuid: 818611b3-6432-4e2a-868e-29fcd404a85b
+langcode: en
+status: true
+dependencies: {  }
+id: photo_caption
+label: 'Photo & Caption'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

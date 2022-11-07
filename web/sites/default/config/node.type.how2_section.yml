@@ -1,0 +1,17 @@
+uuid: f541f7e4-5acf-4365-88de-65aa27454cc3
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'How2 Section'
+type: how2_section
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

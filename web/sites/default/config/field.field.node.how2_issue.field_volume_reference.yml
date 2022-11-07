@@ -1,0 +1,29 @@
+uuid: faec9050-f6cf-49df-96e1-afb8ffd2d606
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_volume_reference
+    - node.type.how2_issue
+    - node.type.how2_volume
+id: node.how2_issue.field_volume_reference
+field_name: field_volume_reference
+entity_type: node
+bundle: how2_issue
+label: 'Volume (reference)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      how2_volume: how2_volume
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,17 @@
+uuid: 4ed37ac2-8bcf-4a26-a377-704be044802e
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'HOW(ever) article'
+type: how_ever_article
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

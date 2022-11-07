@@ -1,0 +1,10 @@
+uuid: fe556d48-3dd0-4c6f-9067-4ead5a2aa868
+langcode: en
+status: true
+dependencies: {  }
+id: section_links
+label: 'HOW(ever) Section Links'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

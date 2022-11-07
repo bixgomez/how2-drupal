@@ -1,0 +1,29 @@
+uuid: 890f0dd7-9142-4a4c-9533-c6e11bd79800
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media_type
+    - node.type.how2_article
+    - taxonomy.vocabulary.media_type
+id: node.how2_article.field_media_type
+field_name: field_media_type
+entity_type: node
+bundle: how2_article
+label: 'Media Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      media_type: media_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

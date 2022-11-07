@@ -1,0 +1,21 @@
+uuid: 7859c3ee-b096-49e4-9da3-157d241ed116
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_notes
+    - paragraphs.paragraphs_type.how2_section_links
+  module:
+    - text
+id: paragraph.how2_section_links.field_notes
+field_name: field_notes
+entity_type: paragraph
+bundle: how2_section_links
+label: Notes
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

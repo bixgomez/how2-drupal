@@ -1,0 +1,76 @@
+uuid: 99e77433-d1dc-4377-9248-9b437e96fc8d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.how_ever_article.body
+    - field.field.node.how_ever_article.field_issue_reference
+    - field.field.node.how_ever_article.field_person_bio
+    - field.field.node.how_ever_article.field_section_reference
+    - field.field.node.how_ever_article.field_tags
+    - field.field.node.how_ever_article.field_volume_reference
+    - node.type.how_ever_article
+  module:
+    - entity_reference_revisions
+    - text
+    - user
+id: node.how_ever_article.default
+targetEntityType: node
+bundle: how_ever_article
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_issue_reference:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_person_bio:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_section_reference:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_volume_reference:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,8 @@
+uuid: e4be6a6c-473a-4ac5-ad4e-1676ad858e4f
+langcode: en
+status: true
+dependencies: {  }
+name: Journal
+vid: journal
+description: ''
+weight: 0

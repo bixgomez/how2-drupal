@@ -1,0 +1,33 @@
+uuid: b7b9670f-9578-4f20-b0aa-eaa46190fb07
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.name_only
+    - field.field.paragraph.person_bio.field_override_bio
+    - field.field.paragraph.person_bio.field_override_role
+    - field.field.paragraph.person_bio.field_person
+    - paragraphs.paragraphs_type.person_bio
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: paragraph.person_bio.name_only
+targetEntityType: paragraph
+bundle: person_bio
+mode: name_only
+content:
+  field_person:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_override_bio: true
+  field_override_role: true
+  search_api_excerpt: true
