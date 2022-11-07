@@ -4,15 +4,20 @@ status: true
 dependencies:
   config:
     - field.field.node.how2_issue.field_archive_url
+    - field.field.node.how2_issue.field_cover_thumbnail
     - field.field.node.how2_issue.field_how_2_sections
     - field.field.node.how2_issue.field_issue_number
+    - field.field.node.how2_issue.field_masthead
     - field.field.node.how2_issue.field_people
-    - field.field.node.how2_issue.field_publication_date
+    - field.field.node.how2_issue.field_publication_date_display
+    - field.field.node.how2_issue.field_short_description
     - field.field.node.how2_issue.field_volume_reference
+    - image.style.large
     - node.type.how2_issue
   module:
-    - datetime
+    - image
     - link
+    - text
     - user
 id: node.how2_issue.default
 targetEntityType: node
@@ -23,11 +28,20 @@ content:
     type: link
     label: hidden
     settings:
-      trim_length: 80
-      url_only: false
+      trim_length: null
+      url_only: true
       url_plain: false
-      rel: ''
-      target: ''
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_cover_thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: large
     third_party_settings: {  }
     weight: 0
     region: content
@@ -47,7 +61,14 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 3
+    weight: 4
+    region: content
+  field_masthead:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
     region: content
   field_people:
     type: entity_reference_label
@@ -55,25 +76,25 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
-  field_publication_date:
-    type: datetime_default
+  field_publication_date_display:
+    type: string
     label: hidden
     settings:
-      timezone_override: ''
-      format_type: medium
+      link_to_entity: false
     third_party_settings: {  }
     weight: 1
     region: content
-  field_volume_reference:
-    type: entity_reference_label
-    label: hidden
+  field_short_description:
+    type: string
+    label: above
     settings:
-      link: true
+      link_to_entity: false
     third_party_settings: {  }
-    weight: 4
+    weight: 6
     region: content
 hidden:
+  field_volume_reference: true
   links: true
   search_api_excerpt: true

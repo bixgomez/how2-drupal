@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
-    - field.field.node.how2_article.field_how2_section
     - field.field.node.how2_article.field_issue_reference
     - field.field.node.how2_article.field_media_type
     - field.field.node.how2_article.field_person_bio
@@ -69,14 +68,10 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_media_type:
-    type: entity_reference_autocomplete_tags
+    type: options_select
     weight: 11
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_person_bio:
     type: paragraphs
@@ -141,7 +136,6 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
-  field_how2_section: true
   promote: true
   sticky: true
   uid: true
