@@ -1,0 +1,32 @@
+uuid: f49df54e-50aa-40cf-9827-5e33ebc7714b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.name_only
+    - field.field.paragraph.section_links.field_notes
+    - field.field.paragraph.section_links.field_unit
+    - paragraphs.paragraphs_type.section_links
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: paragraph.section_links.name_only
+targetEntityType: paragraph
+bundle: section_links
+mode: name_only
+content:
+  field_unit:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: contributor_name
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_notes: true
+  search_api_excerpt: true

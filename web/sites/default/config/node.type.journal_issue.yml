@@ -1,0 +1,17 @@
+uuid: c6ad0e12-c45a-4b50-b7de-b9ba15bf116d
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'HOW(ever) Issue'
+type: journal_issue
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

@@ -1,0 +1,10 @@
+uuid: 82fba794-a9c8-41b2-b31d-0a350a45f308
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.name_only
+label: 'Name Only'
+targetEntityType: paragraph
+cache: true

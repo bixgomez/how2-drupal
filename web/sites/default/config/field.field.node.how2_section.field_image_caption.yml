@@ -1,0 +1,37 @@
+uuid: 001f199c-c6f3-44f0-b060-7d42ae09a459
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image_caption
+    - node.type.how2_section
+    - paragraphs.paragraphs_type.photo_caption
+  module:
+    - entity_reference_revisions
+id: node.how2_section.field_image_caption
+field_name: field_image_caption
+entity_type: node
+bundle: how2_section
+label: 'Image & Caption'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      photo_caption: photo_caption
+    negate: 0
+    target_bundles_drag_drop:
+      how2_section_links:
+        weight: 4
+        enabled: false
+      photo_caption:
+        weight: 5
+        enabled: true
+      section_links:
+        weight: 6
+        enabled: false
+field_type: entity_reference_revisions

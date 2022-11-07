@@ -1,0 +1,29 @@
+uuid: d4245120-9bbc-4913-b203-8ba0b5cc32fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_volume_reference
+    - node.type.how_ever_article
+    - node.type.however_volume
+id: node.how_ever_article.field_volume_reference
+field_name: field_volume_reference
+entity_type: node
+bundle: how_ever_article
+label: 'Volume (reference)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      however_volume: however_volume
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

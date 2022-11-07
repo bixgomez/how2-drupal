@@ -1,0 +1,36 @@
+uuid: f5cb2ef8-e2b1-486a-8de1-0aee96860806
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  theme:
+    - however
+_core:
+  default_config_hash: ItFhhiUOoeR7oIq73ZaCV7PAYrOwXZ-9fazMzF5DJXM
+id: however_page_title
+theme: however
+region: content_top
+weight: -5
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      how2_article: how2_article
+      how2_section: how2_section
+      how2_volume: how2_volume
+      however_volume: however_volume
+      how_ever_article: how_ever_article
+      how_ever_section: how_ever_section
+      page: page
+      person: person

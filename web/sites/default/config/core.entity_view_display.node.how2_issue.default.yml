@@ -1,0 +1,100 @@
+uuid: 628f9179-c9d4-421a-9acd-152ea1cd351d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.how2_issue.field_archive_url
+    - field.field.node.how2_issue.field_cover_thumbnail
+    - field.field.node.how2_issue.field_how_2_sections
+    - field.field.node.how2_issue.field_issue_number
+    - field.field.node.how2_issue.field_masthead
+    - field.field.node.how2_issue.field_people
+    - field.field.node.how2_issue.field_publication_date_display
+    - field.field.node.how2_issue.field_short_description
+    - field.field.node.how2_issue.field_volume_reference
+    - image.style.large
+    - node.type.how2_issue
+  module:
+    - image
+    - link
+    - text
+    - user
+id: node.how2_issue.default
+targetEntityType: node
+bundle: how2_issue
+mode: default
+content:
+  field_archive_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_cover_thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: large
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_how_2_sections:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser_card
+      link: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_issue_number:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_masthead:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_people:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_publication_date_display:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_short_description:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+hidden:
+  field_volume_reference: true
+  links: true
+  search_api_excerpt: true

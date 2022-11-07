@@ -1,0 +1,25 @@
+uuid: bacd162a-3932-4d6f-93b3-8daf611b5296
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:4e5202e5-345f-46ae-9ac3-ec00b0035b5e'
+  module:
+    - block_content
+  theme:
+    - however
+id: footerbottom
+theme: however
+region: footer
+weight: -8
+provider: null
+plugin: 'block_content:4e5202e5-345f-46ae-9ac3-ec00b0035b5e'
+settings:
+  id: 'block_content:4e5202e5-345f-46ae-9ac3-ec00b0035b5e'
+  label: 'Footer bottom'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

@@ -1,0 +1,19 @@
+uuid: 6279d644-c586-4430-b9b3-91b13b90bb96
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_publication_date_display
+    - node.type.how2_issue
+id: node.how2_issue.field_publication_date_display
+field_name: field_publication_date_display
+entity_type: node
+bundle: how2_issue
+label: 'Publication Date Display'
+description: 'How the date should be displayed, such as "March 2007" or "Summer 2005."'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

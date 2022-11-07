@@ -1,0 +1,29 @@
+uuid: 4d0cdaaa-4942-46b0-8ae5-4bbdbdca3df4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_unit
+    - node.type.how2_article
+    - paragraphs.paragraphs_type.how2_section_links
+id: paragraph.how2_section_links.field_unit
+field_name: field_unit
+entity_type: paragraph
+bundle: how2_section_links
+label: 'Poem/piece (Drupal reference)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      how2_article: how2_article
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

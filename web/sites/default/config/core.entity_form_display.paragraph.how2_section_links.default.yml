@@ -1,0 +1,36 @@
+uuid: ec1510f5-9cf1-4b88-b18c-5395a5d3f3a4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.how2_section_links.field_notes
+    - field.field.paragraph.how2_section_links.field_unit
+    - paragraphs.paragraphs_type.how2_section_links
+  module:
+    - text
+id: paragraph.how2_section_links.default
+targetEntityType: paragraph
+bundle: how2_section_links
+mode: default
+content:
+  field_notes:
+    type: text_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  field_unit:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

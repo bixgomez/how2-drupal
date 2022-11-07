@@ -1,0 +1,25 @@
+uuid: d688aff6-b09e-4901-94d2-8cd9726b0009
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - how2
+_core:
+  default_config_hash: d-0emr1mEq7sFKDu5RHUJckvNk62hvIZdRwPEfnJyGg
+id: how2_branding
+theme: how2
+region: branding
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

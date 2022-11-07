@@ -1,0 +1,47 @@
+uuid: 997a3374-aae6-409f-85bb-e72fc942f44c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.contributor_name
+    - field.field.node.how2_article.body
+    - field.field.node.how2_article.field_archive_url
+    - field.field.node.how2_article.field_issue_reference
+    - field.field.node.how2_article.field_media_type
+    - field.field.node.how2_article.field_person_bio
+    - field.field.node.how2_article.field_section_reference
+    - field.field.node.how2_article.field_tags
+    - field.field.node.how2_article.field_volume_reference
+    - node.type.how2_article
+  module:
+    - entity_reference_revisions
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.how2_article.contributor_name
+targetEntityType: node
+bundle: how2_article
+mode: contributor_name
+content:
+  field_person_bio:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: name_only
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  field_archive_url: true
+  field_issue_reference: true
+  field_media_type: true
+  field_section_reference: true
+  field_tags: true
+  field_volume_reference: true
+  links: true
+  search_api_excerpt: true

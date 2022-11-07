@@ -1,0 +1,19 @@
+uuid: 657d4e0f-0e3f-4c3a-8e45-da626bc5d263
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_masthead
+field_name: field_masthead
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

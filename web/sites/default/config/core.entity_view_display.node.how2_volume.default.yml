@@ -1,0 +1,42 @@
+uuid: 32ef63e2-e81d-4824-81f5-67b8873cd03e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.how2_volume.field_archive_url
+    - field.field.node.how2_volume.field_how2_issue
+    - field.field.node.how2_volume.field_volume_number
+    - node.type.how2_volume
+  module:
+    - link
+    - user
+id: node.how2_volume.default
+targetEntityType: node
+bundle: how2_volume
+mode: default
+content:
+  field_archive_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_how2_issue:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_volume_number: true
+  links: true
+  search_api_excerpt: true
