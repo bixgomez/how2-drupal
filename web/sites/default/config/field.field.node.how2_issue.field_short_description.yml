@@ -9,8 +9,8 @@ id: node.how2_issue.field_short_description
 field_name: field_short_description
 entity_type: node
 bundle: how2_issue
-label: 'Back-end description'
-description: 'A description for making the content easier to identify on the back end. E.g., "How2 Volume 3, Issue 3."'
+label: 'Display title'
+description: ''
 required: false
 translatable: false
 default_value: {  }
