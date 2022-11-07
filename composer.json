@@ -33,7 +33,8 @@
         "drupal/search_api_page": "^1.0@beta",
         "drupal/twig_tweak": "^3.2",
         "drupal/better_exposed_filters": "^6.0",
-        "drupal/footnotes": "^3.0"
+        "drupal/footnotes": "^3.0",
+        "drupal/sendgrid_integration": "^2.0"
     },
     "require-dev": {
         "drupal/core-dev": "^9.2"
