@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.search_result
     - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
-    - field.field.node.how2_article.field_how2_section
     - field.field.node.how2_article.field_issue_reference
     - field.field.node.how2_article.field_media_type
     - field.field.node.how2_article.field_person_bio
@@ -71,7 +70,6 @@ content:
     region: content
 hidden:
   field_archive_url: true
-  field_how2_section: true
   field_media_type: true
   field_section_reference: true
   links: true

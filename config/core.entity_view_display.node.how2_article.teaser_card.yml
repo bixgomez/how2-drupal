@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.teaser_card
     - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
-    - field.field.node.how2_article.field_how2_section
     - field.field.node.how2_article.field_issue_reference
     - field.field.node.how2_article.field_media_type
     - field.field.node.how2_article.field_person_bio
@@ -47,14 +46,6 @@ content:
       target: ''
     third_party_settings: {  }
     weight: 8
-    region: content
-  field_how2_section:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 3
     region: content
   field_issue_reference:
     type: entity_reference_label

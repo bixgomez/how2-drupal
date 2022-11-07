@@ -4,27 +4,55 @@ status: true
 dependencies:
   config:
     - field.field.node.how2_issue.field_archive_url
+    - field.field.node.how2_issue.field_cover_thumbnail
     - field.field.node.how2_issue.field_how_2_sections
     - field.field.node.how2_issue.field_issue_number
+    - field.field.node.how2_issue.field_masthead
     - field.field.node.how2_issue.field_people
-    - field.field.node.how2_issue.field_publication_date
+    - field.field.node.how2_issue.field_publication_date_display
+    - field.field.node.how2_issue.field_short_description
     - field.field.node.how2_issue.field_volume_reference
+    - image.style.thumbnail
     - node.type.how2_issue
   module:
-    - datetime
     - field_group
+    - image
     - link
     - path
+    - text
 third_party_settings:
   field_group:
     group_publication_info:
       children:
         - field_issue_number
         - field_publication_date
+        - field_publication_date_display
       label: 'Publication info'
       region: content
+      parent_name: group_metadata
+      weight: 13
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+        required_fields: true
+        description: ''
+    group_metadata:
+      children:
+        - field_volume_reference
+        - group_publication_info
+      label: Metadata
+      region: content
       parent_name: ''
-      weight: 8
+      weight: 11
       format_type: fieldset
       format_settings:
         classes: ''
@@ -32,13 +60,14 @@ third_party_settings:
         id: ''
         description: ''
         required_fields: true
-    group_metadata:
+    group_people:
       children:
-        - field_volume_reference
-      label: Metadata
+        - field_masthead
+        - field_people
+      label: People
       region: content
       parent_name: ''
-      weight: 10
+      weight: 12
       format_type: fieldset
       format_settings:
         classes: ''
@@ -53,21 +82,29 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 2
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   field_archive_url:
     type: link_default
-    weight: 7
+    weight: 8
     region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+  field_cover_thumbnail:
+    type: image_image
+    weight: 9
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
   field_how_2_sections:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 10
     region: content
     settings:
       match_operator: CONTAINS
@@ -82,11 +119,39 @@ content:
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_publication_date:
-    type: datetime_default
-    weight: 13
+  field_masthead:
+    type: text_textarea
+    weight: 14
     region: content
-    settings: {  }
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_people:
+    type: entity_reference_autocomplete
+    weight: 15
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_publication_date_display:
+    type: string_textfield
+    weight: 15
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_short_description:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_volume_reference:
     type: options_select
@@ -96,27 +161,27 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 3
+    weight: 4
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 6
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 4
+    weight: 5
     region: content
     settings:
       display_label: true
@@ -131,7 +196,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 1
+    weight: 2
     region: content
     settings:
       match_operator: CONTAINS
@@ -139,5 +204,4 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden:
-  field_people: true
+hidden: {  }

@@ -17,7 +17,7 @@ mode: default
 content:
   field_archive_url:
     type: link
-    label: above
+    label: hidden
     settings:
       trim_length: 80
       url_only: false
@@ -25,7 +25,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 1
+    weight: 0
     region: content
   field_how2_issue:
     type: entity_reference_entity_view
@@ -34,7 +34,7 @@ content:
       view_mode: teaser
       link: false
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   field_volume_number: true
