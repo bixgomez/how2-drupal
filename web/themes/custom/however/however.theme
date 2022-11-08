@@ -35,6 +35,7 @@ function however_preprocess_node__contributor_name(&$variables, $hook) {
 function however_preprocess_node__how2_issue(&$variables, $hook) {
 
     $volume = null;
+
     if(!empty($variables['node']->field_volume_reference->getValue())) {
         $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
         $volume = 'vol. ' . $volume_number;
@@ -48,6 +49,12 @@ function however_preprocess_node__how2_issue(&$variables, $hook) {
     }
 
     $variables['volume_issue'] = $volume . $issue;
+
+    if(!empty($variables['node']->field_short_description->getValue())) {
+        $variables['label'] = $variables['node']->field_short_description->getValue();
+        $variables['label'] = $variables['label'][0]['value'];
+    }
+
 }
 
 function however_preprocess_node__how2_section(&$variables, $hook) {
