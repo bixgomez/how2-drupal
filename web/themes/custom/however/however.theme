@@ -105,4 +105,23 @@ function however_preprocess_node__how2_article(&$variables, $hook) {
     }
     $variables['volume_issue'] = $volume . $issue;
 
+    if($variables['view_mode'] == 'teaser') {
+        if(!empty($variables['node']->field_person_bio->getValue())) {
+            $contributors = array();
+            foreach($variables['node']->field_person_bio->getValue() as $contributor) {
+                $contributors[] = $contributor['value'];
+            }
+            $contributors = implode(', ', $contributors);
+            $variables['contributors'] = $contributors;
+            $t = 1;
+//            if(count($variables['node']->field_person_bio->getValue()) > 1) {
+//
+//            } else {
+//                $contributor = $variables['node']->field_person_bio->getValue();
+//                $contributor[0]['value'];
+//                $variables['contributors'] = '<span class="contributor"><strong>' . $contributor . '</strong></span>';
+//            }
+        }
+    }
+
 }
