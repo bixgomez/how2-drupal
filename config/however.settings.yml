@@ -5,6 +5,6 @@ features:
   favicon: 1
 logo:
   use_default: 0
-  path: themes/custom/however/assets/images/logo.png
+  path: 'public://HH2DAP_logo_2_w_parens-cropped.png'
 favicon:
   use_default: 1

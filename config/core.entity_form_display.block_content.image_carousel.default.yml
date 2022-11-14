@@ -1,0 +1,30 @@
+uuid: 4b178b2c-d893-49de-ab1e-a5596c8fd5be
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.image_carousel
+    - field.field.block_content.image_carousel.field_image
+  module:
+    - media_library
+id: block_content.image_carousel.default
+targetEntityType: block_content
+bundle: image_carousel
+mode: default
+content:
+  field_image:
+    type: media_library_widget
+    weight: 27
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

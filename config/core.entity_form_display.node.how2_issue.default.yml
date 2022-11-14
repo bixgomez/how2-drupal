@@ -3,12 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.paragraph.person_without_bio
     - field.field.node.how2_issue.field_archive_url
     - field.field.node.how2_issue.field_cover_thumbnail
     - field.field.node.how2_issue.field_how_2_sections
     - field.field.node.how2_issue.field_issue_number
     - field.field.node.how2_issue.field_masthead
-    - field.field.node.how2_issue.field_people
+    - field.field.node.how2_issue.field_person_bio
     - field.field.node.how2_issue.field_publication_date_display
     - field.field.node.how2_issue.field_short_description
     - field.field.node.how2_issue.field_volume_reference
@@ -17,6 +18,7 @@ dependencies:
   module:
     - field_group
     - image
+    - inline_entity_form
     - link
     - path
     - text
@@ -25,7 +27,6 @@ third_party_settings:
     group_publication_info:
       children:
         - field_issue_number
-        - field_publication_date
         - field_publication_date_display
       label: 'Publication info'
       region: content
@@ -63,7 +64,7 @@ third_party_settings:
     group_people:
       children:
         - field_masthead
-        - field_people
+        - field_person_bio
       label: People
       region: content
       parent_name: ''
@@ -127,15 +128,18 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_people:
-    type: entity_reference_autocomplete
+  field_person_bio:
+    type: inline_entity_form_simple
     weight: 15
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      form_mode: person_without_bio
+      override_labels: true
+      label_singular: Person
+      label_plural: People
+      collapsible: false
+      collapsed: false
+      revision: false
     third_party_settings: {  }
   field_publication_date_display:
     type: string_textfield

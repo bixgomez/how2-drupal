@@ -1,0 +1,23 @@
+uuid: 86c8eef0-ee98-4468-a1c9-143e9b2d8290
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.image_carousel
+    - field.field.block_content.image_carousel.field_image
+id: block_content.image_carousel.default
+targetEntityType: block_content
+bundle: image_carousel
+mode: default
+content:
+  field_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

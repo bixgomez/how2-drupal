@@ -1,0 +1,43 @@
+uuid: f1f5b7b6-3921-4f2d-86d1-bd8e1cbae662
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_person_bio
+    - node.type.how2_issue
+    - paragraphs.paragraphs_type.person_bio
+  module:
+    - entity_reference_revisions
+id: node.how2_issue.field_person_bio
+field_name: field_person_bio
+entity_type: node
+bundle: how2_issue
+label: People
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      person_bio: person_bio
+    negate: 0
+    target_bundles_drag_drop:
+      how2_section_links:
+        weight: 6
+        enabled: false
+      link_section_title:
+        weight: 7
+        enabled: false
+      person_bio:
+        weight: 8
+        enabled: true
+      photo_caption:
+        weight: 9
+        enabled: false
+      section_links:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions

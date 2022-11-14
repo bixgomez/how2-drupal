@@ -1,0 +1,35 @@
+uuid: 39c8cd7b-a434-4c82-b3af-1634b10195b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.content_carousel
+    - field.storage.block_content.field_content_embed
+    - node.type.how2_issue
+    - node.type.how2_section
+    - node.type.how_ever_section
+    - node.type.journal_issue
+id: block_content.content_carousel.field_content_embed
+field_name: field_content_embed
+entity_type: block_content
+bundle: content_carousel
+label: 'Content Embed'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      journal_issue: journal_issue
+      how_ever_section: how_ever_section
+      how2_issue: how2_issue
+      how2_section: how2_section
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: how_ever_section
+field_type: entity_reference
