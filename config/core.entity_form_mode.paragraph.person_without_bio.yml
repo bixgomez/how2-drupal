@@ -1,0 +1,10 @@
+uuid: 88f26a4a-ec02-4f92-9db5-f6174a2ea367
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.person_without_bio
+label: 'Person Without Bio'
+targetEntityType: paragraph
+cache: true

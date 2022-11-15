@@ -10,7 +10,7 @@ id: paragraph.person_bio.field_override_role
 field_name: field_override_role
 entity_type: paragraph
 bundle: person_bio
-label: 'Override Role'
+label: Role
 description: ''
 required: false
 translatable: false

@@ -9,7 +9,7 @@ dependencies:
     - field.field.node.how2_issue.field_how_2_sections
     - field.field.node.how2_issue.field_issue_number
     - field.field.node.how2_issue.field_masthead
-    - field.field.node.how2_issue.field_people
+    - field.field.node.how2_issue.field_person_bio
     - field.field.node.how2_issue.field_publication_date_display
     - field.field.node.how2_issue.field_short_description
     - field.field.node.how2_issue.field_volume_reference
@@ -28,6 +28,8 @@ content:
     settings:
       image_link: ''
       image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content
@@ -60,7 +62,7 @@ hidden:
   field_archive_url: true
   field_how_2_sections: true
   field_masthead: true
-  field_people: true
+  field_person_bio: true
   field_short_description: true
   links: true
   search_api_excerpt: true

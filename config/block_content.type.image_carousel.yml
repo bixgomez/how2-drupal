@@ -1,0 +1,8 @@
+uuid: 3237b3d5-ed5a-411c-b944-73f542875ac9
+langcode: en
+status: true
+dependencies: {  }
+id: image_carousel
+label: 'Image Carousel'
+revision: 0
+description: ''

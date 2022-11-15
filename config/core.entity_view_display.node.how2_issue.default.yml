@@ -8,13 +8,14 @@ dependencies:
     - field.field.node.how2_issue.field_how_2_sections
     - field.field.node.how2_issue.field_issue_number
     - field.field.node.how2_issue.field_masthead
-    - field.field.node.how2_issue.field_people
+    - field.field.node.how2_issue.field_person_bio
     - field.field.node.how2_issue.field_publication_date_display
     - field.field.node.how2_issue.field_short_description
     - field.field.node.how2_issue.field_volume_reference
     - image.style.large
     - node.type.how2_issue
   module:
+    - entity_reference_revisions
     - image
     - link
     - text
@@ -42,6 +43,8 @@ content:
     settings:
       image_link: ''
       image_style: large
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content
@@ -70,13 +73,14 @@ content:
     third_party_settings: {  }
     weight: 7
     region: content
-  field_people:
-    type: entity_reference_label
-    label: hidden
+  field_person_bio:
+    type: entity_reference_revisions_entity_view
+    label: above
     settings:
-      link: true
+      view_mode: default
+      link: ''
     third_party_settings: {  }
-    weight: 3
+    weight: 8
     region: content
   field_publication_date_display:
     type: string

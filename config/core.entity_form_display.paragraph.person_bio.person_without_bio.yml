@@ -1,0 +1,39 @@
+uuid: 0eb353bd-2396-4342-ab81-2646f7bb9d36
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.paragraph.person_without_bio
+    - field.field.paragraph.person_bio.field_override_bio
+    - field.field.paragraph.person_bio.field_override_role
+    - field.field.paragraph.person_bio.field_person
+    - paragraphs.paragraphs_type.person_bio
+id: paragraph.person_bio.person_without_bio
+targetEntityType: paragraph
+bundle: person_bio
+mode: person_without_bio
+content:
+  field_override_role:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_person:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_override_bio: true
+  status: true

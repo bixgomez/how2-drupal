@@ -1,0 +1,23 @@
+uuid: 95913bf6-c6b3-491a-9d16-50629ae28cc7
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.content_carousel
+    - field.field.block_content.content_carousel.field_content_embed
+id: block_content.content_carousel.default
+targetEntityType: block_content
+bundle: content_carousel
+mode: default
+content:
+  field_content_embed:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser_card
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true
