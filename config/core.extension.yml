@@ -41,6 +41,7 @@ module:
   layout_builder_component_attributes: 0
   layout_builder_modal: 0
   layout_discovery: 0
+  lb_claro: 0
   link: 0
   media: 0
   media_library: 0

@@ -6,6 +6,7 @@ base theme: classy
 logo: assets/images/logo.png
 libraries:
   - however/global-styling
+  - however/slick
   - however/featherlight
 
 regions:

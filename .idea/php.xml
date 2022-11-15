@@ -143,6 +143,7 @@
       <path value="$PROJECT_DIR$/vendor/html2text/html2text" />
       <path value="$PROJECT_DIR$/vendor/starkbank/ecdsa" />
       <path value="$PROJECT_DIR$/vendor/fastglass/sendgrid" />
+      <path value="$PROJECT_DIR$/vendor/neilime/php-css-lint" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
