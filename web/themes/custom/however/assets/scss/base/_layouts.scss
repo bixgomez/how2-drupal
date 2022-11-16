@@ -2,12 +2,6 @@
   box-sizing: border-box;
 }
 
-.path-frontpage {
-  h1.page-title {
-    @include element-invisible;
-  }
-}
-
 #page-main {
   margin-top: 12px;
   margin-bottom: 22px;
@@ -26,9 +20,9 @@
 }
 
 .layout {
-  margin-bottom: 24px;
+  margin-bottom: 48px;
   @media all and (min-width: 768px) {
-    margin-bottom: 54px;
+    margin-bottom: 96px;
   }
   &:last-of-type {
     margin-bottom: 0;
@@ -69,7 +63,40 @@
       padding-left: 30px;
     }
   }
+
+  .layout--threecol-section {
+    margin-left: -30px;
+    margin-right: -30px;
+    .layout__region {
+      box-sizing: border-box;
+    }
+    > .layout__region--first,
+    > .layout__region--second,
+    > .layout__region--third {
+      padding: 0 30px;
+    }
+  }
+
+  .layout--threecol-section--33-34-33 > .layout__region--first,
+  .layout--threecol-section--33-34-33 > .layout__region--second,
+  .layout--threecol-section--33-34-33 > .layout__region--third {
+    flex: 0 1 33.333333%;
+  }
+
+  .layout--threecol-section--25-25-50 > .layout__region--second,
+  .layout--threecol-section--25-25-50 > .layout__region--first {
+    flex: 0 1 28%;
+  }
+
+  .layout--threecol-section--25-25-50 > .layout__region--third {
+    flex: 0 1 44%;
+  }
 }
+
+.path-frontpage .layout--threecol-section {
+  align-items: center;
+}
+
 
 
 .layout--onecol.card-grid .layout__region,

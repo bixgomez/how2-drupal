@@ -3,11 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.no_filters
     - node.type.page
     - taxonomy.vocabulary.tags
   module:
     - contextual
     - file
+    - filter
     - node
     - path
     - system
@@ -36,6 +38,7 @@ permissions:
   - 'edit own page content'
   - 'edit terms in tags'
   - 'revert all revisions'
+  - 'use text format no_filters'
   - 'view all revisions'
   - 'view own unpublished content'
   - 'view the administration theme'

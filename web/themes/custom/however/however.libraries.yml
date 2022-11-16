@@ -7,9 +7,13 @@ featherlight:
 slick:
   css:
     theme:
-      //cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css: { type: external }
+      vendor/slick/slick.css: {}
+      vendor/slick/slick-theme.css: {}
   js:
-    //cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js: { type: external }
+    vendor/slick/slick.min.js: {}
+theme-scripts:
+  js:
+    assets/scripts/scripts.js: {}
 global-styling:
   css:
     base:

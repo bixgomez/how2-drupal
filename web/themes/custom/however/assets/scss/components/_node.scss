@@ -77,6 +77,64 @@
   }
 }
 
+.node--view-mode-cross-post-teaser-card {
+  padding: 0;
+  text-align: center;
+  > .image-top {
+    position: relative;
+    min-height: 24px;
+    .content-type {
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #171717;
+      color: #ffffff;
+      padding: 2px 12px;
+      border-radius: 0 0 4px 0;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 1;
+    }
+    .volume-issue {
+      position: absolute;
+      right: 10px;
+      bottom: -24px;
+      background: #171717;
+      color: #ffffff;
+      line-height: 1;
+      font-size: 14px;
+      padding: 12px;
+      border-radius: 28px;
+    }
+    img {
+      display: inline-block;
+    }
+    .field--name-field-caption {
+      display: none;
+    }
+  }
+  > .content {
+    padding: 8px 24px 36px 24px;
+    .journal-logo img {
+      display: inline-block;
+    }
+    .pub-date {
+      font-size: 12px;
+    }
+    h3 {
+      margin: 10px;
+      line-height: 1.125;
+    }
+    h3 a {
+      color: $text-color;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
 .issue-top-content {
   @media all and (min-width: 960px) {
     display: flex;

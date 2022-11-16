@@ -39,16 +39,18 @@ function however_preprocess_node__how2_issue(&$variables, $hook) {
     if(!empty($variables['node']->field_volume_reference->getValue())) {
         $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
         $volume = 'vol. ' . $volume_number;
+        $variables['volume'] = $volume;
     }
 
     $issue = null;
     if(!empty($variables['node']->field_issue_number->getValue())) {
         $issue_number = $variables['node']->field_issue_number->getValue();
         $issue_number = $issue_number[0]['value'];
-        $issue = ', no. ' . $issue_number;
+        $issue = 'no. ' . $issue_number;
+        $variables['issue'] = $issue;
     }
 
-    $variables['volume_issue'] = $volume . $issue;
+    $variables['volume_issue'] = $volume . ', ' . $issue;
 
     if(!empty($variables['node']->field_short_description->getValue())) {
         $variables['label'] = $variables['node']->field_short_description->getValue();
@@ -72,14 +74,16 @@ function however_preprocess_node__how2_section(&$variables, $hook) {
     if(!empty($variables['node']->field_volume_reference->getValue())) {
         $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
         $volume = 'vol. ' . $volume_number;
+        $variables['volume'] = $volume;
     }
 
     $issue = null;
     if(!empty($issue_node)) {
         $issue_number = $issue_node->get('field_issue_number')->value;
-        $issue = ', no. ' . $issue_number;
+        $issue = 'no. ' . $issue_number;
+        $variables['issue'] = $issue;
     }
-    $variables['volume_issue'] = $volume . $issue;
+    $variables['volume_issue'] = $volume . ', ' . $issue;
 }
 
 function however_preprocess_node__how2_article(&$variables, $hook) {
@@ -96,14 +100,16 @@ function however_preprocess_node__how2_article(&$variables, $hook) {
     if(!empty($variables['node']->field_volume_reference->getValue())) {
         $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
         $volume = 'vol. ' . $volume_number;
+        $variables['volume'] = $volume;
     }
 
     $issue = null;
     if(!empty($issue_node)) {
         $issue_number = $issue_node->get('field_issue_number')->value;
-        $issue = ', no. ' . $issue_number;
+        $issue = 'no. ' . $issue_number;
+        $variables['issue'] = $issue;
     }
-    $variables['volume_issue'] = $volume . $issue;
+    $variables['volume_issue'] = $volume . ', ' . $issue;
 
     if($variables['view_mode'] == 'teaser') {
         if(!empty($variables['node']->field_person_bio->getValue())) {

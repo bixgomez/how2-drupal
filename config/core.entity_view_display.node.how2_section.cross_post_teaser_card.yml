@@ -1,0 +1,72 @@
+uuid: 3f893aaa-64ed-4a9e-8d26-58ce09c8e424
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.cross_post_teaser_card
+    - field.field.node.how2_section.body
+    - field.field.node.how2_section.field_archive_url
+    - field.field.node.how2_section.field_how2_piece
+    - field.field.node.how2_section.field_image_caption
+    - field.field.node.how2_section.field_issue_reference
+    - field.field.node.how2_section.field_links_section_title
+    - field.field.node.how2_section.field_person_bio
+    - field.field.node.how2_section.field_subtitle
+    - field.field.node.how2_section.field_tags
+    - field.field.node.how2_section.field_volume_reference
+    - node.type.how2_section
+  module:
+    - entity_reference_revisions
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.how2_section.cross_post_teaser_card
+targetEntityType: node
+bundle: how2_section
+mode: cross_post_teaser_card
+content:
+  field_image_caption:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_issue_reference:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_subtitle:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_volume_reference:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  body: true
+  field_archive_url: true
+  field_how2_piece: true
+  field_links_section_title: true
+  field_person_bio: true
+  field_tags: true
+  links: true
+  search_api_excerpt: true

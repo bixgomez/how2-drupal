@@ -1,0 +1,10 @@
+uuid: 76f0e23f-edbb-48a2-9da4-818e2aeaaf82
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.cross_post_teaser_card
+label: 'Cross-post Teaser Card'
+targetEntityType: node
+cache: true

@@ -8,6 +8,7 @@ libraries:
   - however/global-styling
   - however/slick
   - however/featherlight
+  - however/theme-scripts
 
 regions:
   branding: 'Branding'
