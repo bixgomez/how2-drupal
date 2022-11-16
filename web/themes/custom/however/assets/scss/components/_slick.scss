@@ -22,14 +22,20 @@
     background-repeat: no-repeat;
   }
   &.slick-prev {
-    left: -30px;
+    left: -20px;
+    @media all and (min-width: 768px) {
+      left: -30px;
+    }
   }
   &.slick-prev:before {
     @include background-svg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/></svg>');
     content: '';
   }
   &.slick-next {
-    right: -12px;
+    right: -3px;
+    @media all and (min-width: 768px) {
+      right: -12px;
+    }
   }
   &.slick-next:before {
     @include background-svg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/></svg>');

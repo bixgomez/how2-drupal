@@ -12,13 +12,16 @@
 }
 
 .region-navigation {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  .block-menu {
-    flex-grow: 1;
-  }
-  .block.views-exposed-form {
-    flex-shrink: 1;
+  display: none;
+  @media all and (min-width: 960px) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .block-menu {
+      flex-grow: 1;
+    }
+    .block.views-exposed-form {
+      flex-shrink: 1;
+    }
   }
 }

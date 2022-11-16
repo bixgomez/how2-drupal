@@ -10,6 +10,14 @@
   text-align: center;
 }
 
+.block-inline-blockimage-carousel {
+  max-width: 92%;
+  margin: 0 auto;
+  @media all and (min-width: 40em) {
+    max-width: 100%;
+  }
+}
+
 .block-inline-blockimage-carousel .media--type-image {
   padding: 8px;
   img {
@@ -22,6 +30,12 @@
 
 .block.journal-teaser {
   text-align: center;
+  max-width: 78%;
+  margin: 24px auto;
+  @media all and (min-width: 40em) {
+    max-width: 100%;
+    margin: 0;
+  }
   .journal-logo {
     margin: 12px 0 0 0;
     img {
@@ -71,6 +85,10 @@
   padding: 36px 48px;
   border: 1px solid #434343;
   box-shadow: 4px 4px 0 0 #000000;
+  margin-bottom: 24px;
+  @media all and (min-width: 40em) {
+    margin-bottom: 0;
+  }
   &.scholarship {
     background: #FDF8E3;
   }
@@ -99,6 +117,12 @@
 }
 
 .block-inline-blockcontent-carousel {
+  max-width: 85%;
+  margin: 0 auto;
+  @media all and (min-width: 40em) {
+    max-width: 100%;
+    margin: 0;
+  }
   h2 {
     @extend %h1;
     text-align: center;
