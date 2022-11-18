@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.node.inline_article_form
     - core.entity_form_mode.paragraph.person_without_bio
     - field.field.node.how2_issue.field_archive_url
     - field.field.node.how2_issue.field_cover_thumbnail
@@ -104,14 +105,21 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
   field_how_2_sections:
-    type: entity_reference_autocomplete
+    type: inline_entity_form_complex
     weight: 10
     region: content
     settings:
+      form_mode: inline_article_form
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      allow_duplicate: false
+      collapsible: true
+      collapsed: false
+      revision: false
     third_party_settings: {  }
   field_issue_number:
     type: number
