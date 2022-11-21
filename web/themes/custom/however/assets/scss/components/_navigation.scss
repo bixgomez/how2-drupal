@@ -131,3 +131,21 @@ ul.menu li.menu-item--expanded {
     right: 12px;
   }
 }
+
+#mobile-navigation #block-mainnavigation > ul.menu {
+  display: block;
+  text-align: center;
+  > li {
+    margin-bottom: 24px;
+    &.menu-item--collapsed {
+      list-style-type: none !important;
+      list-style-image: none !important;
+    }
+    > a {
+      color: $text-color;
+      font-size: 24px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+  }
+}

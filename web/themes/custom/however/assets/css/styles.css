@@ -746,6 +746,24 @@ ul.menu li.menu-item--expanded {
   right: 12px;
 }
 
+#mobile-navigation #block-mainnavigation > ul.menu {
+  display: block;
+  text-align: center;
+}
+#mobile-navigation #block-mainnavigation > ul.menu > li {
+  margin-bottom: 24px;
+}
+#mobile-navigation #block-mainnavigation > ul.menu > li.menu-item--collapsed {
+  list-style-type: none !important;
+  list-style-image: none !important;
+}
+#mobile-navigation #block-mainnavigation > ul.menu > li > a {
+  color: #333333;
+  font-size: 24px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
 .node .issue-meta {
   display: flex;
   margin: 18px 0;
