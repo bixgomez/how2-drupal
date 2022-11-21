@@ -23,4 +23,16 @@
             }
         ]
     });
+
+    $('.mobile-menu-icon > a').click(function(e) {
+       e.preventDefault();
+       $(this).toggleClass('active').toggleClass('inactive');
+       $('#mobile-navigation').toggleClass('active');
+    });
+
+    $('.close-modal').click(function(e) {
+        $('.mobile-menu-icon > a').toggleClass('active').toggleClass('inactive');
+        $('#mobile-navigation').toggleClass('active');
+    });
+
 })(jQuery);
