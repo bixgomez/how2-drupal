@@ -1,0 +1,29 @@
+uuid: 208895ad-bbf3-425e-b583-67e08ef0d7d0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_how2_subsection
+    - node.type.how2_section
+    - paragraphs.paragraphs_type.how2_subsection
+id: paragraph.how2_subsection.field_how2_subsection
+field_name: field_how2_subsection
+entity_type: paragraph
+bundle: how2_subsection
+label: 'How2 Subsection'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      how2_section: how2_section
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -260,7 +260,8 @@
   }
   .field--name-field-how2-piece {
     margin-bottom: 54px;
-    .paragraph--type--how2-section-links {
+    .paragraph--type--how2-section-links,
+    .paragraph--type--how2-subsection {
       margin-bottom: 22px;
       font-family: $serif-font;
       p {

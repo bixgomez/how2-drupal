@@ -1,9 +1,9 @@
-uuid: 66f504d6-cba0-4a67-be95-17e1a6bfc37b
+uuid: 998e6ddf-36de-406f-8b59-15e54dc593e5
 langcode: en
 status: true
 dependencies: {  }
-id: how2_section_links
-label: 'How2 Individual Piece'
+id: how2_subsection
+label: 'How2 Subsection'
 icon_uuid: null
 icon_default: null
 description: ''

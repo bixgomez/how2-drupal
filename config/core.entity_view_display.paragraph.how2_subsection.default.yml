@@ -1,0 +1,23 @@
+uuid: 824c344b-9783-447a-a837-985fd592494b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.how2_subsection.field_how2_subsection
+    - paragraphs.paragraphs_type.how2_subsection
+id: paragraph.how2_subsection.default
+targetEntityType: paragraph
+bundle: how2_subsection
+mode: default
+content:
+  field_how2_subsection:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

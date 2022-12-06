@@ -1,0 +1,25 @@
+uuid: d45a5d0a-a9ef-4f93-85f5-2d6d148aff1a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.how2_subsection.field_how2_subsection
+    - paragraphs.paragraphs_type.how2_subsection
+id: paragraph.how2_subsection.default
+targetEntityType: paragraph
+bundle: how2_subsection
+mode: default
+content:
+  field_how2_subsection:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

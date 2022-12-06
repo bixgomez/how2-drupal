@@ -9,7 +9,7 @@ id: paragraph.link_section_title.field_link_section_title
 field_name: field_link_section_title
 entity_type: paragraph
 bundle: link_section_title
-label: 'Link Section Title'
+label: 'Section Heading'
 description: ''
 required: false
 translatable: false
