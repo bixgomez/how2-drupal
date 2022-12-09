@@ -1,0 +1,9 @@
+.paragraph--type--open-title-text {
+  font-family: $serif-font;
+  .field--name-field-title {
+    font-weight: bold;
+  }
+  .field--name-field-text p {
+    margin-top: 0;
+  }
+}

@@ -8,6 +8,7 @@ dependencies:
     - paragraphs.paragraphs_type.how2_section_links
     - paragraphs.paragraphs_type.how2_subsection
     - paragraphs.paragraphs_type.link_section_title
+    - paragraphs.paragraphs_type.open_title_text
   module:
     - entity_reference_revisions
 id: node.how2_section.field_how2_piece
@@ -27,6 +28,7 @@ settings:
       how2_section_links: how2_section_links
       link_section_title: link_section_title
       how2_subsection: how2_subsection
+      open_title_text: open_title_text
     negate: 0
     target_bundles_drag_drop:
       how2_section_links:
@@ -37,6 +39,9 @@ settings:
         enabled: true
       link_section_title:
         weight: 7
+        enabled: true
+      open_title_text:
+        weight: 11
         enabled: true
       person_bio:
         weight: 6

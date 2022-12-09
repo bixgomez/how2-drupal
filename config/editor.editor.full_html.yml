@@ -62,6 +62,9 @@ settings:
             - ShowBlocks
             - Source
   plugins:
+    drupallink:
+      linkit_enabled: true
+      linkit_profile: default
     stylescombo:
       styles: ''
 image_upload:

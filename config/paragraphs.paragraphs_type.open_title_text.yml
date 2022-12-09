@@ -1,0 +1,10 @@
+uuid: f78d9e89-5153-4399-9a53-59bcdc469618
+langcode: en
+status: true
+dependencies: {  }
+id: open_title_text
+label: 'Open title & text'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

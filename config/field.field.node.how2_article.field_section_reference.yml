@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.node.field_section_reference
     - node.type.how2_article
-    - node.type.how2_section
 id: node.how2_article.field_section_reference
 field_name: field_section_reference
 entity_type: node
@@ -17,13 +16,10 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:node'
+  handler: views
   handler_settings:
-    target_bundles:
-      how2_section: how2_section
-    sort:
-      field: _none
-      direction: ASC
-    auto_create: true
-    auto_create_bundle: ''
+    view:
+      view_name: metadata_reference_list
+      display_name: entity_reference_5
+      arguments: {  }
 field_type: entity_reference

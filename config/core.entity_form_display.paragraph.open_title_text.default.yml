@@ -1,0 +1,34 @@
+uuid: 4c85f34c-9f41-4f70-8290-be11cbbce9a0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.open_title_text.field_text
+    - field.field.paragraph.open_title_text.field_title
+    - paragraphs.paragraphs_type.open_title_text
+  module:
+    - text
+id: paragraph.open_title_text.default
+targetEntityType: paragraph
+bundle: open_title_text
+mode: default
+content:
+  field_text:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
