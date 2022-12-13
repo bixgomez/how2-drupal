@@ -1007,17 +1007,20 @@ ul.menu li.menu-item--expanded {
   max-width: 300px;
   margin: 0 0 24px 48px;
 }
-.node--type-how2-section.node--view-mode-full .field--name-field-how2-piece {
+.node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how2-piece {
   margin-bottom: 54px;
 }
-.node--type-how2-section.node--view-mode-full .field--name-field-how2-piece .paragraph--type--how2-section-links,
-.node--type-how2-section.node--view-mode-full .field--name-field-how2-piece .paragraph--type--how2-subsection {
+.node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how2-piece > .field__item {
   margin-bottom: 22px;
-  font-family: "Libre Caslon Text", serif;
 }
-.node--type-how2-section.node--view-mode-full .field--name-field-how2-piece .paragraph--type--how2-section-links p,
-.node--type-how2-section.node--view-mode-full .field--name-field-how2-piece .paragraph--type--how2-subsection p {
+
+.node--type-how2-section.node--view-mode-teaser .section-title a {
+  font-weight: bold;
+  color: #333333;
+}
+.node--type-how2-section.node--view-mode-teaser .node--type-how2-section.node--view-mode-full .field--name-field-how2-piece > .field__item {
   line-height: 1.8;
+  margin: 0 0 0.4em 0;
 }
 
 .node--type-how2-article .view-article-section {
@@ -1032,6 +1035,24 @@ ul.menu li.menu-item--expanded {
 }
 .node--type-how2-article .field--name-body p {
   line-height: 1.8;
+}
+
+.paragraph--type--how2-section-links,
+.paragraph--type--how2-subsection,
+.paragraph--type--open-title-text {
+  font-family: "Libre Caslon Text", serif;
+}
+.paragraph--type--how2-section-links p,
+.paragraph--type--how2-subsection p,
+.paragraph--type--open-title-text p {
+  line-height: 1.8;
+}
+
+.paragraph--type--open-title-text .field--name-field-title {
+  font-weight: bold;
+}
+.paragraph--type--open-title-text .field--name-field-text p {
+  margin: 0 0 0.4em 0;
 }
 
 .paragraph--type--person-bio.paragraph--view-mode--name-only {

@@ -79,25 +79,10 @@
 %}
 {{ attach_library('classy/node') }}
 <article{{ attributes.addClass(classes) }}>
-    {% if content.field_person_bio['#items'] %}
-        <div class="contributor"><strong>
-        {% if content.field_person_bio['#items']|length == 1 %}
-            {{ content.field_person_bio['#items'].entity.field_person.0.entity.title.value }}
-        {% else %}
-            {% for person in content.field_person_bio['#items'] %}
-                {% if loop.length == 2 %}
-                    {{ person.entity.field_person.0.entity.title.value }}{{ not loop.last ? ' & ' }}
-                {% else %}
-                    {{ person.entity.field_person.0.entity.title.value }}{{ not loop.last ? ', ' }}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-        </strong></div>
-    {% endif %}
     {{ title_prefix }}
-        <div{{ title_attributes }}>
+        <div class="section-title">
             <a href="{{ url }}" rel="bookmark">{{ label }}</a>
         </div>
     {{ title_suffix }}
-
+    {{ content.field_how2_piece }}
 </article>

@@ -1,9 +1,17 @@
+.paragraph--type--how2-section-links,
+.paragraph--type--how2-subsection,
 .paragraph--type--open-title-text {
   font-family: $serif-font;
+  p {
+    line-height: 1.8;
+  }
+}
+
+.paragraph--type--open-title-text {
   .field--name-field-title {
     font-weight: bold;
   }
   .field--name-field-text p {
-    margin-top: 0;
+    margin: 0 0 .4em 0;
   }
 }

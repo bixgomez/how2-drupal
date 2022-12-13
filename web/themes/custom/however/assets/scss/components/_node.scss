@@ -258,16 +258,22 @@
     max-width: 300px;
     margin: 0 0 24px 48px;
   }
-  .field--name-field-how2-piece {
+  > .node__content > .field--name-field-how2-piece {
     margin-bottom: 54px;
-    .paragraph--type--how2-section-links,
-    .paragraph--type--how2-subsection {
+    > .field__item {
       margin-bottom: 22px;
-      font-family: $serif-font;
-      p {
-        line-height: 1.8;
-      }
     }
+  }
+}
+
+.node--type-how2-section.node--view-mode-teaser {
+  .section-title a {
+    font-weight: bold;
+    color: $text-color;
+  }
+  .node--type-how2-section.node--view-mode-full .field--name-field-how2-piece > .field__item {
+    line-height: 1.8;
+    margin: 0 0 0.4em 0;
   }
 }
 
