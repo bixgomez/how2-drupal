@@ -41,6 +41,7 @@ settings:
           items:
             - Blockquote
             - DrupalImage
+            - DrupalMediaLibrary
             - Table
             - HorizontalRule
         -

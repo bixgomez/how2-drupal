@@ -1,16 +1,17 @@
-uuid: 8541ee37-0b0e-4cf1-b367-9e5de7cbcce9
+uuid: 52beaafa-a274-4f47-8a37-091ade12add5
 langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.field_short_description
     - node.type.journal_issue
-id: node.journal_issue.title
-field_name: title
+id: node.journal_issue.field_short_description
+field_name: field_short_description
 entity_type: node
 bundle: journal_issue
-label: 'Back-end Description'
+label: 'Display title'
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

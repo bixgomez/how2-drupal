@@ -10,7 +10,7 @@ id: node.journal_issue.field_section
 field_name: field_section
 entity_type: node
 bundle: journal_issue
-label: Section
+label: 'Section Reference'
 description: ''
 required: false
 translatable: true

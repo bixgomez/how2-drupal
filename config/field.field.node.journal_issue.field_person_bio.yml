@@ -1,0 +1,49 @@
+uuid: 38d5045a-d442-4ea9-8c98-efa7df362bf0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_person_bio
+    - node.type.journal_issue
+    - paragraphs.paragraphs_type.person_bio
+  module:
+    - entity_reference_revisions
+id: node.journal_issue.field_person_bio
+field_name: field_person_bio
+entity_type: node
+bundle: journal_issue
+label: 'Person & Bio'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      person_bio: person_bio
+    negate: 0
+    target_bundles_drag_drop:
+      how2_section_links:
+        weight: 8
+        enabled: false
+      how2_subsection:
+        weight: 9
+        enabled: false
+      link_section_title:
+        weight: 10
+        enabled: false
+      open_title_text:
+        weight: 11
+        enabled: false
+      person_bio:
+        weight: 12
+        enabled: true
+      photo_caption:
+        weight: 13
+        enabled: false
+      section_links:
+        weight: 14
+        enabled: false
+field_type: entity_reference_revisions

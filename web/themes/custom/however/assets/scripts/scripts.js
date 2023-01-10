@@ -35,4 +35,24 @@
         $('#mobile-navigation').toggleClass('active');
     });
 
+    $('.issue-tabs a.tab').click(function(e) {
+        e.preventDefault();
+        $('.issue-tabs a.active').removeClass('active');
+        $(this).addClass('active');
+        var tabBody = $(this).attr('href');
+        $('.tab-body.active').removeClass('active');
+        $(tabBody).addClass('active');
+    });
+
+    $('.field--name-field-journal-page-images a').featherlightGallery({
+        previousIcon: '« previous',
+        nextIcon: 'next »',
+        gallery: {
+            fadeIn: 300,
+            fadeOut: 300
+        },
+        openSpeed:    300,
+        closeSpeed:   300
+    });
+
 })(jQuery);

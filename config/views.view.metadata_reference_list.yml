@@ -632,10 +632,10 @@ display:
           admin_label: ''
           plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '-- {{ field_issue_reference }}'
             make_link: false
             path: ''
             absolute: false
@@ -699,8 +699,8 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '{{ title_1 }} {{ field_issue_reference }}'
             make_link: false
             path: ''
             absolute: false
@@ -826,10 +826,9 @@ display:
         options:
           default_field_elements: true
           inline:
-            title: title
-            title_1: title_1
             field_issue_reference: field_issue_reference
-          separator: '-'
+            title_1: title_1
+          separator: ' '
           hide_empty: false
       defaults:
         relationships: false

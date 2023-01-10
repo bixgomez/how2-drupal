@@ -27,6 +27,7 @@ third_party_settings:
   field_group:
     group_publication_info:
       children:
+        - field_volume_reference
         - field_issue_number
         - field_publication_date_display
       label: 'Publication info'
@@ -49,7 +50,6 @@ third_party_settings:
         description: ''
     group_metadata:
       children:
-        - field_volume_reference
         - group_publication_info
       label: Metadata
       region: content
@@ -151,7 +151,7 @@ content:
     third_party_settings: {  }
   field_publication_date_display:
     type: string_textfield
-    weight: 15
+    weight: 13
     region: content
     settings:
       size: 60

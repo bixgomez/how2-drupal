@@ -75,6 +75,7 @@
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'node--issue',
   ]
 %}
 {{ attach_library('classy/node') }}

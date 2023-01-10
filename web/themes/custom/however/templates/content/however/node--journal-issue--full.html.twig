@@ -68,7 +68,7 @@
  */
 #}
 {%
-    set classes = [
+  set classes = [
     'node',
     'node--type-' ~ node.bundle|clean_class,
     node.isPromoted() ? 'node--promoted',
@@ -76,28 +76,55 @@
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
     'node--issue',
-]
+  ]
 %}
 {{ attach_library('classy/node') }}
 <article{{ attributes.addClass(classes) }}>
-
-    <a href="{{ url }}" rel="bookmark">{{ content.field_cover_thumbnail }}</a>
-
-    <div{{ content_attributes.addClass('node__content') }}>
-        {{ content.field_issue_number }}
-        <div class="issue-meta">
-            <div class="left">
-                <div class="issue-volume-number">{{ volume_issue }}</div>
-                {{ content.field_publication_date_display }}
-            </div>
+  <div class="issue-top-content node__meta">
+      {% if content.field_cover_thumbnail %}
+        <div class="image">
+          {{ content.field_cover_thumbnail }}
         </div>
+      {% endif %}
+    <div class="issue-title-meta">
         {{ title_prefix }}
-        {% if label and not page %}
-            <h2{{ title_attributes }}>
-                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-            </h2>
-        {% endif %}
+        <h1{{ title_attributes }}>
+          {{ label }}
+        </h1>
         {{ title_suffix }}
+      <div class="issue-meta">
+        <div class="left">
+          <div class="journal-name"><a href="/how2">How2</a></div>
+          <div class="issue-volume-number">{{ volume_issue }}</div>
+          {{ content.field_publication_date_display }}
+          {% if content.field_masthead %}
+            <div class="masthead-link"><a href="#masthead" data-featherlight="#masthead">masthead</a></div>
+          {% endif %}
+          {{ content.field_archive_url }}
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="issue-tabs">
+    <ul>
+      <li><a class="tab active" href="#web-version">Web Version</a></li>
+      <li><a class="tab" href="#page-facsimiles">Page Facsimiles</a></li>
+      <li><a target="_blank" href="{{ node.field_journal_pdf[0]|file_url }}">Download PDF</a></li>
+    </ul>
+  </div>
+  <div{{ content_attributes.addClass('node__content') }}>
+    <div class="tab-body active" id="web-version">
+      {{ content.field_section }}
+    </div>
+    <div class="tab-body" id="page-facsimiles">
+      {{ content.field_journal_page_images }}
+    </div>
+  </div>
+
+  {% if content.field_masthead %}
+    <div id="masthead">
+      {{ content.field_masthead }}
+    </div>
+  {% endif %}
 
 </article>

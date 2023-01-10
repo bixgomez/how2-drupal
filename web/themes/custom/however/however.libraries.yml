@@ -4,6 +4,7 @@ featherlight:
       vendor/featherlight/release/featherlight.min.css: {}
   js:
     vendor/featherlight/release/featherlight.min.js: {}
+    vendor/featherlight-gallery/featherlight.gallery.min.js: {}
 slick:
   css:
     theme:

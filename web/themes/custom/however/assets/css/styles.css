@@ -444,13 +444,27 @@ a.button:hover {
   background: #ffe8e8;
 }
 
-.block-card, .card, .node--type-how2-issue.node--view-mode-teaser, .node--view-mode-teaser-card {
+.block-card, .card, .node--issue.node--view-mode-teaser, .node--view-mode-teaser-card {
   padding: 36px 24px;
   border: 1px solid #515151;
   box-sizing: border-box;
 }
-.block-card h2, .card h2, .node--type-how2-issue.node--view-mode-teaser h2, .node--view-mode-teaser-card h2 {
+.block-card h2, .card h2, .node--issue.node--view-mode-teaser h2, .node--view-mode-teaser-card h2 {
   font-size: 24px;
+}
+
+.featherlight-image.featherlight-inner {
+  max-height: 80vh;
+}
+
+.featherlight-previous {
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.featherlight-next {
+  margin-left: 6px;
+  cursor: pointer;
 }
 
 .field--name-field-volume-reference a,
@@ -481,7 +495,8 @@ a.button:hover {
   border-radius: 14px;
 }
 
-.field--name-field-how-2-sections {
+.field--name-field-how-2-sections,
+.field--name-field-section {
   -webkit-column-count: 3;
   -moz-column-count: 3;
   column-count: 3;
@@ -494,11 +509,44 @@ a.button:hover {
   -webkit-column-gap: 1.5em;
   column-gap: 1.5em;
 }
-.field--name-field-how-2-sections > .field__item {
+.field--name-field-how-2-sections > .field__item,
+.field--name-field-section > .field__item {
   display: inline-block;
   width: 100%;
   margin-bottom: 18px;
   box-sizing: border-box;
+}
+
+.field--name-field-journal-page-images {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 42px;
+}
+.field--name-field-journal-page-images > .field__item {
+  min-width: 100px;
+  max-width: 220px;
+}
+.field--name-field-journal-page-images > .field__item img {
+  width: 100%;
+}
+.field--name-field-journal-page-images > .field__item > article {
+  height: 100%;
+}
+@media all and (min-width: 480px) {
+  .field--name-field-journal-page-images > .field__item {
+    width: calc(33% - 42px);
+  }
+}
+@media all and (min-width: 1024px) {
+  .field--name-field-journal-page-images > .field__item {
+    width: calc(25% - 42px);
+  }
+}
+
+.field--name-field-section .node {
+  background: #FFFCF7;
 }
 
 .field--name-field-archive-url a {
@@ -908,66 +956,134 @@ ul.menu li.menu-item--expanded {
   }
 }
 
-.node--type-how2-issue.node--view-mode-full #masthead {
+.node--issue.node--view-mode-full #masthead {
   display: none;
 }
 
-.node--type-how2-volume .field--name-field-archive-url {
+.node--type-how2-volume .field--name-field-archive-url,
+.node--type-however-volume .field--name-field-archive-url {
   margin-bottom: 2em;
   text-align: center;
 }
-.node--type-how2-volume .field--name-field-how2-issue {
+.node--type-how2-volume .field--name-field-how2-issue,
+.node--type-how2-volume .field--name-field-how-ever-issue,
+.node--type-however-volume .field--name-field-how2-issue,
+.node--type-however-volume .field--name-field-how-ever-issue {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   gap: 30px;
 }
-.node--type-how2-volume .field--name-field-how2-issue > .field__item {
+.node--type-how2-volume .field--name-field-how2-issue > .field__item,
+.node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
+.node--type-however-volume .field--name-field-how2-issue > .field__item,
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item {
   min-width: 280px;
 }
-.node--type-how2-volume .field--name-field-how2-issue > .field__item > article {
+.node--type-how2-volume .field--name-field-how2-issue > .field__item > article,
+.node--type-how2-volume .field--name-field-how-ever-issue > .field__item > article,
+.node--type-however-volume .field--name-field-how2-issue > .field__item > article,
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item > article {
   height: 100%;
 }
 @media all and (min-width: 480px) {
-  .node--type-how2-volume .field--name-field-how2-issue {
+  .node--type-how2-volume .field--name-field-how2-issue,
+.node--type-how2-volume .field--name-field-how-ever-issue,
+.node--type-however-volume .field--name-field-how2-issue,
+.node--type-however-volume .field--name-field-how-ever-issue {
     flex-direction: row;
   }
-  .node--type-how2-volume .field--name-field-how2-issue > .field__item {
+  .node--type-how2-volume .field--name-field-how2-issue > .field__item,
+.node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
+.node--type-however-volume .field--name-field-how2-issue > .field__item,
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item {
     width: calc(50% - 30px);
   }
 }
 @media all and (min-width: 768px) {
-  .node--type-how2-volume .field--name-field-how2-issue > .field__item {
+  .node--type-how2-volume .field--name-field-how2-issue > .field__item,
+.node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
+.node--type-however-volume .field--name-field-how2-issue > .field__item,
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item {
     width: calc(33% - 30px);
   }
 }
 @media all and (min-width: 1024px) {
-  .node--type-how2-volume .field--name-field-how2-issue > .field__item {
+  .node--type-how2-volume .field--name-field-how2-issue > .field__item,
+.node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
+.node--type-however-volume .field--name-field-how2-issue > .field__item,
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item {
     width: calc(25% - 30px);
   }
 }
 
-.node--type-how2-issue.node--view-mode-teaser {
+.node--type-journal-issue .issue-tabs ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 24px;
+  list-style: none;
+  margin: 24px 0 36px 0;
   padding: 0;
 }
-.node--type-how2-issue.node--view-mode-teaser .field--name-field-cover-thumbnail {
+.node--type-journal-issue .issue-tabs ul li {
+  margin: 0;
+  padding: 0;
+}
+.node--type-journal-issue .issue-tabs ul li a {
+  font-weight: 900;
+  color: #333333;
+  text-decoration: none;
+  padding-bottom: 3px;
+}
+.node--type-journal-issue .issue-tabs ul li a.active, .node--type-journal-issue .issue-tabs ul li a:hover {
+  border-bottom: 3px solid #9E2727;
+}
+.node--type-journal-issue .tab-body {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.node--type-journal-issue .tab-body.active {
+  display: block;
+  opacity: 1;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.node--issue.node--view-mode-teaser {
+  padding: 0;
+}
+.node--issue.node--view-mode-teaser .field--name-field-cover-thumbnail {
   background: #FFFCF0;
   text-align: center;
   aspect-ratio: 1/1;
 }
-.node--type-how2-issue.node--view-mode-teaser .field--name-field-cover-thumbnail img {
+.node--issue.node--view-mode-teaser .field--name-field-cover-thumbnail img {
   object-fit: cover;
   object-position: center center;
   height: 100%;
   margin-bottom: -4px;
 }
-.node--type-how2-issue.node--view-mode-teaser .node__content {
+.node--issue.node--view-mode-teaser .node__content {
   padding: 32px 24px;
   text-align: center;
   position: relative;
 }
-.node--type-how2-issue.node--view-mode-teaser .field--name-field-issue-number {
+.node--issue.node--view-mode-teaser .field--name-field-issue-number {
   display: inline-block;
   background: #2E2E2E;
   font-size: 48px;
@@ -982,18 +1098,18 @@ ul.menu li.menu-item--expanded {
   left: 40%;
   right: 40%;
 }
-.node--type-how2-issue.node--view-mode-teaser .issue-meta {
+.node--issue.node--view-mode-teaser .issue-meta {
   justify-content: center;
   font-weight: normal;
 }
-.node--type-how2-issue.node--view-mode-teaser h2 {
+.node--issue.node--view-mode-teaser h2 {
   font-size: 18px;
   margin-bottom: 0;
 }
-.node--type-how2-issue.node--view-mode-teaser h2 a {
+.node--issue.node--view-mode-teaser h2 a {
   color: #333333;
 }
-.node--type-how2-issue.node--view-mode-teaser h2 a:hover {
+.node--issue.node--view-mode-teaser h2 a:hover {
   text-decoration: underline;
 }
 

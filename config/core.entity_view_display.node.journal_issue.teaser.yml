@@ -5,39 +5,61 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.journal_issue.body
+    - field.field.node.journal_issue.field_cover_thumbnail
     - field.field.node.journal_issue.field_issue_number
+    - field.field.node.journal_issue.field_journal_page_images
     - field.field.node.journal_issue.field_journal_pdf
     - field.field.node.journal_issue.field_masthead
-    - field.field.node.journal_issue.field_people
+    - field.field.node.journal_issue.field_person_bio
+    - field.field.node.journal_issue.field_publication_date_display
     - field.field.node.journal_issue.field_section
+    - field.field.node.journal_issue.field_short_description
     - field.field.node.journal_issue.field_volume_reference
     - node.type.journal_issue
   module:
-    - text
+    - image
     - user
 id: node.journal_issue.teaser
 targetEntityType: node
 bundle: journal_issue
 mode: teaser
 content:
-  body:
-    type: text_summary_or_trimmed
+  field_cover_thumbnail:
+    type: image
     label: hidden
     settings:
-      trim_length: 600
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    weight: 101
+    weight: 0
     region: content
-  links:
-    settings: {  }
+  field_issue_number:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
     third_party_settings: {  }
-    weight: 100
+    weight: 1
+    region: content
+  field_publication_date_display:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
     region: content
 hidden:
-  field_issue_number: true
+  body: true
+  field_journal_page_images: true
   field_journal_pdf: true
   field_masthead: true
-  field_people: true
+  field_person_bio: true
   field_section: true
+  field_short_description: true
   field_volume_reference: true
+  links: true
   search_api_excerpt: true

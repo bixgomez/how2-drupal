@@ -28,7 +28,8 @@
   }
 }
 
-.field--name-field-how-2-sections {
+.field--name-field-how-2-sections,
+.field--name-field-section {
   -webkit-column-count: 3;
   -moz-column-count:3;
   column-count: 3;
@@ -45,6 +46,40 @@
     width: 100%;
     margin-bottom: 18px;
     box-sizing: border-box;
+  }
+}
+
+.field--name-field-journal-page-images {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 42px;
+  > .field__item {
+    min-width: 100px;
+    max-width: 220px;
+    img {
+      width: 100%;
+    }
+  }
+  > .field__item > article {
+    height: 100%;
+  }
+  @media all and (min-width: 480px) {
+    > .field__item {
+      width: calc(33% - 42px);
+    }
+  }
+  @media all and (min-width: 1024px) {
+    > .field__item {
+      width: calc(25% - 42px);
+    }
+  }
+}
+
+.field--name-field-section {
+  .node {
+    background: #FFFCF7;
   }
 }
 

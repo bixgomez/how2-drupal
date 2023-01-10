@@ -152,22 +152,24 @@
   }
 }
 
-.node--type-how2-issue.node--view-mode-teaser {
+.node--issue.node--view-mode-teaser {
   @extend %card;
 }
 
-.node--type-how2-issue.node--view-mode-full {
+.node--issue.node--view-mode-full {
   #masthead {
     display: none;
   }
 }
 
-.node--type-how2-volume {
+.node--type-how2-volume,
+.node--type-however-volume {
   .field--name-field-archive-url {
     margin-bottom: 2em;
     text-align: center;
   }
-  .field--name-field-how2-issue {
+  .field--name-field-how2-issue,
+  .field--name-field-how-ever-issue{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -198,7 +200,54 @@
   }
 }
 
-.node--type-how2-issue.node--view-mode-teaser {
+.node--type-journal-issue {
+  .issue-tabs {
+    ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 24px;
+      list-style: none;
+      margin: 24px 0 36px 0;
+      padding: 0;
+      li {
+        margin: 0;
+        padding: 0;
+        a {
+          font-weight: 900;
+          color: $text-color;
+          text-decoration: none;
+          padding-bottom: 3px;
+          &.active, &:hover {
+            border-bottom: 3px solid $red;
+          }
+        }
+      }
+    }
+  }
+  .tab-body {
+    display: none;
+    opacity: 0;
+    transition: opacity .5s ease;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    &.active {
+      display: block;
+      opacity: 1;
+      -webkit-animation-name: fadeIn;
+      animation-name: fadeIn;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.node--issue.node--view-mode-teaser {
   padding: 0;
   .field--name-field-cover-thumbnail {
     background: $yellow-lightest;
@@ -292,5 +341,6 @@
     }
   }
 }
+
 
 

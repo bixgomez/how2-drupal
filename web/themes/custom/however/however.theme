@@ -131,3 +131,30 @@ function however_preprocess_node__how2_article(&$variables, $hook) {
     }
 
 }
+
+function however_preprocess_node__journal_issue(&$variables, $hook) {
+
+    $volume = null;
+
+    if(!empty($variables['node']->field_volume_reference->getValue())) {
+        $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
+        $volume = 'vol. ' . $volume_number;
+        $variables['volume'] = $volume;
+    }
+
+    $issue = null;
+    if(!empty($variables['node']->field_issue_number->getValue())) {
+        $issue_number = $variables['node']->field_issue_number->getValue();
+        $issue_number = $issue_number[0]['value'];
+        $issue = 'no. ' . $issue_number;
+        $variables['issue'] = $issue;
+    }
+
+    $variables['volume_issue'] = $volume . ', ' . $issue;
+
+    if(!empty($variables['node']->field_short_description->getValue())) {
+        $variables['label'] = $variables['node']->field_short_description->getValue();
+        $variables['label'] = $variables['label'][0]['value'];
+    }
+
+}

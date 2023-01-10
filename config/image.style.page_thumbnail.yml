@@ -1,0 +1,15 @@
+uuid: 1fd603c7-84f1-4cf2-8713-d6d3a86989f1
+langcode: en
+status: true
+dependencies: {  }
+name: page_thumbnail
+label: page-thumbnail
+effects:
+  d0787d66-e759-476c-8e44-047f9ed7f6c2:
+    uuid: d0787d66-e759-476c-8e44-047f9ed7f6c2
+    id: image_scale
+    weight: 1
+    data:
+      width: 220
+      height: null
+      upscale: false
