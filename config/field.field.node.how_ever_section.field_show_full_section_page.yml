@@ -1,0 +1,23 @@
+uuid: 072157f7-e1f9-4561-8e26-8d538078bb8c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_full_section_page
+    - node.type.how_ever_section
+id: node.how_ever_section.field_show_full_section_page
+field_name: field_show_full_section_page
+entity_type: node
+bundle: how_ever_section
+label: 'Show full section page'
+description: 'Toggle this on to show a full-page view of the section. Otherwise, the section teaser will link directly into section pieces.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

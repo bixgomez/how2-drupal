@@ -11,7 +11,7 @@ id: node.how_ever_section.body
 field_name: body
 entity_type: node
 bundle: how_ever_section
-label: 'Teaser Text'
+label: Body
 description: ''
 required: false
 translatable: true

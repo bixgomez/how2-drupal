@@ -9,7 +9,9 @@ dependencies:
     - field.field.node.how_ever_section.field_issue_reference
     - field.field.node.how_ever_section.field_links_section_title
     - field.field.node.how_ever_section.field_person_bio
+    - field.field.node.how_ever_section.field_show_full_section_page
     - field.field.node.how_ever_section.field_tags
+    - field.field.node.how_ever_section.field_teaser_text
     - field.field.node.how_ever_section.field_volume_reference
     - node.type.how_ever_section
   module:
@@ -26,71 +28,57 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 101
+    weight: 0
     region: content
   field_how_ever_piece:
     type: entity_reference_revisions_entity_view
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 102
+    weight: 1
     region: content
   field_image_caption:
     type: entity_reference_revisions_entity_view
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 103
-    region: content
-  field_issue_reference:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 108
+    weight: 2
     region: content
   field_links_section_title:
     type: string
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 105
+    weight: 4
     region: content
   field_person_bio:
     type: entity_reference_revisions_entity_view
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 104
+    weight: 3
     region: content
-  field_tags:
-    type: entity_reference_label
+  field_show_full_section_page:
+    type: boolean
     label: above
     settings:
-      link: true
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
     third_party_settings: {  }
-    weight: 106
-    region: content
-  field_volume_reference:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 107
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 100
+    weight: 5
     region: content
 hidden:
+  field_issue_reference: true
+  field_tags: true
+  field_teaser_text: true
+  field_volume_reference: true
+  links: true
   search_api_excerpt: true

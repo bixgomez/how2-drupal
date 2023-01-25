@@ -1,23 +1,23 @@
-uuid: 143e0f3f-3826-4932-a5da-d1ae23fd90d5
+uuid: ff880fe6-db1a-4bfb-aa05-34f6a18cc728
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:basic:72bbb6d6-a509-4d99-9400-99e89cad7dbc'
+    - 'block_content:basic:02177644-faa7-4524-95ee-85fb2a56194d'
   module:
     - block_content
     - node
   theme:
     - however
-id: how2logo
+id: howeverlogo
 theme: however
 region: content_top
-weight: -8
+weight: -7
 provider: null
-plugin: 'block_content:72bbb6d6-a509-4d99-9400-99e89cad7dbc'
+plugin: 'block_content:02177644-faa7-4524-95ee-85fb2a56194d'
 settings:
-  id: 'block_content:72bbb6d6-a509-4d99-9400-99e89cad7dbc'
-  label: 'how2 logo'
+  id: 'block_content:02177644-faa7-4524-95ee-85fb2a56194d'
+  label: 'HOW(ever) logo'
   label_display: '0'
   provider: block_content
   status: true
@@ -30,5 +30,5 @@ visibility:
     context_mapping:
       node: '@node.node_route_context:node'
     bundles:
-      how2_article: how2_article
-      how2_section: how2_section
+      how_ever_article: how_ever_article
+      how_ever_section: how_ever_section
