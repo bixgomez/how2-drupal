@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.how_ever_article.body
     - field.field.node.how_ever_article.field_issue_reference
+    - field.field.node.how_ever_article.field_journal_page_images_media
     - field.field.node.how_ever_article.field_person_bio
     - field.field.node.how_ever_article.field_section_reference
     - field.field.node.how_ever_article.field_tags
@@ -26,17 +27,14 @@ content:
       view_mode: name_only
       link: ''
     third_party_settings: {  }
-    weight: 1
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
     weight: 0
     region: content
 hidden:
   body: true
   field_issue_reference: true
+  field_journal_page_images_media: true
   field_section_reference: true
   field_tags: true
   field_volume_reference: true
+  links: true
   search_api_excerpt: true

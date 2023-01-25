@@ -6,7 +6,7 @@ dependencies:
     - field.field.node.journal_issue.body
     - field.field.node.journal_issue.field_cover_thumbnail
     - field.field.node.journal_issue.field_issue_number
-    - field.field.node.journal_issue.field_journal_page_images
+    - field.field.node.journal_issue.field_journal_page_images_media
     - field.field.node.journal_issue.field_journal_pdf
     - field.field.node.journal_issue.field_masthead
     - field.field.node.journal_issue.field_person_bio
@@ -14,7 +14,6 @@ dependencies:
     - field.field.node.journal_issue.field_section
     - field.field.node.journal_issue.field_short_description
     - field.field.node.journal_issue.field_volume_reference
-    - image.style.page_thumbnail
     - node.type.journal_issue
   module:
     - entity_reference_revisions
@@ -53,16 +52,14 @@ content:
     third_party_settings: {  }
     weight: 4
     region: content
-  field_journal_page_images:
-    type: image
+  field_journal_page_images_media:
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      image_link: file
-      image_style: page_thumbnail
-      image_loading:
-        attribute: lazy
+      view_mode: default
+      link: false
     third_party_settings: {  }
-    weight: 9
+    weight: 10
     region: content
   field_journal_pdf:
     type: entity_reference_entity_view

@@ -44,9 +44,7 @@
         $(tabBody).addClass('active');
     });
 
-    $('.field--name-field-journal-page-images a').featherlightGallery({
-        previousIcon: '« previous',
-        nextIcon: 'next »',
+    $('.field--name-field-journal-page-images-media a').featherlightGallery({
         gallery: {
             fadeIn: 300,
             fadeOut: 300

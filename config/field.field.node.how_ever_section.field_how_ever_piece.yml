@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_how_ever_piece
     - node.type.how_ever_section
+    - paragraphs.paragraphs_type.how_ever_subsection
     - paragraphs.paragraphs_type.link_section_title
     - paragraphs.paragraphs_type.section_links
   module:
@@ -24,22 +25,32 @@ settings:
   handler_settings:
     target_bundles:
       section_links: section_links
+      how_ever_subsection: how_ever_subsection
       link_section_title: link_section_title
     negate: 0
     target_bundles_drag_drop:
       how2_section_links:
-        weight: 3
+        weight: -14
         enabled: false
-      link_section_title:
-        weight: 7
+      how2_subsection:
+        weight: -11
+        enabled: false
+      how_ever_subsection:
+        weight: -16
         enabled: true
+      link_section_title:
+        weight: -15
+        enabled: true
+      open_title_text:
+        weight: -10
+        enabled: false
       person_bio:
-        weight: 8
+        weight: -12
         enabled: false
       photo_caption:
-        weight: 5
+        weight: -13
         enabled: false
       section_links:
-        weight: 4
+        weight: -17
         enabled: true
 field_type: entity_reference_revisions

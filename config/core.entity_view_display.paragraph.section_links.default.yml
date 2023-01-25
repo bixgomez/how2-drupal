@@ -21,10 +21,11 @@ content:
     weight: 1
     region: content
   field_unit:
-    type: entity_reference_label
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      link: true
+      view_mode: teaser
+      link: false
     third_party_settings: {  }
     weight: 0
     region: content

@@ -296,7 +296,8 @@
   }
 }
 
-.node--type-how2-section.node--view-mode-full {
+.node--type-how2-section.node--view-mode-full,
+.node--type-how-ever-section.node--view-mode-full {
   .node__content {
     max-width: 748px;
     margin: 0 auto;
@@ -307,7 +308,8 @@
     max-width: 300px;
     margin: 0 0 24px 48px;
   }
-  > .node__content > .field--name-field-how2-piece {
+  > .node__content > .field--name-field-how2-piece,
+  > .node__content > .field--name-field-how-ever-piece {
     margin-bottom: 54px;
     > .field__item {
       margin-bottom: 22px;
@@ -315,12 +317,14 @@
   }
 }
 
-.node--type-how2-section.node--view-mode-teaser {
+.node--type-how2-section.node--view-mode-teaser,
+.node--type-how-ever-section.node--view-mode-teaser {
   .section-title a {
     font-weight: bold;
     color: $text-color;
   }
-  .node--type-how2-section.node--view-mode-full .field--name-field-how2-piece > .field__item {
+  .node--type-how2-section.node--view-mode-full .field--name-field-how2-piece > .field__item,
+  .node--type-how-ever-section.node--view-mode-full .field--name-field-how-ever-piece > .field__item {
     line-height: 1.8;
     margin: 0 0 0.4em 0;
   }

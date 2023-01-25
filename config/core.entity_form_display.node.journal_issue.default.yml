@@ -7,7 +7,7 @@ dependencies:
     - field.field.node.journal_issue.body
     - field.field.node.journal_issue.field_cover_thumbnail
     - field.field.node.journal_issue.field_issue_number
-    - field.field.node.journal_issue.field_journal_page_images
+    - field.field.node.journal_issue.field_journal_page_images_media
     - field.field.node.journal_issue.field_journal_pdf
     - field.field.node.journal_issue.field_masthead
     - field.field.node.journal_issue.field_person_bio
@@ -74,6 +74,7 @@ third_party_settings:
     group_journal_files:
       children:
         - field_journal_page_images
+        - field_journal_page_images_media
         - field_journal_pdf
       label: 'Journal Files'
       region: content
@@ -111,22 +112,21 @@ content:
     third_party_settings: {  }
   field_issue_number:
     type: number
-    weight: 14
+    weight: 15
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_journal_page_images:
-    type: image_image
-    weight: 12
+  field_journal_page_images_media:
+    type: media_library_widget
+    weight: 13
     region: content
     settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+      media_types: {  }
     third_party_settings: {  }
   field_journal_pdf:
     type: media_library_widget
-    weight: 13
+    weight: 14
     region: content
     settings:
       media_types: {  }

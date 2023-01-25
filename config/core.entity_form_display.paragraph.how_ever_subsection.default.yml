@@ -1,0 +1,25 @@
+uuid: 13eaa775-32c1-4d6a-80cf-95b0ea486b5e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.how_ever_subsection.field_how_ever_subsection
+    - paragraphs.paragraphs_type.how_ever_subsection
+id: paragraph.how_ever_subsection.default
+targetEntityType: paragraph
+bundle: how_ever_subsection
+mode: default
+content:
+  field_how_ever_subsection:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

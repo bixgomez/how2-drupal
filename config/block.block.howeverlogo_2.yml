@@ -1,22 +1,22 @@
-uuid: ff880fe6-db1a-4bfb-aa05-34f6a18cc728
+uuid: c3d8d0d9-05ae-4660-b997-c9b0c170b37b
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:basic:02177644-faa7-4524-95ee-85fb2a56194d'
+    - 'block_content:basic:10470daf-468f-4176-9d8d-c8ba8b6b8034'
   module:
     - block_content
     - node
   theme:
     - however
-id: howeverlogo
+id: howeverlogo_2
 theme: however
 region: content_top
 weight: -7
 provider: null
-plugin: 'block_content:02177644-faa7-4524-95ee-85fb2a56194d'
+plugin: 'block_content:10470daf-468f-4176-9d8d-c8ba8b6b8034'
 settings:
-  id: 'block_content:02177644-faa7-4524-95ee-85fb2a56194d'
+  id: 'block_content:10470daf-468f-4176-9d8d-c8ba8b6b8034'
   label: 'HOW(ever) logo'
   label_display: '0'
   provider: block_content

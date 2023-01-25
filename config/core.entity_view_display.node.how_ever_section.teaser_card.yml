@@ -1,8 +1,9 @@
-uuid: 288a8888-3f54-4449-989e-dcc4503e99d3
+uuid: 9236c361-3724-4a26-b1a5-88a3ed69c0b1
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.teaser_card
     - field.field.node.how_ever_section.body
     - field.field.node.how_ever_section.field_how_ever_piece
     - field.field.node.how_ever_section.field_image_caption
@@ -15,29 +16,18 @@ dependencies:
     - node.type.how_ever_section
   module:
     - entity_reference_revisions
+    - layout_builder
     - text
     - user
-id: node.how_ever_section.default
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.how_ever_section.teaser_card
 targetEntityType: node
 bundle: how_ever_section
-mode: default
+mode: teaser_card
 content:
-  body:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 0
-    region: content
-  field_how_ever_piece:
-    type: entity_reference_revisions_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    weight: 1
-    region: content
   field_image_caption:
     type: entity_reference_revisions_entity_view
     label: hidden
@@ -45,31 +35,22 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 2
+    weight: 0
     region: content
-  field_person_bio:
-    type: entity_reference_revisions_entity_view
+  field_teaser_text:
+    type: text_default
     label: hidden
-    settings:
-      view_mode: default
-      link: ''
+    settings: {  }
     third_party_settings: {  }
-    weight: 3
-    region: content
-  field_show_full_section_page:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 5
+    weight: 1
     region: content
 hidden:
+  body: true
+  field_how_ever_piece: true
   field_issue_reference: true
+  field_person_bio: true
+  field_show_full_section_page: true
   field_tags: true
-  field_teaser_text: true
   field_volume_reference: true
   links: true
   search_api_excerpt: true

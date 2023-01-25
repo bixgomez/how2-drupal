@@ -2,6 +2,7 @@ featherlight:
   css:
     theme:
       vendor/featherlight/release/featherlight.min.css: {}
+      vendor/featherlight/release/featherlight.gallery.min.css: {}
   js:
     vendor/featherlight/release/featherlight.min.js: {}
     vendor/featherlight-gallery/featherlight.gallery.min.js: {}

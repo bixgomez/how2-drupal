@@ -1,0 +1,23 @@
+uuid: 8616d0d7-31e6-40ae-8ed6-6b0e6068d41c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.how_ever_subsection.field_how_ever_subsection
+    - paragraphs.paragraphs_type.how_ever_subsection
+id: paragraph.how_ever_subsection.default
+targetEntityType: paragraph
+bundle: how_ever_subsection
+mode: default
+content:
+  field_how_ever_subsection:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

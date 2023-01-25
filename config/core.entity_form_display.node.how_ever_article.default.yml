@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.how_ever_article.body
     - field.field.node.how_ever_article.field_issue_reference
+    - field.field.node.how_ever_article.field_journal_page_images_media
     - field.field.node.how_ever_article.field_person_bio
     - field.field.node.how_ever_article.field_section_reference
     - field.field.node.how_ever_article.field_tags
@@ -12,6 +13,7 @@ dependencies:
     - node.type.how_ever_article
   module:
     - field_group
+    - media_library
     - paragraphs
     - path
     - text
@@ -26,7 +28,7 @@ third_party_settings:
       label: Metadata
       region: content
       parent_name: ''
-      weight: 11
+      weight: 9
       format_type: fieldset
       format_settings:
         classes: ''
@@ -60,6 +62,13 @@ content:
     weight: 11
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_journal_page_images_media:
+    type: media_library_widget
+    weight: 7
+    region: content
+    settings:
+      media_types: {  }
     third_party_settings: {  }
   field_person_bio:
     type: paragraphs

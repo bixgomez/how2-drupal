@@ -12,7 +12,7 @@ field_name: body
 entity_type: node
 bundle: how_ever_section
 label: Body
-description: ''
+description: 'Section introduction or working notes displayed on the section detail page (only use this if "Show full section page" above is toggled.'
 required: false
 translatable: true
 default_value: {  }
