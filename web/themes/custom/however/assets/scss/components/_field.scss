@@ -84,11 +84,18 @@
 
 .node--type-how-ever-article {
   .field--name-field-journal-page-images-media {
+    .field__item {
+      width: 120px;
+    }
     @media all and (min-width: 960px) {
-      float: right;
+      .field__item {
+        width: 200px;
+      }
+      float: left;
       max-width: 200px;
       flex-direction: column;
-      margin-left: 60px;
+      margin-left: -158px;
+      margin-right: 80px;
     }
   }
 }
