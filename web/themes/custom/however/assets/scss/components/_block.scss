@@ -6,8 +6,11 @@
   max-width: 200px;
 }
 
-#block-how2logo {
+#block-how2logo, #block-howeverlogo {
   text-align: center;
+  .field img {
+    max-width: 200px;
+  }
 }
 
 .block-inline-blockimage-carousel {

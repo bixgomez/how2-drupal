@@ -75,28 +75,26 @@
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'node--article'
 ]
 %}
 {{ attach_library('classy/node') }}
 <article{{ attributes.addClass(classes) }}>
-
-    {{ drupal_view('article_section', 'block_1') }}
-
+    <h2 class="subtitle text-center">{{ content.field_subtitle.0 }}</h2>
     <div class="issue-meta">
         <div class="left">
-            <div class="journal-name"><a href="/how2">How2</a></div>
-            <div class="issue-volume-number">{{ volume_issue }}</div>
-            <div class="issue-pub-date">{{ issue_pub_date }}</div>
-            <div><a href="{{ issue_url }}">table of contents</a></div>
+        <div class="journal-name"><a href="/however">HOW(ever)</a></div>
+        <div class="issue-volume-number">{{ volume_issue }}</div>
+        <div class="issue-pub-date">{{ issue_pub_date }}</div>
+        <div><a href="{{ issue_url }}">table of contents</a></div>
         </div>
-        <div class="righ">
+        <div class="right">
             {{ content.field_archive_url }}
         </div>
     </div>
 
     <div{{ content_attributes.addClass('node__content') }}>
-        {{ content.body }}
+        {{ content.field_image_caption }}
+        {{ content.field_how2_piece }}
         {{ content.field_person_bio }}
     </div>
 

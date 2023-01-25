@@ -287,8 +287,11 @@ body {
   max-width: 200px;
 }
 
-#block-how2logo {
+#block-how2logo, #block-howeverlogo {
   text-align: center;
+}
+#block-how2logo .field img, #block-howeverlogo .field img {
+  max-width: 200px;
 }
 
 .block-inline-blockimage-carousel {
@@ -1139,17 +1142,17 @@ ul.menu li.menu-item--expanded {
   margin: 0 0 0.4em 0;
 }
 
-.node--type-how2-article .view-article-section {
+.node--article .view-article-section {
   text-align: center;
 }
-.node--type-how2-article .node__content {
+.node--article .node__content {
   max-width: 748px;
   margin: 0 auto;
 }
-.node--type-how2-article .field--name-body {
+.node--article .field--name-body {
   font-family: "Libre Caslon Text", serif;
 }
-.node--type-how2-article .field--name-body p {
+.node--article .field--name-body p {
   line-height: 1.8;
 }
 
