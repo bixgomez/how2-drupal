@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.how_ever_section.field_tags
     - field.field.node.how_ever_section.field_teaser_text
     - field.field.node.how_ever_section.field_volume_reference
+    - field.field.node.how_ever_section.field_working_notes
     - node.type.how_ever_section
   module:
     - field_group
@@ -74,6 +75,7 @@ hidden:
   field_tags: true
   field_teaser_text: true
   field_volume_reference: true
+  field_working_notes: true
   path: true
   promote: true
   status: true

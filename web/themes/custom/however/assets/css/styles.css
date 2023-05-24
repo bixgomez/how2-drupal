@@ -556,18 +556,21 @@ a.button:hover {
   }
 }
 
-.node--type-how-ever-article .field--name-field-journal-page-images-media .field__item {
+.node--type-how-ever-article .field--name-field-journal-page-images-media .field__item,
+.node--type-how-ever-section .field--name-field-journal-page-images-media .field__item {
   width: 120px;
 }
 @media all and (min-width: 960px) {
-  .node--type-how-ever-article .field--name-field-journal-page-images-media {
+  .node--type-how-ever-article .field--name-field-journal-page-images-media,
+.node--type-how-ever-section .field--name-field-journal-page-images-media {
     float: left;
     max-width: 200px;
     flex-direction: column;
     margin-left: -158px;
     margin-right: 80px;
   }
-  .node--type-how-ever-article .field--name-field-journal-page-images-media .field__item {
+  .node--type-how-ever-article .field--name-field-journal-page-images-media .field__item,
+.node--type-how-ever-section .field--name-field-journal-page-images-media .field__item {
     width: 200px;
   }
 }

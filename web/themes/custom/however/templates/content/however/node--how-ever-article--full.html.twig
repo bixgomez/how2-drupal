@@ -97,11 +97,11 @@
 
     <div{{ content_attributes.addClass('node__content') }}>
 
-        <h1>{{ label }}</h1>
-
         {% if content.field_person_bio.0 %}
             <p class="author-name"><em>by {{ content.field_person_bio.0['#paragraph'].field_person.entity.title.value }}</em></p>
         {% endif %}
+
+        <h1>{{ label }}</h1>
 
         {{ content.field_journal_page_images_media }}
         <div class="content-text-inner">

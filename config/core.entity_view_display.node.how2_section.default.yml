@@ -13,10 +13,12 @@ dependencies:
     - field.field.node.how2_section.field_subtitle
     - field.field.node.how2_section.field_tags
     - field.field.node.how2_section.field_volume_reference
+    - field.field.node.how2_section.field_working_notes
     - node.type.how2_section
   module:
     - entity_reference_revisions
     - link
+    - text
     - user
 id: node.how2_section.default
 targetEntityType: node
@@ -69,6 +71,13 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_working_notes:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
     region: content
 hidden:
   body: true

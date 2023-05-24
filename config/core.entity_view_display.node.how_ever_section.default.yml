@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.how_ever_section.field_tags
     - field.field.node.how_ever_section.field_teaser_text
     - field.field.node.how_ever_section.field_volume_reference
+    - field.field.node.how_ever_section.field_working_notes
     - node.type.how_ever_section
   module:
     - entity_reference_revisions
@@ -50,7 +51,7 @@ content:
     region: content
   field_journal_page_images_media:
     type: entity_reference_label
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -67,13 +68,20 @@ content:
     region: content
   field_show_full_section_page:
     type: boolean
-    label: above
+    label: hidden
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
     weight: 5
+    region: content
+  field_working_notes:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
     region: content
 hidden:
   field_issue_reference: true
