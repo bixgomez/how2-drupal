@@ -8,7 +8,7 @@ third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
-name: 'HOW(ever) article'
+name: 'HOW(ever) Article'
 type: how_ever_article
 description: ''
 help: ''

@@ -30,10 +30,9 @@ bundle: how2_section
 mode: teaser_card
 content:
   body:
-    type: text_summary_or_trimmed
+    type: text_default
     label: visually_hidden
-    settings:
-      trim_length: 600
+    settings: {  }
     third_party_settings: {  }
     weight: 2
     region: content
