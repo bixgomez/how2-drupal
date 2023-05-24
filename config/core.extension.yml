@@ -13,6 +13,7 @@ module:
   breakpoint: 0
   cer: 0
   ckeditor: 0
+  ckeditor_indentblock: 0
   color: 0
   config: 0
   contextual: 0

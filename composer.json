@@ -39,7 +39,8 @@
         "drupal/layout_builder_modal": "^1.1",
         "drupal/backup_migrate": "^5.0",
         "drupal/lb_claro": "^1.0@beta",
-        "drupal/linkit": "^6.0@beta"
+        "drupal/linkit": "^6.0@beta",
+        "drupal/ckeditor_indentblock": "^1.0@beta"
     },
     "require-dev": {
         "drupal/core-dev": "^9.2"

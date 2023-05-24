@@ -68,6 +68,8 @@ settings:
       linkit_profile: default
     stylescombo:
       styles: ''
+    indentblock:
+      enable: true
 image_upload:
   status: true
   scheme: public
