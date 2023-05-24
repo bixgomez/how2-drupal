@@ -26,11 +26,9 @@ visibility:
     context_mapping:
       node: '@node.node_route_context:node'
     bundles:
-      how2_article: how2_article
       how2_section: how2_section
       how2_volume: how2_volume
       however_volume: however_volume
-      how_ever_article: how_ever_article
       how_ever_section: how_ever_section
       page: page
       person: person
