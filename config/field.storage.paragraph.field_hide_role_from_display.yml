@@ -1,0 +1,18 @@
+uuid: 16869a58-2b7a-4a39-be4f-7489e0d3ce96
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_hide_role_from_display
+field_name: field_hide_role_from_display
+entity_type: paragraph
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

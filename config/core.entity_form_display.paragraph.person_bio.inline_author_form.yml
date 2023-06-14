@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.paragraph.inline_author_form
+    - field.field.paragraph.person_bio.field_hide_role_from_display
     - field.field.paragraph.person_bio.field_override_bio
     - field.field.paragraph.person_bio.field_override_role
     - field.field.paragraph.person_bio.field_person
@@ -25,6 +26,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_hide_role_from_display: true
   field_override_bio: true
   field_override_role: true
   status: true

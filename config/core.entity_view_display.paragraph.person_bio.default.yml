@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.person_bio.field_hide_role_from_display
     - field.field.paragraph.person_bio.field_override_bio
     - field.field.paragraph.person_bio.field_override_role
     - field.field.paragraph.person_bio.field_person
@@ -14,6 +15,16 @@ targetEntityType: paragraph
 bundle: person_bio
 mode: default
 content:
+  field_hide_role_from_display:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
   field_override_bio:
     type: text_default
     label: hidden

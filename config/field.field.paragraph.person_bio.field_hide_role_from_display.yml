@@ -1,0 +1,23 @@
+uuid: c8961d38-20aa-47d5-b95c-8c4c665fb300
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_hide_role_from_display
+    - paragraphs.paragraphs_type.person_bio
+id: paragraph.person_bio.field_hide_role_from_display
+field_name: field_hide_role_from_display
+entity_type: paragraph
+bundle: person_bio
+label: 'Hide role from display'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
