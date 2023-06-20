@@ -92,11 +92,7 @@
       .field__item {
         width: 200px;
       }
-      float: left;
-      max-width: 200px;
-      flex-direction: column;
-      margin-left: -158px;
-      margin-right: 80px;
+      display: block;
     }
   }
 }

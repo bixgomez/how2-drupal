@@ -563,11 +563,7 @@ a.button:hover {
 @media all and (min-width: 960px) {
   .node--type-how-ever-article .field--name-field-journal-page-images-media,
 .node--type-how-ever-section .field--name-field-journal-page-images-media {
-    float: left;
-    max-width: 200px;
-    flex-direction: column;
-    margin-left: -158px;
-    margin-right: 80px;
+    display: block;
   }
   .node--type-how-ever-article .field--name-field-journal-page-images-media .field__item,
 .node--type-how-ever-section .field--name-field-journal-page-images-media .field__item {
@@ -1193,6 +1189,18 @@ ul.menu li.menu-item--expanded {
 }
 .node--article .field--name-body p {
   line-height: 1.8;
+}
+
+.node--type-how-ever-section.node--view-mode-full .node__content,
+.node--type-how-ever-article.node--view-mode-full .node__content {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex;
+  gap: 80px;
+}
+.node--type-how-ever-section.node--view-mode-full .node__content .content-text-inner,
+.node--type-how-ever-article.node--view-mode-full .node__content .content-text-inner {
+  width: calc(100% - 280px);
 }
 
 .paragraph--type--how2-section-links,
