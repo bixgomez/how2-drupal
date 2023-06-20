@@ -351,8 +351,10 @@
   .node__content {
     width: 100% !important;
     max-width: 100% !important;
-    display: flex;
-    gap: 80px;
+    .article-content {
+      display: flex;
+      gap: 80px;
+    }
     .content-text-inner {
       width: calc(100% - 280px);
     }

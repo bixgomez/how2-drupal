@@ -1195,6 +1195,9 @@ ul.menu li.menu-item--expanded {
 .node--type-how-ever-article.node--view-mode-full .node__content {
   width: 100% !important;
   max-width: 100% !important;
+}
+.node--type-how-ever-section.node--view-mode-full .node__content .article-content,
+.node--type-how-ever-article.node--view-mode-full .node__content .article-content {
   display: flex;
   gap: 80px;
 }

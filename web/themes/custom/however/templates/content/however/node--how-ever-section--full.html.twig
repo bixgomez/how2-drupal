@@ -94,16 +94,16 @@
     </div>
 
     <div{{ content_attributes.addClass('node__content') }}>
+        <div class="article-content">
+            {{ content.field_journal_page_images_media }}
 
-        {{ content.field_journal_page_images_media }}
-
-        <div class="content-text-inner">
-            {{ content.body }}
-            {{ content.field_how_ever_piece }}
-            {{ content.field_working_notes }}
-            {{ content.field_person_bio }}
+            <div class="content-text-inner">
+                {{ content.body }}
+                {{ content.field_how_ever_piece }}
+                {{ content.field_working_notes }}
+                {{ content.field_person_bio }}
+            </div>
         </div>
-
     </div>
 
 </article>
