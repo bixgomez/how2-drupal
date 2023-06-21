@@ -50,9 +50,10 @@ content:
     weight: 2
     region: content
   field_journal_page_images_media:
-    type: entity_reference_label
+    type: entity_reference_entity_view
     label: hidden
     settings:
+      view_mode: default
       link: true
     third_party_settings: {  }
     weight: 6

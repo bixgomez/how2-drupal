@@ -57,7 +57,7 @@
         <div class="bio-content">
             {% block content %}
                 {{ content.field_person }}
-                {{ content.field_override_role }}
+                {{ paragraph.field_hide_role_from_display.0.value == '0' ? content.field_override_role }}
                 {{ content.field_override_bio.0 ? content.field_override_bio : paragraph.field_person.0.entity.body.0.value|raw }}
             {% endblock %}
         </div>
