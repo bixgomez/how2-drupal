@@ -1,0 +1,21 @@
+uuid: 0c5fc10c-1ec1-4079-bc98-1446ac83800a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_working_notes
+    - node.type.how2_article
+  module:
+    - text
+id: node.how2_article.field_working_notes
+field_name: field_working_notes
+entity_type: node
+bundle: how2_article
+label: 'Working Notes'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.how2_article.field_section_reference
     - field.field.node.how2_article.field_tags
     - field.field.node.how2_article.field_volume_reference
+    - field.field.node.how2_article.field_working_notes
     - node.type.how2_article
   module:
     - inline_entity_form
@@ -58,6 +59,7 @@ hidden:
   field_section_reference: true
   field_tags: true
   field_volume_reference: true
+  field_working_notes: true
   path: true
   promote: true
   status: true

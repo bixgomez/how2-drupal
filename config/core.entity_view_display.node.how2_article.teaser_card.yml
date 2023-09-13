@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.how2_article.field_section_reference
     - field.field.node.how2_article.field_tags
     - field.field.node.how2_article.field_volume_reference
+    - field.field.node.how2_article.field_working_notes
     - node.type.how2_article
   module:
     - entity_reference_revisions
@@ -102,4 +103,5 @@ content:
     weight: 9
     region: content
 hidden:
+  field_working_notes: true
   search_api_excerpt: true

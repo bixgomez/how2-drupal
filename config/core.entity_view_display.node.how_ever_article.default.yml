@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.how_ever_article.field_section_reference
     - field.field.node.how_ever_article.field_tags
     - field.field.node.how_ever_article.field_volume_reference
+    - field.field.node.how_ever_article.field_working_notes
     - node.type.how_ever_article
   module:
     - entity_reference_revisions
@@ -76,6 +77,13 @@ content:
       link: true
     third_party_settings: {  }
     weight: 106
+    region: content
+  field_working_notes:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 109
     region: content
   links:
     settings: {  }

@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.how2_article.field_section_reference
     - field.field.node.how2_article.field_tags
     - field.field.node.how2_article.field_volume_reference
+    - field.field.node.how2_article.field_working_notes
     - node.type.how2_article
   module:
     - entity_reference_revisions
@@ -38,5 +39,6 @@ hidden:
   field_section_reference: true
   field_tags: true
   field_volume_reference: true
+  field_working_notes: true
   links: true
   search_api_excerpt: true
