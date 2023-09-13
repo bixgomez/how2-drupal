@@ -1206,6 +1206,10 @@ ul.menu li.menu-item--expanded {
   width: calc(100% - 280px);
 }
 
+.node .author-name {
+  font-size: 24px;
+}
+
 .paragraph--type--how2-section-links,
 .paragraph--type--how2-subsection,
 .paragraph--type--open-title-text {

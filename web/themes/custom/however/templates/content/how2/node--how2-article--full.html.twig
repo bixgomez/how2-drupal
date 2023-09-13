@@ -98,7 +98,7 @@
     <div{{ content_attributes.addClass('node__content') }}>
 
         {% if content.field_person_bio.0 %}
-            <p class="author-name"><em>by {{ content.field_person_bio.0['#paragraph'].field_person.entity.title.value }}</em></p>
+            <p class="author-name">{{ content.field_person_bio.0['#paragraph'].field_person.entity.title.value }}</p>
         {% endif %}
 
         <h1>{{ label }}</h1>
