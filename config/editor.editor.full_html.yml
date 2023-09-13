@@ -25,6 +25,8 @@ settings:
             - '-'
             - RemoveFormat
             - Underline
+            - TextColor
+            - BGColor
         -
           name: Linking
           items:
@@ -68,8 +70,8 @@ settings:
       linkit_profile: default
     stylescombo:
       styles: ''
-    indentblock:
-      enable: true
+    colorbutton:
+      colors: ''
 image_upload:
   status: true
   scheme: public

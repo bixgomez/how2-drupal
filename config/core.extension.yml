@@ -15,6 +15,7 @@ module:
   ckeditor: 0
   ckeditor_indentblock: 0
   color: 0
+  colorbutton: 0
   config: 0
   contextual: 0
   datetime: 0
@@ -52,6 +53,7 @@ module:
   node: 0
   options: 0
   page_cache: 0
+  panelbutton: 0
   path: 0
   path_alias: 0
   pdf: 0
