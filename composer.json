@@ -42,7 +42,8 @@
         "drupal/linkit": "^6.0@beta",
         "drupal/ckeditor_indentblock": "^1.0@beta",
         "drupal/ckeditor5_font": "^1.1@beta",
-        "drupal/colorbutton": "^1.5"
+        "drupal/colorbutton": "^1.5",
+        "drupal/ckeditor_font": "^1.4"
     },
     "require-dev": {
         "drupal/core-dev": "^9.2"

@@ -27,6 +27,7 @@ settings:
             - Underline
             - TextColor
             - BGColor
+            - FontSize
         -
           name: Linking
           items:
@@ -70,6 +71,9 @@ settings:
       linkit_profile: default
     stylescombo:
       styles: ''
+    font:
+      font_names: ''
+      font_sizes: "12px|12px\r\n16px|16px (default)\r\n24px|24px\r\n36px|36px\r\n54px|54px\r\n72px|72px"
     colorbutton:
       colors: ''
 image_upload:
