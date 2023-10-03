@@ -611,6 +611,13 @@ a.button:hover {
   font-weight: 700;
 }
 
+.field--name-body table {
+  border: none;
+}
+.field--name-body table tbody, .field--name-body table tr, .field--name-body table td {
+  border: none;
+}
+
 #page-footer {
   border-top: 4px solid #333333;
   background: #FFFCF0;

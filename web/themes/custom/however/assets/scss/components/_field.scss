@@ -141,3 +141,10 @@
     font-weight: 700;
   }
 }
+
+.field--name-body table {
+  border: none;
+  tbody, tr, td {
+    border: none;
+  }
+}
