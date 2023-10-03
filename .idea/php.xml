@@ -33,7 +33,6 @@
       <path value="$PROJECT_DIR$/vendor/pantheon-upstreams/upstream-configuration" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-escaper" />
       <path value="$PROJECT_DIR$/vendor/symfony/lock" />
-      <path value="$PROJECT_DIR$/vendor/laminas/laminas-diactoros" />
       <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-feed" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
@@ -153,6 +152,8 @@
       <path value="$PROJECT_DIR$/vendor/starkbank/ecdsa" />
       <path value="$PROJECT_DIR$/vendor/fastglass/sendgrid" />
       <path value="$PROJECT_DIR$/vendor/neilime/php-css-lint" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/longwave/laminas-diactoros" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

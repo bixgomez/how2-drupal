@@ -26,7 +26,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/pantheon-upstreams/upstream-configuration" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-escaper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/lock" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-diactoros" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dom-crawler" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-feed" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-kernel" />
@@ -142,6 +141,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/friends-of-behat/mink-browserkit-driver" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/neilime/php-css-lint" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/longwave/laminas-diactoros" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
