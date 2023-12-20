@@ -1,0 +1,10 @@
+uuid: c03cd797-4f96-4f0b-a4b7-7a9dc5746511
+langcode: en
+status: true
+dependencies: {  }
+id: body_sections
+label: 'Body Sections'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -1191,10 +1191,10 @@ ul.menu li.menu-item--expanded {
   max-width: 748px;
   margin: 0 auto;
 }
-.node--article .field--name-body {
+.node--article .field--name-body, .node--article .field--name-field-body-sections {
   font-family: "Libre Caslon Text", serif;
 }
-.node--article .field--name-body p {
+.node--article .field--name-body p, .node--article .field--name-field-body-sections p {
   line-height: 1.8;
 }
 

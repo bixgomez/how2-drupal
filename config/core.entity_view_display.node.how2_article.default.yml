@@ -5,6 +5,8 @@ dependencies:
   config:
     - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
+    - field.field.node.how2_article.field_body_sections
+    - field.field.node.how2_article.field_hide_the_node_title
     - field.field.node.how2_article.field_issue_reference
     - field.field.node.how2_article.field_media_type
     - field.field.node.how2_article.field_person_bio
@@ -40,7 +42,16 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 6
+    weight: 5
+    region: content
+  field_body_sections:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 8
     region: content
   field_issue_reference:
     type: entity_reference_label
@@ -48,7 +59,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 5
+    weight: 4
     region: content
   field_person_bio:
     type: entity_reference_revisions_entity_view
@@ -65,7 +76,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 7
+    weight: 6
     region: content
   field_tags:
     type: entity_reference_label
@@ -81,16 +92,17 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 4
+    weight: 3
     region: content
   field_working_notes:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 8
+    weight: 7
     region: content
 hidden:
+  field_hide_the_node_title: true
   field_media_type: true
   links: true
   search_api_excerpt: true

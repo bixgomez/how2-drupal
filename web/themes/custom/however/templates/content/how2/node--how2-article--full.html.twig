@@ -97,15 +97,20 @@
 
     <div{{ content_attributes.addClass('node__content') }}>
 
-        {% if content.field_person_bio.0 %}
-            <p class="author-name">{{ content.field_person_bio.0['#paragraph'].field_person.entity.title.value }}</p>
+        {{ content.field_person_bio }}
+
+        {% if node.field_hide_the_node_title[0].value != 1 %}
+            <h1>{{ label }}</h1>
         {% endif %}
 
-        <h1>{{ label }}</h1>
-
-        {{ content.body }}
         {{ content.field_working_notes }}
-        {{ content.field_person_bio }}
+
+        <h2>Full body field (to be removed after migrating to new body sections)</h2>
+        {{ content.body }}
+
+        {{ content.field_body_sections }}
+
+
     </div>
 
 </article>

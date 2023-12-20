@@ -6,6 +6,8 @@ dependencies:
     - core.entity_view_mode.node.teaser_card
     - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
+    - field.field.node.how2_article.field_body_sections
+    - field.field.node.how2_article.field_hide_the_node_title
     - field.field.node.how2_article.field_issue_reference
     - field.field.node.how2_article.field_media_type
     - field.field.node.how2_article.field_person_bio
@@ -103,5 +105,7 @@ content:
     weight: 9
     region: content
 hidden:
+  field_body_sections: true
+  field_hide_the_node_title: true
   field_working_notes: true
   search_api_excerpt: true

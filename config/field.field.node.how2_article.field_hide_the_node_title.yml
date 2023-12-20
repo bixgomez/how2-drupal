@@ -1,0 +1,23 @@
+uuid: e4814133-c14a-47b7-84d5-c972f692ba0e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hide_the_node_title
+    - node.type.how2_article
+id: node.how2_article.field_hide_the_node_title
+field_name: field_hide_the_node_title
+entity_type: node
+bundle: how2_article
+label: 'Hide the node title'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
