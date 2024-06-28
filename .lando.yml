@@ -10,3 +10,6 @@ config:
 services:
   appserver:
     xdebug: true
+    myservice:
+      type: mysql:8.0
+      portforward: true
