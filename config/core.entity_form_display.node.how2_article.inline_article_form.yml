@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.node.inline_article_form
-    - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
     - field.field.node.how2_article.field_body_sections
     - field.field.node.how2_article.field_hide_the_node_title
@@ -54,7 +53,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
-  body: true
   created: true
   field_body_sections: true
   field_hide_the_node_title: true

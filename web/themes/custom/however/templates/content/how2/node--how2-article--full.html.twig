@@ -97,6 +97,12 @@
 
     <div{{ content_attributes.addClass('node__content') }}>
 
+        <ul class="body-section-links">
+            {% for section in node.field_body_sections %}
+                <li><a href="#section-{{ loop.index }}">{{ section.entity.field_title.value }}</a></li>
+            {% endfor %}
+        </ul>
+
         {{ content.field_person_bio }}
 
         {% if node.field_hide_the_node_title[0].value != 1 %}
@@ -104,9 +110,6 @@
         {% endif %}
 
         {{ content.field_working_notes }}
-
-        <h2>Full body field (to be removed after migrating to new body sections)</h2>
-        {{ content.body }}
 
         {{ content.field_body_sections }}
 

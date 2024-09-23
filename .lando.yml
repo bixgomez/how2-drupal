@@ -5,11 +5,9 @@ config:
   site: however-demo
   id: 78d5fc9a-da95-4e48-911f-51edc37d0838
   xdebug: true
+  database: mysql:8.0
   config:
     php: .lando.php.ini
 services:
   appserver:
     xdebug: true
-    myservice:
-      type: mysql:8.0
-      portforward: true

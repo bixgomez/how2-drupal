@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
     - field.field.node.how2_article.field_body_sections
     - field.field.node.how2_article.field_hide_the_node_title
@@ -46,16 +45,6 @@ targetEntityType: node
 bundle: how2_article
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 7
-    region: content
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
   field_archive_url:
     type: link_default
     weight: 3

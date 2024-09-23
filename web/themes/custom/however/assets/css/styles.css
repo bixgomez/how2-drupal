@@ -989,6 +989,11 @@ ul.menu li.menu-item--expanded {
   }
 }
 
+.node--issue.node--view-mode-teaser .issue-volume-number, .node--issue.node--view-mode-teaser .field--name-field-publication-date-display {
+  text-decoration: none !important;
+  color: #0f0f0f !important;
+}
+
 .node--issue.node--view-mode-full #masthead {
   display: none;
 }
@@ -1196,6 +1201,11 @@ ul.menu li.menu-item--expanded {
 }
 .node--article .field--name-body p, .node--article .field--name-field-body-sections p {
   line-height: 1.8;
+}
+.node--article .field--name-field-body-sections .field--name-field-title {
+  font-weight: bold;
+  font-size: 20px;
+  margin: 12px 0;
 }
 
 .node--type-how-ever-section.node--view-mode-full .node__content,

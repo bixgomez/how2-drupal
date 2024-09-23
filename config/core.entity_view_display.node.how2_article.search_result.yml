@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.search_result
-    - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
     - field.field.node.how2_article.field_body_sections
     - field.field.node.how2_article.field_hide_the_node_title
@@ -19,7 +18,6 @@ dependencies:
   module:
     - entity_reference_revisions
     - layout_builder
-    - text
     - user
 third_party_settings:
   layout_builder:
@@ -30,14 +28,6 @@ targetEntityType: node
 bundle: how2_article
 mode: search_result
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    weight: 1
-    region: content
   field_issue_reference:
     type: entity_reference_label
     label: hidden

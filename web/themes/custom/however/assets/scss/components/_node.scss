@@ -156,6 +156,13 @@
   @extend %card;
 }
 
+.node--issue.node--view-mode-teaser {
+  .issue-volume-number, .field--name-field-publication-date-display {
+    text-decoration: none !important;
+    color: #0f0f0f !important;
+  }
+}
+
 .node--issue.node--view-mode-full {
   #masthead {
     display: none;
@@ -343,6 +350,11 @@
     p {
       line-height: 1.8;
     }
+  }
+  .field--name-field-body-sections .field--name-field-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 12px 0;
   }
 }
 
