@@ -78,21 +78,19 @@
   ]
 %}
 {{ attach_library('classy/node') }}
-<article{{ attributes.addClass(classes) }}>
-
-  <a href="{{ url }}" rel="bookmark">{{ content.field_image_caption }}</a>
-
-  {{ title_prefix }}
-  {% if label and not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
-
-  <div{{ content_attributes.addClass('node__content') }}>
-    {{ content.field_subtitle }}
-    {{ content.body }}
-  </div>
-
-</article>
+<a href="{{ url }}" rel="bookmark">
+  <article{{ attributes.addClass(classes) }}>
+    <a href="{{ url }}" rel="bookmark">{{ content.field_image_caption }}</a>
+    {{ title_prefix }}
+    {% if label and not page %}
+      <h2{{ title_attributes }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h2>
+    {% endif %}
+    {{ title_suffix }}
+    <div{{ content_attributes.addClass('node__content') }}>
+      {{ content.field_subtitle }}
+      {{ content.body }}
+    </div>
+  </article>
+</a>
