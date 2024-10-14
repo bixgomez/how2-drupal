@@ -4,9 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.however_volume.field_how_ever_issue
+    - field.field.node.however_volume.field_however_page_facimile_link
     - field.field.node.however_volume.field_volume_number
     - node.type.however_volume
   module:
+    - link
     - user
 id: node.however_volume.default
 targetEntityType: node
@@ -21,6 +23,18 @@ content:
       link: false
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_however_page_facimile_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   field_volume_number: true

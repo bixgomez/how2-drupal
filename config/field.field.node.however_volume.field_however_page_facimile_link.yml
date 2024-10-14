@@ -1,0 +1,23 @@
+uuid: 48d3de3e-d096-4bab-8d6d-fd34a48229ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_however_page_facimile_link
+    - node.type.however_volume
+  module:
+    - link
+id: node.however_volume.field_however_page_facimile_link
+field_name: field_however_page_facimile_link
+entity_type: node
+bundle: however_volume
+label: 'However Page Facimile link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 17
+field_type: link

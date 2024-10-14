@@ -4,9 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.however_volume.field_how_ever_issue
+    - field.field.node.however_volume.field_however_page_facimile_link
     - field.field.node.however_volume.field_volume_number
     - node.type.however_volume
   module:
+    - link
     - path
 id: node.however_volume.default
 targetEntityType: node
@@ -28,6 +30,14 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_however_page_facimile_link:
+    type: link_default
+    weight: 123
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_volume_number:
     type: number

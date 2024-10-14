@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.however_volume.field_how_ever_issue
+    - field.field.node.however_volume.field_however_page_facimile_link
     - field.field.node.however_volume.field_volume_number
     - node.type.however_volume
   module:
@@ -21,5 +22,6 @@ content:
     region: content
 hidden:
   field_how_ever_issue: true
+  field_however_page_facimile_link: true
   field_volume_number: true
   search_api_excerpt: true
