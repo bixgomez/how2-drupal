@@ -1060,9 +1060,6 @@ ul.menu li.menu-item--expanded {
   }
 }
 
-.node--type-journal-issue.node--view-mode-teaser {
-  background: #FFFCF7;
-}
 .node--type-journal-issue .issue-tabs ul {
   display: flex;
   flex-direction: row;
