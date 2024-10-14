@@ -1,0 +1,55 @@
+uuid: 472aaf21-6b31-4d71-b6ea-57e1611414f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_body_sections
+    - node.type.how_ever_article
+    - paragraphs.paragraphs_type.body_sections
+  module:
+    - entity_reference_revisions
+id: node.how_ever_article.field_body_sections
+field_name: field_body_sections
+entity_type: node
+bundle: how_ever_article
+label: 'Body Sections'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      body_sections: body_sections
+    negate: 0
+    target_bundles_drag_drop:
+      body_sections:
+        weight: 10
+        enabled: true
+      how2_section_links:
+        weight: 11
+        enabled: false
+      how2_subsection:
+        weight: 12
+        enabled: false
+      how_ever_subsection:
+        weight: 13
+        enabled: false
+      link_section_title:
+        weight: 14
+        enabled: false
+      open_title_text:
+        weight: 15
+        enabled: false
+      person_bio:
+        weight: 16
+        enabled: false
+      photo_caption:
+        weight: 17
+        enabled: false
+      section_links:
+        weight: 18
+        enabled: false
+field_type: entity_reference_revisions
