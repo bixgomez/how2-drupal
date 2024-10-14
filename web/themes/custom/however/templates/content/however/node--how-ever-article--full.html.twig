@@ -88,7 +88,9 @@
             <div class="journal-name"><a href="/however">HOW(ever)</a></div>
             <div class="issue-volume-number">{{ volume_issue }}</div>
             <div class="issue-pub-date">{{ issue_pub_date }}</div>
-            <div><a href="{{ issue_url }}">table of contents</a></div>
+            {% if issue_url %}
+                <div><a href="{{ issue_url }}">table of contents</a></div>
+            {% endif %}
         </div>
         <div class="right">
             {{ content.field_archive_url }}
