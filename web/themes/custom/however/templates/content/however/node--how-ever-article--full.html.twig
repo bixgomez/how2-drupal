@@ -105,15 +105,15 @@
         <div class="article-content">
             {{ content.field_journal_page_images_media }}
             <div class="content-text-inner">
+                {{ content.field_person_bio }}
+                <h1>{{ label }}</h1>
+                {{ content.field_working_notes }}
                 <ul class="body-section-links">
                     {% for section in node.field_body_sections %}
                         <li><a href="#section-{{ loop.index }}">{{ section.entity.field_title.value }}</a></li>
                     {% endfor %}
                 </ul>
-                {{ content.field_person_bio }}
-                <h1>{{ label }}</h1>
                 {{ content.field_body_sections }}
-                {{ content.field_working_notes }}
             </div>
         </div>
     </div>
