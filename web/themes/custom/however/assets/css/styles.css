@@ -575,12 +575,14 @@ a.button:hover {
   background: #FFFCF7;
 }
 
-.field--name-field-archive-url a {
+.field--name-field-archive-url a,
+.field--name-field-however-page-facimile-link a {
   font-weight: 600;
   color: #333333;
   text-decoration: none;
 }
-.field--name-field-archive-url a:hover {
+.field--name-field-archive-url a:hover,
+.field--name-field-however-page-facimile-link a:hover {
   text-decoration: underline;
 }
 
@@ -999,7 +1001,9 @@ ul.menu li.menu-item--expanded {
 }
 
 .node--type-how2-volume .field--name-field-archive-url,
-.node--type-however-volume .field--name-field-archive-url {
+.node--type-how2-volume .field--name-field-however-page-facimile-link,
+.node--type-however-volume .field--name-field-archive-url,
+.node--type-however-volume .field--name-field-however-page-facimile-link {
   margin-bottom: 2em;
   text-align: center;
 }
