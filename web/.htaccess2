@@ -1,0 +1,5 @@
+### never deliver .git folders, .gitIgnore
+RewriteRule ^(.*/)?\.git+ - [R=404,L]
+
+# 2nd line of defense (if no mod_rewrite)
+RedirectMatch 404 ^(.*/)?\.git+
