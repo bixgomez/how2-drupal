@@ -4,9 +4,14 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_facsimile_pages
+    - field.field.node.page.field_however_pages
+    - field.field.node.page.layout_builder__layout
     - node.type.page
   module:
+    - image
     - layout_builder
+    - layout_discovery
     - text
     - user
 third_party_settings:
@@ -44,6 +49,44 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: 1
             additional: {  }
+          b01f7877-b366-4edb-ab9d-33d7be50bc95:
+            uuid: b01f7877-b366-4edb-ab9d-33d7be50bc95
+            region: content
+            configuration:
+              id: 'field_block:node:page:field_facsimile_pages'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: image
+                label: above
+                settings:
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          47d947c0-a291-4f36-beed-9130b7fcd91a:
+            uuid: 47d947c0-a291-4f36-beed-9130b7fcd91a
+            region: content
+            configuration:
+              id: 'field_block:node:page:field_however_pages'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: image
+                label: above
+                settings:
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
         third_party_settings: {  }
 _core:
   default_config_hash: M_Y8L5tfmhx7DR143E05YyZSpvgil6VFvqcfBWykalg
@@ -59,10 +102,33 @@ content:
     third_party_settings: {  }
     weight: 100
     region: content
+  field_facsimile_pages:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_however_pages:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 103
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }
     weight: 101
     region: content
 hidden:
+  layout_builder__layout: true
   search_api_excerpt: true

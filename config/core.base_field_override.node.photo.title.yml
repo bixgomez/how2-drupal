@@ -1,0 +1,18 @@
+uuid: 4bd23f03-3415-48da-8395-5b63608aa366
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.photo
+id: node.photo.title
+field_name: title
+entity_type: node
+bundle: photo
+label: Photo
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

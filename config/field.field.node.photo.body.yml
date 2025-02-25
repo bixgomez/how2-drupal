@@ -1,0 +1,23 @@
+uuid: ac290f37-1b86-4921-8e19-6b0830e789ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.photo
+  module:
+    - text
+id: node.photo.body
+field_name: body
+entity_type: node
+bundle: photo
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

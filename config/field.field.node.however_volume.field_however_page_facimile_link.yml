@@ -11,7 +11,7 @@ id: node.however_volume.field_however_page_facimile_link
 field_name: field_however_page_facimile_link
 entity_type: node
 bundle: however_volume
-label: 'However Page Facimile link'
+label: 'However Page Facsimile link'
 description: ''
 required: false
 translatable: false

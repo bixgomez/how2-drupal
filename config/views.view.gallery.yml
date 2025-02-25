@@ -1,19 +1,22 @@
-uuid: e1635b48-a337-4772-b674-8f966697d1c8
+uuid: 9a354e2d-dc69-4026-8af4-f389e0a9dd48
 langcode: en
 status: true
 dependencies:
   config:
-    - search_api.index.default
+    - field.storage.node.field_cover_thumbnail
+    - image.style.media_library
+    - node.type.facsimile_pages
   module:
-    - better_exposed_filters
-    - search_api
-id: search_results
-label: 'Search Results'
+    - image
+    - node
+    - user
+id: gallery
+label: Gallery
 module: views
 description: ''
 tag: ''
-base_table: search_api_index_default
-base_field: search_api_id
+base_table: node_field_data
+base_field: nid
 display:
   default:
     id: default
@@ -21,20 +24,20 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Search Results'
+      title: 'Facsimile Pages'
       fields:
-        aggregated_field:
-          id: aggregated_field
-          table: search_api_index_default
-          field: aggregated_field
+        title:
+          id: title
+          table: node_field_data
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: null
-          entity_field: null
-          plugin_id: search_api
-          label: ''
-          exclude: true
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+          label: 'HOW(ever) Facsimile Pages'
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -53,8 +56,8 @@ display:
             target: ''
             nl2br: false
             max_length: 0
-            word_boundary: true
-            ellipsis: true
+            word_boundary: false
+            ellipsis: false
             more_link: false
             more_link_text: ''
             more_link_path: ''
@@ -66,7 +69,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -74,18 +77,28 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          link_to_item: false
-          use_highlighting: false
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
           multi_type: separator
-          multi_separator: ', '
-        search_api_rendered_item:
-          id: search_api_rendered_item
-          table: search_api_index_default
-          field: search_api_rendered_item
+          separator: ', '
+          field_api_classes: false
+        field_cover_thumbnail:
+          id: field_cover_thumbnail
+          table: node__field_cover_thumbnail
+          field: field_cover_thumbnail
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: search_api_rendered_item
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -127,12 +140,23 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          view_modes:
-            'entity:node':
-              how2_article: search_result
-              how_ever_article: search_result
-              how_ever_section: search_result
-              journal_issue: search_result
+          click_sort_column: target_id
+          type: image
+          settings:
+            image_link: content
+            image_style: media_library
+            image_loading:
+              attribute: lazy
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
       pager:
         type: mini
         options:
@@ -152,116 +176,93 @@ display:
             offset: false
             offset_label: Offset
       exposed_form:
-        type: bef
+        type: basic
         options:
-          submit_button: Search
+          submit_button: Apply
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
-          text_input_required: 'Select any filter and click on Apply to see results'
-          text_input_required_format: full_html
-          bef:
-            general:
-              autosubmit: false
-              autosubmit_exclude_textfield: false
-              autosubmit_textfield_delay: 500
-              autosubmit_hide: false
-              input_required: false
-              allow_secondary: false
-              secondary_label: 'Advanced options'
-              secondary_open: false
-              reset_button_always_show: false
-            filter:
-              search_api_fulltext_2:
-                plugin_id: default
-                advanced:
-                  placeholder_text: Search
-                  rewrite:
-                    filter_rewrite_values: ''
-                    filter_rewrite_values_key: false
-                  collapsible: false
-                  is_secondary: false
-                  collapsible_disable_automatic_open: false
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'access content'
       cache:
-        type: none
+        type: tag
         options: {  }
       empty: {  }
-      sorts: {  }
-      arguments: {  }
-      filters:
-        search_api_fulltext_2:
-          id: search_api_fulltext_2
-          table: search_api_index_default
-          field: search_api_fulltext
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
           relationship: none
           group_type: group
-          admin_label: 'fulltext search'
-          plugin_id: search_api_fulltext
-          operator: or
-          value: ''
-          group: 1
-          exposed: true
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
           expose:
-            operator_id: search_api_fulltext_2_op
-            label: Search
-            description: ''
-            use_operator: false
-            operator: search_api_fulltext_2_op
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
+      arguments: {  }
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: search_api_fulltext_2
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              content_editor: '0'
-              administrator: '0'
-            expose_fields: false
-            placeholder: ''
-            searched_fields_id: search_api_fulltext_2_searched_fields
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          parse_mode: terms
-          min_length: null
-          fields:
-            - rendered_item
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            facsimile_pages: facsimile_pages
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
       style:
-        type: default
+        type: grid
+        options:
+          uses_fields: false
+          columns: 4
+          automatic_width: true
+          alignment: horizontal
+          row_class_custom: ''
+          row_class_default: true
+          col_class_custom: ''
+          col_class_default: true
       row:
         type: fields
         options:
           default_field_elements: true
-          inline: {  }
+          inline:
+            field_cover_thumbnail: field_cover_thumbnail
           separator: ''
           hide_empty: false
       query:
-        type: search_api_query
+        type: views_query
         options:
-          bypass_access: false
-          skip_access: false
-          preserve_facet_query_args: false
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
           query_tags: {  }
       relationships: {  }
       header: {  }
@@ -270,27 +271,28 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
+        - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
         - 'user.node_grants:view'
+        - user.permissions
       tags:
-        - 'config:search_api.index.default'
+        - 'config:field.storage.node.field_cover_thumbnail'
   page_1:
     id: page_1
     display_title: Page
     display_plugin: page
     position: 1
     display_options:
-      exposed_block: true
       display_extenders: {  }
-      path: search
+      path: facsimile-pages
     cache_metadata:
       max-age: -1
       contexts:
+        - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
         - 'user.node_grants:view'
+        - user.permissions
       tags:
-        - 'config:search_api.index.default'
+        - 'config:field.storage.node.field_cover_thumbnail'

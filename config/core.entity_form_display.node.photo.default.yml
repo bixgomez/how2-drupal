@@ -1,28 +1,21 @@
-uuid: bf40af88-9a16-4a9a-ac4b-8520f264b976
+uuid: 03f63a42-7072-42b4-b83b-a0b10361ecc3
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.page.body
-    - field.field.node.page.field_facsimile_pages
-    - field.field.node.page.field_however_pages
-    - field.field.node.page.layout_builder__layout
-    - image.style.thumbnail
-    - node.type.page
+    - field.field.node.photo.body
+    - node.type.photo
   module:
-    - image
     - path
     - text
-_core:
-  default_config_hash: SfpLhPExzvR0MgFp0Wp7CrmgEnhcqQ-fXIWFhbf4ue0
-id: node.page.default
+id: node.photo.default
 targetEntityType: node
-bundle: page
+bundle: photo
 mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 31
+    weight: 121
     region: content
     settings:
       rows: 9
@@ -35,22 +28,6 @@ content:
     weight: 10
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_facsimile_pages:
-    type: image_image
-    weight: 121
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-  field_however_pages:
-    type: image_image
-    weight: 122
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
     third_party_settings: {  }
   path:
     type: path
@@ -97,5 +74,4 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden:
-  layout_builder__layout: true
+hidden: {  }

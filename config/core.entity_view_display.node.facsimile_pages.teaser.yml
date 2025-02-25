@@ -1,0 +1,64 @@
+uuid: 73176e11-dc12-4396-8045-469b3cbdce8d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.facsimile_pages.body
+    - field.field.node.facsimile_pages.field_cover_thumbnail
+    - field.field.node.facsimile_pages.field_issue_number
+    - field.field.node.facsimile_pages.field_volume_number
+    - node.type.facsimile_pages
+  module:
+    - image
+    - text
+    - user
+id: node.facsimile_pages.teaser
+targetEntityType: node
+bundle: facsimile_pages
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_cover_thumbnail:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_issue_number:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_volume_number:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  search_api_excerpt: true

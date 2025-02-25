@@ -1,28 +1,26 @@
-uuid: bf40af88-9a16-4a9a-ac4b-8520f264b976
+uuid: 16ae781f-be37-401d-8592-2b06fa585b65
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.page.body
-    - field.field.node.page.field_facsimile_pages
-    - field.field.node.page.field_however_pages
-    - field.field.node.page.layout_builder__layout
+    - field.field.node.facsimile_pages.body
+    - field.field.node.facsimile_pages.field_cover_thumbnail
+    - field.field.node.facsimile_pages.field_issue_number
+    - field.field.node.facsimile_pages.field_volume_number
     - image.style.thumbnail
-    - node.type.page
+    - node.type.facsimile_pages
   module:
     - image
     - path
     - text
-_core:
-  default_config_hash: SfpLhPExzvR0MgFp0Wp7CrmgEnhcqQ-fXIWFhbf4ue0
-id: node.page.default
+id: node.facsimile_pages.default
 targetEntityType: node
-bundle: page
+bundle: facsimile_pages
 mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 31
+    weight: 121
     region: content
     settings:
       rows: 9
@@ -36,21 +34,27 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_facsimile_pages:
+  field_cover_thumbnail:
     type: image_image
-    weight: 121
+    weight: 119
     region: content
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-  field_however_pages:
-    type: image_image
-    weight: 122
+  field_issue_number:
+    type: number
+    weight: 124
     region: content
     settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+      placeholder: ''
+    third_party_settings: {  }
+  field_volume_number:
+    type: number
+    weight: 123
+    region: content
+    settings:
+      placeholder: ''
     third_party_settings: {  }
   path:
     type: path
@@ -97,5 +101,4 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden:
-  layout_builder__layout: true
+hidden: {  }
