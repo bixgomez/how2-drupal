@@ -7,7 +7,6 @@ dependencies:
   module:
     - editor
     - footnotes
-    - linkit
     - media
 _core:
   default_config_hash: WNeK5FbcY8pXgEpbD_KgRzlF1-5PL3BJXwqaBctPTqw
@@ -69,6 +68,7 @@ filters:
     settings:
       footnotes_collapse: '0'
       footnotes_html: '1'
+      footnotes_css: '1'
   media_embed:
     id: media_embed
     provider: media
@@ -96,10 +96,3 @@ filters:
     status: false
     weight: -40
     settings: {  }
-  linkit:
-    id: linkit
-    provider: linkit
-    status: false
-    weight: -41
-    settings:
-      title: true
