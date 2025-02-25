@@ -51,6 +51,7 @@ module:
   media_library: 0
   menu_link_content: 0
   menu_ui: 0
+  mysql: 0
   node: 0
   options: 0
   page_cache: 0
@@ -68,14 +69,13 @@ module:
   toolbar: 0
   tour: 0
   twig_tweak: 0
+  update: 0
   user: 0
   views_ui: 0
   views: 10
   paragraphs: 11
   standard: 1000
 theme:
-  bartik: 0
-  seven: 0
   claro: 0
   stable: 0
   classy: 0
