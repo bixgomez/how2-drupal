@@ -97,3 +97,9 @@
 #/.env
 
 web/.ht.router.php
+
+# Databases
+*.mysql
+*.mysql.gz
+*.sql
+*.sql.gz
