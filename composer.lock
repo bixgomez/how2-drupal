@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f69386750b9235003c541145415ad248",
+    "content-hash": "a5836419ca770ed4f479fab4644ccd84",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1517,29 +1517,29 @@
         },
         {
             "name": "drupal/cer",
-            "version": "4.0.0-alpha3",
+            "version": "5.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/cer.git",
-                "reference": "8.x-4.0-alpha3"
+                "reference": "5.0.0-beta3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/cer-8.x-4.0-alpha3.zip",
-                "reference": "8.x-4.0-alpha3",
-                "shasum": "3c508e842a2c17235e4c9909ab64ef1aeb9d3ebe"
+                "url": "https://ftp.drupal.org/files/projects/cer-5.0.0-beta3.zip",
+                "reference": "5.0.0-beta3",
+                "shasum": "732e95528a8aa0771f38785a5db49861612da150"
             },
             "require": {
-                "drupal/core": "^8 || ^9"
+                "drupal/core": "^9.5 || ^10"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-4.0-alpha3",
-                    "datestamp": "1620240213",
+                    "version": "5.0.0-beta3",
+                    "datestamp": "1679926745",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -1549,7 +1549,7 @@
             ],
             "authors": [
                 {
-                    "name": "Anybody",
+                    "name": "anybody",
                     "homepage": "https://www.drupal.org/user/291091"
                 },
                 {
@@ -1569,7 +1569,7 @@
                     "homepage": "https://www.drupal.org/user/336930"
                 },
                 {
-                    "name": "Grevil",
+                    "name": "grevil",
                     "homepage": "https://www.drupal.org/user/3668491"
                 },
                 {
@@ -13135,7 +13135,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "drupal/cer": 15,
+        "drupal/cer": 20,
         "drupal/ckeditor5_font": 10,
         "drupal/ckeditor_indentblock": 10,
         "drupal/inline_entity_form": 5,

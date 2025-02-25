@@ -29,7 +29,7 @@
         "drupal/field_group": "^3.2",
         "drupal/paragraphs": "^1.14",
         "drupal/inline_entity_form": "^1.0@RC",
-        "drupal/cer": "^4.0@alpha",
+        "drupal/cer": "^5.0@dev",
         "drupal/search_api_page": "^1.0@beta",
         "drupal/twig_tweak": "^3.2",
         "drupal/better_exposed_filters": "^6.0",
