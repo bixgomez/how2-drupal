@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c5040b618b11b723f8e3c59b0d17acf",
+    "content-hash": "dd058993c80cfdbfc33e4ba9765efb2e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2448,17 +2448,17 @@
         },
         {
             "name": "drupal/fakeobjects",
-            "version": "1.3.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/fakeobjects.git",
-                "reference": "8.x-1.3"
+                "reference": "2.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/fakeobjects-8.x-1.3.zip",
-                "reference": "8.x-1.3",
-                "shasum": "3d809e634f334681664e01c57fbff013e18b428e"
+                "url": "https://ftp.drupal.org/files/projects/fakeobjects-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "a11cac7fa7fd2d511048ba0ff3d18321e767b296"
             },
             "require": {
                 "drupal-ckeditor-libraries-group/fakeobjects": "^4.5.11",
@@ -2467,8 +2467,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.3",
-                    "datestamp": "1740013102",
+                    "version": "2.0.1",
+                    "datestamp": "1740094419",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2582,33 +2582,32 @@
         },
         {
             "name": "drupal/footnotes",
-            "version": "3.1.0",
+            "version": "4.0.0-beta5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/footnotes.git",
-                "reference": "3.1.0"
+                "reference": "4.0.0-beta5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/footnotes-3.1.0.zip",
-                "reference": "3.1.0",
-                "shasum": "6cc51af0d8cd50628b5a7e9cc75255a657e2aa62"
+                "url": "https://ftp.drupal.org/files/projects/footnotes-4.0.0-beta5.zip",
+                "reference": "4.0.0-beta5",
+                "shasum": "63651a3fa08a50e0c87abe33b18228ee6bcf6131"
             },
             "require": {
-                "drupal/core": ">=8.6",
-                "drupal/fakeobjects": "^1.0"
+                "drupal/core": ">=10.0"
             },
             "require-dev": {
-                "drupal/fakeobjects": "*"
+                "drupal/metatag": "^2.0"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "3.1.0",
-                    "datestamp": "1691752661",
+                    "version": "4.0.0-beta5",
+                    "datestamp": "1721752682",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -2638,8 +2637,9 @@
                     "role": "Maintainer"
                 },
                 {
-                    "name": "scott_euser",
-                    "homepage": "https://www.drupal.org/user/3267594"
+                    "name": "Scott Euser (scott_euser)",
+                    "homepage": "https://www.drupal.org/u/scott_euser",
+                    "role": "Maintainer"
                 },
                 {
                     "name": "smulvih2",
@@ -14433,6 +14433,7 @@
         "drupal/cer": 20,
         "drupal/ckeditor5_font": 10,
         "drupal/ckeditor_indentblock": 10,
+        "drupal/footnotes": 15,
         "drupal/inline_entity_form": 5,
         "drupal/search_api_page": 10
     },

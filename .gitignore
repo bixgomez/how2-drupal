@@ -103,3 +103,4 @@ web/.ht.router.php
 # Local config settings.
 /web/sites/default/settings.ddev.php
 .vscode
+.DS_Store
