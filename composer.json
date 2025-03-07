@@ -14,7 +14,7 @@
         "drupal/core-composer-scaffold": "^10.2",
         "drupal/core-recommended": "^10.2",
         "cweagans/composer-patches": "^1.7",
-        "drush/drush": "^11.3",
+        "drush/drush": "^12.4.3",
         "drupal/pdf": "^1.1",
         "drupal/admin_toolbar": "^3.1",
         "drupal/search_api": "^1.25",
@@ -35,7 +35,10 @@
         "drupal/ckeditor_indentblock": "^1.0@beta",
         "drupal/ckeditor5_font": "^1.1@beta",
         "drupal/colorbutton": "^1.5",
-        "drupal/ckeditor_font": "^1.4"
+        "drupal/ckeditor_font": "^1.4",
+        "drupal/classy": "^1.0",
+        "drupal/color": "^1.0",
+        "drupal/rdf": "^2.1"
     },
     "require-dev": {
         "drupal/core-dev": "^10.2",
@@ -82,7 +85,10 @@
             "composer/installers": true,
             "cweagans/composer-patches": true,
             "drupal/core-composer-scaffold": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true,
+            "tbachert/spi": true
         }
     }
 }
