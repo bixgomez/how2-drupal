@@ -3,21 +3,20 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.full
     - field.storage.node.body
-    - field.storage.node.field_person_bio
-    - field.storage.paragraph.field_person
     - field.storage.node.field_image_caption
-    - field.storage.paragraph.field_caption
     - field.storage.node.field_issue_reference
     - field.storage.node.field_masthead
+    - field.storage.node.field_person_bio
     - field.storage.node.field_tags
     - field.storage.node.field_volume_reference
+    - field.storage.paragraph.field_caption
+    - field.storage.paragraph.field_person
     - search_api.server.default
-    - core.entity_view_mode.node.full
   module:
     - node
     - paragraphs
-    - search_api
 id: default
 name: Default
 description: ''

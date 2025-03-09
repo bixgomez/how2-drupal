@@ -6,5 +6,6 @@ dependencies:
     - node
 id: node.cross_post_teaser_card
 label: 'Cross-post Teaser Card'
+description: ''
 targetEntityType: node
 cache: true

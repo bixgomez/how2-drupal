@@ -4,5 +4,5 @@ status: true
 dependencies: {  }
 id: content_carousel
 label: 'Content Carousel'
-revision: 0
+revision: false
 description: ''

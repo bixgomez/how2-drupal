@@ -17,7 +17,7 @@ tips:
     id: search-api-index-processors-introduction
     plugin: text
     label: 'Processors used for this index'
-    body: 'Processors customize different aspects of an index''s functionality. They can keep items from being indexed, change how certain fields are indexed and influence searches.'
+    body: "Processors customize different aspects of an index's functionality. They can keep items from being indexed, change how certain fields are indexed and influence searches."
     weight: 1
   search-api-index-processors-enable:
     id: search-api-index-processors-enable

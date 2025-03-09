@@ -6,5 +6,6 @@ dependencies:
     - paragraphs
 id: paragraph.node_teaser
 label: 'Node Teaser'
+description: ''
 targetEntityType: paragraph
 cache: true

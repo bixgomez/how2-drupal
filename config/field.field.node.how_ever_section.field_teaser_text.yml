@@ -12,7 +12,7 @@ field_name: field_teaser_text
 entity_type: node
 bundle: how_ever_section
 label: 'Teaser Text'
-description: 'Section teaser that''s displayed on the issue TOC.'
+description: "Section teaser that's displayed on the issue TOC."
 required: false
 translatable: false
 default_value: {  }

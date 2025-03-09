@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_display.node.page.default
+    - filter.format.footnote
     - filter.format.full_html
     - filter.format.no_filters
     - media.type.audio
@@ -29,6 +30,7 @@ dependencies:
     - contextual
     - file
     - filter
+    - help
     - layout_builder
     - layout_builder_component_attributes
     - media
@@ -49,6 +51,7 @@ permissions:
   - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
+  - 'access help pages'
   - 'access media overview'
   - 'access site in maintenance mode'
   - 'access site reports'
@@ -117,6 +120,7 @@ permissions:
   - 'delete media'
   - 'delete own audio media'
   - 'delete own document media'
+  - 'delete own files'
   - 'delete own how2_article content'
   - 'delete own how2_issue content'
   - 'delete own how2_section content'
@@ -185,6 +189,7 @@ permissions:
   - 'revert person revisions'
   - 'update any media'
   - 'update media'
+  - 'use text format footnote'
   - 'use text format full_html'
   - 'use text format no_filters'
   - 'view all media revisions'

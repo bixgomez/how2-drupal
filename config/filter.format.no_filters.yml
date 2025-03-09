@@ -14,5 +14,6 @@ filters:
     status: false
     weight: 0
     settings:
-      footnotes_collapse: '0'
-      footnotes_html: '0'
+      footnotes_collapse: false
+      footnotes_dialog: false
+      footnotes_footer_disable: false

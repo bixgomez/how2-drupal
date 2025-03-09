@@ -4,5 +4,5 @@ status: true
 dependencies: {  }
 id: image_carousel
 label: 'Image Carousel'
-revision: 0
+revision: false
 description: ''
