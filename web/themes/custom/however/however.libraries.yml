@@ -6,6 +6,7 @@ featherlight:
   js:
     vendor/featherlight/release/featherlight.min.js: {}
     vendor/featherlight-gallery/featherlight.gallery.min.js: {}
+
 slick:
   css:
     theme:
@@ -13,12 +14,20 @@ slick:
       vendor/slick/slick-theme.css: {}
   js:
     vendor/slick/slick.min.js: {}
+
+# Replaced with minified version from Vite
 theme-scripts:
   js:
-    assets/scripts/scripts.js: {}
+    assets/js/scripts.min.js: { minified: true }
+  dependencies:
+    - core/jquery
+    - however/slick
+    - however/featherlight
+
+# Updated to use minified CSS from Vite
 global-styling:
   css:
     base:
-      assets/css/styles.css: {}
+      assets/css/styles.min.css: { minified: true }
     theme:
       https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap: { type: external }
