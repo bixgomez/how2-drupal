@@ -9,6 +9,7 @@ libraries:
   - however/slick
   - however/featherlight
   - however/theme-scripts
+  - however/jquery-scripts
 
 regions:
   branding: 'Branding'

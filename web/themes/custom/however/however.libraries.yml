@@ -15,11 +15,17 @@ slick:
   js:
     vendor/slick/slick.min.js: {}
 
-# Replaced with minified version from Vite
 theme-scripts:
   js:
-    assets/js/scripts.min.js: { minified: true }
+    dist/js/scripts.min.js: { minified: true }
   dependencies:
+    - core/drupal
+
+jquery-scripts:
+  js:
+    dist/js/scripts-jquery.min.js: { minified: true }
+  dependencies:
+    - core/drupal
     - core/jquery
     - however/slick
     - however/featherlight
@@ -28,6 +34,6 @@ theme-scripts:
 global-styling:
   css:
     base:
-      assets/css/styles.min.css: { minified: true }
+      dist/css/styles.min.css: { minified: true }
     theme:
       https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap: { type: external }

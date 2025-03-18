@@ -15,13 +15,13 @@ function ensureDir(dir) {
 async function processCSS() {
   try {
     console.log('Processing SCSS...');
-    const result = sass.compile('assets/scss/styles.scss', {
+    const result = sass.compile('src/scss/styles.scss', {
       style: 'compressed',
       sourceMap: true
     });
     
-    ensureDir('assets/css');
-    fs.writeFileSync('assets/css/styles.min.css', result.css);
+    ensureDir('dist/css');
+    fs.writeFileSync('dist/css/styles.min.css', result.css);
     console.log('CSS processed successfully');
   } catch (err) {
     console.error('CSS Error:', err.message);
@@ -32,18 +32,24 @@ async function processCSS() {
 async function processJS() {
   try {
     console.log('Processing JS...');
-    const jsContent = fs.readFileSync('assets/scripts/scripts.js', 'utf8');
     
-    // Minify JS
+    // Process vanilla JS
+    const jsContent = fs.readFileSync('src/js/scripts.js', 'utf8');
     const minified = await minify(jsContent, {
       sourceMap: true,
-      format: {
-        comments: false
-      }
+      format: { comments: false }
     });
     
-    ensureDir('assets/js');
-    fs.writeFileSync('assets/js/scripts.min.js', minified.code);
+    // Process jQuery JS
+    const jQueryContent = fs.readFileSync('src/js/scripts-jquery.js', 'utf8');
+    const minifiedJQuery = await minify(jQueryContent, {
+      sourceMap: true,
+      format: { comments: false }
+    });
+    
+    ensureDir('dist/js');
+    fs.writeFileSync('dist/js/scripts.min.js', minified.code);
+    fs.writeFileSync('dist/js/scripts-jquery.min.js', minifiedJQuery.code);
     console.log('JS processed successfully');
   } catch (err) {
     console.error('JS Error:', err.message);
@@ -65,13 +71,13 @@ function watch() {
   build();
   
   // Watch SCSS files
-  chokidar.watch('assets/scss/**/*.scss').on('change', (path) => {
+  chokidar.watch('src/scss/**/*.scss').on('change', (path) => {
     console.log(`SCSS file changed: ${path}`);
     processCSS();
   });
   
   // Watch JS files
-  chokidar.watch('assets/scripts/**/*.js').on('change', (path) => {
+  chokidar.watch('src/js/**/*.js').on('change', (path) => {
     console.log(`JS file changed: ${path}`);
     processJS();
   });

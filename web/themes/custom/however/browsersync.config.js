@@ -4,8 +4,8 @@ module.exports = {
   
   // Watch these files for changes
   files: [
-    "assets/css/*.css",
-    "assets/js/*.js",
+    "dist/css/*.css",
+    "dist/js/*.js",
     "templates/**/*.html.twig"
   ],
   
