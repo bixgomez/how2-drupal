@@ -2,16 +2,17 @@
   border-top: 4px solid $grey-dark;
   background: $yellow-lightest;
   padding: 42px 0;
-  margin-top: 96px;
+  margin: 0;
 }
 
-#page-footer .block-menu {
-  margin-bottom: 36px;
+.region-footer {
+  
 }
 
 #block-footerbottom .field--name-body {
   display: flex;
   gap: 18px;
+
   p {
     margin: 0;
   }

@@ -97,10 +97,13 @@
 
     <div{{ content_attributes.addClass('node__content') }}>
 
+    {{ content.field_title_display }}
+
         {{ content.field_person_bio }}
 
         {% if node.field_hide_the_node_title[0].value != 1 %}
             <h1>{{ label }}</h1>
+            <h1>{{ content.field_title_display }}</h1>
         {% endif %}
 
         {{ content.field_working_notes }}
@@ -112,7 +115,6 @@
         </ul>
 
         {{ content.field_body_sections }}
-
 
     </div>
 

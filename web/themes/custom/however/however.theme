@@ -33,30 +33,42 @@ function however_preprocess_node__contributor_name(&$variables, $hook) {
 }
 
 function however_preprocess_node__how2_issue(&$variables, $hook) {
-
     $volume = null;
 
-    if(!empty($variables['node']->field_volume_reference->getValue())) {
-        $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
-        $volume = 'vol. ' . $volume_number;
-        $variables['volume'] = $volume;
+    if (!empty($variables['node']->field_volume_reference) && !$variables['node']->field_volume_reference->isEmpty()) {
+        $volume_reference = $variables['node']->field_volume_reference->entity;
+        if ($volume_reference && $volume_reference->hasField('field_volume_number') && !$volume_reference->get('field_volume_number')->isEmpty()) {
+            $volume_number = $volume_reference->get('field_volume_number')->value;
+            $volume = 'vol. ' . $volume_number;
+            $variables['volume'] = $volume;
+        }
     }
 
     $issue = null;
-    if(!empty($variables['node']->field_issue_number->getValue())) {
+    if (!empty($variables['node']->field_issue_number) && !$variables['node']->field_issue_number->isEmpty()) {
         $issue_number = $variables['node']->field_issue_number->getValue();
-        $issue_number = $issue_number[0]['value'];
-        $issue = 'no. ' . $issue_number;
-        $variables['issue'] = $issue;
+        if (!empty($issue_number[0]['value'])) {
+            $issue_number = $issue_number[0]['value'];
+            $issue = 'no. ' . $issue_number;
+            $variables['issue'] = $issue;
+        }
     }
 
-    $variables['volume_issue'] = $volume . ', ' . $issue;
-
-    if(!empty($variables['node']->field_short_description->getValue())) {
-        $variables['label'] = $variables['node']->field_short_description->getValue();
-        $variables['label'] = $variables['label'][0]['value'];
+    // Only set volume_issue if both volume and issue are defined
+    if (isset($volume) && isset($issue)) {
+        $variables['volume_issue'] = $volume . ', ' . $issue;
+    } elseif (isset($volume)) {
+        $variables['volume_issue'] = $volume;
+    } elseif (isset($issue)) {
+        $variables['volume_issue'] = $issue;
     }
 
+    if (!empty($variables['node']->field_short_description) && !$variables['node']->field_short_description->isEmpty()) {
+        $label = $variables['node']->field_short_description->getValue();
+        if (!empty($label[0]['value'])) {
+            $variables['label'] = $label[0]['value'];
+        }
+    }
 }
 
 function however_preprocess_node__how2_section(&$variables, $hook) {
@@ -219,28 +231,64 @@ function however_preprocess_node__how_ever_article(&$variables, $hook) {
 }
 
 function however_preprocess_node__journal_issue(&$variables, $hook) {
-
     $volume = null;
 
-    if(!empty($variables['node']->field_volume_reference->getValue())) {
-        $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
-        $volume = 'vol. ' . $volume_number;
-        $variables['volume'] = $volume;
+    if (!empty($variables['node']->field_volume_reference) && !$variables['node']->field_volume_reference->isEmpty()) {
+        $volume_reference = $variables['node']->field_volume_reference->entity;
+        if ($volume_reference && $volume_reference->hasField('field_volume_number') && !$volume_reference->get('field_volume_number')->isEmpty()) {
+            $volume_number = $volume_reference->get('field_volume_number')->value;
+            $volume = 'vol. ' . $volume_number;
+            $variables['volume'] = $volume;
+        }
     }
 
     $issue = null;
-    if(!empty($variables['node']->field_issue_number->getValue())) {
+    if (!empty($variables['node']->field_issue_number) && !$variables['node']->field_issue_number->isEmpty()) {
         $issue_number = $variables['node']->field_issue_number->getValue();
-        $issue_number = $issue_number[0]['value'];
-        $issue = 'no. ' . $issue_number;
-        $variables['issue'] = $issue;
+        if (!empty($issue_number[0]['value'])) {
+            $issue_number = $issue_number[0]['value'];
+            $issue = 'no. ' . $issue_number;
+            $variables['issue'] = $issue;
+        }
     }
 
-    $variables['volume_issue'] = $volume . ', ' . $issue;
-
-    if(!empty($variables['node']->field_short_description->getValue())) {
-        $variables['label'] = $variables['node']->field_short_description->getValue();
-        $variables['label'] = $variables['label'][0]['value'];
+    // Only set volume_issue if both volume and issue are defined
+    if (isset($volume) && isset($issue)) {
+        $variables['volume_issue'] = $volume . ', ' . $issue;
+    } elseif (isset($volume)) {
+        $variables['volume_issue'] = $volume;
+    } elseif (isset($issue)) {
+        $variables['volume_issue'] = $issue;
     }
 
+    if (!empty($variables['node']->field_short_description) && !$variables['node']->field_short_description->isEmpty()) {
+        $label = $variables['node']->field_short_description->getValue();
+        if (!empty($label[0]['value'])) {
+            $variables['label'] = $label[0]['value'];
+        }
+    }
 }
+
+// function however_preprocess_field(&$variables) {
+//     // Target only the specific field
+//     if (isset($variables['element']['#field_name']) && 
+//         $variables['element']['#field_name'] == 'field_title_display') {
+      
+//       // Use hook_field_attach_view_alter to modify the rendered output
+//       foreach ($variables['items'] as $delta => &$item) {
+//         // Check for processed_text type
+//         if (isset($item['content']['#type']) && $item['content']['#type'] == 'processed_text') {
+//           // Add a post-render callback to strip p tags
+//           $item['content']['#post_render'][] = 'however_strip_p_tags';
+//         }
+//       }
+//     }
+//   }
+  
+//   /**
+//    * Post-render callback to strip paragraph tags.
+//    */
+//   function however_strip_p_tags($markup, $element) {
+//     // Strip opening and closing p tags
+//     return preg_replace('/^<p>(.*)<\/p>$/s', '$1', $markup);
+//   }

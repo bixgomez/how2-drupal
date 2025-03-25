@@ -43,50 +43,52 @@
  */
 #}
 
-  <header id="page-header" role="banner">
+<header id="page-header" role="banner">
+  <div class="layout-container">
+    {{ page.branding }}
+    {{ page.navigation }}
+    <div class="mobile-menu-icon">
+      <a alt="toggle mobile" class="inactive" href="#mobile-navigation">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% if page.content_top %}
+  <div class="layout-container content-top-container clearfix">
+    {{ page.content_top }}
+  </div>
+{% endif %}
+
+<main role="main" class="clearfix">
+  <div class="layout-container clearfix">
+    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+
+    <div class="layout-content">
+      {{ page.title_banner }}
+      {{ page.content }}
+      {{ page.content_bottom }}
+    </div>{# /.layout-content #}
+
+    {% if page.sidebar %}
+      <aside class="layout-sidebar" role="complementary">
+        {{ page.sidebar }}
+      </aside>
+    {% endif %}
+  </div>
+</main>
+
+{% if page.footer %}
+  <footer id="page-footer" role="contentinfo">
     <div class="layout-container">
-      {{ page.branding }}
-      {{ page.navigation }}
-      <div class="mobile-menu-icon">
-        <a alt="toggle mobile" class="inactive" href="#mobile-navigation">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-          </svg>
-        </a>
-      </div>
+      {{ page.footer }}
+      {{ page.footer_bottom }}
     </div>
-  </header>
-  {% if page.content_top %}
-    <div class="layout-container content-top-container clearfix">
-      {{ page.content_top }}
-    </div>
-  {% endif %}
-  <main role="main" class="clearfix">
-    <div class="layout-container clearfix">
-      <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
-
-      <div class="layout-content">
-        {{ page.title_banner }}
-        {{ page.content }}
-        {{ page.content_bottom }}
-      </div>{# /.layout-content #}
-
-      {% if page.sidebar %}
-        <aside class="layout-sidebar" role="complementary">
-          {{ page.sidebar }}
-        </aside>
-      {% endif %}
-    </div>
-  </main>
-
-  {% if page.footer %}
-    <footer id="page-footer" role="contentinfo">
-      <div class="layout-container">
-        {{ page.footer }}
-        {{ page.footer_bottom }}
-      </div>
-    </footer>
-  {% endif %}
+  </footer>
+{% endif %}
 
 {% if page.mobile_navigation %}
   <div id="mobile-navigation">
