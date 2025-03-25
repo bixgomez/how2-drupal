@@ -36,11 +36,19 @@ class EntityAutocompleteMatcher extends CoreEntityAutocompleteMatcher {
     // Only enhance node matches
     if ($target_type === 'node') {
       foreach ($matches as &$match) {
-        // Extract the entity ID from the match value
-        preg_match('/\((\d+)\)$/', $match['value'], $matches_id);
-        if (!empty($matches_id[1])) {
+        // Try different patterns to extract entity ID
+        $entity_id = NULL;
+        
+        // Standard pattern: "Label (123)"
+        if (preg_match('/\((\d+)\)$/', $match['value'], $matches_id)) {
           $entity_id = $matches_id[1];
-          
+        }
+        // Alternative: might be embedded differently
+        elseif (preg_match('/\[nid:(\d+)\]/', $match['value'], $matches_id)) {
+          $entity_id = $matches_id[1];
+        }
+        
+        if ($entity_id) {
           // Load the node to get additional info
           $node = $this->entityTypeManager->getStorage('node')->load($entity_id);
           if ($node) {
@@ -48,9 +56,21 @@ class EntityAutocompleteMatcher extends CoreEntityAutocompleteMatcher {
             $created = \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'short');
             
             // Update the match label to include additional info
-            // Keep the entity ID in parentheses at the end for selection
+            // Keep the original format for selection
             $original_label = preg_replace('/\s*\(\d+\)$/', '', $match['label']);
-            $match['label'] = $original_label . ' [' . $node->bundle() . ' - ' . $created . '] (' . $entity_id . ')';
+            $original_label = preg_replace('/\s*\[nid:\d+\]$/', '', $original_label);
+            
+            // Add our custom info while preserving the entity ID format
+            if (strpos($match['label'], '(') !== FALSE) {
+              $match['label'] = $original_label . ' [' . $node->bundle() . ' - ' . $created . '] (' . $entity_id . ')';
+            } 
+            elseif (strpos($match['label'], '[nid:') !== FALSE) {
+              $match['label'] = $original_label . ' [' . $node->bundle() . ' - ' . $created . '] [nid:' . $entity_id . ']';
+            }
+            else {
+              // Some other format, just append our info
+              $match['label'] = $match['label'] . ' [' . $node->bundle() . ' - ' . $created . ']';
+            }
           }
         }
       }
