@@ -1,0 +1,5 @@
+services:
+  however_customizations.autocomplete_matcher:
+    class: Drupal\however_customizations\EntityAutocompleteMatcher
+    decorates: entity.autocomplete_matcher
+    arguments: ['@plugin.manager.entity_reference_selection']
