@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Contains however_customizations.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function however_customizations_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.however_customizations':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Custom functionality for the However project.') . '</p>';
+      return $output;
+  }
+}

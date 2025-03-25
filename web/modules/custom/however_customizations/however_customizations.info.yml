@@ -1,0 +1,5 @@
+name: However Customizations
+type: module
+description: 'Custom functionality for the However project'
+package: Custom
+core_version_requirement: ^9 || ^10

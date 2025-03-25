@@ -1,0 +1,9 @@
+{
+    "name": "custom/however_customizations",
+    "description": "Custom functionality for the However project",
+    "type": "drupal-module",
+    "license": "proprietary",
+    "require": {
+        "drupal/core": "^9 || ^10"
+    }
+}
