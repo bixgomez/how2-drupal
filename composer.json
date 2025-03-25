@@ -39,7 +39,8 @@
         "drupal/classy": "^1.0",
         "drupal/color": "^1.0",
         "drupal/rdf": "^2.1",
-        "drupal/fakeobjects": "^2.0"
+        "drupal/fakeobjects": "^2.0",
+        "drupal/entity_reference_modal": "^1.0"
     },
     "require-dev": {
         "drupal/core-dev": "^10.2",

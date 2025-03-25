@@ -1,0 +1,28 @@
+uuid: 0a480f1e-01db-468f-abaa-995126540b2b
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+  module:
+    - ckeditor5
+format: full_html
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - heading
+      - bold
+      - italic
+  plugins:
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
+    media_media:
+      allow_view_mode_override: false
+image_upload:
+  status: false

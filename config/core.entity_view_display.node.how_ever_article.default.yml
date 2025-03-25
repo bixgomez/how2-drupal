@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.how_ever_article.field_person_bio
     - field.field.node.how_ever_article.field_section_reference
     - field.field.node.how_ever_article.field_tags
+    - field.field.node.how_ever_article.field_title_display
     - field.field.node.how_ever_article.field_volume_reference
     - field.field.node.how_ever_article.field_working_notes
     - node.type.how_ever_article
@@ -29,7 +30,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 8
+    weight: 9
     region: content
   field_issue_reference:
     type: entity_reference_label
@@ -37,7 +38,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   field_journal_page_images_media:
     type: entity_reference_entity_view
@@ -46,7 +47,7 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 6
+    weight: 7
     region: content
   field_person_bio:
     type: entity_reference_revisions_entity_view
@@ -55,7 +56,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   field_section_reference:
     type: entity_reference_label
@@ -63,7 +64,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
   field_tags:
     type: entity_reference_label
@@ -71,7 +72,14 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 1
+    weight: 2
+    region: content
+  field_title_display:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
     region: content
   field_volume_reference:
     type: entity_reference_label
@@ -79,20 +87,21 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   field_working_notes:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 7
+    weight: 8
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   body: true
+  footnotes_group: true
   search_api_excerpt: true

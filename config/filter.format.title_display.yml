@@ -1,0 +1,17 @@
+uuid: 6de424d9-08bf-4e64-b745-e322fc86c55e
+langcode: en
+status: true
+dependencies: {  }
+name: 'Title Display'
+format: title_display
+weight: 0
+filters:
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: true
+    weight: -10
+    settings:
+      allowed_html: '<br> <p> <strong> <em> <u> <s>'
+      filter_html_help: true
+      filter_html_nofollow: false

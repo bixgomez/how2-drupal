@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.how2_issue.field_masthead
     - field.field.node.how2_issue.field_person_bio
     - field.field.node.how2_issue.field_publication_date_display
+    - field.field.node.how2_issue.field_sections_how2
     - field.field.node.how2_issue.field_short_description
     - field.field.node.how2_issue.field_volume_reference
     - image.style.large
@@ -55,7 +56,7 @@ content:
       view_mode: teaser_card
       link: false
     third_party_settings: {  }
-    weight: 5
+    weight: 4
     region: content
   field_issue_number:
     type: number_integer
@@ -64,7 +65,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 4
+    weight: 3
     region: content
   field_masthead:
     type: text_default
@@ -90,6 +91,15 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  field_sections_how2:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser_card
+      link: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
   field_short_description:
     type: string
     label: above
@@ -100,5 +110,6 @@ content:
     region: content
 hidden:
   field_volume_reference: true
+  footnotes_group: true
   links: true
   search_api_excerpt: true

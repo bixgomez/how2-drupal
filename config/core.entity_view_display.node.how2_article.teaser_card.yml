@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.how2_article.field_person_bio
     - field.field.node.how2_article.field_section_reference
     - field.field.node.how2_article.field_tags
+    - field.field.node.how2_article.field_title_display
     - field.field.node.how2_article.field_volume_reference
     - field.field.node.how2_article.field_working_notes
     - node.type.how2_article
@@ -98,5 +99,7 @@ content:
 hidden:
   field_body_sections: true
   field_hide_the_node_title: true
+  field_title_display: true
   field_working_notes: true
+  footnotes_group: true
   search_api_excerpt: true

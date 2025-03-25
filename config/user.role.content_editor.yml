@@ -7,6 +7,7 @@ dependencies:
     - filter.format.footnote
     - filter.format.full_html
     - filter.format.no_filters
+    - filter.format.title_display
     - media.type.audio
     - media.type.document
     - media.type.image
@@ -192,6 +193,7 @@ permissions:
   - 'use text format footnote'
   - 'use text format full_html'
   - 'use text format no_filters'
+  - 'use text format title_display'
   - 'view all media revisions'
   - 'view all revisions'
   - 'view how2_article revisions'

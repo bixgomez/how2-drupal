@@ -1,0 +1,20 @@
+uuid: 2f26fdfe-5967-4469-a238-f6e28ebd6e8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.title_display
+  module:
+    - ckeditor5
+format: title_display
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - bold
+      - italic
+      - underline
+      - strikethrough
+  plugins: {  }
+image_upload:
+  status: false

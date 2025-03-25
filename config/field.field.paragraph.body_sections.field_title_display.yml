@@ -1,0 +1,24 @@
+uuid: 7a59d79c-294d-494c-86e6-bce6440ff93f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title_display
+    - filter.format.title_display
+    - paragraphs.paragraphs_type.body_sections
+  module:
+    - text
+id: paragraph.body_sections.field_title_display
+field_name: field_title_display
+entity_type: paragraph
+bundle: body_sections
+label: 'Title (Display)'
+description: 'This is the title that will be displayed on the item itself, and in search results.  It will not be used for searching and sorting, only for display.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - title_display
+field_type: text_long
