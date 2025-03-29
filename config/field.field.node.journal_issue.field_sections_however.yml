@@ -1,0 +1,31 @@
+uuid: 609f1420-8482-46b4-a1dd-94320105048e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sections_however
+    - node.type.how_ever_article
+    - node.type.how_ever_section
+    - node.type.journal_issue
+id: node.journal_issue.field_sections_however
+field_name: field_sections_however
+entity_type: node
+bundle: journal_issue
+label: 'Sections (However)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      how_ever_article: how_ever_article
+      how_ever_section: how_ever_section
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: how_ever_article
+field_type: entity_reference

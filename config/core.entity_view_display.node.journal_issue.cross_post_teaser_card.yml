@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.journal_issue.field_person_bio
     - field.field.node.journal_issue.field_publication_date_display
     - field.field.node.journal_issue.field_section
+    - field.field.node.journal_issue.field_sections_however
     - field.field.node.journal_issue.field_short_description
     - field.field.node.journal_issue.field_volume_reference
     - node.type.journal_issue
@@ -122,4 +123,6 @@ content:
     region: content
 hidden:
   field_journal_page_images_media: true
+  field_sections_however: true
+  footnotes_group: true
   search_api_excerpt: true

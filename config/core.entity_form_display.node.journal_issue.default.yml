@@ -13,11 +13,13 @@ dependencies:
     - field.field.node.journal_issue.field_person_bio
     - field.field.node.journal_issue.field_publication_date_display
     - field.field.node.journal_issue.field_section
+    - field.field.node.journal_issue.field_sections_however
     - field.field.node.journal_issue.field_short_description
     - field.field.node.journal_issue.field_volume_reference
     - image.style.thumbnail
     - node.type.journal_issue
   module:
+    - entity_reference_modal
     - field_group
     - image
     - inline_entity_form
@@ -73,13 +75,12 @@ third_party_settings:
         required_fields: true
     group_journal_files:
       children:
-        - field_journal_page_images
         - field_journal_page_images_media
         - field_journal_pdf
       label: 'Journal Files'
       region: content
       parent_name: ''
-      weight: 7
+      weight: 8
       format_type: fieldset
       format_settings:
         classes: ''
@@ -175,6 +176,24 @@ content:
       collapsible: true
       collapsed: false
       revision: false
+      removed_reference: optional
+    third_party_settings: {  }
+  field_sections_however:
+    type: entity_reference_modal
+    weight: 7
+    region: content
+    settings:
+      add_new_button_title: +
+      modal_form_mode: default
+      modal_width: 80%
+      modal_title: 'Add new'
+      duplicate: false
+      search: true
+      bootstrap: false
+      match_operator: CONTAINS
+      match_limit: '10'
+      size: '60'
+      placeholder: ''
     third_party_settings: {  }
   field_short_description:
     type: string_textfield

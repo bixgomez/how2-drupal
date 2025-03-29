@@ -1,21 +1,20 @@
-uuid: 6dc1b40d-1465-499e-bfa8-971a28f2d73a
+uuid: cbca6b6e-5a19-4319-9276-7e6621c8d166
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser_card
-    - field.field.node.how2_article.field_archive_url
-    - field.field.node.how2_article.field_body_sections
-    - field.field.node.how2_article.field_hide_the_node_title
-    - field.field.node.how2_article.field_issue_reference
-    - field.field.node.how2_article.field_media_type
-    - field.field.node.how2_article.field_person_bio
-    - field.field.node.how2_article.field_section_reference
-    - field.field.node.how2_article.field_tags
-    - field.field.node.how2_article.field_title_display
-    - field.field.node.how2_article.field_volume_reference
-    - field.field.node.how2_article.field_working_notes
-    - node.type.how2_article
+    - field.field.node.how_ever_article.body
+    - field.field.node.how_ever_article.field_body_sections
+    - field.field.node.how_ever_article.field_issue_reference
+    - field.field.node.how_ever_article.field_journal_page_images_media
+    - field.field.node.how_ever_article.field_person_bio
+    - field.field.node.how_ever_article.field_section_reference
+    - field.field.node.how_ever_article.field_tags
+    - field.field.node.how_ever_article.field_title_display
+    - field.field.node.how_ever_article.field_volume_reference
+    - field.field.node.how_ever_article.field_working_notes
+    - node.type.how_ever_article
   module:
     - layout_builder
     - text
@@ -24,9 +23,9 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-id: node.how2_article.teaser_card
+id: node.how_ever_article.teaser_card
 targetEntityType: node
-bundle: how2_article
+bundle: how_ever_article
 mode: teaser_card
 content:
   field_issue_reference:
@@ -35,7 +34,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
   field_section_reference:
     type: entity_reference_label
@@ -43,7 +42,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 3
+    weight: 2
     region: content
   field_title_display:
     type: text_default
@@ -58,13 +57,12 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
 hidden:
-  field_archive_url: true
+  body: true
   field_body_sections: true
-  field_hide_the_node_title: true
-  field_media_type: true
+  field_journal_page_images_media: true
   field_person_bio: true
   field_tags: true
   field_working_notes: true
