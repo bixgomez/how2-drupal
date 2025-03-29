@@ -36,41 +36,62 @@ class EntityAutocompleteMatcher extends CoreEntityAutocompleteMatcher {
     // Only enhance node matches
     if ($target_type === 'node') {
       foreach ($matches as &$match) {
-        // Try different patterns to extract entity ID
-        $entity_id = NULL;
-        
-        // Standard pattern: "Label (123)"
-        if (preg_match('/\((\d+)\)$/', $match['value'], $matches_id)) {
+        // Extract the entity ID from the match value
+        preg_match('/\((\d+)\)$/', $match['value'], $matches_id);
+        if (!empty($matches_id[1])) {
           $entity_id = $matches_id[1];
-        }
-        // Alternative: might be embedded differently
-        elseif (preg_match('/\[nid:(\d+)\]/', $match['value'], $matches_id)) {
-          $entity_id = $matches_id[1];
-        }
-        
-        if ($entity_id) {
+          
           // Load the node to get additional info
           $node = $this->entityTypeManager->getStorage('node')->load($entity_id);
           if ($node) {
-            // Add node type and created date to the label
-            $created = \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'short');
+            // Get the volume reference value
+            $volume_value = '';
+            if ($node->hasField('field_volume_reference') && !$node->get('field_volume_reference')->isEmpty()) {
+              $volume_field = $node->get('field_volume_reference');
+              // Check if this is an entity reference field
+              if ($volume_field->entity) {
+                $volume_value = $volume_field->entity->label();
+              } 
+              // Or a simple value field
+              else {
+                $volume_value = $volume_field->value;
+              }
+            }
+            
+            // Get the issue reference value
+            $issue_value = '';
+            if ($node->hasField('field_issue_reference') && !$node->get('field_issue_reference')->isEmpty()) {
+              $issue_field = $node->get('field_issue_reference');
+              // Check if this is an entity reference field
+              if ($issue_field->entity) {
+                $issue_value = $issue_field->entity->label();
+              } 
+              // Or a simple value field
+              else {
+                $issue_value = $issue_field->value;
+              }
+            }
+            
+            // Build the additional info string
+            $additional_info = $node->bundle();
+            
+            // Add volume and issue if available
+            if (!empty($volume_value) || !empty($issue_value)) {
+              $additional_info .= ' - ';
+              if (!empty($volume_value)) {
+                $additional_info .= 'Vol: ' . $volume_value;
+              }
+              if (!empty($volume_value) && !empty($issue_value)) {
+                $additional_info .= ', ';
+              }
+              if (!empty($issue_value)) {
+                $additional_info .= 'Issue: ' . $issue_value;
+              }
+            }
             
             // Update the match label to include additional info
-            // Keep the original format for selection
             $original_label = preg_replace('/\s*\(\d+\)$/', '', $match['label']);
-            $original_label = preg_replace('/\s*\[nid:\d+\]$/', '', $original_label);
-            
-            // Add our custom info while preserving the entity ID format
-            if (strpos($match['label'], '(') !== FALSE) {
-              $match['label'] = $original_label . ' [' . $node->bundle() . ' - ' . $created . '] (' . $entity_id . ')';
-            } 
-            elseif (strpos($match['label'], '[nid:') !== FALSE) {
-              $match['label'] = $original_label . ' [' . $node->bundle() . ' - ' . $created . '] [nid:' . $entity_id . ']';
-            }
-            else {
-              // Some other format, just append our info
-              $match['label'] = $match['label'] . ' [' . $node->bundle() . ' - ' . $created . ']';
-            }
+            $match['label'] = $original_label . ' [' . $additional_info . '] (' . $entity_id . ')';
           }
         }
       }

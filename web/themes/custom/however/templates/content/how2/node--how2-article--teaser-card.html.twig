@@ -75,47 +75,31 @@
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'node--issue',
+    'teaser-card',
+    'teaser-card__article',
   ]
 %}
+
 {{ attach_library('classy/node') }}
+
 <article{{ attributes.addClass(classes) }}>
-  <div class="issue-top-content node__meta">
-      {% if content.field_cover_thumbnail %}
-        <div class="image">
-          {{ content.field_cover_thumbnail }}
-        </div>
-      {% endif %}
-    <div class="issue-title-meta">
-        {{ title_prefix }}
-        <h1{{ title_attributes }}>
-          {{ label }}
-        </h1>
-        {{ title_suffix }}
-      <div class="issue-meta">
-        <div class="left">
-          <div class="journal-name"><a href="/how2">How2</a></div>
-          <div class="issue-volume-number">{{ volume_issue }}</div>
-          {{ content.field_publication_date_display }}
-          {% if content.field_masthead %}
-            <div class="masthead-link"><a href="#masthead" data-featherlight="#masthead">masthead</a></div>
-          {% endif %}
-          {{ content.field_archive_url }}
-        </div>
-      </div>
-    </div>
-  </div>
+
+  <a href="{{ url }}" rel="bookmark">{{ content.field_image_caption }}</a>
+
+  {{ title_prefix }}
+  {% if label and not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ title_suffix }}
 
   <div{{ content_attributes.addClass('node__content') }}>
-    {{ content.field_how_2_sections }}
-
-    {{ content.field_sections_how2 }}
+    {{ content.field_subtitle }}
+    {{ content.body }}
+    <hr>
+    {{ content.field_volume_reference }}
+    {{ content.field_issue_reference }}
   </div>
-
-  {% if content.field_masthead %}
-    <div id="masthead">
-      {{ content.field_masthead }}
-    </div>
-  {% endif %}
-
+  
 </article>

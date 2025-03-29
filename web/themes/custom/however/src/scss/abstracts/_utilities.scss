@@ -1,16 +1,3 @@
-.full-width, %full-width {
-  width: 100vw;
-  position: relative;
-  margin-left: -50vw !important;
-  left: 50%;
-}
-
-.star-pattern-background, %star-pattern-background {
-  @extend %full-width;
-  background: url('/themes/custom/ufl/images/star-pattern--yellow.png');
-  background-size: 132px;
-}
-
 .sr-only {
   position:absolute;
   left:-10000px;
@@ -26,6 +13,7 @@ a.more, %more {
   text-transform: uppercase;
   text-decoration: none;
   position: relative;
+
   &:after {
     content: '⇨';
     display: inline-block;
@@ -34,6 +22,7 @@ a.more, %more {
     position: absolute;
     top: -6px;
   }
+
   &:hover {
     text-decoration: underline;
   }

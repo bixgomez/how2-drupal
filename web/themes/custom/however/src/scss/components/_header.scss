@@ -1,27 +1,34 @@
 #page-header {
   background: #FDFDFD;
   border-bottom: 4px solid $grey-dark;
-  margin-bottom: 54px;
 }
 
 #page-header .layout-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
 }
 
-.region-navigation {
-  display: none;
-  @media all and (min-width: 960px) {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    .block-menu {
-      flex-grow: 1;
-    }
-    .block.views-exposed-form {
-      flex-shrink: 1;
-    }
+.region-branding {
+  background-color: pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 200px;
+}
+
+#block-however-branding {
+  display: contents;
+}
+
+a.site-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    display: block;
+    padding: 0;
+    margin: 0;
   }
 }

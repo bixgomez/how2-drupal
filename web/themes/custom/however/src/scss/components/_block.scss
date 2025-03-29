@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-#block-however-branding {
-  max-width: 200px;
-}
-
 #block-how2logo,
 #block-howeverlogo,
 #block-howeverlogo-2 {
@@ -59,6 +55,7 @@
 
 .block#about-site {
   text-align: justify;
+
   h2 {
     font-weight: 900;
     text-transform: uppercase;
@@ -67,6 +64,7 @@
     position: relative;
     font-size: 16px;
     margin: 6px 0;
+
     &:before, &:after {
       position: absolute;
       top: calc(50% - .5px);
@@ -74,13 +72,16 @@
       content: "";
       border: .625px solid $text-color;
     }
+
     &:before {
       left: 0;
     }
+    
     &:after {
       right: 0;
     }
   }
+  
   p {
     margin: 0;
   }
@@ -128,16 +129,19 @@
     max-width: 100%;
     margin: 0;
   }
+
   h2 {
     @extend %h1;
     text-align: center;
     margin-top: 0;
     margin-bottom: 12px;
   }
+  
   .field--name-field-content-embed {
     margin-left: -15px;
     margin-right: -15px;
   }
+  
   .field--name-field-content-embed .field__item.slick-slide {
     margin: 0 15px;
   }

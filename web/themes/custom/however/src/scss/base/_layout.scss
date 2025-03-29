@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+ 
+.layout-container, 
+%layout-container {
+  border-left: 1px dashed #333;
+  border-right: 1px dashed #333;
+  width: 92%;
+  margin: 0 auto;
+  max-width: 1100px;
+  transition: width .2s linear;
+
+  @media all and (min-width: 960px) {
+    width: 96%;
+  }
+}
+
+.view-content {
+  background-color: rgba(#000, .1);
+}
+
+.full-width, 
+%full-width {
+  width: 100vw;
+  position: relative;
+  margin-left: -50vw !important;
+  left: 50%;
+}
+
+.page-header,
+.page-content-area,
+.page-footer {
+  padding: 1rem 0;
+}

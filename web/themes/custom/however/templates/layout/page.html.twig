@@ -43,7 +43,7 @@
  */
 #}
 
-<header id="page-header" role="banner">
+<header id="page-header" class="page-header" role="banner">
   <div class="layout-container">
     {{ page.branding }}
     {{ page.navigation }}
@@ -57,32 +57,34 @@
   </div>
 </header>
 
-{% if page.content_top %}
-  <div class="layout-container content-top-container clearfix">
-    {{ page.content_top }}
-  </div>
-{% endif %}
+<section class="page-content-area">
+  {% if page.content_top %}
+    <div class="layout-container content-top-container clearfix">
+      {{ page.content_top }}
+    </div>
+  {% endif %}
 
-<main role="main" class="clearfix">
-  <div class="layout-container clearfix">
-    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+  <main role="main" class="clearfix">
+    <div class="layout-container clearfix">
+      <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
-    <div class="layout-content">
-      {{ page.title_banner }}
-      {{ page.content }}
-      {{ page.content_bottom }}
-    </div>{# /.layout-content #}
+      <div class="layout-content">
+        {{ page.title_banner }}
+        {{ page.content }}
+        {{ page.content_bottom }}
+      </div>{# /.layout-content #}
 
-    {% if page.sidebar %}
-      <aside class="layout-sidebar" role="complementary">
-        {{ page.sidebar }}
-      </aside>
-    {% endif %}
-  </div>
-</main>
+      {% if page.sidebar %}
+        <aside class="layout-sidebar" role="complementary">
+          {{ page.sidebar }}
+        </aside>
+      {% endif %}
+    </div>
+  </main>
+</section>
 
 {% if page.footer %}
-  <footer id="page-footer" role="contentinfo">
+  <footer id="page-footer" class="page-footer" role="contentinfo">
     <div class="layout-container">
       {{ page.footer }}
       {{ page.footer_bottom }}

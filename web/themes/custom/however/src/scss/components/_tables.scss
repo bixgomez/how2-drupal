@@ -1,0 +1,17 @@
+table {
+    background-color: lighten(black, 95%);
+
+    tr {
+        border-top: 1px solid #999;
+        border-left: 1px solid #999;
+
+        td, th {
+            border-right: 1px solid #999;
+            border-bottom: 1px solid #999;
+            padding: 2px 4px;
+            line-height: 1.4;
+            text-align: left;
+            vertical-align: top;
+        }
+    }
+}
