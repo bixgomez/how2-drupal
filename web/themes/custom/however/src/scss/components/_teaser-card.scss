@@ -1,64 +1,210 @@
-
 .teaser-card {
-    font-size: 1rem;
-    background-color: rgba(blue, .075);
-    padding: .75em;
-    border: 1px solid #515151;
+  font-size: 1rem;
+  background-color: rgba(blue, .075);
+  padding: .75em;
+  border: 1px solid #515151;
+  position: relative;
+
+  a {
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+    }
+  }
+  
+  > h2 {
+    margin: 0;
+    padding: 0 0 .75em;
+    border-bottom: 1px solid rgba(black, .25);
+
+    span {
+      font-size: 1.125em;
+    }
+  }
+
+  p {
+    margin: .5em 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  > .node__content {
+    padding: .75em 0 0;
+  }
+
+  &__section {
+    background-color: rgba(orange, .1);
+
+    &:hover {
+      background-color: rgba(orange, .2);
+    }
+  }
+
+  &__article {
+    background-color: rgba(purple, .1);
+
+    &:hover {
+      background-color: rgba(purple, .2);
+    }
+  }
+}
+
+.node--view-mode-teaser-card {
+  @extend %card;
+
+  > h2 {
+    font-size: 16px;
+    border-bottom: 1px solid #979797;
+    padding-bottom: 12px;
+    text-align: center;
+
+    a {
+      color: $text-color;
+    }
+  }
+
+  .field--name-field-image-caption {
+    text-align: center;
+    margin-top: -12px;
+  }
+
+  .field--name-field-subtitle {
+    text-align: center;
+  }
+}
+
+.node--view-mode-cross-post-teaser-card {
+  padding: 0;
+  text-align: center;
+
+  > .image-top {
     position: relative;
-    
+    min-height: 24px;
 
-    > h2 {
-        margin: 0;
-        padding: 0 0 .75em;
-        border-bottom: 1px solid rgba(black, .25);
-
-        > a {
-            &::after {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: transparent;
-            }
-        }
-
-        span {
-            font-size: 1.125em;
-        }
+    .content-type {
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #171717;
+      color: #ffffff;
+      padding: 2px 12px;
+      border-radius: 0 0 4px 0;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 1;
     }
 
-    p {
-        margin: .5em 0;
-
-        &:first-child {
-            margin-top: 0;
-        }
-
-        &:last-child {
-            margin-bottom: 0;
-        }
+    .volume-issue {
+      position: absolute;
+      right: 10px;
+      bottom: -24px;
+      background: #171717;
+      color: #ffffff;
+      line-height: 1;
+      font-size: 14px;
+      padding: 12px;
+      border-radius: 28px;
     }
 
-    > .node__content {
-        padding: .75em 0 0;
+    img {
+      display: inline-block;
     }
 
-    &__section {
-        background-color: rgba(orange, .1);
+    .field--name-field-caption {
+      display: none;
+    }
+  }
 
-        &:hover {
-            background-color: rgba(orange, .2);
-        }
+  > .content {
+    padding: 8px 24px 36px 24px;
+
+    .journal-logo img {
+      display: inline-block;
     }
 
-    &__article {
-        background-color: rgba(purple, .1);
-
-        &:hover {
-            background-color: rgba(purple, .2);
-        }
+    .pub-date {
+      font-size: 12px;
     }
+
+    h3 {
+      margin: 10px;
+      line-height: 1.125;
+    }
+
+    h3 a {
+      color: $text-color;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.teaser-card--issue {
+  padding: 0;
+
+  .field--name-field-cover-thumbnail {
+    text-align: center;
+    aspect-ratio: 1 / 1;
+
+    img {
+      object-fit: contain;
+      object-position: center center;
+      height: 100%;
+      margin-bottom: -4px;
+    }
+  }
+
+  .node__content {
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .field--name-field-issue-number {
+    display: inline-block;
+    background: #2E2E2E;
+    font-size: 48px;
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    position: absolute;
+    top: 245px;
+    left: 40%;
+    right: 40%;
+  }
+
+  .issue-meta {
+    justify-content: center;
+    font-weight: normal;
+  }
+
+  h2 {
+    font-size: 18px;
+    margin-bottom: 0;
+
+    a {
+      color: $text-color;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }

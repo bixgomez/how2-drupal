@@ -75,28 +75,36 @@
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'node--issue',
+    'teaser-card',
+    'teaser-card--issue',
 ]
 %}
+
 {{ attach_library('classy/node') }}
-<a href="{{ url }}" rel="bookmark">
-    <article{{ attributes.addClass(classes) }}>
-        {{ content.field_cover_thumbnail }}
-        <div{{ content_attributes.addClass('node__content') }}>
-            {{ content.field_issue_number }}
-            <div class="issue-meta">
-                <div class="left">
-                    <div class="issue-volume-number">{{ volume_issue }}</div>
-                    {{ content.field_publication_date_display }}
-                </div>
+
+<article{{ attributes.addClass(classes) }}>
+
+    {{ content.field_cover_thumbnail }}
+
+    <div{{ content_attributes.addClass('node__content') }}>
+        
+        {{ content.field_issue_number }}
+        
+        <div class="issue-meta">
+            <div class="left">
+                <div class="issue-volume-number">{{ volume_issue }}</div>
+                {{ content.field_publication_date_display }}
             </div>
-            {{ title_prefix }}
-            {% if label and not page %}
-                <h2{{ title_attributes }}>
-                    {{ label }}
-                </h2>
-            {% endif %}
-            {{ title_suffix }}
         </div>
-    </article>
-</a>
+
+        {{ title_prefix }}
+        {% if label %}
+            <h2{{ title_attributes }}>
+                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            </h2>
+        {% endif %}
+        {{ title_suffix }}
+
+    </div>
+
+</article>

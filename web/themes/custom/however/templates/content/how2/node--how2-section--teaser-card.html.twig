@@ -76,7 +76,7 @@
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
     'teaser-card',
-    'teaser-card__section',
+    'teaser-card--section',
   ]
 %}
 
@@ -84,10 +84,10 @@
 
 <article{{ attributes.addClass(classes) }}>
 
-  <a href="{{ url }}" rel="bookmark">{{ content.field_image_caption }}</a>
+  {{ content.field_image_caption }}
 
   {{ title_prefix }}
-  {% if label and not page %}
+  {% if label %}
     <h2{{ title_attributes }}>
       <a href="{{ url }}" rel="bookmark">{{ label }}</a>
     </h2>
