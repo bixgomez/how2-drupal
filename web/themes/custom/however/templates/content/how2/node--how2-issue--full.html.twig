@@ -67,6 +67,49 @@
  *
  */
 #}
+
+{% set sections_old_entities = [] %}
+{% for item in node.field_how_2_sections %}
+  {% if item.entity %}
+    {% set sections_old_entities = sections_old_entities|merge([item.entity]) %}
+  {% endif %}
+{% endfor %}
+
+{% set sections_new_entities = [] %}
+{% for item in node.field_sections_how2 %}
+  {% if item.entity %}
+    {% set sections_new_entities = sections_new_entities|merge([item.entity]) %}
+  {% endif %}
+{% endfor %}
+
+{% set person_bio_entities = [] %}
+{% if node.field_person_bio %}
+  {% for item in node.field_person_bio %}
+    {% if item.entity %}
+      {% set person_bio_entities = person_bio_entities|merge([item.entity]) %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% include "@issue/issue.html.twig" with {
+  journal: "How2",
+  volume: node.field_volume_reference.entity.field_volume_number.value,
+  issue: node.field_issue_number.entity.field_issue_number.value,
+  date: node.field_publication_date_display.value,
+  title: label,
+  title_prefix: title_prefix,
+  title_suffix: title_suffix,
+  archive_url: node.field_archive_url.uri,
+  featured_image: content.field_cover_thumbnail,
+  masthead: content.field_masthead.0['#text'],
+  short_description: node.field_short_description,
+  sections_old: sections_old_entities,
+  sections_new: sections_new_entities,
+  person_bio: person_bio_entities,
+  page_facsimiles: content.field_journal_page_images_media,
+  pdf_url: node.field_journal_pdf[0]|file_url,
+} %}
+
 {%
   set classes = [
     'node',
@@ -78,7 +121,14 @@
     'node--issue',
   ]
 %}
+
 {{ attach_library('classy/node') }}
+
+<div class="field-dumps">
+  <h3>Dumps</h3>
+  {{ dump(content) }}
+</div>
+
 <article{{ attributes.addClass(classes) }}>
   <div class="issue-top-content node__meta">
       {% if content.field_cover_thumbnail %}
@@ -111,11 +161,5 @@
 
     {{ content.field_sections_how2 }}
   </div>
-
-  {% if content.field_masthead %}
-    <div id="masthead">
-      {{ content.field_masthead }}
-    </div>
-  {% endif %}
 
 </article>

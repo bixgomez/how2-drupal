@@ -1,15 +1,21 @@
 name: HOW(ever) Theme
 description: HOW(ever) theme based on Classy.
-core_version_requirement: ^8 || ^9 || ^10
+core_version_requirement: ^10
 type: theme
 base theme: classy
 logo: assets/images/logo.png
+
 libraries:
   - however/global-styling
   - however/slick
   - however/featherlight
   - however/theme-scripts
   - however/jquery-scripts
+
+components:
+  namespaces:
+    issue: components/issue
+    section-teaser: components/section-teaser
 
 regions:
   branding: 'Branding'

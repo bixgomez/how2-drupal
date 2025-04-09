@@ -1,0 +1,21 @@
+<article>
+
+  {{ image_caption }}
+
+  {% if title %}
+    {{ title_prefix }}
+    <h2>
+      <a href="{{ url }}" rel="bookmark">{{ title }}</a>
+    </h2>
+    {{ title_suffix }}
+  {% endif %}
+
+  <div>
+    {{ subtitle }}
+    {{ body }}
+    <hr>
+    {{ volume_reference }}
+    {{ issue_reference }}
+  </div>
+
+</article>

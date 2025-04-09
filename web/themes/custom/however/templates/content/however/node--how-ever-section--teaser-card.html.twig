@@ -67,20 +67,20 @@
  *
  */
 #}
-{%
-  set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'teaser-card',
-    'teaser-card__section',
-  ]
-%}
 
-{{ attach_library('classy/node') }}
+{% include "@section-teaser/section-teaser.html.twig" with {
+  title: label,
+  url: url,
+  title_prefix: title_prefix,
+  title_suffix: title_suffix,
+  subtitle: content.field_subtitle,
+  image_caption: content.field_image_caption,
+  body: content.field_how_ever_piece,
+  volume_reference: content.field_volume_reference,
+  issue_reference: content.field_issue_reference,
+} %}
+
+{# {{ attach_library('classy/node') }}
 
 <article{{ attributes.addClass(classes) }}>
 
@@ -102,4 +102,4 @@
       {{ content.field_issue_reference }}
   </div>
 
-</article>
+</article> #}
