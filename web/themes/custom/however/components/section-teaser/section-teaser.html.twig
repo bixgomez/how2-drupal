@@ -1,21 +1,27 @@
-<article>
+<article{{ attributes.addClass(classes) }}>
 
-  {{ image_caption }}
+  <div class="teaser-card-image">
+    {{ image_caption }}
+  </div>
 
   {% if title %}
     {{ title_prefix }}
-    <h2>
+    <h2 class="teaser-card-title">
       <a href="{{ url }}" rel="bookmark">{{ title }}</a>
     </h2>
     {{ title_suffix }}
   {% endif %}
 
-  <div>
-    {{ subtitle }}
+  {% if subtitle %}
+    <h3 class="teaser-card-subtitle">{{ subtitle }}</h3>
+  {% endif %}
+
+  {% if body %}
     {{ body }}
-    <hr>
-    {{ volume_reference }}
-    {{ issue_reference }}
-  </div>
+  {% endif %}
+
+  <hr>
+  {{ volume_reference }}
+  {{ issue_reference }}
 
 </article>

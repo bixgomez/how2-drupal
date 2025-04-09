@@ -1,60 +1,56 @@
 <article class="issue">
-  
-  <div class="issue-element title">
-    {{ title_prefix }}
-    <h2>
-    {{title}}
-    </h2>
-    <h3>
-      {{ journal }} · vol {{ volume }}, no. {{ issue }} · ({{ date }})
-    </h3>
-    {{ title_suffix }}
+
+  <div class="issue-header">
+    <div class="issue-image">
+      {{ featured_image }}
+    </div>
+
+    <div class="issue-title">
+      {{ title_prefix }}
+      <h1>{{title}}</h1>
+      {{ title_suffix }}
+
+      <ul>
+        <li>{{ journal }}</li>
+        <li>vol {{ volume }}, no. {{ issue }}</li>
+        <li>{{ date }}</li>
+        {% if archive_url %}
+          <li>{{ link('View archival HTML', archive_url, {'class': ['archive-link']}) }}</li>
+        {% else %}
+          <li>No archive URL...?</li>
+        {% endif %}
+      </ul>
+
+      <ul>
+        <li><a class="tab active" href="#web-version">Web Version</a></li>
+        <li><a class="tab" href="#page-facsimiles">Page Facsimiles</a></li>
+        {% if pdf_url %}
+          <li><a target="_blank" href="{{ pdf_url }}">Download PDF</a></li>
+        {% endif %}
+      </ul>
+    </div>
   </div>
 
-  <div class="issue-element image">
-    {{ featured_image }}
-  </div>
-
-  <div class="issue-element archive-link">
-    {% if archive_url %}
-      {{ link('View archival HTML', archive_url, {'class': ['archive-link']}) }}
-    {% else %}
-      No archive URL...?
-    {% endif %}
-  </div>
-
-  <div class="issue-element issue-tabs">
-    <ul>
-      <li><a class="tab active" href="#web-version">Web Version</a></li>
-      <li><a class="tab" href="#page-facsimiles">Page Facsimiles</a></li>
-      {% if pdf_url %}
-        <li><a target="_blank" href="{{ pdf_url }}">Download PDF</a></li>
-      {% endif %}
-    </ul>
-  </div>
-
-  <div class="issue-element masthead">
+  <div class="masthead">
     {{ masthead|raw }}
   </div>
 
-  <div class="issue-element sections">
-    {% if sections_old %}
-      <div class="issue__sections-list">
-        {% for section in sections_old %}
-          {{ drupal_entity('node', section.id(), 'teaser_card') }}
-        {% endfor %}
-      </div>
-    {% endif %}
-    
-    {% if sections_new %}
-      <h3>Sections (new)</h3>
-      <div class="issue__sections-list">
-        {% for section in sections_new %}
-          {{ drupal_entity('node', section.id(), 'teaser_card') }}
-        {% endfor %}
-      </div>
-    {% endif %}
-  </div>
+  {% if sections_old %}
+    <div class="issue-sections">
+      {% for section in sections_old %}
+        {{ drupal_entity('node', section.id(), 'teaser_card') }}
+      {% endfor %}
+    </div>
+  {% endif %}
+  
+  {% if sections_new %}
+    <h3>Sections (new)</h3>
+    <div class="issue-sections">
+      {% for section in sections_new %}
+        {{ drupal_entity('node', section.id(), 'teaser_card') }}
+      {% endfor %}
+    </div>
+  {% endif %}
 
   <div class="issue-element person-bio">
     {% if person_bio %}

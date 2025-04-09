@@ -68,19 +68,6 @@
  */
 #}
 
-{% include "@section-teaser/section-teaser.html.twig" with {
-  title: label,
-  url: url,
-  title_prefix: title_prefix,
-  title_suffix: title_suffix,
-  subtitle: content.field_subtitle,
-  image_caption: content.field_image_caption,
-  body: content.body,
-  volume_reference: content.field_volume_reference,
-  issue_reference: content.field_issue_reference,
-} %}
-
-{# 
 {%
   set classes = [
     'node',
@@ -93,6 +80,21 @@
     'teaser-card--section',
   ]
 %}
+
+{% include "@section-teaser/section-teaser.html.twig" with {
+  title: label,
+  url: url,
+  title_prefix: title_prefix,
+  title_suffix: title_suffix,
+  subtitle: content.field_subtitle,
+  image_caption: content.field_image_caption,
+  body: content.body,
+  volume_reference: content.field_volume_reference,
+  issue_reference: content.field_issue_reference,
+  classes: classes,
+} %}
+
+{# 
 
 {{ attach_library('classy/node') }}
 
