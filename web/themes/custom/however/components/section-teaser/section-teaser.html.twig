@@ -7,7 +7,7 @@
   {% if title %}
     {{ title_prefix }}
     <h2 class="teaser-card-title">
-      <a href="{{ url }}" rel="bookmark">{{ title }}</a>
+      <span><a href="{{ url }}" rel="bookmark">{{ title }}</a></span>
     </h2>
     {{ title_suffix }}
   {% endif %}
@@ -16,12 +16,17 @@
     <h3 class="teaser-card-subtitle">{{ subtitle }}</h3>
   {% endif %}
 
+  {% if teaser_text %}
+    {{ teaser_text }}
+  {% endif %}
+
   {% if body %}
     {{ body }}
   {% endif %}
 
-  <hr>
-  {{ volume_reference }}
-  {{ issue_reference }}
+  <div class="info-box">
+    <div class="info-bit">{{ volume_reference }}</div>
+    <div class="info-bit">{{ issue_reference }}</div>
+  </div>
 
 </article>

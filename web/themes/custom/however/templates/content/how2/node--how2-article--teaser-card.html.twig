@@ -68,7 +68,7 @@
  */
 #}
 
-{%
+{# {%
   set classes = [
     'node',
     'node--type-' ~ node.bundle|clean_class,
@@ -76,6 +76,13 @@
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'teaser-card',
+    'teaser-card__article',
+  ]
+%} #}
+
+{%
+  set classes = [
     'teaser-card',
     'teaser-card__article',
   ]
@@ -88,10 +95,13 @@
   title_suffix: title_suffix,
   subtitle: content.field_subtitle,
   body: content.body,
-  volume_reference: content.field_volume_reference,
-  issue_reference: content.field_issue_reference,
+  teaser_text: content.field_teaser_text,
+  volume_reference: content.field_volume_reference.0['#title'],
+  issue_reference: content.field_issue_reference.0['#title'],
   classes: classes,
 } %}
+
+{# 
 
 {{ attach_library('classy/node') }}
 
@@ -111,4 +121,6 @@
     {{ content.field_issue_reference }}
   </div>
   
-</article>
+</article> 
+
+#}

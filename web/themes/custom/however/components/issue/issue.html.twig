@@ -31,11 +31,8 @@
     </div>
   </div>
 
-  <div class="masthead">
-    {{ masthead|raw }}
-  </div>
-
   {% if sections_old %}
+    <h3>Sections (old)</h3>
     <div class="issue-sections">
       {% for section in sections_old %}
         {{ drupal_entity('node', section.id(), 'teaser_card') }}
@@ -52,16 +49,27 @@
     </div>
   {% endif %}
 
-  <div class="issue-element person-bio">
-    {% if person_bio %}
+  {% if page_facsimiles %}
+    <h3>Page Facsimiles</h3>
+    <div class="issue-element tab-body" id="page-facsimiles">
+      {{ page_facsimiles }}
+    </div>
+  {% endif %}
+
+  {% if masthead %}
+    <h3>Masthead</h3>
+    <div class="masthead">
+      {{ masthead|raw }}
+    </div>
+  {% endif %}
+
+  {% if person_bio %}
+    <h3>Person Bio (?)</h3>
+    <div class="person-bio">
       {% for paragraph in person_bio %}
         {{ drupal_entity('paragraph', paragraph.id(), 'default') }}
       {% endfor %}
-    {% endif %}
-  </div>
-
-  <div class="issue-element tab-body" id="page-facsimiles">
-    {{ page_facsimiles }}
-  </div>
+    </div>
+  {% endif %}
   
 </article>
