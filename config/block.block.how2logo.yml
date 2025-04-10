@@ -12,7 +12,7 @@ dependencies:
 id: how2logo
 theme: however
 region: content_top
-weight: -8
+weight: -9
 provider: null
 plugin: 'block_content:72bbb6d6-a509-4d99-9400-99e89cad7dbc'
 settings:

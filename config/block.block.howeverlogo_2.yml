@@ -12,7 +12,7 @@ dependencies:
 id: howeverlogo_2
 theme: however
 region: content_top
-weight: -7
+weight: -8
 provider: null
 plugin: 'block_content:10470daf-468f-4176-9d8d-c8ba8b6b8034'
 settings:

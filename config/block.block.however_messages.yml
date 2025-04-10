@@ -10,8 +10,8 @@ _core:
   default_config_hash: KC12e0aosUnBBs5bd374JVcQjJaFNOSIHzu0dUGf22o
 id: however_messages
 theme: however
-region: content_top
-weight: -10
+region: admin_info
+weight: -11
 provider: null
 plugin: system_messages_block
 settings:

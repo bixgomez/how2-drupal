@@ -20,11 +20,9 @@ components:
 regions:
   branding: 'Branding'
   navigation: 'Main Navigation'
-  title_banner: 'Title Banner'
+  admin_info: 'Admin Info'
   content_top: 'Content Top'
   content: 'Content'
-  content_bottom: 'Content Bottom'
   sidebar: 'Sidebar'
   footer: 'Footer'
-  footer_bottom: 'Footer Bottom'
   mobile_navigation: 'Mobile Navigation'

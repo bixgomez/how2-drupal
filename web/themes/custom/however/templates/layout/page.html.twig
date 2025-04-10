@@ -57,6 +57,14 @@
   </div>
 </header>
 
+{% if page.admin_info|render|striptags|trim is not empty and page.admin_info|render|length > 50 %}
+  <section class="admin-info">
+    <div class="layout-container">
+      {{ page.admin_info }}
+    </div>
+  </section>
+{% endif %}
+
 <section class="page-content-area">
   {% if page.content_top %}
     <div class="layout-container content-top-container clearfix">

@@ -149,7 +149,7 @@
           text-decoration: none;
           padding-bottom: 3px;
           &.active, &:hover {
-            border-bottom: 3px solid $red;
+            border-bottom: 3px solid $c--red-dark;
           }
         }
       }

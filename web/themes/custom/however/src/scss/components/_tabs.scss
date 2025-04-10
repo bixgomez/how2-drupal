@@ -1,0 +1,36 @@
+.tabs.primary {
+  font-size: 1.125rem;
+  margin: 0;
+  display: flex;
+  gap: .25em;
+
+  li {
+
+    &.is-active {
+    }
+
+    a {
+      font-size: 1em;
+      font-weight: 600;
+      line-height: 1;
+      padding: .35em .5em;
+      background-color: rgba(#fff, .3);
+      border-radius: .25em;
+      transition: all .2s linear;
+
+      &:hover {
+        background-color: #fff;
+        color: red;
+      }
+
+      &.is-active {
+        background-color: rgba(#fff, .75);
+
+        &:hover {
+          background-color: #fff;
+          color: red;
+        }
+      }
+    }
+  }
+}

@@ -1,16 +1,15 @@
-#page-header {
-  background: #FDFDFD;
+.page-header {
+  background-color: $c--yellow-light;
   border-bottom: 4px solid $grey-dark;
 }
 
-#page-header .layout-container {
+.page-header .layout-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .region-branding {
-  background-color: pink;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,4 +30,10 @@ a.site-logo {
     padding: 0;
     margin: 0;
   }
+}
+
+.admin-info {
+  background-color: $c--yellow-dark;
+  border-bottom: 4px solid $grey-dark;
+  padding: .5rem 0;
 }

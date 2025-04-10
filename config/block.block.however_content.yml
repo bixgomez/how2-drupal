@@ -11,7 +11,7 @@ _core:
 id: however_content
 theme: however
 region: content
-weight: -7
+weight: -11
 provider: null
 plugin: system_main_block
 settings:

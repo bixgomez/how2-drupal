@@ -8,8 +8,8 @@ _core:
   default_config_hash: XRdb8LpbArVA6CpuuEZxzi50JIdjsJaCCZ5o3fH0Blk
 id: however_local_actions
 theme: however
-region: content
-weight: -8
+region: admin_info
+weight: -9
 provider: null
 plugin: local_actions_block
 settings:

@@ -8,8 +8,8 @@ _core:
   default_config_hash: Qf2BoIzd9py5AYXZj8fJzCYDyVk1-AWXcu-AqQeDZKA
 id: however_local_tasks
 theme: however
-region: content
-weight: -9
+region: admin_info
+weight: -10
 provider: null
 plugin: local_tasks_block
 settings:

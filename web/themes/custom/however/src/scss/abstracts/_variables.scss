@@ -2,11 +2,16 @@ $grey-dark: #333333;
 
 $text-color: $grey-dark;
 
-$yellow: #FBF9E5;
-$yellow-dark: #FBF2CE;
-$yellow-lightest: #FFFCF0;
+$c--yellow-light: #fffcf0;
 
-$red: #9E2727;
+$c--yellow: darken($c--yellow-light, 10%);
+$c--yellow: desaturate($c--yellow, 60%);
+
+$c--yellow-dark: darken($c--yellow, 10%);
+$c--yellow-dark: desaturate($c--yellow-dark, 15%);
+
+$c--red-dark: #9E2727;
+$c--red: red;
 
 $base-font: 'Urbanist', sans-serif;
 $serif-font: 'Libre Caslon Text', serif;
