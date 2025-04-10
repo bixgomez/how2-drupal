@@ -66,6 +66,7 @@ module:
   system: 0
   taxonomy: 0
   text: 0
+  token: 0
   toolbar: 0
   tour: 0
   twig_tweak: 0
@@ -73,6 +74,7 @@ module:
   upgrade_status: 0
   user: 0
   views_ui: 0
+  pathauto: 1
   views: 10
   paragraphs: 11
   standard: 1000
