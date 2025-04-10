@@ -69,21 +69,25 @@
 #}
 
 {% set sections_old_entities = [] %}
-{% for item in node.field_how_2_sections %}
-  {% if item.entity %}
-    {% set sections_old_entities = sections_old_entities|merge([item.entity]) %}
-  {% endif %}
-{% endfor %}
+{% if content.field_how_2_sections[0] is defined %}
+  {% for item in node.field_how_2_sections %}
+    {% if item.entity %}
+      {% set sections_old_entities = sections_old_entities|merge([item.entity]) %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
 {% set sections_new_entities = [] %}
-{% for item in node.field_sections_how2 %}
-  {% if item.entity %}
-    {% set sections_new_entities = sections_new_entities|merge([item.entity]) %}
-  {% endif %}
-{% endfor %}
+{% if content.field_sections_how2[0] is defined %}
+  {% for item in node.field_sections_how2 %}
+    {% if item.entity %}
+      {% set sections_new_entities = sections_new_entities|merge([item.entity]) %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
 {% set person_bio_entities = [] %}
-{% if node.field_person_bio %}
+{% if content.field_person_bio[0] is defined %}
   {% for item in node.field_person_bio %}
     {% if item.entity %}
       {% set person_bio_entities = person_bio_entities|merge([item.entity]) %}
