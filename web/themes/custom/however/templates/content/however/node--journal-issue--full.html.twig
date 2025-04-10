@@ -69,8 +69,8 @@
 #}
 
 {% set sections_old_entities = [] %}
-{% if content.field_how_2_sections[0] is defined %}
-  {% for item in node.field_how_2_sections %}
+{% if content.field_section[0] is defined %}
+  {% for item in node.field_section %}
     {% if item.entity %}
       {% set sections_old_entities = sections_old_entities|merge([item.entity]) %}
     {% endif %}
@@ -78,8 +78,8 @@
 {% endif %}
 
 {% set sections_new_entities = [] %}
-{% if content.field_sections_how2[0] is defined %}
-  {% for item in node.field_sections_how2 %}
+{% if content.field_sections_however[0] is defined %}
+  {% for item in node.field_sections_however %}
     {% if item.entity %}
       {% set sections_new_entities = sections_new_entities|merge([item.entity]) %}
     {% endif %}
