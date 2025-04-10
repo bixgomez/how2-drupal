@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.journal_issue.field_section
     - field.field.node.journal_issue.field_sections_however
     - field.field.node.journal_issue.field_short_description
+    - field.field.node.journal_issue.field_volume_number
     - field.field.node.journal_issue.field_volume_reference
     - image.style.thumbnail
     - node.type.journal_issue
@@ -46,6 +47,7 @@ third_party_settings:
     group_publication_info:
       children:
         - field_volume_reference
+        - field_volume_number
         - field_issue_number
       label: 'Publication Info'
       region: content
@@ -201,6 +203,13 @@ content:
     region: content
     settings:
       size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_volume_number:
+    type: number
+    weight: 14
+    region: content
+    settings:
       placeholder: ''
     third_party_settings: {  }
   field_volume_reference:

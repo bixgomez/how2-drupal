@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.how2_issue.field_publication_date_display
     - field.field.node.how2_issue.field_sections_how2
     - field.field.node.how2_issue.field_short_description
+    - field.field.node.how2_issue.field_volume_number
     - field.field.node.how2_issue.field_volume_reference
     - image.style.thumbnail
     - node.type.how2_issue
@@ -30,8 +31,8 @@ third_party_settings:
     group_publication_info:
       children:
         - field_volume_reference
+        - field_volume_number
         - field_issue_number
-        - field_publication_date_display
       label: 'Publication info'
       region: content
       parent_name: group_metadata
@@ -56,7 +57,7 @@ third_party_settings:
       label: Metadata
       region: content
       parent_name: ''
-      weight: 12
+      weight: 8
       format_type: fieldset
       format_settings:
         classes: ''
@@ -71,7 +72,7 @@ third_party_settings:
       label: People
       region: content
       parent_name: ''
-      weight: 13
+      weight: 9
       format_type: fieldset
       format_settings:
         classes: ''
@@ -84,15 +85,9 @@ targetEntityType: node
 bundle: how2_issue
 mode: default
 content:
-  created:
-    type: datetime_timestamp
-    weight: 3
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_archive_url:
     type: link_default
-    weight: 8
+    weight: 5
     region: content
     settings:
       placeholder_url: ''
@@ -100,7 +95,7 @@ content:
     third_party_settings: {  }
   field_cover_thumbnail:
     type: image_image
-    weight: 9
+    weight: 3
     region: content
     settings:
       progress_indicator: throbber
@@ -108,7 +103,7 @@ content:
     third_party_settings: {  }
   field_how_2_sections:
     type: inline_entity_form_complex
-    weight: 10
+    weight: 6
     region: content
     settings:
       form_mode: inline_article_form
@@ -126,7 +121,7 @@ content:
     third_party_settings: {  }
   field_issue_number:
     type: number
-    weight: 12
+    weight: 13
     region: content
     settings:
       placeholder: ''
@@ -154,7 +149,7 @@ content:
     third_party_settings: {  }
   field_publication_date_display:
     type: string_textfield
-    weight: 13
+    weight: 2
     region: content
     settings:
       size: 60
@@ -162,7 +157,7 @@ content:
     third_party_settings: {  }
   field_sections_how2:
     type: entity_reference_modal
-    weight: 11
+    weight: 7
     region: content
     settings:
       add_new_button_title: +
@@ -185,6 +180,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_volume_number:
+    type: number
+    weight: 12
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   field_volume_reference:
     type: options_select
     weight: 11
@@ -193,27 +195,13 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
-  promote:
-    type: boolean_checkbox
-    weight: 4
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 7
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  sticky:
-    type: boolean_checkbox
-    weight: 5
+    weight: 10
     region: content
     settings:
       display_label: true
@@ -228,7 +216,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 11
     region: content
     settings:
       match_operator: CONTAINS
@@ -236,4 +224,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  created: true
+  promote: true
+  sticky: true

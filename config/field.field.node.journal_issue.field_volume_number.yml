@@ -1,0 +1,23 @@
+uuid: 736b959b-ab3f-4d6c-8bd0-50d46df01650
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_volume_number
+    - node.type.journal_issue
+id: node.journal_issue.field_volume_number
+field_name: field_volume_number
+entity_type: node
+bundle: journal_issue
+label: 'Volume Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

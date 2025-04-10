@@ -12,8 +12,8 @@ dependencies:
     - field.field.node.how2_issue.field_publication_date_display
     - field.field.node.how2_issue.field_sections_how2
     - field.field.node.how2_issue.field_short_description
+    - field.field.node.how2_issue.field_volume_number
     - field.field.node.how2_issue.field_volume_reference
-    - image.style.large
     - node.type.how2_issue
   module:
     - entity_reference_revisions
@@ -43,7 +43,7 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: large
+      image_style: ''
       image_loading:
         attribute: lazy
     third_party_settings: {  }
@@ -56,7 +56,7 @@ content:
       view_mode: teaser_card
       link: false
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
   field_issue_number:
     type: number_integer
@@ -65,14 +65,14 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   field_masthead:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 7
+    weight: 8
     region: content
   field_person_bio:
     type: entity_reference_revisions_entity_view
@@ -81,7 +81,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 8
+    weight: 9
     region: content
   field_publication_date_display:
     type: string
@@ -98,7 +98,7 @@ content:
       view_mode: teaser_card
       link: false
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   field_short_description:
     type: string
@@ -106,7 +106,16 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 6
+    weight: 7
+    region: content
+  field_volume_number:
+    type: number_integer
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 3
     region: content
 hidden:
   field_volume_reference: true

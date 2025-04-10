@@ -1,0 +1,23 @@
+uuid: b0e90daf-9a1e-4f6e-995a-8f2a1a61b2b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_volume_number
+    - node.type.how2_issue
+id: node.how2_issue.field_volume_number
+field_name: field_volume_number
+entity_type: node
+bundle: how2_issue
+label: 'Volume Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

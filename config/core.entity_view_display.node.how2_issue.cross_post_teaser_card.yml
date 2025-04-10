@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.how2_issue.field_publication_date_display
     - field.field.node.how2_issue.field_sections_how2
     - field.field.node.how2_issue.field_short_description
+    - field.field.node.how2_issue.field_volume_number
     - field.field.node.how2_issue.field_volume_reference
     - image.style.large
     - node.type.how2_issue
@@ -71,6 +72,7 @@ hidden:
   field_masthead: true
   field_person_bio: true
   field_sections_how2: true
+  field_volume_number: true
   field_volume_reference: true
   footnotes_group: true
   links: true

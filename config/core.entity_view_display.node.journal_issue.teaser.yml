@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.journal_issue.field_section
     - field.field.node.journal_issue.field_sections_however
     - field.field.node.journal_issue.field_short_description
+    - field.field.node.journal_issue.field_volume_number
     - field.field.node.journal_issue.field_volume_reference
     - node.type.journal_issue
   module:
@@ -52,6 +53,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 2
+    region: content
+  field_volume_number:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   body: true
