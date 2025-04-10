@@ -10,13 +10,20 @@
 }
 
 .issue-title {
-  margin-top: 2rem;
+  margin-top: .25rem;
+}
+
+.issue-elements {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
 }
 
 .issue-element {
-  // border: 1px solid blue;
-  // margin: 0 0 .5rem;
-  // padding: 1rem;
+  border: 1px solid rgba(#000, .125);
+  background-color: rgba(#000, .01);
+  margin: 0;
+  padding: 1rem;
 }
 
 .issue-image {
@@ -24,7 +31,6 @@
   overflow: hidden;
   position: relative;
   width: 30%;
-  // aspect-ratio: 1/1.5;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;

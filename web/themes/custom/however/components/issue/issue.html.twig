@@ -1,6 +1,6 @@
-<article class="issue">
+<article class="issue issue-elements">
 
-  <div class="issue-header">
+  <div class="issue-element issue-header">
     <div class="issue-image">
       {{ featured_image }}
     </div>
@@ -15,15 +15,25 @@
         <li>vol {{ volume }}, no. {{ issue }}</li>
         <li>{{ date }}</li>
         {% if archive_url %}
-          <li>{{ link('View archival HTML', archive_url, {'class': ['archive-link']}) }}</li>
-        {% else %}
-          <li>No archive URL...?</li>
+          <li>
+            {{ link('View archival HTML', archive_url, {
+              'class': ['archive-link'], 
+              'target': '_blank',
+              'rel': 'noopener noreferrer'
+            }) }}
+          </li>
         {% endif %}
       </ul>
 
       <ul>
-        <li><a class="tab active" href="#web-version">Web Version</a></li>
+        {# <li><a class="tab active" href="#web-version">Web Version</a></li> #}
         <li><a class="tab" href="#page-facsimiles">Page Facsimiles</a></li>
+        {% if masthead %}
+          <li><a href="#masthead">Masthead</a></li>
+        {% endif %}
+        {% if person_bio %}
+          <li><a href="#people">Bios</a></li>
+        {% endif %}
         {% if pdf_url %}
           <li><a target="_blank" href="{{ pdf_url }}">Download PDF</a></li>
         {% endif %}
@@ -32,43 +42,76 @@
   </div>
 
   {% if sections_old %}
-    <h3>Sections (old)</h3>
-    <div class="issue-sections">
-      {% for section in sections_old %}
-        {{ drupal_entity('node', section.id(), 'teaser_card') }}
-      {% endfor %}
+    <div class="issue-element sections">
+      <h3>Sections (old)</h3>
+      <p>
+        These are the "old" sections -- they only allow for sections to be added to them.  
+        We need to replace all of these with the "new" sections below, which allow not only for
+        sections, but also for articles to be added directly.
+      </p>
+      <div class="issue-sections">
+        {% for section in sections_old %}
+          {{ drupal_entity('node', section.id(), 'teaser_card') }}
+        {% endfor %}
+      </div>
     </div>
   {% endif %}
   
   {% if sections_new %}
-    <h3>Sections (new)</h3>
-    <div class="issue-sections">
-      {% for section in sections_new %}
-        {{ drupal_entity('node', section.id(), 'teaser_card') }}
-      {% endfor %}
-    </div>
-  {% endif %}
-
-  {% if page_facsimiles %}
-    <h3>Page Facsimiles</h3>
-    <div class="issue-element tab-body" id="page-facsimiles">
-      {{ page_facsimiles }}
+    <div class="issue-element sections">
+      <h3>Sections (new)</h3>
+      <p>
+        These are the "new" sections -- they allow not only for sections, but also for articles 
+        to be added directly. Alas, the only "easy" way to migrate the sections to this new
+        area is to do it manually.  We can start this process soon.
+      </p>
+      <div class="issue-sections">
+        {% for section in sections_new %}
+          {{ drupal_entity('node', section.id(), 'teaser_card') }}
+        {% endfor %}
+      </div>
     </div>
   {% endif %}
 
   {% if masthead %}
-    <h3>Masthead</h3>
-    <div class="masthead">
-      {{ masthead|raw }}
+    <div class="issue-element issue-masthead" id="masthead">
+      <h3>Masthead</h3>
+      <p>
+        In the current version of the site, the masthead is displayed in a modal popup window.
+        Do we want to continue to do this?  It seems like important information we might want
+        to always display on the page somewhere.  In a sidebar, perhaps?
+      </p>
+      <div class="masthead">
+        {{ masthead|raw }}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if page_facsimiles %}
+    <div class="issue-element page-facsimiles" id="page-facsimiles">
+      <h3>Page Facsimiles</h3>
+      <p>
+        Might be good to add a bit of instruction here, like "click on each page to reveal 
+        a large version" or something.
+      </p>
+      <div class="issue-element tab-body">
+        {{ page_facsimiles }}
+      </div>
     </div>
   {% endif %}
 
   {% if person_bio %}
-    <h3>Person Bio (?)</h3>
-    <div class="person-bio">
-      {% for paragraph in person_bio %}
-        {{ drupal_entity('paragraph', paragraph.id(), 'default') }}
-      {% endfor %}
+    <div class="issue-element people" id="people">
+      <h3>Person Bio (?)</h3>
+        <p>
+          I noticed that each issue has a field that holds all the people associated with it,
+          along with their bios.  Do we want to use this for anything, or display it anywhere?
+        </p>
+      <div class="person-bio">
+        {% for paragraph in person_bio %}
+          {{ drupal_entity('paragraph', paragraph.id(), 'default') }}
+        {% endfor %}
+      </div>
     </div>
   {% endif %}
   
