@@ -35,7 +35,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_image_caption:
     type: entity_reference_revisions_entity_view
@@ -52,7 +52,15 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 3
+    weight: 4
+    region: content
+  field_subtitle:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
     region: content
   field_volume_reference:
     type: entity_reference_label
@@ -60,14 +68,13 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
 hidden:
   field_archive_url: true
   field_how2_piece: true
   field_links_section_title: true
   field_person_bio: true
-  field_subtitle: true
   field_tags: true
   field_working_notes: true
   footnotes_group: true
