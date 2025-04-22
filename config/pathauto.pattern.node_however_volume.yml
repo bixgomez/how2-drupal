@@ -1,0 +1,22 @@
+uuid: f0aa59c7-60fd-4418-95a7-e71c1cbf5bf0
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_however_volume
+label: 'However Volume'
+type: 'canonical_entities:node'
+pattern: '/however/vol-[node:field_volume_number]'
+selection_criteria:
+  eea6c0f4-102d-454b-b20a-16e5a8d281b0:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: eea6c0f4-102d-454b-b20a-16e5a8d281b0
+    context_mapping:
+      node: node
+    bundles:
+      however_volume: however_volume
+selection_logic: and
+weight: 0
+relationships: {  }

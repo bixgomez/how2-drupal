@@ -1,0 +1,22 @@
+uuid: 29d2a75b-d9aa-4212-9986-a201af23670f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_how2_section
+label: 'How2 Section'
+type: 'canonical_entities:node'
+pattern: '/how2/vol-[node:field_volume_reference:entity:field_volume_number]/no-[node:field_issue_reference:entity:field_issue_number]/[node:title]'
+selection_criteria:
+  f32b7c82-a7c5-4ee5-b0ef-9132ce68a068:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: f32b7c82-a7c5-4ee5-b0ef-9132ce68a068
+    context_mapping:
+      node: node
+    bundles:
+      how2_section: how2_section
+selection_logic: and
+weight: 0
+relationships: {  }

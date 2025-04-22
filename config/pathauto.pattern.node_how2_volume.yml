@@ -1,0 +1,22 @@
+uuid: 84bfc9d7-60d2-4aee-99d2-2d8271735de4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_how2_volume
+label: 'How2 Volume'
+type: 'canonical_entities:node'
+pattern: '/how2/vol-[node:field_volume_number]'
+selection_criteria:
+  9658c840-eb4b-4ffc-b45c-9ddebb2e2d89:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 9658c840-eb4b-4ffc-b45c-9ddebb2e2d89
+    context_mapping:
+      node: node
+    bundles:
+      how2_volume: how2_volume
+selection_logic: and
+weight: 0
+relationships: {  }

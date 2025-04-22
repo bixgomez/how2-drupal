@@ -1,0 +1,22 @@
+uuid: 44a0e24c-2eb6-404a-bb79-b331718e8242
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_how2_issue
+label: 'How2 Issue'
+type: 'canonical_entities:node'
+pattern: '/how2/vol-[node:field_volume_number]/no-[node:field_issue_number]'
+selection_criteria:
+  f4875791-4201-4823-97ba-7b3356babaec:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: f4875791-4201-4823-97ba-7b3356babaec
+    context_mapping:
+      node: node
+    bundles:
+      how2_issue: how2_issue
+selection_logic: and
+weight: 0
+relationships: {  }

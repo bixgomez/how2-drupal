@@ -1,0 +1,22 @@
+uuid: e6439e2d-0622-410a-ae3f-1c13197120ea
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_how_ever_section
+label: 'However Section'
+type: 'canonical_entities:node'
+pattern: '/however/vol-[node:field_volume_reference:entity:field_volume_number]/no-[node:field_issue_reference:entity:field_issue_number]/[node:title]'
+selection_criteria:
+  74d11100-2d15-425c-8dc3-0f6fb771892f:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 74d11100-2d15-425c-8dc3-0f6fb771892f
+    context_mapping:
+      node: node
+    bundles:
+      how_ever_section: how_ever_section
+selection_logic: and
+weight: 0
+relationships: {  }

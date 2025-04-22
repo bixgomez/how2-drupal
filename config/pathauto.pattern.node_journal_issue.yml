@@ -1,0 +1,22 @@
+uuid: bfa504d8-883d-4f21-85d2-9c6ff1aebe14
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_journal_issue
+label: 'Journal Issue (However Issue)'
+type: 'canonical_entities:node'
+pattern: '/however/vol-[node:field_volume_number]/no-[node:field_issue_number]'
+selection_criteria:
+  32e772ec-5c2f-4fd8-80b3-810382ed9b21:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 32e772ec-5c2f-4fd8-80b3-810382ed9b21
+    context_mapping:
+      node: node
+    bundles:
+      journal_issue: journal_issue
+selection_logic: and
+weight: 0
+relationships: {  }
