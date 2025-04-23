@@ -13,7 +13,7 @@ class HoweverCustomizationsCommands extends DrushCommands {
   /**
    * Updates volume numbers for how2_issue and journal_issue nodes.
    *
-   * @command however:update-volume-numbers
+   * @command however-customizations:update-volume-numbers
    * @aliases how-vol
    */
   public function updateVolumeNumbers() {
