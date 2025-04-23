@@ -1,5 +1,0 @@
-services:
-  however_customizations.commands:
-    class: \Drupal\however_customizations\Commands\HoweverCustomizationsCommands
-    tags:
-      - { name: drush.command }

@@ -5,5 +5,11 @@
     "license": "proprietary",
     "require": {
         "drupal/core": "^9 || ^10"
+    },
+    "autoload": {
+        "psr-4": {
+        "Drupal\\however_customizations\\": "src"
+        }
     }
 }
+  

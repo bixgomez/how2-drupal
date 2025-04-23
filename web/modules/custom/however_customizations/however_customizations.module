@@ -41,41 +41,27 @@ function however_customizations_entity_presave(Drupal\Core\Entity\EntityInterfac
       'number_field' => 'field_volume_number',
     ],
   ];
-  
-  function however_customizations_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
-    // Define content types and their field mappings
-    $content_mappings = [
-      'how2_issue' => [
-        'reference_field' => 'field_volume_reference',
-        'number_field' => 'field_volume_number',
-      ],
-      'journal_issue' => [
-        'reference_field' => 'field_volume_reference',
-        'number_field' => 'field_volume_number',
-      ],
-    ];
     
-    // Check if this is one of our target content types
-    if ($entity->getEntityTypeId() === 'node' && isset($content_mappings[$entity->bundle()])) {
-      $mapping = $content_mappings[$entity->bundle()];
+  // Check if this is one of our target content types
+  if ($entity->getEntityTypeId() === 'node' && isset($content_mappings[$entity->bundle()])) {
+    $mapping = $content_mappings[$entity->bundle()];
+    
+    // Check if reference field has a value
+    if (!$entity->{$mapping['reference_field']}->isEmpty()) {
       
-      // Check if reference field has a value
-      if (!$entity->{$mapping['reference_field']}->isEmpty()) {
-        
-        // Get the referenced volume entity
-        $volume_reference = $entity->{$mapping['reference_field']}->entity;
-        
-        if ($volume_reference) {
-          // Assuming the volume entity has a field called 'field_volume_number'
-          if ($volume_reference->hasField('field_volume_number') && 
-              !$volume_reference->field_volume_number->isEmpty()) {
-            
-            // Get the volume number from the referenced entity
-            $volume_number = $volume_reference->field_volume_number->value;
-            
-            // Set the volume number on the current entity
-            $entity->{$mapping['number_field']}->value = $volume_number;
-          }
+      // Get the referenced volume entity
+      $volume_reference = $entity->{$mapping['reference_field']}->entity;
+      
+      if ($volume_reference) {
+        // Assuming the volume entity has a field called 'field_volume_number'
+        if ($volume_reference->hasField('field_volume_number') && 
+            !$volume_reference->field_volume_number->isEmpty()) {
+          
+          // Get the volume number from the referenced entity
+          $volume_number = $volume_reference->field_volume_number->value;
+          
+          // Set the volume number on the current entity
+          $entity->{$mapping['number_field']}->value = $volume_number;
         }
       }
     }

@@ -22,9 +22,12 @@ class EntityAutocompleteMatcher extends CoreEntityAutocompleteMatcher {
   /**
    * {@inheritdoc}
    */
-  public function __construct(SelectionPluginManagerInterface $selection_manager) {
-    parent::__construct($selection_manager);
-    $this->entityTypeManager = \Drupal::entityTypeManager();
+  public function __construct(
+    EntityTypeManagerInterface $entity_type_manager,
+    SelectionPluginManagerInterface $selection_manager
+  ) {
+    // Pass both arguments to the parent.
+    parent::__construct($entity_type_manager, $selection_manager);
   }
 
   /**
