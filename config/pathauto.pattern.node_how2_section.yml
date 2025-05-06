@@ -7,7 +7,7 @@ dependencies:
 id: node_how2_section
 label: 'How2 Section'
 type: 'canonical_entities:node'
-pattern: '/how2/vol-[node:field_volume_reference:entity:field_volume_number]/no-[node:field_issue_reference:entity:field_issue_number]/[node:title]'
+pattern: '/how2/v[node:field_volume_reference:entity:field_volume_number]/n[node:field_issue_reference:entity:field_issue_number]/[node:title]'
 selection_criteria:
   f32b7c82-a7c5-4ee5-b0ef-9132ce68a068:
     id: 'entity_bundle:node'

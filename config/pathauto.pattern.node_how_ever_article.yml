@@ -7,7 +7,7 @@ dependencies:
 id: node_how_ever_article
 label: 'However Article'
 type: 'canonical_entities:node'
-pattern: '/however/vol-[node:field_volume_reference:entity:field_volume_number]/no-[node:field_issue_reference:entity:field_issue_number]/[node:field_section_reference:entity:title]/[node:title]'
+pattern: '/however/v[node:field_volume_reference:entity:field_volume_number]/n[node:field_issue_reference:entity:field_issue_number]/[node:field_section_reference:entity:title]/[node:title]'
 selection_criteria:
   487513f1-8b6f-4337-a61d-6e3b568caf4c:
     id: 'entity_bundle:node'

@@ -7,7 +7,7 @@ dependencies:
 id: node_how_ever_section
 label: 'However Section'
 type: 'canonical_entities:node'
-pattern: '/however/vol-[node:field_volume_reference:entity:field_volume_number]/no-[node:field_issue_reference:entity:field_issue_number]/[node:title]'
+pattern: '/however/v[node:field_volume_reference:entity:field_volume_number]/n[node:field_issue_reference:entity:field_issue_number]/[node:title]'
 selection_criteria:
   74d11100-2d15-425c-8dc3-0f6fb771892f:
     id: 'entity_bundle:node'

@@ -7,7 +7,7 @@ dependencies:
 id: node_how2_volume
 label: 'How2 Volume'
 type: 'canonical_entities:node'
-pattern: '/how2/vol-[node:field_volume_number]'
+pattern: '/how2/v[node:field_volume_number]'
 selection_criteria:
   9658c840-eb4b-4ffc-b45c-9ddebb2e2d89:
     id: 'entity_bundle:node'

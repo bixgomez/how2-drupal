@@ -7,7 +7,7 @@ dependencies:
 id: node_however_volume
 label: 'However Volume'
 type: 'canonical_entities:node'
-pattern: '/however/vol-[node:field_volume_number]'
+pattern: '/however/v[node:field_volume_number]'
 selection_criteria:
   eea6c0f4-102d-454b-b20a-16e5a8d281b0:
     id: 'entity_bundle:node'

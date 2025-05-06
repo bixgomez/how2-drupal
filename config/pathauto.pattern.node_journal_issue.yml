@@ -7,7 +7,7 @@ dependencies:
 id: node_journal_issue
 label: 'Journal Issue (However Issue)'
 type: 'canonical_entities:node'
-pattern: '/however/vol-[node:field_volume_number]/no-[node:field_issue_number]'
+pattern: '/however/v[node:field_volume_number]/n[node:field_issue_number]'
 selection_criteria:
   32e772ec-5c2f-4fd8-80b3-810382ed9b21:
     id: 'entity_bundle:node'
