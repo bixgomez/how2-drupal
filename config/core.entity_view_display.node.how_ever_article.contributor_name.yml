@@ -1,23 +1,23 @@
-uuid: 997a3374-aae6-409f-85bb-e72fc942f44c
+uuid: 5ab4c4df-1ba1-4fc2-8735-6fb20c9af236
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.node.contributor_name
-    - field.field.node.how2_article.body
-    - field.field.node.how2_article.field_archive_url
-    - field.field.node.how2_article.field_body_sections
-    - field.field.node.how2_article.field_hide_the_node_title
-    - field.field.node.how2_article.field_issue_reference
-    - field.field.node.how2_article.field_journal_page_images_media
-    - field.field.node.how2_article.field_media_type
-    - field.field.node.how2_article.field_person_bio
-    - field.field.node.how2_article.field_section_reference
-    - field.field.node.how2_article.field_tags
-    - field.field.node.how2_article.field_title_display
-    - field.field.node.how2_article.field_volume_reference
-    - field.field.node.how2_article.field_working_notes
-    - node.type.how2_article
+    - field.field.node.how_ever_article.body
+    - field.field.node.how_ever_article.field_archive_url
+    - field.field.node.how_ever_article.field_body_sections
+    - field.field.node.how_ever_article.field_hide_the_node_title
+    - field.field.node.how_ever_article.field_issue_reference
+    - field.field.node.how_ever_article.field_journal_page_images_media
+    - field.field.node.how_ever_article.field_media_type
+    - field.field.node.how_ever_article.field_person_bio
+    - field.field.node.how_ever_article.field_section_reference
+    - field.field.node.how_ever_article.field_tags
+    - field.field.node.how_ever_article.field_title_display
+    - field.field.node.how_ever_article.field_volume_reference
+    - field.field.node.how_ever_article.field_working_notes
+    - node.type.how_ever_article
   module:
     - entity_reference_revisions
     - layout_builder
@@ -26,9 +26,9 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-id: node.how2_article.contributor_name
+id: node.how_ever_article.contributor_name
 targetEntityType: node
-bundle: how2_article
+bundle: how_ever_article
 mode: contributor_name
 content:
   field_person_bio:

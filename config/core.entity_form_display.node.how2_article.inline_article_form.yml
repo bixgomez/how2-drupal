@@ -4,10 +4,12 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.node.inline_article_form
+    - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
     - field.field.node.how2_article.field_body_sections
     - field.field.node.how2_article.field_hide_the_node_title
     - field.field.node.how2_article.field_issue_reference
+    - field.field.node.how2_article.field_journal_page_images_media
     - field.field.node.how2_article.field_media_type
     - field.field.node.how2_article.field_person_bio
     - field.field.node.how2_article.field_section_reference
@@ -54,10 +56,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  body: true
   created: true
   field_body_sections: true
   field_hide_the_node_title: true
   field_issue_reference: true
+  field_journal_page_images_media: true
   field_media_type: true
   field_section_reference: true
   field_tags: true

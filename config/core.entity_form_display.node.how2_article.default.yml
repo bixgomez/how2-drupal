@@ -3,10 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
     - field.field.node.how2_article.field_body_sections
     - field.field.node.how2_article.field_hide_the_node_title
     - field.field.node.how2_article.field_issue_reference
+    - field.field.node.how2_article.field_journal_page_images_media
     - field.field.node.how2_article.field_media_type
     - field.field.node.how2_article.field_person_bio
     - field.field.node.how2_article.field_section_reference
@@ -16,8 +18,10 @@ dependencies:
     - field.field.node.how2_article.field_working_notes
     - node.type.how2_article
   module:
+    - entity_reference_modal
     - field_group
     - link
+    - media_library
     - paragraphs
     - path
     - text
@@ -33,7 +37,7 @@ third_party_settings:
       label: Metadata
       region: content
       parent_name: ''
-      weight: 9
+      weight: 12
       format_type: fieldset
       format_settings:
         classes: ''
@@ -46,9 +50,25 @@ targetEntityType: node
 bundle: how2_article
 mode: default
 content:
+  body:
+    type: text_textarea_with_summary
+    weight: 13
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_archive_url:
     type: link_default
-    weight: 4
+    weight: 6
     region: content
     settings:
       placeholder_url: ''
@@ -85,6 +105,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_journal_page_images_media:
+    type: media_library_widget
+    weight: 11
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
   field_media_type:
     type: options_select
     weight: 31
@@ -93,7 +120,7 @@ content:
     third_party_settings: {  }
   field_person_bio:
     type: paragraphs
-    weight: 6
+    weight: 10
     region: content
     settings:
       title: Paragraph
@@ -141,7 +168,7 @@ content:
     third_party_settings: {  }
   field_working_notes:
     type: text_textarea
-    weight: 7
+    weight: 9
     region: content
     settings:
       rows: 5
@@ -155,7 +182,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 3
+    weight: 7
     region: content
     settings:
       display_label: true
@@ -168,8 +195,23 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  uid:
+    type: entity_reference_modal
+    weight: 3
+    region: content
+    settings:
+      add_new_button_title: +
+      modal_form_mode: default
+      modal_width: 80%
+      modal_title: 'Add new'
+      duplicate: false
+      search: true
+      bootstrap: false
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
-  created: true
   promote: true
   sticky: true
-  uid: true

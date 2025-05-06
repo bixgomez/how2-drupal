@@ -8,7 +8,7 @@ third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
-name: 'How2 article'
+name: 'How2 Article'
 type: how2_article
 description: null
 help: null

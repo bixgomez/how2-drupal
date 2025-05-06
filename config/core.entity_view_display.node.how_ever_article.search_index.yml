@@ -1,9 +1,9 @@
-uuid: cbca6b6e-5a19-4319-9276-7e6621c8d166
+uuid: 8ac61458-9089-4b48-ab6e-360b5bc0befe
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser_card
+    - core.entity_view_mode.node.search_index
     - field.field.node.how_ever_article.body
     - field.field.node.how_ever_article.field_archive_url
     - field.field.node.how_ever_article.field_body_sections
@@ -19,59 +19,49 @@ dependencies:
     - field.field.node.how_ever_article.field_working_notes
     - node.type.how_ever_article
   module:
-    - layout_builder
-    - text
+    - link
     - user
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
-id: node.how_ever_article.teaser_card
+id: node.how_ever_article.search_index
 targetEntityType: node
 bundle: how_ever_article
-mode: teaser_card
+mode: search_index
 content:
-  field_issue_reference:
+  field_archive_url:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_media_type:
     type: entity_reference_label
-    label: hidden
+    label: above
     settings:
       link: true
     third_party_settings: {  }
-    weight: 1
+    weight: 105
     region: content
-  field_section_reference:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_title_display:
-    type: text_default
-    label: hidden
+  links:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
-    region: content
-  field_volume_reference:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 3
+    weight: 100
     region: content
 hidden:
   body: true
-  field_archive_url: true
   field_body_sections: true
   field_hide_the_node_title: true
+  field_issue_reference: true
   field_journal_page_images_media: true
-  field_media_type: true
   field_person_bio: true
+  field_section_reference: true
   field_tags: true
+  field_title_display: true
+  field_volume_reference: true
   field_working_notes: true
   footnotes_group: true
-  links: true
   search_api_excerpt: true
