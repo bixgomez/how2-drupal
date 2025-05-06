@@ -35,13 +35,16 @@ third_party_settings:
         - field_issue_number
       label: 'Publication info'
       region: content
-      parent_name: group_metadata
-      weight: 13
-      format_type: html_element
+      parent_name: ''
+      weight: 3
+      format_type: fieldset
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
         element: div
         show_label: false
         label_element: h3
@@ -49,22 +52,6 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
-        required_fields: true
-        description: ''
-    group_metadata:
-      children:
-        - group_publication_info
-      label: Metadata
-      region: content
-      parent_name: ''
-      weight: 8
-      format_type: fieldset
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        description: ''
-        required_fields: true
     group_people:
       children:
         - field_masthead
@@ -87,7 +74,7 @@ mode: default
 content:
   field_archive_url:
     type: link_default
-    weight: 5
+    weight: 6
     region: content
     settings:
       placeholder_url: ''
@@ -95,7 +82,7 @@ content:
     third_party_settings: {  }
   field_cover_thumbnail:
     type: image_image
-    weight: 3
+    weight: 4
     region: content
     settings:
       progress_indicator: throbber
@@ -103,7 +90,7 @@ content:
     third_party_settings: {  }
   field_how_2_sections:
     type: inline_entity_form_complex
-    weight: 6
+    weight: 7
     region: content
     settings:
       form_mode: inline_article_form
@@ -157,7 +144,7 @@ content:
     third_party_settings: {  }
   field_sections_how2:
     type: entity_reference_modal
-    weight: 7
+    weight: 8
     region: content
     settings:
       add_new_button_title: +
@@ -195,7 +182,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
