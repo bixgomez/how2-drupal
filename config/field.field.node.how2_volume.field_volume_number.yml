@@ -11,12 +11,14 @@ entity_type: node
 bundle: how2_volume
 label: 'Volume Number'
 description: ''
-required: false
+required: true
 translatable: true
-default_value: {  }
+default_value:
+  -
+    value: 1
 default_value_callback: ''
 settings:
-  min: null
+  min: 1
   max: null
   prefix: ''
   suffix: ''

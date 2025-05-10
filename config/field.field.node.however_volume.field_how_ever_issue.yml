@@ -10,7 +10,7 @@ id: node.however_volume.field_how_ever_issue
 field_name: field_how_ever_issue
 entity_type: node
 bundle: however_volume
-label: 'HOW(ever) Issue'
+label: 'HOW(ever) Issues'
 description: ''
 required: false
 translatable: false
