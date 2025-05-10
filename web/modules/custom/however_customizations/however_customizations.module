@@ -30,6 +30,26 @@ function however_customizations_entity_presave(Drupal\Core\Entity\EntityInterfac
     return;
   }
   
+  // Auto-generate titles for volume content types
+  if ($entity->getEntityTypeId() === 'node') {
+    // Check if this is one of our volume content types
+    if ($entity->bundle() === 'however_volume' || $entity->bundle() === 'how2_volume') {
+      // Make sure volume number field exists and has a value
+      if ($entity->hasField('field_volume_number') && !$entity->field_volume_number->isEmpty()) {
+        // Get volume number
+        $volume_number = $entity->field_volume_number->value;
+        
+        // Generate title based on content type
+        if ($entity->bundle() === 'however_volume') {
+          $entity->setTitle("How(ever) Volume {$volume_number}");
+        }
+        else if ($entity->bundle() === 'how2_volume') {
+          $entity->setTitle("How2 Volume {$volume_number}");
+        }
+      }
+    }
+  }
+  
   // Define content types and their field mappings
   $content_mappings = [
     'how2_issue' => [
