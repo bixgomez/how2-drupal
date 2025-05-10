@@ -29,27 +29,21 @@ function however_customizations_form_alter(&$form, FormStateInterface $form_stat
   if (in_array($form_id, ['node_however_volume_edit_form', 'node_however_volume_form', 
                            'node_how2_volume_edit_form', 'node_how2_volume_form'])) {
     
-    // Make the title field read-only
-    $form['title']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
-    
-    // Add description to the title field
-    $content_type = '';
+    // Get content type name for the message
     $example = '';
-    
     if (strpos($form_id, 'however_volume') !== FALSE) {
-      $content_type = 'However Volume';
       $example = 'How(ever) Volume 1';
     }
     else if (strpos($form_id, 'how2_volume') !== FALSE) {
-      $content_type = 'How(2) Volume';
       $example = 'How2 Volume 1';
     }
     
-    $form['title']['widget'][0]['value']['#description'] = t('This title is automatically generated based on the volume number. Example: @example', 
-      ['@example' => $example]);
+    // Make the title field disabled (not just readonly)
+    $form['title']['widget'][0]['value']['#disabled'] = TRUE;
     
-    // Add a custom validation to enforce the correct format
-    $form['#validate'][] = 'however_customizations_volume_form_validate';
+    // Add description to explain the auto-generation
+    $form['title']['widget'][0]['value']['#description'] = t('This title is automatically generated based on the Volume Number. Example: @example', 
+      ['@example' => $example]);
   }
 }
 
@@ -82,10 +76,10 @@ function however_customizations_entity_presave(Drupal\Core\Entity\EntityInterfac
         
         // Generate title based on content type
         if ($entity->bundle() === 'however_volume') {
-          $entity->setTitle("However Volume [{$volume_number}]");
+          $entity->setTitle("How(ever) Volume {$volume_number}");
         }
         else if ($entity->bundle() === 'how2_volume') {
-          $entity->setTitle("How(2) Volume [{$volume_number}]");
+          $entity->setTitle("How2 Volume {$volume_number}");
         }
       }
     }
