@@ -4,14 +4,19 @@ A custom Drupal module that provides specialized functionality for the However p
 
 ## Features
 
-### Auto-generated Volume Titles
+### Auto-generated Titles
 
-Automatically generates titles for volume content types based on their volume number:
+Automatically generates titles for content types based on their number fields:
 
+#### Volumes
 - **however_volume**: Titles are formatted as "How(ever) Volume #"
 - **how2_volume**: Titles are formatted as "How2 Volume #"
 
-The title field is set to read-only in the UI with explanatory text.
+#### Issues
+- **journal_issue**: Titles are formatted as "How(ever) Volume # Issue #"
+- **how2_issue**: Titles are formatted as "How2 Volume # Issue #"
+
+The title fields are disabled in the UI with explanatory text.
 
 ### Volume Number Propagation
 
@@ -55,7 +60,9 @@ drush how-vol
 
 ## Troubleshooting
 
-- If titles aren't generating correctly, make sure the `field_volume_number` exists and has a value
+- If titles aren't generating correctly, make sure the required fields exist and have values:
+  - Volumes need `field_volume_number`
+  - Issues need both `field_volume_number` and `field_issue_number`
 - After making changes to the module, clear cache with `drush cr`
 
 ## Credits

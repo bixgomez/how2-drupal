@@ -45,6 +45,27 @@ function however_customizations_form_alter(&$form, FormStateInterface $form_stat
     $form['title']['widget'][0]['value']['#description'] = t('This title is automatically generated based on the Volume Number. Example: @example', 
       ['@example' => $example]);
   }
+  
+  // Target the node edit forms for our issue content types
+  if (in_array($form_id, ['node_journal_issue_edit_form', 'node_journal_issue_form', 
+                          'node_how2_issue_edit_form', 'node_how2_issue_form'])) {
+    
+    // Get content type name for the message
+    $example = '';
+    if (strpos($form_id, 'journal_issue') !== FALSE) {
+      $example = 'How(ever) Volume 1 Issue 1';
+    }
+    else if (strpos($form_id, 'how2_issue') !== FALSE) {
+      $example = 'How2 Volume 1 Issue 1';
+    }
+    
+    // Make the title field disabled (not just readonly)
+    $form['title']['widget'][0]['value']['#disabled'] = TRUE;
+    
+    // Add description to explain the auto-generation
+    $form['title']['widget'][0]['value']['#description'] = t('This title is automatically generated based on the Volume and Issue Numbers. Example: @example', 
+      ['@example' => $example]);
+  }
 }
 
 /**
@@ -80,6 +101,26 @@ function however_customizations_entity_presave(Drupal\Core\Entity\EntityInterfac
         }
         else if ($entity->bundle() === 'how2_volume') {
           $entity->setTitle("How2 Volume {$volume_number}");
+        }
+      }
+    }
+    
+    // Check if this is one of our issue content types
+    if ($entity->bundle() === 'journal_issue' || $entity->bundle() === 'how2_issue') {
+      // Make sure volume number and issue number fields exist and have values
+      if ($entity->hasField('field_volume_number') && !$entity->field_volume_number->isEmpty() && 
+          $entity->hasField('field_issue_number') && !$entity->field_issue_number->isEmpty()) {
+        
+        // Get volume number and issue number
+        $volume_number = $entity->field_volume_number->value;
+        $issue_number = $entity->field_issue_number->value;
+        
+        // Generate title based on content type
+        if ($entity->bundle() === 'journal_issue') {
+          $entity->setTitle("How(ever) Volume {$volume_number} Issue {$issue_number}");
+        }
+        else if ($entity->bundle() === 'how2_issue') {
+          $entity->setTitle("How2 Volume {$volume_number} Issue {$issue_number}");
         }
       }
     }
