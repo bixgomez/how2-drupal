@@ -5,3 +5,8 @@ services:
     arguments:
       - '@entity_type.manager'
       - '@plugin.manager.entity_reference_selection'
+      
+  however_customizations.volume_navigation:
+    class: Drupal\however_customizations\VolumeNavigationService
+    arguments:
+      - '@entity_type.manager'

@@ -68,4 +68,97 @@ class HoweverCustomizationsCommands extends DrushCommands {
     
     $this->output()->writeln("Update complete. Updated $count nodes.");
   }
+
+  /**
+   * Updates titles for all content types with auto-generated titles.
+   *
+   * @command however-customizations:update-titles
+   * @aliases how-titles
+   */
+  public function updateTitles() {
+    $this->output()->writeln('Starting title update...');
+    
+    // Content types to process with their respective fields
+    $content_mappings = [
+      'however_volume' => [
+        'fields' => ['field_volume_number'],
+        'title_pattern' => 'How(ever) Volume {volume}',
+      ],
+      'how2_volume' => [
+        'fields' => ['field_volume_number'],
+        'title_pattern' => 'How2 Volume {volume}',
+      ],
+      'journal_issue' => [
+        'fields' => ['field_volume_number', 'field_issue_number'],
+        'title_pattern' => 'How(ever) Volume {volume} Issue {issue}',
+      ],
+      'how2_issue' => [
+        'fields' => ['field_volume_number', 'field_issue_number'],
+        'title_pattern' => 'How2 Volume {volume} Issue {issue}',
+      ],
+    ];
+    
+    $total_updated = 0;
+    
+    foreach ($content_mappings as $content_type => $mapping) {
+      // Load all nodes of this type
+      $query = \Drupal::entityQuery('node')
+        ->condition('type', $content_type)
+        ->accessCheck(FALSE);
+      $nids = $query->execute();
+      
+      if (!empty($nids)) {
+        $this->output()->writeln("Processing {$content_type}: " . count($nids) . " nodes found.");
+        $count = 0;
+        
+        // Process nodes in smaller batches to avoid memory issues
+        $chunks = array_chunk($nids, 50, TRUE);
+        
+        foreach ($chunks as $chunk) {
+          $nodes = Node::loadMultiple($chunk);
+          
+          foreach ($nodes as $node) {
+            $fields_exist = TRUE;
+            $replacements = [];
+            
+            // Check if all required fields exist and have values
+            foreach ($mapping['fields'] as $field) {
+              if (!$node->hasField($field) || $node->get($field)->isEmpty()) {
+                $fields_exist = FALSE;
+                break;
+              }
+              
+              // Store field values for replacement
+              if ($field === 'field_volume_number') {
+                $replacements['{volume}'] = $node->get($field)->value;
+              } elseif ($field === 'field_issue_number') {
+                $replacements['{issue}'] = $node->get($field)->value;
+              }
+            }
+            
+            if ($fields_exist) {
+              // Create title by replacing placeholders
+              $title = $mapping['title_pattern'];
+              foreach ($replacements as $placeholder => $value) {
+                $title = str_replace($placeholder, $value, $title);
+              }
+              
+              // Only update if title has changed
+              if ($node->getTitle() !== $title) {
+                $node->setTitle($title);
+                $node->however_skip_presave = TRUE;
+                $node->save();
+                $count++;
+              }
+            }
+          }
+        }
+        
+        $this->output()->writeln("Updated {$count} {$content_type} nodes.");
+        $total_updated += $count;
+      }
+    }
+    
+    $this->output()->writeln("Title update complete. Updated {$total_updated} nodes in total.");
+  }
 }

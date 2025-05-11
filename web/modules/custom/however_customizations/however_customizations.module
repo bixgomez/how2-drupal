@@ -163,3 +163,26 @@ function however_customizations_entity_presave(Drupal\Core\Entity\EntityInterfac
     }
   }
 }
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function however_customizations_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  
+  // Only add navigation for volume content types
+  $volume_types = ['however_volume', 'how2_volume'];
+  if (in_array($node->bundle(), $volume_types)) {
+    // Get navigation service
+    $navigation_service = \Drupal::service('however_customizations.volume_navigation');
+    
+    // Get previous and next volumes
+    $navigation = $navigation_service->getVolumeNavigation($node);
+    
+    // Add navigation to variables
+    $variables['volume_navigation'] = [
+      'prev' => $navigation['prev'],
+      'next' => $navigation['next'],
+    ];
+  }
+}
