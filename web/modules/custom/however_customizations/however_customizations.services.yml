@@ -7,6 +7,6 @@ services:
       - '@plugin.manager.entity_reference_selection'
       
   however_customizations.volume_navigation:
-    class: Drupal\however_customizations\VolumeNavigationService
+    class: Drupal\however_customizations\PublicationNavigationService
     arguments:
       - '@entity_type.manager'

@@ -7,7 +7,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 /**
  * Service to handle volume navigation (prev/next links).
  */
-class VolumeNavigationService {
+class PublicationNavigationService {
 
   /**
    * The entity type manager.
@@ -17,7 +17,7 @@ class VolumeNavigationService {
   protected $entityTypeManager;
 
   /**
-   * Constructs a VolumeNavigationService object.
+   * Constructs a PublicationNavigationService object.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
