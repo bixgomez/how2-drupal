@@ -38,6 +38,26 @@
           <li><a target="_blank" href="{{ pdf_url }}">Download PDF</a></li>
         {% endif %}
       </ul>
+
+      {{ dump }}
+
+{# Issue navigation #}
+{% if issue_navigation.prev or issue_navigation.next %}
+  <div class="issue-navigation">
+    {% if issue_navigation.prev %}
+      <a href="{{ path('entity.node.canonical', {'node': issue_navigation.prev.id}) }}" class="issue-navigation__prev">
+        ← Previous: {{ issue_navigation.prev.label }}
+      </a>
+    {% endif %}
+    
+    {% if issue_navigation.next %}
+      <a href="{{ path('entity.node.canonical', {'node': issue_navigation.next.id}) }}" class="issue-navigation__next">
+        Next: {{ issue_navigation.next.label }} →
+      </a>
+    {% endif %}
+  </div>
+{% endif %}
+
     </div>
   </div>
 

@@ -89,19 +89,19 @@
   {{ title_suffix }}
 
   {# Volume navigation #}
-  {% if volume_navigation %}
+  {% if publication_navigation %}
     <div class="volume-navigation">
-      {% if volume_navigation.prev %}
+      {% if publication_navigation.prev %}
         <div>
-          <a href="{{ path('entity.node.canonical', {'node': volume_navigation.prev.id}) }}" class="volume-navigation__prev">
-            Previous: {{ volume_navigation.prev.label }}
+          <a href="{{ path('entity.node.canonical', {'node': publication_navigation.prev.id}) }}" class="volume-navigation__prev">
+            Previous: {{ publication_navigation.prev.label }}
           </a>
         </div>
       {% endif %}
-      {% if volume_navigation.next %}
+      {% if publication_navigation.next %}
         <div>
-          <a href="{{ path('entity.node.canonical', {'node': volume_navigation.next.id}) }}" class="volume-navigation__next">
-            Next: {{ volume_navigation.next.label }}
+          <a href="{{ path('entity.node.canonical', {'node': publication_navigation.next.id}) }}" class="volume-navigation__next">
+            Next: {{ publication_navigation.next.label }}
           </a>
         </div>
       {% endif %}
