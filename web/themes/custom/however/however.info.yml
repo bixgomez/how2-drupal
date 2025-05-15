@@ -15,6 +15,7 @@ libraries:
 components:
   namespaces:
     issue: components/issue
+    volume: components/volume
     section-teaser: components/section-teaser
 
 regions:

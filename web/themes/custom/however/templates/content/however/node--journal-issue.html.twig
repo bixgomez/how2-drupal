@@ -95,25 +95,6 @@
   {% endfor %}
 {% endif %}
 
-{{dump()}}
-
-{# Issue navigation #}
-{% if issue_navigation.prev or issue_navigation.next %}
-  <div class="issue-navigation">
-    {% if issue_navigation.prev %}
-      <a href="{{ path('entity.node.canonical', {'node': issue_navigation.prev.id}) }}" class="issue-navigation__prev">
-        ← Previous: {{ issue_navigation.prev.label }}
-      </a>
-    {% endif %}
-    
-    {% if issue_navigation.next %}
-      <a href="{{ path('entity.node.canonical', {'node': issue_navigation.next.id}) }}" class="issue-navigation__next">
-        Next: {{ issue_navigation.next.label }} →
-      </a>
-    {% endif %}
-  </div>
-{% endif %}
-
 {% include "@issue/issue.html.twig" with {
   journal: "HOW(ever)",
   volume: node.field_volume_reference.entity.field_volume_number.value,
@@ -132,67 +113,3 @@
   page_facsimiles: content.field_journal_page_images_media,
   pdf_url: node.field_journal_pdf[0]|file_url,
 } %}
-
-{%
-  set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'node--issue',
-  ]
-%}
-
-{# 
-
-{{ attach_library('classy/node') }}
-
-<article{{ attributes.addClass(classes) }}>
-  <div class="issue-top-content node__meta">
-      {% if content.field_cover_thumbnail %}
-        <div class="image">
-          {{ content.field_cover_thumbnail }}
-        </div>
-      {% endif %}
-    <div class="issue-title-meta">
-        {{ title_prefix }}
-        <h1{{ title_attributes }}>
-          {{ label }}
-        </h1>
-        {{ title_suffix }}
-      <div class="issue-meta">
-        <div class="left">
-          <div class="journal-name"><a href="/however">HOW(ever)</a></div>
-          <div class="issue-volume-number">{{ volume_issue }}</div>
-          {{ content.field_publication_date_display }}
-          {% if content.field_masthead %}
-            <div class="masthead-link"><a href="#masthead" data-featherlight="#masthead">masthead</a></div>
-          {% endif %}
-          {{ content.field_archive_url }}
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="issue-tabs">
-    <ul>
-      <li><a class="tab active" href="#web-version">Web Version</a></li>
-      <li><a class="tab" href="#page-facsimiles">Page Facsimiles</a></li>
-      <li><a target="_blank" href="{{ node.field_journal_pdf[0]|file_url }}">Download PDF</a></li>
-    </ul>
-  </div>
-  <div{{ content_attributes.addClass('node__content') }}>
-    <div class="tab-body active" id="web-version">
-      {{ content.field_section }}
-
-    {{ content.field_sections_however }}
-    </div>
-    <div class="tab-body" id="page-facsimiles">
-      {{ content.field_journal_page_images_media }}
-    </div>
-  </div>
-
-</article> 
-
-#}

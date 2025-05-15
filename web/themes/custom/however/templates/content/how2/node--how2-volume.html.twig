@@ -67,50 +67,9 @@
  *
  */
 #}
-{%
-  set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-  ]
-%}
-{{ attach_library('classy/node') }}
-<article{{ attributes.addClass(classes) }}>
 
-  {{ title_prefix }}
-  {% if label and not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
-
-  {# Volume navigation #}
-  {% if volume_navigation %}
-    {# Volume navigation #}
-    {% if volume_navigation.prev is not empty or volume_navigation.next is not empty %}
-      <div class="volume-navigation">
-        {% if volume_navigation.prev is not empty %}
-          <a href="{{ path('entity.node.canonical', {'node': volume_navigation.prev.id}) }}" class="volume-navigation__prev">
-            {{ volume_navigation.prev.label }}
-          </a>
-        {% endif %}
-        
-        {% if volume_navigation.next is not empty %}
-          <a href="{{ path('entity.node.canonical', {'node': volume_navigation.next.id}) }}" class="volume-navigation__next">
-            {{ volume_navigation.next.label }}
-          </a>
-        {% endif %}
-      </div>
-    {% endif %}
-  {% endif %}
-
-  <div{{ content_attributes.addClass('node__content') }}>
-    {{ content.field_archive_url }}
-    {{ content.field_how2_issue }}
-  </div>
-
-</article>
+{% include "@volume/volume.html.twig" with {
+  journal: "How2",
+  archive_link: content.field_archive_url,
+  issues: content.field_how2_issue
+} %}

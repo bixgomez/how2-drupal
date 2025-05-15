@@ -268,27 +268,3 @@ function however_preprocess_node__journal_issue(&$variables, $hook) {
         }
     }
 }
-
-// function however_preprocess_field(&$variables) {
-//     // Target only the specific field
-//     if (isset($variables['element']['#field_name']) && 
-//         $variables['element']['#field_name'] == 'field_title_display') {
-      
-//       // Use hook_field_attach_view_alter to modify the rendered output
-//       foreach ($variables['items'] as $delta => &$item) {
-//         // Check for processed_text type
-//         if (isset($item['content']['#type']) && $item['content']['#type'] == 'processed_text') {
-//           // Add a post-render callback to strip p tags
-//           $item['content']['#post_render'][] = 'however_strip_p_tags';
-//         }
-//       }
-//     }
-//   }
-  
-//   /**
-//    * Post-render callback to strip paragraph tags.
-//    */
-//   function however_strip_p_tags($markup, $element) {
-//     // Strip opening and closing p tags
-//     return preg_replace('/^<p>(.*)<\/p>$/s', '$1', $markup);
-//   }
