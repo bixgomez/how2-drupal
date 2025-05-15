@@ -9,7 +9,7 @@ _core:
 id: however_local_tasks
 theme: however
 region: admin_info
-weight: -10
+weight: -8
 provider: null
 plugin: local_tasks_block
 settings:

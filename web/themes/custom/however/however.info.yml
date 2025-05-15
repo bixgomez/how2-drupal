@@ -22,7 +22,6 @@ regions:
   branding: 'Branding'
   navigation: 'Main Navigation'
   admin_info: 'Admin Info'
-  content_top: 'Content Top'
   content: 'Content'
   sidebar: 'Sidebar'
   footer: 'Footer'

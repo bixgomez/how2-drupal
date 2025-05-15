@@ -68,7 +68,9 @@
 <section class="page-content-area">
   {% if page.content_top %}
     <div class="layout-container content-top-container clearfix">
+      this is content top
       {{ page.content_top }}
+      that was content top
     </div>
   {% endif %}
 
@@ -77,9 +79,7 @@
       <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
       <div class="layout-content">
-        {{ page.title_banner }}
         {{ page.content }}
-        {{ page.content_bottom }}
       </div>{# /.layout-content #}
 
       {% if page.sidebar %}
@@ -95,7 +95,6 @@
   <footer id="page-footer" class="page-footer" role="contentinfo">
     <div class="layout-container">
       {{ page.footer }}
-      {{ page.footer_bottom }}
     </div>
   </footer>
 {% endif %}

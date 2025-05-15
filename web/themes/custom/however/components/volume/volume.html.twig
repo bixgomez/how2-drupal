@@ -1,25 +1,21 @@
 <article class="volume volume-elements node--type-how2-volume">
 
-  {# Volume navigation #}
-  {% if volume_navigation %}
-    {% if volume_navigation.prev is not empty or volume_navigation.next is not empty %}
-      <ul class="volume-navigation">
-        {% if volume_navigation.prev is not empty %}
-          <li>
-            Previous: <a href="{{ path('entity.node.canonical', {'node': volume_navigation.prev.id}) }}" class="volume-navigation__prev">{{ volume_navigation.prev.label }}</a>
-          </li>
-        {% endif %}
-        
-        {% if volume_navigation.next is not empty %}
-          <li>
-            Next: <a href="{{ path('entity.node.canonical', {'node': volume_navigation.next.id}) }}" class="volume-navigation__next">{{ volume_navigation.next.label }}</a>
-          </li>
-        {% endif %}
-      </ul>
-    {% endif %}
+  {{ title_prefix }}
+  {% if title %}
+    <h1{{ title_attributes }}>{{ title }}</h1>
   {% endif %}
+  {{ title_suffix }}
 
-   {{ archive_link }}
+  <div class="">
+    {% if volume_navigation.prev is not empty %}
+      <a href="{{ path('entity.node.canonical', {'node': volume_navigation.prev.id}) }}" class="volume-navigation__prev">{{ volume_navigation.prev.label }}</a>
+    {% endif %}
+    {{ archive_link }}          
+    {% if volume_navigation.next is not empty %}
+      <a href="{{ path('entity.node.canonical', {'node': volume_navigation.next.id}) }}" class="volume-navigation__next">{{ volume_navigation.next.label }}</a>
+    {% endif %}
+  </div>
+
 
   <div class="issues">
     {{ issues }}

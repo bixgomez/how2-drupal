@@ -9,7 +9,7 @@ _core:
 id: however_local_actions
 theme: however
 region: admin_info
-weight: -9
+weight: -7
 provider: null
 plugin: local_actions_block
 settings:
