@@ -1,24 +1,29 @@
 <article class="volume volume-elements node--type-how2-volume">
 
-  {{ title_prefix }}
-  {% if title %}
-    <h1{{ title_attributes }}>{{ title }}</h1>
-  {% endif %}
-  {{ title_suffix }}
+	{{ title_prefix }}
+	{% if title %}
+		<h1 class="is-text-centered">{{ title }}</h1>
+	{% endif %}
+	{{ title_suffix }}
 
-  <div class="">
-    {% if volume_navigation.prev is not empty %}
-      <a href="{{ path('entity.node.canonical', {'node': volume_navigation.prev.id}) }}" class="volume-navigation__prev">{{ volume_navigation.prev.label }}</a>
-    {% endif %}
-    {{ archive_link }}          
-    {% if volume_navigation.next is not empty %}
-      <a href="{{ path('entity.node.canonical', {'node': volume_navigation.next.id}) }}" class="volume-navigation__next">{{ volume_navigation.next.label }}</a>
-    {% endif %}
-  </div>
+	<div class="columns is-hcentered">
+		<div class="column is-vcentered is-flex is-justify-content-flex-start">
+			{% if volume_navigation.prev is not empty %}
+				<a href="{{ path('entity.node.canonical', {'node': volume_navigation.prev.id}) }}" class="button is-inverted is-small">{{ volume_navigation.prev.label }}</a>
+			{% endif %}
+		</div>
+		<div class="column is-vcentered  is-flex is-justify-content-center">
+			{{ archive_link }}
+		</div>
+		<div class="column is-vcentered is-flex is-justify-content-flex-end">
+			{% if volume_navigation.next is not empty %}
+				<a href="{{ path('entity.node.canonical', {'node': volume_navigation.next.id}) }}" class="button is-inverted is-small">{{ volume_navigation.next.label }}</a>
+			{% endif %}
+		</div>
+	</div>
 
-
-  <div class="issues">
-    {{ issues }}
-  </div>
+	<div class="issues">
+		{{ issues }}
+	</div>
 
 </article>
