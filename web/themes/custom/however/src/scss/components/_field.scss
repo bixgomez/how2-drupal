@@ -1,10 +1,13 @@
+@use "../abstracts/variables" as vars;
+@use "../abstracts/typography" as typography;
+
 .field--name-field-volume-reference,
 .field--name-field-issue-reference,
 .journal-name {
   a {
     font-weight: bold;
     text-decoration: none;
-    color: $text-color;
+    color: vars.$text-color;
     &:hover {
       text-decoration: underline;
     }
@@ -18,9 +21,9 @@
     gap: 12px;
     .field__item {
       a {
-        color: $text-color;
+        color: vars.$text-color;
         text-decoration: none;
-        background: $c--yellow-dark;
+        background: vars.$c--yellow-dark;
         padding: 3px 16px;
         border-radius: 14px;
       }
@@ -33,7 +36,7 @@
 .field--name-field-sections-however,
 .field--name-field-section {
   -webkit-column-count: 3;
-  -moz-column-count:3;
+  -moz-column-count: 3;
   column-count: 3;
   -webkit-column-gap: 1em;
   -moz-column-gap: 1em;
@@ -101,14 +104,14 @@
 
 .field--name-field-section {
   .node {
-    background: #FFFCF7;
+    background: #fffcf7;
   }
 }
 
 .field--name-field-archive-url a,
 .field--name-field-however-page-facimile-link a {
   font-weight: 600;
-  color: $text-color;
+  color: vars.$text-color;
   text-decoration: none;
   &:hover {
     text-decoration: underline;
@@ -138,7 +141,7 @@
     }
   }
   .field--name-field-person {
-    @extend %h2;
+    @extend h2;
   }
   .field--name-field-override-role {
     font-weight: 700;
@@ -147,7 +150,9 @@
 
 .field--name-body table {
   border: none;
-  tbody, tr, td {
+  tbody,
+  tr,
+  td {
     border: none;
   }
 }

@@ -1,3 +1,6 @@
+@use "../abstracts/variables" as vars;
+@use "../abstracts/mixins" as mixins;
+
 nav ul.menu {
   margin: 0;
   display: flex;
@@ -43,7 +46,7 @@ nav ul.menu {
       // background-color: pink;
   
       > a {
-        color: $text-color;
+        color: vars.$text-color;
         font-weight: bold;
         text-decoration: none;
         display: block;
@@ -71,7 +74,7 @@ ul.menu li.menu-item--expanded {
 
 //dropdowns
 #block-however-main-menu > ul.menu > li.menu-item--expanded > ul {
-  @include box-shadow();
+  @include mixins.box-shadow();
   display: none;
   position: absolute;
   background: #ffffff;
@@ -118,7 +121,7 @@ ul.menu li.menu-item--expanded {
   }
 
   li a {
-    color: $text-color;
+    color: vars.$text-color;
     font-weight: bold;
     text-decoration: none;
 
@@ -171,7 +174,7 @@ ul.menu li.menu-item--expanded {
     }
 
     > a {
-      color: $text-color;
+      color: vars.$text-color;
       font-size: 24px;
       font-weight: 900;
       text-decoration: none;

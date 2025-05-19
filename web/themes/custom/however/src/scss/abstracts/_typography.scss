@@ -1,22 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Urbanist:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700;1,900&display=swap');
-@import "variables";
+// @import url("https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Urbanist:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700;1,900&display=swap");
+@use "variables" as vars;
+@use "sass:math";
 
 html {
   font-size: 16px;
 }
 
 body {
-  font-family: $base-font;
+  font-family: vars.$base-font;
   font-weight: 400;
-  color: $text-color;
+  color: vars.$text-color;
   font-size: 1rem;
-  line-height: $line-height--md;
+  line-height: vars.$line-height--md;
 }
 
 // 54, 36, 24, 16
-h1, h2, h3, h4,
-%h1, %h2, %h3, %h4 {
-  line-height: $line-height--sm;
+h1,
+h2,
+h3,
+h4,
+%h1,
+%h2,
+%h3,
+%h4 {
+  line-height: vars.$line-height--sm;
   font-weight: 700;
 
   a {
@@ -32,9 +39,10 @@ h1, h2, h3, h4,
   }
 }
 
-h1, %h1 {
+h1,
+%h1 {
   font-size: 1.75rem;
-  margin-bottom: .25em;
+  margin-bottom: 0.25em;
 
   @media all and (min-width: 768px) {
     font-size: 1.75rem;
@@ -45,11 +53,12 @@ h1, %h1 {
   }
 }
 
-h2, %h2 {
-  font-size: (1.5rem * .75);
+h2,
+%h2 {
+  font-size: math.div(1.5rem * 0.75, 1);
 
   @media all and (min-width: 768px) {
-    font-size: (1.5rem * .825);
+    font-size: math.div(1.5rem * 0.825, 1);
   }
 
   @media all and (min-width: 1024px) {
@@ -57,11 +66,12 @@ h2, %h2 {
   }
 }
 
-h3, %h3 {
-  font-size: (1.25rem * .75);
+h3,
+%h3 {
+  font-size: math.div(1.25rem * 0.75, 1);
 
   @media all and (min-width: 768px) {
-    font-size: (1.25rem * .825);
+    font-size: math.div(1.25rem * 0.825, 1);
   }
 
   @media all and (min-width: 1024px) {
@@ -69,12 +79,12 @@ h3, %h3 {
   }
 }
 
-h4, 
+h4,
 %h4 {
-  font-size: (1rem * .75);
+  font-size: math.div(1rem * 0.75, 1);
 
   @media all and (min-width: 768px) {
-    font-size: (1rem * .825);
+    font-size: math.div(1rem * 0.825, 1);
   }
 
   @media all and (min-width: 1024px) {
@@ -82,8 +92,11 @@ h4,
   }
 }
 
-a, a:link, a:visited, a:focus {
-  color: $c--red-dark;
+a,
+a:link,
+a:visited,
+a:focus {
+  color: vars.$c--red-dark;
 
   &:hover {
     text-decoration: none;
@@ -91,5 +104,5 @@ a, a:link, a:visited, a:focus {
 }
 
 p {
-  line-height: $line-height--md;
+  line-height: vars.$line-height--md;
 }

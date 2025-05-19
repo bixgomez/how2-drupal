@@ -1,6 +1,8 @@
+@use "../abstracts/variables" as vars;
+
 .page-header {
-  background-color: $c--yellow-light;
-  border-bottom: 4px solid $grey-dark;
+  background-color: vars.$c--yellow-light;
+  border-bottom: 4px solid vars.$grey-dark;
 }
 
 .page-header .layout-container {
@@ -33,7 +35,7 @@ a.site-logo {
 }
 
 .admin-info {
-  background-color: $c--yellow-dark;
-  border-bottom: 4px solid $grey-dark;
+  background-color: vars.$c--yellow-dark;
+  border-bottom: 4px solid vars.$grey-dark;
   padding: .5rem 0;
 }

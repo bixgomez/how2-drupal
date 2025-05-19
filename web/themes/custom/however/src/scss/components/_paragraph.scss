@@ -1,7 +1,9 @@
+@use "../abstracts/variables" as vars;
+
 .paragraph--type--how2-section-links,
 .paragraph--type--how2-subsection,
 .paragraph--type--open-title-text {
-  font-family: $serif-font;
+  font-family: vars.$serif-font;
   p {
     line-height: 1.8;
   }

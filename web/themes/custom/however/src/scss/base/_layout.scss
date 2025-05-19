@@ -1,3 +1,5 @@
+@use "sass:color";
+
 * {
   box-sizing: border-box;
 }
@@ -17,7 +19,7 @@
 }
 
 .view-content {
-  background-color: rgba(#000, .1);
+  background-color: color.adjust(#000, $alpha: -0.9);
 }
 
 .full-width, 

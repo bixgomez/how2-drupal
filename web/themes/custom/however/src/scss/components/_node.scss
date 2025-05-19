@@ -1,3 +1,7 @@
+@use "../abstracts/variables" as vars;
+@use "card" as card;
+@use "sass:math";
+
 .node {
   .issue-meta {
     display: flex;
@@ -22,7 +26,7 @@
     .right {
     }
     a {
-      color: $text-color;
+      color: vars.$text-color;
       text-decoration: none;
       &:hover {
         text-decoration: underline;
@@ -74,7 +78,7 @@
 }
 
 .node--issue.node--view-mode-teaser {
-  @extend %card;
+  @extend .block-card;
 }
 
 .node--issue.node--view-mode-teaser {
@@ -148,13 +152,13 @@
 
         a {
           font-weight: 900;
-          color: $text-color;
+          color: vars.$text-color;
           text-decoration: none;
           padding-bottom: 3px;
 
           &.active,
           &:hover {
-            border-bottom: 3px solid $c--red-dark;
+            border-bottom: 3px solid vars.$c--red-dark;
           }
         }
       }
@@ -216,7 +220,7 @@
 .node--type-how-ever-section.node--view-mode-teaser {
   .section-title a {
     font-weight: bold;
-    color: $text-color;
+    color: vars.$text-color;
   }
   .node--type-how2-section.node--view-mode-full
     .field--name-field-how2-piece
@@ -239,7 +243,7 @@
   }
   .field--name-body,
   .field--name-field-body-sections {
-    font-family: $serif-font;
+    font-family: vars.$serif-font;
     p {
       line-height: 1.8;
     }

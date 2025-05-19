@@ -1,13 +1,16 @@
+@use "variables" as vars;
+
 .sr-only {
-  position:absolute;
-  left:-10000px;
-  top:auto;
-  width:1px;
-  height:1px;
-  overflow:hidden;
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
-a.more, %more {
+a.more,
+%more {
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
@@ -15,7 +18,7 @@ a.more, %more {
   position: relative;
 
   &:after {
-    content: '⇨';
+    content: "⇨";
     display: inline-block;
     margin-left: 8px;
     font-size: 18px;
@@ -28,7 +31,8 @@ a.more, %more {
   }
 }
 
-.clearfix, %clearfix {
+.clearfix,
+%clearfix {
   &::after {
     content: "";
     clear: both;

@@ -1,20 +1,22 @@
+@use "sass:color";
+
 $grey-dark: #333333;
 
 $text-color: $grey-dark;
 
 $c--yellow-light: #fffcf0;
 
-$c--yellow: darken($c--yellow-light, 10%);
-$c--yellow: desaturate($c--yellow, 60%);
+$c--yellow: color.adjust($c--yellow-light, $lightness: -10%);
+$c--yellow: color.adjust($c--yellow, $saturation: -60%);
 
-$c--yellow-dark: darken($c--yellow, 10%);
-$c--yellow-dark: desaturate($c--yellow-dark, 15%);
+$c--yellow-dark: color.adjust($c--yellow, $lightness: -10%);
+$c--yellow-dark: color.adjust($c--yellow-dark, $saturation: -15%);
 
-$c--red-dark: #9E2727;
+$c--red-dark: #9e2727;
 $c--red: red;
 
-$base-font: 'Urbanist', sans-serif;
-$serif-font: 'Libre Caslon Text', serif;
+$base-font: "Urbanist", sans-serif;
+$serif-font: "Libre Caslon Text", serif;
 
 $line-height--xs: 1;
 $line-height--sm: 1.25;

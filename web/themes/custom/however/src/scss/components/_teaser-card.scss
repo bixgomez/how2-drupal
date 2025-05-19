@@ -1,7 +1,10 @@
+@use "../abstracts/variables" as vars;
+@use "card" as card;
+
 .teaser-card {
   font-size: 1rem;
-  background-color: rgba(blue, .075);
-  padding: .75em;
+  background-color: rgba(blue, 0.075);
+  padding: 0.75em;
   border: 1px solid #515151;
   position: relative;
   display: inline-block;
@@ -10,7 +13,7 @@
 
   a {
     &::after {
-      content: '';
+      content: "";
       display: block;
       position: absolute;
       top: 0;
@@ -20,11 +23,11 @@
       background-color: transparent;
     }
   }
-  
+
   > h2 {
-    margin: 0 0 .75em;
-    padding: 0 0 .75em;
-    border-bottom: 1px solid rgba(black, .25);
+    margin: 0 0 0.75em;
+    padding: 0 0 0.75em;
+    border-bottom: 1px solid rgba(black, 0.25);
     font-size: 1em;
 
     span {
@@ -33,7 +36,7 @@
   }
 
   p {
-    margin: .5em 0;
+    margin: 0.5em 0;
 
     &:first-child {
       margin-top: 0;
@@ -45,28 +48,28 @@
   }
 
   > .node__content {
-    padding: .75em 0 0;
+    padding: 0.75em 0 0;
   }
 
   &__section {
-    background-color: rgba(orange, .1);
+    background-color: rgba(orange, 0.1);
 
     &:hover {
-      background-color: rgba(orange, .2);
+      background-color: rgba(orange, 0.2);
     }
   }
 
   &__article {
-    background-color: rgba(purple, .1);
+    background-color: rgba(purple, 0.1);
 
     &:hover {
-      background-color: rgba(purple, .2);
+      background-color: rgba(purple, 0.2);
     }
   }
 }
 
 .node--view-mode-teaser-card {
-  @extend %card;
+  @extend .block-card;
 
   > h2 {
     font-size: 16px;
@@ -75,7 +78,7 @@
     text-align: center;
 
     a {
-      color: $text-color;
+      color: vars.$text-color;
     }
   }
 
@@ -148,7 +151,7 @@
     }
 
     h3 a {
-      color: $text-color;
+      color: vars.$text-color;
       text-decoration: none;
 
       &:hover {
@@ -180,7 +183,7 @@
 
   .field--name-field-issue-number {
     display: inline-block;
-    background: #2E2E2E;
+    background: #2e2e2e;
     font-size: 48px;
     color: #ffffff;
     font-weight: 700;
@@ -204,8 +207,8 @@
     margin-bottom: 0;
 
     a {
-      color: $text-color;
-      
+      color: vars.$text-color;
+
       &:hover {
         text-decoration: underline;
       }

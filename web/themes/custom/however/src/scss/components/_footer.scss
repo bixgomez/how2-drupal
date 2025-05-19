@@ -1,6 +1,8 @@
+@use "../abstracts/variables" as vars;
+
 #page-footer {
-  border-top: 4px solid $grey-dark;
-  background: $c--yellow-light;
+  border-top: 4px solid vars.$grey-dark;
+  background: vars.$c--yellow-light;
   margin: 0;
 }
 

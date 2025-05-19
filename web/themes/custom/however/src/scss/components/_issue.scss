@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .issue {
   padding: 0;
   margin: 0;
@@ -20,8 +22,8 @@
 }
 
 .issue-element {
-  border: 1px solid rgba(#000, .125);
-  background-color: rgba(#000, .01);
+  border: 1px solid color.adjust(#000, $alpha: -0.875);
+  background-color: color.adjust(#000, $alpha: -0.99);
   margin: 0;
   padding: 1rem;
 }
