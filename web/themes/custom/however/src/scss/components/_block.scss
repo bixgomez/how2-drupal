@@ -10,6 +10,7 @@
 #block-howeverlogo,
 #block-howeverlogo-2 {
   text-align: center;
+
   .field img {
     max-width: 200px;
   }
@@ -18,16 +19,19 @@
 .block-inline-blockimage-carousel {
   max-width: 92%;
   margin: 0 auto;
-  @media all and (min-width: 40em) {
+
+  @media all and (width >= 40em) {
     max-width: 100%;
   }
 }
 
 .block-inline-blockimage-carousel .media--type-image {
   padding: 8px;
+
   img {
-    @include mixins.box-shadow();
+    @include mixins.box-shadow;
   }
+
   .field--name-field-caption {
     margin-top: 6px;
   }
@@ -37,20 +41,25 @@
   text-align: center;
   max-width: 78%;
   margin: 24px auto;
-  @media all and (min-width: 40em) {
+
+  @media all and (width >= 40em) {
     max-width: 100%;
     margin: 0;
   }
+
   .journal-logo {
-    margin: 12px 0 0 0;
+    margin: 12px 0 0;
+
     img {
       height: 28px;
       width: auto;
     }
   }
+
   p {
     margin: 8px 0;
   }
+
   a.link {
     color: vars.$text-color;
     font-size: 14px;
@@ -69,8 +78,8 @@
     font-size: 16px;
     margin: 6px 0;
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       position: absolute;
       top: calc(50% - 0.5px);
       width: 18%;
@@ -78,11 +87,11 @@
       border: 0.625px solid vars.$text-color;
     }
 
-    &:before {
+    &::before {
       left: 0;
     }
 
-    &:after {
+    &::after {
       right: 0;
     }
   }
@@ -95,33 +104,41 @@
 .block.ad-block {
   padding: 36px 48px;
   border: 1px solid #434343;
-  box-shadow: 4px 4px 0 0 #000000;
+  box-shadow: 4px 4px 0 0 #000;
   margin-bottom: 24px;
-  @media all and (min-width: 40em) {
+
+  @media all and (width >= 40em) {
     margin-bottom: 0;
   }
+
   &.scholarship {
     background: #fdf8e3;
   }
+
   &.about {
     background: #eed7d7;
   }
+
   .field--name-body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     .content p {
       line-height: 1.25;
     }
+
     .cta {
       width: 140px;
       text-align: right;
       flex: 0 0 142px;
     }
   }
+
   h3 {
     margin: 0;
   }
+
   p {
     margin: 0;
   }
@@ -130,13 +147,15 @@
 .block-inline-blockcontent-carousel {
   max-width: 85%;
   margin: 0 auto;
-  @media all and (min-width: 40em) {
+
+  @media all and (width >= 40em) {
     max-width: 100%;
     margin: 0;
   }
 
   h2 {
     @extend %h1;
+
     text-align: center;
     margin-top: 0;
     margin-bottom: 12px;

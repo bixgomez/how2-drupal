@@ -1,17 +1,18 @@
 @use "../abstracts/variables" as vars;
 
-input[type=text],
-input[type=password],
-input[type=search],
-input[type=address],
-input[type=email],
-input[type=url],
-input[type=tel] {
+input[type="text"],
+input[type="password"],
+input[type="search"],
+input[type="address"],
+input[type="email"],
+input[type="url"],
+input[type="tel"] {
   height: 34px;
-  border: 1px solid #444444;
+  border: 1px solid #444;
   padding: 0 16px;
   color: vars.$text-color;
   box-sizing: border-box;
+
   &::placeholder {
     color: vars.$text-color;
   }

@@ -2,9 +2,7 @@
 @use "sass:string";
 
 @mixin box-shadow() {
-  -webkit-box-shadow: 2px 1px 8px 0px rgba(85, 85, 85, 0.3);
-  -moz-box-shadow: 2px 1px 8px 0px rgba(85, 85, 85, 0.3);
-  box-shadow: 2px 1px 8px 0px rgba(85, 85, 85, 0.3);
+  box-shadow: 2px 1px 8px 0 rgb(85 85 85 / 30%);
 }
 
 @mixin element-invisible {
@@ -27,35 +25,33 @@
 // Makes an element visually hidden by default, but visible when focused.
 @mixin element-focusable {
   @include element-invisible;
+
   &:active,
   &:focus {
     @include element-invisible-off;
   }
 }
 
-//
 //  Function to create an optimized svg url
-//
 @function svg-url($svg) {
-  //
   //  Add missing namespace
-  //
   @if not string.index($svg, xmlns) {
     $svg: str-replace($svg, "<svg", '<svg xmlns="http://www.w3.org/2000/svg"');
   }
-  //
+
   //  Chunk up string in order to avoid
   //  "stack level too deep" error
-  //
+
   $encoded: "";
   $slice: 2000;
   $index: 0;
   $loops: math.ceil(math.div(string.length($svg), $slice));
+
   @for $i from 1 through $loops {
     $chunk: string.slice($svg, $index, $index + $slice - 1);
-    //
+
     //   Encode
-    //
+
     $chunk: str-replace($chunk, '"', "'");
     $chunk: str-replace($chunk, "%", "%25");
     $chunk: str-replace($chunk, "&", "%26");
@@ -65,12 +61,11 @@
     $chunk: str-replace($chunk, "<", "%3C");
     $chunk: str-replace($chunk, ">", "%3E");
 
-    //
     //    The maybe list
-    //
+
     //    Keep size and compile time down
     //    ... only add on documented fail
-    //
+
     //  $chunk: str-replace($chunk, '|', '%7C');
     //  $chunk: str-replace($chunk, '[', '%5B');
     //  $chunk: str-replace($chunk, ']', '%5D');
@@ -85,6 +80,7 @@
     $encoded: #{$encoded}#{$chunk};
     $index: $index + $slice;
   }
+
   @return url("data:image/svg+xml,#{$encoded}");
 }
 
@@ -96,6 +92,7 @@
 //  Helper function to replace characters in a string
 @function str-replace($string, $search, $replace: "") {
   $index: string.index($string, $search);
+
   @return if(
     $index,
     string.slice($string, 1, $index - 1) + $replace +

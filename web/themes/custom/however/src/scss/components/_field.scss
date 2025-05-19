@@ -8,6 +8,7 @@
     font-weight: bold;
     text-decoration: none;
     color: vars.$text-color;
+
     &:hover {
       text-decoration: underline;
     }
@@ -16,9 +17,11 @@
 
 .field--name-field-tags {
   margin: 18px 0;
+
   .field__items {
     display: flex;
     gap: 12px;
+
     .field__item {
       a {
         color: vars.$text-color;
@@ -35,17 +38,15 @@
 .field--name-field-sections-how2,
 .field--name-field-sections-however,
 .field--name-field-section {
-  -webkit-column-count: 3;
-  -moz-column-count: 3;
   column-count: 3;
-  -webkit-column-gap: 1em;
-  -moz-column-gap: 1em;
-  column-gap: 1em;
+  column-count: 3;
+  column-count: 3;
   margin: 1.5em 0;
   padding: 0;
-  -moz-column-gap: 1.5em;
-  -webkit-column-gap: 1.5em;
   column-gap: 1.5em;
+  column-gap: 1.5em;
+  column-gap: 1.5em;
+
   > .field__item {
     display: inline-block;
     width: 100%;
@@ -56,17 +57,19 @@
 
 .field--name-field-journal-page-images-media {
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: center;
   gap: 42px;
+
   > .field__item {
     min-width: 100px;
     max-width: 220px;
+
     img {
       width: 100%;
     }
   }
+
   > .field__item > article {
     height: 100%;
   }
@@ -74,12 +77,13 @@
 
 .node--type-how-ever-issue {
   .field--name-field-journal-page-images-media {
-    @media all and (min-width: 480px) {
+    @media all and (width >= 480px) {
       > .field__item {
         width: calc(33% - 42px);
       }
     }
-    @media all and (min-width: 1024px) {
+
+    @media all and (width >= 1024px) {
       > .field__item {
         width: calc(25% - 42px);
       }
@@ -93,10 +97,12 @@
     .field__item {
       width: 120px;
     }
-    @media all and (min-width: 960px) {
+
+    @media all and (width >= 960px) {
       .field__item {
         width: 200px;
       }
+
       display: block;
     }
   }
@@ -113,6 +119,7 @@
   font-weight: 600;
   color: vars.$text-color;
   text-decoration: none;
+
   &:hover {
     text-decoration: underline;
   }
@@ -128,21 +135,25 @@
 }
 
 .field--name-field-person-bio {
-  margin: 54px 0 36px 0;
+  margin: 54px 0 36px;
   padding: 36px 0;
   border-top: 3px solid #909090;
   border-bottom: 3px solid #909090;
+
   .headshot {
-    margin: 0 0 20px 0;
-    @media all and (min-width: 768px) {
+    margin: 0 0 20px;
+
+    @media all and (width >= 768px) {
       max-width: 200px;
       float: left;
       margin: 0 30px 0 0;
     }
   }
+
   .field--name-field-person {
     @extend h2;
   }
+
   .field--name-field-override-role {
     font-weight: 700;
   }
@@ -150,6 +161,7 @@
 
 .field--name-body table {
   border: none;
+
   tbody,
   tr,
   td {

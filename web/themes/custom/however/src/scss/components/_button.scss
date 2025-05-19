@@ -11,6 +11,7 @@ a.button {
   display: inline-block;
   text-decoration: none;
   padding: 14px 30px;
+
   &:hover {
     background: color.adjust(#fffcfc, $lightness: -4%);
   }

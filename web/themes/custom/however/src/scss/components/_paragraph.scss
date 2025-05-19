@@ -4,6 +4,7 @@
 .paragraph--type--how2-subsection,
 .paragraph--type--open-title-text {
   font-family: vars.$serif-font;
+
   p {
     line-height: 1.8;
   }
@@ -13,7 +14,8 @@
   .field--name-field-title {
     font-weight: bold;
   }
+
   .field--name-field-text p {
-    margin: 0 0 .4em 0;
+    margin: 0 0 0.4em;
   }
 }

@@ -4,20 +4,17 @@
   font-size: 1.125rem;
   margin: 0;
   display: flex;
-  gap: .25em;
+  gap: 0.25em;
 
   li {
-    &.is-active {
-    }
-
     a {
       font-size: 1em;
       font-weight: 600;
       line-height: 1;
-      padding: .35em .5em;
+      padding: 0.35em 0.5em;
       background-color: color.adjust(#fff, $alpha: -0.7);
-      border-radius: .25em;
-      transition: all .2s linear;
+      border-radius: 0.25em;
+      transition: all 0.2s linear;
 
       &:hover {
         background-color: #fff;

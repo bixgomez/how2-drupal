@@ -1,9 +1,11 @@
-.block-card, .card, %card {
+.block-card,
+.card,
+%card {
   padding: 36px 24px;
   border: 1px solid #515151;
   box-sizing: border-box;
+
   h2 {
     font-size: 24px;
   }
 }
-

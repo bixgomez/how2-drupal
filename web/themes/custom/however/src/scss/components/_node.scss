@@ -9,10 +9,12 @@
     font-weight: 700;
     justify-content: space-between;
     flex-wrap: wrap;
+
     .left {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+
       > div:not(:last-of-type)::after {
         content: "";
         height: 10px;
@@ -23,36 +25,43 @@
         margin-left: 12px;
       }
     }
+
     .right {
     }
+
     a {
       color: vars.$text-color;
       text-decoration: none;
+
       &:hover {
         text-decoration: underline;
       }
     }
   }
+
   &.node--view-mode-full > .issue-meta {
     border-top: 1px solid #919191;
     border-bottom: 1px solid #919191;
     padding: 18px 0;
-    margin: 54px 0 62px 0 !important;
+    margin: 54px 0 62px !important;
   }
 }
 
 .node--view-mode-search-result {
   margin-bottom: 54px;
+
   h2 {
     margin-bottom: 8px;
   }
+
   .article__meta .issue-meta {
     border: none;
     padding: 0;
     margin-top: 0;
   }
+
   .field--name-field-person {
-    &:before {
+    &::before {
       content: "by";
       font-style: italic;
       margin-right: 4px;
@@ -61,16 +70,18 @@
 }
 
 .issue-top-content {
-  @media all and (min-width: 960px) {
+  @media all and (width >= 960px) {
     display: flex;
     justify-content: center;
     gap: 36px;
     align-items: center;
     max-width: 92%;
     margin: 0 auto;
+
     .image {
       width: 25%;
     }
+
     .issue-title-meta {
       width: calc(75% - 36px);
     }
@@ -100,8 +111,7 @@
   .field--name-field-how2-issue,
   .field--name-field-how-ever-issue {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+    flex-flow: column wrap;
     justify-content: center;
     gap: 30px;
 
@@ -113,7 +123,7 @@
       height: 100%;
     }
 
-    @media all and (min-width: 480px) {
+    @media all and (width >= 480px) {
       flex-direction: row;
 
       > .field__item {
@@ -121,13 +131,13 @@
       }
     }
 
-    @media all and (min-width: 768px) {
+    @media all and (width >= 768px) {
       > .field__item {
         width: calc(33% - 30px);
       }
     }
 
-    @media all and (min-width: 1024px) {
+    @media all and (width >= 1024px) {
       > .field__item {
         width: calc(25% - 30px);
       }
@@ -143,7 +153,7 @@
       justify-content: flex-start;
       gap: 24px;
       list-style: none;
-      margin: 24px 0 36px 0;
+      margin: 24px 0 36px;
       padding: 0;
 
       li {
@@ -169,15 +179,15 @@
     display: none;
     opacity: 0;
     transition: opacity 0.5s ease;
-    -webkit-animation-duration: 1s;
     animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
+    animation-duration: 1s;
+    animation-fill-mode: both;
     animation-fill-mode: both;
 
     &.active {
       display: block;
       opacity: 1;
-      -webkit-animation-name: fadeIn;
+      animation-name: fadeIn;
       animation-name: fadeIn;
     }
   }
@@ -187,6 +197,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -222,6 +233,7 @@
     font-weight: bold;
     color: vars.$text-color;
   }
+
   .node--type-how2-section.node--view-mode-full
     .field--name-field-how2-piece
     > .field__item,
@@ -229,7 +241,7 @@
     .field--name-field-how-ever-piece
     > .field__item {
     line-height: 1.8;
-    margin: 0 0 0.4em 0;
+    margin: 0 0 0.4em;
   }
 }
 
@@ -237,17 +249,21 @@
   .view-article-section {
     text-align: center;
   }
+
   .node__content {
     max-width: 748px;
     margin: 0 auto;
   }
+
   .field--name-body,
   .field--name-field-body-sections {
     font-family: vars.$serif-font;
+
     p {
       line-height: 1.8;
     }
   }
+
   .field--name-field-body-sections .field--name-field-title {
     font-weight: bold;
     font-size: 20px;
@@ -260,10 +276,12 @@
   .node__content {
     width: 100% !important;
     max-width: 100% !important;
+
     .article-content {
       display: flex;
       gap: 80px;
     }
+
     .content-text-inner {
       width: calc(100% - 280px);
     }

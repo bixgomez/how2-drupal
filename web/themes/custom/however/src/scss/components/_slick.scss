@@ -1,6 +1,6 @@
 @use "../abstracts/mixins" as mixins;
 
-*{
+* {
   min-height: 0;
   min-width: 0;
 }
@@ -13,34 +13,47 @@
   border: none;
   position: absolute;
   top: 50%;
-  &:before {
+
+  &::before {
     background-image: none;
     display: block;
-    content: '';
+    content: "";
     width: 38px;
     height: 38px;
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
   }
+
   &.slick-prev {
     left: -20px;
-    @media all and (min-width: 768px) {
+
+    @media all and (width >= 768px) {
       left: -30px;
     }
   }
-  &.slick-prev:before {
-    @include mixins.background-svg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/></svg>');
-    content: '';
+
+  &.slick-prev::before {
+    @include mixins.background-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/></svg>'
+    );
+
+    content: "";
   }
+
   &.slick-next {
     right: -3px;
-    @media all and (min-width: 768px) {
+
+    @media all and (width >= 768px) {
       right: -12px;
     }
   }
-  &.slick-next:before {
-    @include mixins.background-svg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/></svg>');
-    content: '';
+
+  &.slick-next::before {
+    @include mixins.background-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/></svg>'
+    );
+
+    content: "";
   }
 }

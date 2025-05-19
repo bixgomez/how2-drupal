@@ -13,17 +13,17 @@ nav ul.menu {
 .region-navigation {
   display: none;
 
-  @media all and (min-width: 768px) {
+  @media all and (width >= 768px) {
     display: flex;
     flex-grow: 1;
     justify-content: space-between;
     align-items: center;
     margin-left: 2rem;
-  
+
     .block-menu {
       flex-grow: 1;
     }
-  
+
     .block.views-exposed-form {
       flex-shrink: 1;
     }
@@ -39,27 +39,31 @@ nav ul.menu {
   > ul.menu {
     justify-content: flex-end;
     gap: 1.5rem;
-  
+
     > li.menu-item {
       position: relative;
-      padding: .25rem 0;
+      padding: 0.25rem 0;
+
       // background-color: pink;
-  
+
       > a {
         color: vars.$text-color;
         font-weight: bold;
         text-decoration: none;
         display: block;
-        padding: .25rem 0;
+        padding: 0.25rem 0;
+
         // background-color: yellow;
-  
-        &:hover, &.active, &.active-trail {
+
+        &:hover,
+        &.active,
+        &.active-trail {
           text-decoration: underline;
         }
       }
     }
   }
-  
+
   .menu-item--collapsed {
     list-style-image: none;
     list-style-type: none;
@@ -72,12 +76,13 @@ ul.menu li.menu-item--expanded {
   list-style-type: none;
 }
 
-//dropdowns
+// dropdowns
 #block-however-main-menu > ul.menu > li.menu-item--expanded > ul {
-  @include mixins.box-shadow();
+  @include mixins.box-shadow;
+
   display: none;
   position: absolute;
-  background: #ffffff;
+  background: #fff;
   z-index: 1000;
   left: 0;
   top: 2.25rem;
@@ -94,10 +99,11 @@ ul.menu li.menu-item--expanded {
 
   li a {
     width: 100%;
-    padding: .25rem .5rem;
+    padding: 0.25rem 0.5rem;
     text-decoration: none;
     margin: 0;
     display: inline-block;
+
     // background-color: pink;
 
     &:hover {
@@ -132,14 +138,14 @@ ul.menu li.menu-item--expanded {
 }
 
 .mobile-menu-icon {
-  @media all and (min-width: 768px) {
+  @media all and (width >= 768px) {
     display: none;
   }
 }
 
 #mobile-navigation {
   display: none;
-  background: #ffffff;
+  background: #fff;
   padding: 54px 18px;
   text-align: center;
 
@@ -148,10 +154,7 @@ ul.menu li.menu-item--expanded {
     position: absolute;
     width: 100%;
     height: 100vh;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
   }
 
   .close-modal {

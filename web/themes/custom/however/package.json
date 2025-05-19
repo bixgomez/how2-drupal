@@ -3,15 +3,18 @@
     "version": "1.0.0",
     "description": "Drupal theme build tools",
     "scripts": {
-      "build": "node simple-build.js",
-      "watch": "node simple-build.js --watch",
-      "dev": "concurrently \"npm run watch\" \"browser-sync start --config browsersync.config.js\""
+        "build": "node simple-build.js",
+        "watch": "node simple-build.js --watch",
+        "dev": "concurrently \"npm run watch\" \"browser-sync start --config browsersync.config.js\""
     },
     "devDependencies": {
-      "browser-sync": "^2.29.3",
-      "chokidar": "^3.5.3",
-      "concurrently": "^8.2.2",
-      "sass": "^1.69.5",
-      "terser": "^5.24.0"
+        "browser-sync": "^2.29.3",
+        "chokidar": "^3.5.3",
+        "concurrently": "^8.2.2",
+        "sass": "^1.69.5",
+        "stylelint": "^16.19.1",
+        "stylelint-config-standard-scss": "^15.0.1",
+        "stylelint-scss": "^6.12.0",
+        "terser": "^5.24.0"
     }
-  }
+}

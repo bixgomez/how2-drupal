@@ -3,17 +3,15 @@
 * {
   box-sizing: border-box;
 }
- 
-.layout-container, 
+
+.layout-container,
 %layout-container {
-  // border-left: 1px dashed rgba(maroon, .5);
-  // border-right: 1px dashed rgba(maroon, .5);
   width: 92%;
   margin: 0 auto;
   max-width: 1100px;
-  transition: width .2s linear;
+  transition: width 0.2s linear;
 
-  @media all and (min-width: 960px) {
+  @media all and (width >= 960px) {
     width: 96%;
   }
 }
@@ -22,7 +20,7 @@
   background-color: color.adjust(#000, $alpha: -0.9);
 }
 
-.full-width, 
+.full-width,
 %full-width {
   width: 100vw;
   position: relative;

@@ -17,7 +17,7 @@ a.more,
   text-decoration: none;
   position: relative;
 
-  &:after {
+  &::after {
     content: "⇨";
     display: inline-block;
     margin-left: 8px;

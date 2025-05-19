@@ -3,7 +3,7 @@
 
 .teaser-card {
   font-size: 1rem;
-  background-color: rgba(blue, 0.075);
+  background-color: rgb(blue, 0.075);
   padding: 0.75em;
   border: 1px solid #515151;
   position: relative;
@@ -27,7 +27,7 @@
   > h2 {
     margin: 0 0 0.75em;
     padding: 0 0 0.75em;
-    border-bottom: 1px solid rgba(black, 0.25);
+    border-bottom: 1px solid rgb(black, 0.25);
     font-size: 1em;
 
     span {
@@ -52,18 +52,18 @@
   }
 
   &__section {
-    background-color: rgba(orange, 0.1);
+    background-color: rgb(orange, 0.1);
 
     &:hover {
-      background-color: rgba(orange, 0.2);
+      background-color: rgb(orange, 0.2);
     }
   }
 
   &__article {
-    background-color: rgba(purple, 0.1);
+    background-color: rgb(purple, 0.1);
 
     &:hover {
-      background-color: rgba(purple, 0.2);
+      background-color: rgb(purple, 0.2);
     }
   }
 }
@@ -105,9 +105,9 @@
       left: 0;
       top: 0;
       background: #171717;
-      color: #ffffff;
+      color: #fff;
       padding: 2px 12px;
-      border-radius: 0 0 4px 0;
+      border-radius: 0 0 4px;
       font-size: 12px;
       font-weight: bold;
       line-height: 1;
@@ -118,7 +118,7 @@
       right: 10px;
       bottom: -24px;
       background: #171717;
-      color: #ffffff;
+      color: #fff;
       line-height: 1;
       font-size: 14px;
       padding: 12px;
@@ -135,7 +135,7 @@
   }
 
   > .content {
-    padding: 8px 24px 36px 24px;
+    padding: 8px 24px 36px;
 
     .journal-logo img {
       display: inline-block;
@@ -185,7 +185,7 @@
     display: inline-block;
     background: #2e2e2e;
     font-size: 48px;
-    color: #ffffff;
+    color: #fff;
     font-weight: 700;
     border-radius: 30px;
     width: 60px;
