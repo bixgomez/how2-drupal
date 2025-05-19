@@ -8,13 +8,16 @@
         "dev": "concurrently \"npm run watch\" \"browser-sync start --config browsersync.config.js\""
     },
     "devDependencies": {
+        "@tailwindcss/postcss": "^4.1.7",
         "browser-sync": "^2.29.3",
         "chokidar": "^3.5.3",
         "concurrently": "^8.2.2",
+        "postcss": "^8.5.3",
         "sass": "^1.69.5",
         "stylelint": "^16.19.1",
         "stylelint-config-standard-scss": "^15.0.1",
         "stylelint-scss": "^6.12.0",
+        "tailwindcss": "^4.1.7",
         "terser": "^5.24.0"
     }
 }
