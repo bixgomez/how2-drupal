@@ -6,18 +6,18 @@
 	{% endif %}
 	{{ title_suffix }}
 
-	<div class="columns is-hcentered">
-		<div class="column is-vcentered is-flex is-justify-content-flex-start">
+	<div class="columns">
+		<div class="column">
 			{% if volume_navigation.prev is not empty %}
-				<a href="{{ path('entity.node.canonical', {'node': volume_navigation.prev.id}) }}" class="button is-inverted is-small">{{ volume_navigation.prev.label }}</a>
+				<a href="{{ path('entity.node.canonical', {'node': volume_navigation.prev.id}) }}" class="button">{{ volume_navigation.prev.label }}</a>
 			{% endif %}
 		</div>
-		<div class="column is-vcentered  is-flex is-justify-content-center">
+		<div class="column">
 			{{ archive_link }}
 		</div>
-		<div class="column is-vcentered is-flex is-justify-content-flex-end">
+		<div class="column">
 			{% if volume_navigation.next is not empty %}
-				<a href="{{ path('entity.node.canonical', {'node': volume_navigation.next.id}) }}" class="button is-inverted is-small">{{ volume_navigation.next.label }}</a>
+				<a href="{{ path('entity.node.canonical', {'node': volume_navigation.next.id}) }}" class="button">{{ volume_navigation.next.label }}</a>
 			{% endif %}
 		</div>
 	</div>
