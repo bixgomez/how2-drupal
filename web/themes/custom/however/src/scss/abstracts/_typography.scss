@@ -11,6 +11,23 @@ body {
   color: vars.$text-color;
   font-size: 1rem;
   line-height: vars.$line-height--md;
+  background-color: #fff;
+  min-height: 100vh;
+
+  > .dialog-off-canvas-main-canvas {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page-header,
+  .page-footer {
+    flex-shrink: 1;
+  }
+
+  .page-content-area {
+    flex-grow: 1;
+  }
 }
 
 // 54, 36, 24, 16

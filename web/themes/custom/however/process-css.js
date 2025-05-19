@@ -6,7 +6,7 @@ const sass = require("sass");
 const { minify } = require("terser");
 const chokidar = require("chokidar");
 
-// Ensure directories exist
+// Ensure directory exists
 function ensureDir(dir) {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
@@ -25,7 +25,7 @@ if (!fs.existsSync(tailwindImportFile)) {
   fs.writeFileSync(tailwindImportFile, '@import "tailwindcss";\n');
 }
 
-// Process Tailwind CSS
+// Process Tailwind CSS and return the output directly (no file write)
 async function processTailwindCSS() {
   try {
     console.log("Processing Tailwind CSS...");
@@ -46,10 +46,9 @@ async function processTailwindCSS() {
     // Process with PostCSS
     const result = await postcss(plugins).process(css, {
       from: tailwindImportFile,
-      to: path.join(distCssDir, "tailwind.min.css"),
+      to: path.join(distCssDir, "styles.min.css"), // Change destination to final file
     });
 
-    fs.writeFileSync(path.join(distCssDir, "tailwind.min.css"), result.css);
     console.log("Tailwind CSS processed successfully");
     return result.css;
   } catch (err) {
@@ -67,6 +66,8 @@ async function processSass() {
       sourceMap: true,
       loadPaths: ["node_modules"],
     });
+
+    ensureDir(distCssDir);
 
     // Get the processed Tailwind CSS
     const tailwindCSS = await processTailwindCSS();
@@ -112,7 +113,7 @@ async function processJS() {
 
 // Main build function
 async function build() {
-  await processSass(); // This processes both Sass and Tailwind
+  await processSass(); // This now internally calls processTailwindCSS
   await processJS();
   console.log("Build completed");
 }
@@ -124,13 +125,12 @@ if (process.argv.includes("--watch")) {
   // Initial build
   build();
 
-  // Watch Twig templates - Add this section!
+  // Watch templates for Tailwind class changes
   chokidar.watch("./templates/**/*.twig").on("change", async (path) => {
     console.log(`Template file changed: ${path}`);
-    await processSass(); // This will rebuild Tailwind based on the updated template
+    await processSass();
   });
 
-  // Also add components if you have them
   chokidar.watch("./components/**/*.twig").on("change", async (path) => {
     console.log(`Component file changed: ${path}`);
     await processSass();
@@ -142,18 +142,26 @@ if (process.argv.includes("--watch")) {
     await processSass();
   });
 
+  // Watch SCSS files
   chokidar.watch("src/scss/**/*.scss").on("change", async (path) => {
     console.log(`SCSS file changed: ${path}`);
     await processSass();
   });
 
+  // Watch JS files
   chokidar.watch("src/js/**/*.js").on("change", async (path) => {
     console.log(`JS file changed: ${path}`);
     await processJS();
   });
 
+  // Watch config files
   chokidar.watch("tailwind.config.js").on("change", async (path) => {
     console.log(`Tailwind config changed: ${path}`);
+    await processSass();
+  });
+
+  chokidar.watch("postcss.config.js").on("change", async (path) => {
+    console.log(`PostCSS config changed: ${path}`);
     await processSass();
   });
 } else {

@@ -11,13 +11,13 @@ module.exports = {
   ],
 
   // Auto-open browser window
-  open: true,
+  open: false,
 
   // Notify on changes
   notify: true,
 
   // Use HTTPS
-  https: true,
+  https: false,
 
   // Ignore certificate errors
   httpModule: {
