@@ -6,10 +6,10 @@
 	{% endif %}
 	{{ title_suffix }}
 
-	<div class="flex my-5">
+	<div class="flex !my-5">
 		<div class="w-1/3">
 			{% if volume_navigation.prev is not empty %}
-				<a href="{{ path('entity.node.canonical', {'node': volume_navigation.prev.id}) }}" class="px-3 py-1 text-sm !bg-gray-100 border border-gray-300 rounded hover:bg-gray-200 inline-block">
+				<a href="{{ path('entity.node.canonical', {'node': volume_navigation.prev.id}) }}" class="button button--primary button--small">
 					<span aria-hidden="true">←</span>
 					{{ volume_navigation.prev.label }}
 				</a>
@@ -22,7 +22,7 @@
 
 		<div class="w-1/3 text-right">
 			{% if volume_navigation.next is not empty %}
-				<a href="{{ path('entity.node.canonical', {'node': volume_navigation.next.id}) }}" class="px-3 py-1 text-sm !bg-gray-100 border border-gray-300 rounded hover:bg-gray-200 inline-block">
+				<a href="{{ path('entity.node.canonical', {'node': volume_navigation.next.id}) }}" class="button button--primary button--small">
 					{{ volume_navigation.next.label }}
 					<span aria-hidden="true">→</span>
 				</a>

@@ -70,7 +70,7 @@
 }
 
 .issue-top-content {
-  @media all and (width >= 960px) {
+  @media all and (width >= 1024px) {
     display: flex;
     justify-content: center;
     gap: 36px;
@@ -180,14 +180,11 @@
     opacity: 0;
     transition: opacity 0.5s ease;
     animation-duration: 1s;
-    animation-duration: 1s;
-    animation-fill-mode: both;
     animation-fill-mode: both;
 
     &.active {
       display: block;
       opacity: 1;
-      animation-name: fadeIn;
       animation-name: fadeIn;
     }
   }

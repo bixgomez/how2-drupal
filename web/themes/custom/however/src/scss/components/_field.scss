@@ -39,12 +39,8 @@
 .field--name-field-sections-however,
 .field--name-field-section {
   column-count: 3;
-  column-count: 3;
-  column-count: 3;
   margin: 1.5em 0;
   padding: 0;
-  column-gap: 1.5em;
-  column-gap: 1.5em;
   column-gap: 1.5em;
 
   > .field__item {
@@ -98,7 +94,7 @@
       width: 120px;
     }
 
-    @media all and (width >= 960px) {
+    @media all and (width >= 1024px) {
       .field__item {
         width: 200px;
       }

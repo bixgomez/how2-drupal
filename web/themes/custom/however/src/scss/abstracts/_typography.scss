@@ -59,14 +59,6 @@ h1,
 %h1 {
   font-size: 1.75rem;
   margin-bottom: 0.25em;
-
-  @media all and (width >= 768px) {
-    font-size: 1.75rem;
-  }
-
-  @media all and (width >= 1024px) {
-    font-size: 1.75rem;
-  }
 }
 
 h2,
@@ -105,17 +97,6 @@ h4,
 
   @media all and (width >= 1024px) {
     font-size: 1rem;
-  }
-}
-
-a,
-a:link,
-a:visited,
-a:focus {
-  color: vars.$c--red-dark;
-
-  &:hover {
-    text-decoration: none;
   }
 }
 

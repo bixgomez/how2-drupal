@@ -22,7 +22,7 @@
       width: 6rem;
       transition: width 0.2s linear;
 
-      @media all and (width >= 960px) {
+      @media all and (width >= 1024px) {
         width: 16rem;
       }
     }

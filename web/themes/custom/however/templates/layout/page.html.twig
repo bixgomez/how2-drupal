@@ -45,14 +45,16 @@
 
 <header id="page-header" class="page-header" role="banner">
 	<div class="container mx-auto px-4 transition-width duration-250 linear">
-		{{ page.branding }}
-		{{ page.navigation }}
-		<div class="mobile-menu-icon">
-			<a alt="toggle mobile" class="inactive" href="#mobile-navigation">
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24">
-					<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-				</svg>
-			</a>
+		<div class="flex justify-between">
+			{{ page.branding }}
+			{{ page.navigation }}
+			<div class="mobile-menu-icon flex justify-end items-center">
+				<a alt="toggle mobile" class="inactive" href="#mobile-navigation">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24">
+						<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+					</svg>
+				</a>
+			</div>
 		</div>
 	</div>
 </header>
