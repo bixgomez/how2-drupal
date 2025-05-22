@@ -1,32 +1,30 @@
-<article{{ attributes.addClass(classes) }}>
+<article{{attributes.addClass(classes)}}>
 
-  <div class="teaser-card-image">
-    {{ image_caption }}
-  </div>
+	<div class="publication-teaser-inner">
 
-  {% if title %}
-    {{ title_prefix }}
-    <h2 class="teaser-card-title">
-      <span><a href="{{ url }}" rel="bookmark">{{ title }}</a></span>
-    </h2>
-    {{ title_suffix }}
-  {% endif %}
+		<div class="publication-teaser-image">
+			{{ cover_thumbnail }}
+		</div>
 
-  {% if subtitle %}
-    <h3 class="teaser-card-subtitle">{{ subtitle }}</h3>
-  {% endif %}
+		<div{{content_attributes.addClass('node__content')}}>
 
-  {% if teaser_text %}
-    {{ teaser_text }}
-  {% endif %}
+			{{ issue_number }}
 
-  {% if body %}
-    {{ body }}
-  {% endif %}
+			<div class="issue-meta">
+				<div class="left">
+					<div class="issue-volume-number">{{ volume_issue }}</div>
+					{{ publication_date_display }}
+				</div>
+			</div>
 
-  <div class="info-box">
-    <div class="info-bit">{{ volume_reference }}</div>
-    <div class="info-bit">{{ issue_reference }}</div>
-  </div>
+			{{ title_prefix }}
+			{% if label %}
+				<a href="{{ url }}" rel="bookmark" class="publication-teaser-link">{{ title }}</a>
+			{% endif %}
+			{{ title_suffix }}
+
+		</div>
+
+	</div>
 
 </article>

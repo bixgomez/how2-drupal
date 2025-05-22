@@ -17,6 +17,7 @@ components:
     issue: components/issue
     volume: components/volume
     section-teaser: components/section-teaser
+    publication-teaser: components/publication-teaser
 
 regions:
   branding: 'Branding'

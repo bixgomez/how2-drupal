@@ -69,42 +69,19 @@
 #}
 {%
     set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'teaser-card',
-    'teaser-card--issue',
+    'publication-teaser',
+    'publication-teaser--issue',
 ]
 %}
 
-{{ attach_library('classy/node') }}
-
-<article{{ attributes.addClass(classes) }}>
-
-    {{ content.field_cover_thumbnail }}
-
-    <div{{ content_attributes.addClass('node__content') }}>
-        
-        {{ content.field_issue_number }}
-        
-        <div class="issue-meta">
-            <div class="left">
-                <div class="issue-volume-number">{{ volume_issue }}</div>
-                {{ content.field_publication_date_display }}
-            </div>
-        </div>
-        
-        {{ title_prefix }}
-        {% if label %}
-            <h2{{ title_attributes }}>
-                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-            </h2>
-        {% endif %}
-        {{ title_suffix }}
-
-    </div>
-
-</article>
+{% include "@publication-teaser/publication-teaser.html.twig" with {
+  classes: classes,
+  title: label,
+  url: url,
+  title_prefix: title_prefix,
+  title_suffix: title_suffix,
+  cover_thumbnail: content.field_cover_thumbnail,
+  volume_issue: volume_issue,
+  issue_number: content.field_issue_number,
+  publication_date_display: content.field_publication_date_display,
+} %}
