@@ -1,4 +1,7 @@
+/* stylelint-disable at-rule-no-deprecated */
 .publication-teaser {
+  @apply transition-colors duration-500;
+
   font-size: 1rem;
   background-color: var(--color-accent);
   padding: 0;
@@ -28,6 +31,8 @@
   }
 
   .publication-teaser-image {
+    @apply transition-colors duration-500;
+
     text-align: center;
     width: 100cqi;
     height: 100cqi;
@@ -53,6 +58,8 @@
   }
 
   .field--name-field-issue-number {
+    @apply transition-colors duration-500;
+
     display: flex;
     background: #2e2e2e;
     background-color: var(--color-primary-dark);
@@ -81,20 +88,22 @@
     flex-wrap: wrap;
     justify-content: center;
     font-weight: normal;
+    font-size: 6cqi;
 
     .left {
       display: flex;
-      gap: 12px;
+      gap: 2cqi;
       flex-wrap: wrap;
 
       > div:not(:last-of-type)::after {
         content: "";
-        height: 10px;
-        width: 10px;
+        height: 2cqi;
+        width: 2cqi;
+        padding-bottom: 2cqi;
         background-color: #bbb;
         border-radius: 50%;
         display: inline-block;
-        margin-left: 12px;
+        margin-left: 2cqi;
       }
     }
   }
