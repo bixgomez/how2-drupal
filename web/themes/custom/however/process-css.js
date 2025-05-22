@@ -1,220 +1,144 @@
 // process-css.js
-const fs = require("fs");
+
+// ── Patch module resolution so `require('tailwindcss')` always picks up
+//    this folder's node_modules, even if you run npm from above.
 const path = require("path");
+process.env.NODE_PATH = path.join(__dirname, "node_modules");
+require("module").Module._initPaths();
+
+// ── Also make sure cwd is this file’s folder (just in case)
+process.chdir(path.dirname(__filename));
+
+const fs = require("fs");
 const postcss = require("postcss");
 const sass = require("sass");
-const { minify } = require("terser");
-const chokidar = require("chokidar");
 const glob = require("glob");
+const chokidar = require("chokidar");
+const { minify } = require("terser");
 
-// Ensure directory exists
+// Helper: mkdir -p
 function ensureDir(dir) {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 }
 
-const srcCssDir = path.join(__dirname, "src", "css");
-const distCssDir = path.join(__dirname, "dist", "css");
+const projectRoot = __dirname;
+const srcDir = path.join(projectRoot, "src");
+const distDir = path.join(projectRoot, "dist");
 
-ensureDir(srcCssDir);
+// CSS paths
+const tailwindInput = path.join(srcDir, "css", "tailwind.css");
+const scssEntry = path.join(srcDir, "scss", "styles.scss");
+const componentCssGlob = path.join("components", "**", "*.css");
+const distCssDir = path.join(distDir, "css");
+const distCssFile = path.join(distCssDir, "styles.min.css");
+
+// JS paths
+const jsSrcDir = path.join(srcDir, "js");
+const distJsDir = path.join(distDir, "js");
+
+// ensure output dirs exist
 ensureDir(distCssDir);
+ensureDir(distJsDir);
 
-// Create or update the tailwind import file
-const tailwindImportFile = path.join(srcCssDir, "tailwind.css");
-if (!fs.existsSync(tailwindImportFile)) {
-  fs.writeFileSync(tailwindImportFile, '@import "tailwindcss";\n');
+// if tailwind.css doesn’t exist, stub it
+if (!fs.existsSync(tailwindInput)) {
+  fs.writeFileSync(tailwindInput, '@import "tailwindcss";\n');
 }
 
-// Process Tailwind CSS and return the output directly (no file write)
-async function processTailwindCSS() {
-  try {
-    console.log("Processing Tailwind CSS...");
-    const css = fs.readFileSync(tailwindImportFile, "utf8");
-
-    // Use the PostCSS configuration defined in postcss.config.js
-    const postcssConfig = require("./postcss.config.js");
-    const plugins = [];
-
-    // Convert postcss.config.js plugins object to array of instantiated plugins
-    Object.entries(postcssConfig.plugins).forEach(([name, options]) => {
-      const plugin = require(name);
-      if (typeof plugin === "function") {
-        plugins.push(plugin(options));
-      }
-    });
-
-    // Process with PostCSS
-    const result = await postcss(plugins).process(css, {
-      from: tailwindImportFile,
-      to: path.join(distCssDir, "styles.min.css"), // Change destination to final file
-    });
-
-    console.log("Tailwind CSS processed successfully");
-    return result.css;
-  } catch (err) {
-    console.error("Error processing Tailwind CSS:", err);
-    return "";
+// load PostCSS plugins
+const postcssConfig = require("./postcss.config.js");
+const postcssPlugins = Object.entries(postcssConfig.plugins).map(
+  ([pkg, opts]) => {
+    const plugin = require(pkg);
+    return typeof plugin === "function" ? plugin(opts) : plugin;
   }
-}
+);
 
-// Process SCSS
-async function processSass() {
+async function processCSS() {
   try {
-    console.log("Processing SCSS...");
-    const result = sass.compile("src/scss/styles.scss", {
+    console.log("▶️  Building CSS…");
+
+    // 1) Tailwind import + any @apply you’ve added there
+    const twCss = fs.readFileSync(tailwindInput, "utf8");
+
+    // 2) Raw component CSS
+    const compCss = glob
+      .sync(componentCssGlob)
+      .map((f) => `/* —— ${f} —— */\n` + fs.readFileSync(f, "utf8"))
+      .join("\n\n");
+
+    // 3) Compile Sass
+    const sassResult = sass.compile(scssEntry, {
       style: "compressed",
       sourceMap: true,
       loadPaths: ["node_modules"],
     });
 
-    ensureDir(distCssDir);
+    // 4) One PostCSS pass over everything
+    const combined = [twCss, compCss, sassResult.css].join("\n\n");
+    const result = await postcss(postcssPlugins).process(combined, {
+      from: undefined,
+      to: distCssFile,
+    });
 
-    // Get the processed Tailwind CSS
-    const tailwindCSS = await processTailwindCSS();
-
-    // Get the processed component CSS
-    const componentCSS = await processComponentCSS();
-
-    // Combine Tailwind + Component CSS + Sass output
-    const combinedCSS = tailwindCSS + componentCSS + result.css;
-
-    // Write the combined file
-    fs.writeFileSync(path.join(distCssDir, "styles.min.css"), combinedCSS);
-    console.log("CSS processed successfully");
+    fs.writeFileSync(distCssFile, result.css);
+    console.log(
+      `✅  CSS written to ${path.relative(projectRoot, distCssFile)}`
+    );
   } catch (err) {
-    console.error("CSS Error:", err.message);
+    console.error("‼️  CSS build error:", err);
   }
 }
 
-// Process JS
 async function processJS() {
   try {
-    console.log("Processing JS...");
+    console.log("▶️  Building JS…");
 
-    // Process vanilla JS
-    const jsContent = fs.readFileSync("src/js/scripts.js", "utf8");
-    const minified = await minify(jsContent, {
+    // scripts.js → scripts.min.js
+    const jsIn = fs.readFileSync(path.join(jsSrcDir, "scripts.js"), "utf8");
+    const jsMin = await minify(jsIn, {
       sourceMap: true,
       format: { comments: false },
     });
+    fs.writeFileSync(path.join(distJsDir, "scripts.min.js"), jsMin.code);
 
-    // Process jQuery JS
-    const jQueryContent = fs.readFileSync("src/js/scripts-jquery.js", "utf8");
-    const minifiedJQuery = await minify(jQueryContent, {
+    // scripts-jquery.js → scripts-jquery.min.js
+    const jqIn = fs.readFileSync(
+      path.join(jsSrcDir, "scripts-jquery.js"),
+      "utf8"
+    );
+    const jqMin = await minify(jqIn, {
       sourceMap: true,
       format: { comments: false },
     });
+    fs.writeFileSync(path.join(distJsDir, "scripts-jquery.min.js"), jqMin.code);
 
-    ensureDir("dist/js");
-    fs.writeFileSync("dist/js/scripts.min.js", minified.code);
-    fs.writeFileSync("dist/js/scripts-jquery.min.js", minifiedJQuery.code);
-    console.log("JS processed successfully");
+    console.log(`✅  JS written to ${path.relative(projectRoot, distDir)}/js`);
   } catch (err) {
-    console.error("JS Error:", err.message);
+    console.error("‼️  JS build error:", err);
   }
 }
 
-// Main build function
 async function build() {
-  await processSass(); // This now internally calls processTailwindCSS
+  await processCSS();
   await processJS();
-  console.log("Build completed");
+  console.log("🏁  Build complete");
 }
 
-// Execute based on command-line arguments
 if (process.argv.includes("--watch")) {
-  console.log("Watching for changes...");
-
-  // Initial build
+  console.log("👀  Watching for changes…");
   build();
-
-  // Watch templates for Tailwind class changes
-  chokidar.watch("./templates/**/*.twig").on("change", async (path) => {
-    console.log(`Template file changed: ${path}`);
-    await processSass();
-  });
-
-  chokidar.watch("./components/**/*.twig").on("change", async (path) => {
-    console.log(`Component file changed: ${path}`);
-    await processSass();
-  });
-
-  // Watch Tailwind CSS input file
-  chokidar.watch("src/css/tailwind.css").on("change", async (path) => {
-    console.log(`Tailwind file changed: ${path}`);
-    await processSass();
-  });
-
-  chokidar.watch("components/**/*.css").on("change", async (path) => {
-    console.log(`Component CSS file changed: ${path}`);
-    await processSass();
-  });
-
-  // Watch SCSS files
-  chokidar.watch("src/scss/**/*.scss").on("change", async (path) => {
-    console.log(`SCSS file changed: ${path}`);
-    await processSass();
-  });
-
-  // Watch JS files
-  chokidar.watch("src/js/**/*.js").on("change", async (path) => {
-    console.log(`JS file changed: ${path}`);
-    await processJS();
-  });
-
-  // Watch config files
-  chokidar.watch("tailwind.config.js").on("change", async (path) => {
-    console.log(`Tailwind config changed: ${path}`);
-    await processSass();
-  });
-
-  chokidar.watch("postcss.config.js").on("change", async (path) => {
-    console.log(`PostCSS config changed: ${path}`);
-    await processSass();
-  });
+  chokidar
+    .watch([
+      "templates/**/*.twig",
+      componentCssGlob,
+      "tailwind.config.js",
+      "postcss.config.js",
+      tailwindInput,
+      "src/scss/**/*.scss",
+    ])
+    .on("change", () => processCSS());
+  chokidar.watch("src/js/**/*.js").on("change", () => processJS());
 } else {
   build();
-}
-
-// Function to gather component CSS files
-async function processComponentCSS() {
-  try {
-    // Find all CSS files in the components directory
-    const componentCssFiles = glob.sync("components/**/*.css");
-
-    if (componentCssFiles.length === 0) {
-      console.log("No component CSS files found");
-      return "";
-    }
-
-    // Read and concatenate all component CSS files
-    let combinedCSS = "";
-    for (const cssFile of componentCssFiles) {
-      const css = fs.readFileSync(cssFile, "utf8");
-      combinedCSS += `/* ${cssFile} */\n${css}\n\n`;
-    }
-
-    // Process with PostCSS (for Tailwind)
-    const postcssConfig = require("./postcss.config.js");
-    const plugins = [];
-
-    // Convert postcss.config.js plugins object to array of instantiated plugins
-    Object.entries(postcssConfig.plugins).forEach(([name, options]) => {
-      const plugin = require(name);
-      if (typeof plugin === "function") {
-        plugins.push(plugin(options));
-      }
-    });
-
-    // Process with PostCSS
-    const result = await postcss(plugins).process(combinedCSS, {
-      from: undefined,
-      to: path.join(distCssDir, "components.css"),
-    });
-
-    return result.css;
-  } catch (err) {
-    return "";
-  }
 }

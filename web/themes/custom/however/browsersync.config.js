@@ -1,8 +1,6 @@
 module.exports = {
-  // Your DDEV site URL
   proxy: "https://however-drupal.ddev.site/",
 
-  // Watch these files for changes
   files: [
     "dist/css/*.css",
     "dist/js/*.js",
@@ -10,16 +8,26 @@ module.exports = {
     "components/**/*.html.twig",
   ],
 
-  // Auto-open browser window
   open: false,
-
-  // Notify on changes
   notify: true,
 
-  // Use HTTPS
-  https: false,
+  // Add these options for better file watching
+  watchOptions: {
+    ignoreInitial: true,
+    awaitWriteFinish: {
+      stabilityThreshold: 100,
+      pollInterval: 10,
+    },
+  },
 
-  // Ignore certificate errors
+  // Better reload behavior
+  reloadOnRestart: true,
+  injectChanges: true,
+
+  // DDEV-specific settings
+  https: false,
+  host: "0.0.0.0",
+
   httpModule: {
     rejectUnauthorized: false,
   },

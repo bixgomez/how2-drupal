@@ -18,6 +18,7 @@ components:
     volume: components/volume
     section-teaser: components/section-teaser
     publication-teaser: components/publication-teaser
+    issues-grid: components/issues-grid
 
 regions:
   branding: 'Branding'
