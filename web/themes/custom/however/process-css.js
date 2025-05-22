@@ -5,6 +5,7 @@ const postcss = require("postcss");
 const sass = require("sass");
 const { minify } = require("terser");
 const chokidar = require("chokidar");
+const glob = require("glob");
 
 // Ensure directory exists
 function ensureDir(dir) {
@@ -72,8 +73,11 @@ async function processSass() {
     // Get the processed Tailwind CSS
     const tailwindCSS = await processTailwindCSS();
 
-    // Combine Tailwind + Sass output
-    const combinedCSS = tailwindCSS + result.css;
+    // Get the processed component CSS
+    const componentCSS = await processComponentCSS();
+
+    // Combine Tailwind + Component CSS + Sass output
+    const combinedCSS = tailwindCSS + componentCSS + result.css;
 
     // Write the combined file
     fs.writeFileSync(path.join(distCssDir, "styles.min.css"), combinedCSS);
@@ -142,6 +146,11 @@ if (process.argv.includes("--watch")) {
     await processSass();
   });
 
+  chokidar.watch("components/**/*.css").on("change", async (path) => {
+    console.log(`Component CSS file changed: ${path}`);
+    await processSass();
+  });
+
   // Watch SCSS files
   chokidar.watch("src/scss/**/*.scss").on("change", async (path) => {
     console.log(`SCSS file changed: ${path}`);
@@ -166,4 +175,46 @@ if (process.argv.includes("--watch")) {
   });
 } else {
   build();
+}
+
+// Function to gather component CSS files
+async function processComponentCSS() {
+  try {
+    // Find all CSS files in the components directory
+    const componentCssFiles = glob.sync("components/**/*.css");
+
+    if (componentCssFiles.length === 0) {
+      console.log("No component CSS files found");
+      return "";
+    }
+
+    // Read and concatenate all component CSS files
+    let combinedCSS = "";
+    for (const cssFile of componentCssFiles) {
+      const css = fs.readFileSync(cssFile, "utf8");
+      combinedCSS += `/* ${cssFile} */\n${css}\n\n`;
+    }
+
+    // Process with PostCSS (for Tailwind)
+    const postcssConfig = require("./postcss.config.js");
+    const plugins = [];
+
+    // Convert postcss.config.js plugins object to array of instantiated plugins
+    Object.entries(postcssConfig.plugins).forEach(([name, options]) => {
+      const plugin = require(name);
+      if (typeof plugin === "function") {
+        plugins.push(plugin(options));
+      }
+    });
+
+    // Process with PostCSS
+    const result = await postcss(plugins).process(combinedCSS, {
+      from: undefined,
+      to: path.join(distCssDir, "components.css"),
+    });
+
+    return result.css;
+  } catch (err) {
+    return "";
+  }
 }
