@@ -68,23 +68,10 @@
  */
 #}
 
-{# {%
-  set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'teaser-card',
-    'teaser-card__article',
-  ]
-%} #}
-
 {%
   set classes = [
-    'teaser-card',
-    'teaser-card__article',
+    'section-teaser',
+    'section-teaser__article',
   ]
 %}
 
@@ -100,27 +87,3 @@
   issue_reference: content.field_issue_reference.0['#title'],
   classes: classes,
 } %}
-
-{# 
-
-{{ attach_library('classy/node') }}
-
-<article{{ attributes.addClass(classes) }}>
-
-  {{ title_prefix }}
-  {% if label and not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
-
-  <div{{ content_attributes.addClass('node__content') }}>
-    <hr>
-    {{ content.field_volume_reference }}
-    {{ content.field_issue_reference }}
-  </div>
-  
-</article> 
-
-#}
