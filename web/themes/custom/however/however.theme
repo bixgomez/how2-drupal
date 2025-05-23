@@ -5,266 +5,272 @@ use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\Core\Render\Markup;
 
-function however_preprocess_html(&$variables, $hook) {
-    if(!empty($variables['page']['sidebar'])) {
-        $variables['attributes']['class'][] = 'has-sidebar';
-    }
+function however_preprocess_html(&$variables, $hook)
+{
+  if (!empty($variables['page']['sidebar'])) {
+    $variables['attributes']['class'][] = 'has-sidebar';
+  }
 }
 
-function however_preprocess_page(&$variables, $hook) {
+function however_preprocess_page(&$variables, $hook) {}
 
+function however_preprocess_node(&$variables, $hook)
+{
+  $function = __FUNCTION__ . '__' . $variables['node']->getType();
+  // Each node type can have its own specific function
+  if (function_exists($function)) {
+    $function($variables, $hook);
+  }
+  $function = __FUNCTION__ . '__' . $variables['view_mode'];
+  // Each node type can have its own specific function
+  if (function_exists($function)) {
+    $function($variables, $hook);
+  }
 }
 
-function however_preprocess_node(&$variables, $hook) {
-    $function = __FUNCTION__ . '__' . $variables['node']->getType();
-    // Each node type can have its own specific function
-    if (function_exists($function)) {
-        $function($variables, $hook);
-    }
-    $function = __FUNCTION__ . '__' . $variables['view_mode'];
-    // Each node type can have its own specific function
-    if (function_exists($function)) {
-        $function($variables, $hook);
-    }
+function however_preprocess_node__contributor_name(&$variables, $hook)
+{
+  $variables['title_attributes']['class'][] = 'visually-hidden';
 }
 
-function however_preprocess_node__contributor_name(&$variables, $hook) {
-    $variables['title_attributes']['class'][] = 'visually-hidden';
+function however_preprocess_node__how2_issue(&$variables, $hook)
+{
+  $volume = null;
+
+  if (!empty($variables['node']->field_volume_reference) && !$variables['node']->field_volume_reference->isEmpty()) {
+    $volume_reference = $variables['node']->field_volume_reference->entity;
+    if ($volume_reference && $volume_reference->hasField('field_volume_number') && !$volume_reference->get('field_volume_number')->isEmpty()) {
+      $volume_number = $volume_reference->get('field_volume_number')->value;
+      $volume = 'vol. ' . $volume_number;
+      $variables['volume'] = $volume;
+    }
+  }
+
+  $issue = null;
+  if (!empty($variables['node']->field_issue_number) && !$variables['node']->field_issue_number->isEmpty()) {
+    $issue_number = $variables['node']->field_issue_number->getValue();
+    if (!empty($issue_number[0]['value'])) {
+      $issue_number = $issue_number[0]['value'];
+      $issue = 'no. ' . $issue_number;
+      $variables['issue'] = $issue;
+    }
+  }
+
+  // Only set volume_issue if both volume and issue are defined
+  if (isset($volume) && isset($issue)) {
+    $variables['volume_issue'] = $volume . ', ' . $issue;
+  } elseif (isset($volume)) {
+    $variables['volume_issue'] = $volume;
+  } elseif (isset($issue)) {
+    $variables['volume_issue'] = $issue;
+  }
+
+  if (!empty($variables['node']->field_short_description) && !$variables['node']->field_short_description->isEmpty()) {
+    $label = $variables['node']->field_short_description->getValue();
+    if (!empty($label[0]['value'])) {
+      $variables['label'] = $label[0]['value'];
+    }
+  }
 }
 
-function however_preprocess_node__how2_issue(&$variables, $hook) {
-    $volume = null;
+function however_preprocess_node__how2_section(&$variables, $hook)
+{
+  // Check if field_issue_reference exists and has a value
+  if (!empty($variables['node']->field_issue_reference) && !$variables['node']->field_issue_reference->isEmpty()) {
+    $issue_node = $variables['node']->field_issue_reference->entity;
 
-    if (!empty($variables['node']->field_volume_reference) && !$variables['node']->field_volume_reference->isEmpty()) {
-        $volume_reference = $variables['node']->field_volume_reference->entity;
-        if ($volume_reference && $volume_reference->hasField('field_volume_number') && !$volume_reference->get('field_volume_number')->isEmpty()) {
-            $volume_number = $volume_reference->get('field_volume_number')->value;
-            $volume = 'vol. ' . $volume_number;
-            $variables['volume'] = $volume;
-        }
+    // Check if issue_node exists and has the field_publication_date_display field
+    if ($issue_node && $issue_node->hasField('field_publication_date_display') && !$issue_node->field_publication_date_display->isEmpty()) {
+      $issue_pub_date = $issue_node->field_publication_date_display->value;
+      $variables['issue_pub_date'] = $issue_pub_date;
     }
 
-    $issue = null;
-    if (!empty($variables['node']->field_issue_number) && !$variables['node']->field_issue_number->isEmpty()) {
-        $issue_number = $variables['node']->field_issue_number->getValue();
-        if (!empty($issue_number[0]['value'])) {
-            $issue_number = $issue_number[0]['value'];
-            $issue = 'no. ' . $issue_number;
-            $variables['issue'] = $issue;
-        }
-    }
+    if ($issue_node) {
+      $issue_url = $issue_node->toUrl()->toString();
+      $variables['issue_url'] = $issue_url;
 
-    // Only set volume_issue if both volume and issue are defined
-    if (isset($volume) && isset($issue)) {
-        $variables['volume_issue'] = $volume . ', ' . $issue;
-    } elseif (isset($volume)) {
-        $variables['volume_issue'] = $volume;
-    } elseif (isset($issue)) {
-        $variables['volume_issue'] = $issue;
+      // Check if issue_node has field_issue_number
+      if ($issue_node->hasField('field_issue_number') && !$issue_node->field_issue_number->isEmpty()) {
+        $issue_number = $issue_node->get('field_issue_number')->value;
+        $issue = 'no. ' . $issue_number;
+        $variables['issue'] = $issue;
+      }
     }
+  }
 
-    if (!empty($variables['node']->field_short_description) && !$variables['node']->field_short_description->isEmpty()) {
-        $label = $variables['node']->field_short_description->getValue();
-        if (!empty($label[0]['value'])) {
-            $variables['label'] = $label[0]['value'];
-        }
-    }
+  $volume = null;
+  if (!empty($variables['node']->field_volume_reference->getValue())) {
+    $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
+    $volume = 'vol. ' . $volume_number;
+    $variables['volume'] = $volume;
+  }
+
+  // Only set volume_issue if both volume and issue are defined
+  if (isset($volume) && isset($variables['issue'])) {
+    $variables['volume_issue'] = $volume . ', ' . $variables['issue'];
+  } elseif (isset($volume)) {
+    $variables['volume_issue'] = $volume;
+  } elseif (isset($variables['issue'])) {
+    $variables['volume_issue'] = $variables['issue'];
+  }
 }
 
-function however_preprocess_node__how2_section(&$variables, $hook) {
-    // Check if field_issue_reference exists and has a value
-    if (!empty($variables['node']->field_issue_reference) && !$variables['node']->field_issue_reference->isEmpty()) {
-        $issue_node = $variables['node']->field_issue_reference->entity;
-        
-        // Check if issue_node exists and has the field_publication_date_display field
-        if ($issue_node && $issue_node->hasField('field_publication_date_display') && !$issue_node->field_publication_date_display->isEmpty()) {
-            $issue_pub_date = $issue_node->field_publication_date_display->value;
-            $variables['issue_pub_date'] = $issue_pub_date;
+function however_preprocess_node__how2_article(&$variables, $hook)
+{
+  // Check if issue reference exists and is not empty
+  if (!empty($variables['node']->field_issue_reference) && !$variables['node']->field_issue_reference->isEmpty()) {
+    $issue_node = $variables['node']->field_issue_reference->entity;
+
+    // Check if issue_node exists and has the field_publication_date_display field
+    if ($issue_node && $issue_node->hasField('field_publication_date_display') && !$issue_node->field_publication_date_display->isEmpty()) {
+      $issue_pub_date = $issue_node->field_publication_date_display->value;
+      $variables['issue_pub_date'] = $issue_pub_date;
+    }
+
+    if ($issue_node) {
+      $issue_url = $issue_node->toUrl()->toString();
+      $variables['issue_url'] = $issue_url;
+
+      // Check if issue_node has field_issue_number
+      if ($issue_node->hasField('field_issue_number') && !$issue_node->field_issue_number->isEmpty()) {
+        $issue_number = $issue_node->get('field_issue_number')->value;
+        $issue = 'no. ' . $issue_number;
+        $variables['issue'] = $issue;
+      }
+    }
+  }
+
+  $volume = null;
+  if (!empty($variables['node']->field_volume_reference->getValue())) {
+    $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
+    $volume = 'vol. ' . $volume_number;
+    $variables['volume'] = $volume;
+  }
+
+  // Only set volume_issue if both volume and issue are defined
+  if (isset($volume) && isset($variables['issue'])) {
+    $variables['volume_issue'] = $volume . ', ' . $variables['issue'];
+  } elseif (isset($volume)) {
+    $variables['volume_issue'] = $volume;
+  } elseif (isset($variables['issue'])) {
+    $variables['volume_issue'] = $variables['issue'];
+  }
+
+  if ($variables['view_mode'] == 'teaser') {
+    if (!empty($variables['node']->field_person_bio->getValue())) {
+      $contributors = array();
+      foreach ($variables['node']->field_person_bio->getValue() as $contributor) {
+        // Check if 'value' key exists in the contributor array
+        if (isset($contributor['value'])) {
+          $contributors[] = $contributor['value'];
         }
-
-        if ($issue_node) {
-            $issue_url = $issue_node->toUrl()->toString();
-            $variables['issue_url'] = $issue_url;
-            
-            // Check if issue_node has field_issue_number
-            if ($issue_node->hasField('field_issue_number') && !$issue_node->field_issue_number->isEmpty()) {
-                $issue_number = $issue_node->get('field_issue_number')->value;
-                $issue = 'no. ' . $issue_number;
-                $variables['issue'] = $issue;
-            }
-        }
+      }
+      $contributors = implode(', ', $contributors);
+      $variables['contributors'] = $contributors;
     }
-
-    $volume = null;
-    if(!empty($variables['node']->field_volume_reference->getValue())) {
-        $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
-        $volume = 'vol. ' . $volume_number;
-        $variables['volume'] = $volume;
-    }
-
-    // Only set volume_issue if both volume and issue are defined
-    if (isset($volume) && isset($variables['issue'])) {
-        $variables['volume_issue'] = $volume . ', ' . $variables['issue'];
-    } elseif (isset($volume)) {
-        $variables['volume_issue'] = $volume;
-    } elseif (isset($variables['issue'])) {
-        $variables['volume_issue'] = $variables['issue'];
-    }
+  }
 }
 
-function however_preprocess_node__how2_article(&$variables, $hook) {
-    // Check if issue reference exists and is not empty
-    if (!empty($variables['node']->field_issue_reference) && !$variables['node']->field_issue_reference->isEmpty()) {
-        $issue_node = $variables['node']->field_issue_reference->entity;
-        
-        // Check if issue_node exists and has the field_publication_date_display field
-        if ($issue_node && $issue_node->hasField('field_publication_date_display') && !$issue_node->field_publication_date_display->isEmpty()) {
-            $issue_pub_date = $issue_node->field_publication_date_display->value;
-            $variables['issue_pub_date'] = $issue_pub_date;
+function however_preprocess_node__how_ever_article(&$variables, $hook)
+{
+  // Check if field_issue_reference exists and is not empty
+  $issue_pub_date = null;
+  $issue_url = null;
+  $issue = null;
+
+  if (!empty($variables['node']->field_issue_reference) && !$variables['node']->field_issue_reference->isEmpty()) {
+    $issue_node = $variables['node']->field_issue_reference->entity;
+
+    // Check if issue_node exists and has the field_publication_date_display field
+    if ($issue_node && $issue_node->hasField('field_publication_date_display') && !$issue_node->field_publication_date_display->isEmpty()) {
+      $issue_pub_date = $issue_node->field_publication_date_display->value;
+      $variables['issue_pub_date'] = $issue_pub_date;
+    }
+
+    if ($issue_node) {
+      $issue_url = $issue_node->toUrl()->toString();
+      $variables['issue_url'] = $issue_url;
+
+      // Check if issue_node has field_issue_number
+      if ($issue_node->hasField('field_issue_number') && !$issue_node->field_issue_number->isEmpty()) {
+        $issue_number = $issue_node->get('field_issue_number')->value;
+        $issue = 'no. ' . $issue_number;
+        $variables['issue'] = $issue;
+      }
+    }
+  }
+
+  $volume = null;
+  if (!empty($variables['node']->field_volume_reference) && !$variables['node']->field_volume_reference->isEmpty()) {
+    $volume_reference = $variables['node']->field_volume_reference->entity;
+    if ($volume_reference && $volume_reference->hasField('field_volume_number') && !$volume_reference->get('field_volume_number')->isEmpty()) {
+      $volume_number = $volume_reference->get('field_volume_number')->value;
+      $volume = 'vol. ' . $volume_number;
+      $variables['volume'] = $volume;
+    }
+  }
+
+  // Only set volume_issue if both volume and issue are defined
+  if (isset($volume) && isset($issue)) {
+    $variables['volume_issue'] = $volume . ', ' . $issue;
+  } elseif (isset($volume)) {
+    $variables['volume_issue'] = $volume;
+  } elseif (isset($issue)) {
+    $variables['volume_issue'] = $issue;
+  }
+
+  if ($variables['view_mode'] == 'teaser') {
+    if (!empty($variables['node']->field_person_bio) && !$variables['node']->field_person_bio->isEmpty()) {
+      $contributors = array();
+      foreach ($variables['node']->field_person_bio->getValue() as $contributor) {
+        if (isset($contributor['value'])) {
+          $contributors[] = $contributor['value'];
         }
-
-        if ($issue_node) {
-            $issue_url = $issue_node->toUrl()->toString();
-            $variables['issue_url'] = $issue_url;
-            
-            // Check if issue_node has field_issue_number
-            if ($issue_node->hasField('field_issue_number') && !$issue_node->field_issue_number->isEmpty()) {
-                $issue_number = $issue_node->get('field_issue_number')->value;
-                $issue = 'no. ' . $issue_number;
-                $variables['issue'] = $issue;
-            }
-        }
+      }
+      if (!empty($contributors)) {
+        $contributors = implode(', ', $contributors);
+        $variables['contributors'] = $contributors;
+      }
     }
-
-    $volume = null;
-    if(!empty($variables['node']->field_volume_reference->getValue())) {
-        $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
-        $volume = 'vol. ' . $volume_number;
-        $variables['volume'] = $volume;
-    }
-
-    // Only set volume_issue if both volume and issue are defined
-    if (isset($volume) && isset($variables['issue'])) {
-        $variables['volume_issue'] = $volume . ', ' . $variables['issue'];
-    } elseif (isset($volume)) {
-        $variables['volume_issue'] = $volume;
-    } elseif (isset($variables['issue'])) {
-        $variables['volume_issue'] = $variables['issue'];
-    }
-
-    if($variables['view_mode'] == 'teaser') {
-        if(!empty($variables['node']->field_person_bio->getValue())) {
-            $contributors = array();
-            foreach($variables['node']->field_person_bio->getValue() as $contributor) {
-                // Check if 'value' key exists in the contributor array
-                if (isset($contributor['value'])) {
-                    $contributors[] = $contributor['value'];
-                }
-            }
-            $contributors = implode(', ', $contributors);
-            $variables['contributors'] = $contributors;
-        }
-    }
+  }
 }
 
-function however_preprocess_node__how_ever_article(&$variables, $hook) {
-    // Check if field_issue_reference exists and is not empty
-    $issue_pub_date = null;
-    $issue_url = null;
-    $issue = null;
-    
-    if (!empty($variables['node']->field_issue_reference) && !$variables['node']->field_issue_reference->isEmpty()) {
-        $issue_node = $variables['node']->field_issue_reference->entity;
-        
-        // Check if issue_node exists and has the field_publication_date_display field
-        if ($issue_node && $issue_node->hasField('field_publication_date_display') && !$issue_node->field_publication_date_display->isEmpty()) {
-            $issue_pub_date = $issue_node->field_publication_date_display->value;
-            $variables['issue_pub_date'] = $issue_pub_date;
-        }
+function however_preprocess_node__journal_issue(&$variables, $hook)
+{
+  $volume = null;
 
-        if ($issue_node) {
-            $issue_url = $issue_node->toUrl()->toString();
-            $variables['issue_url'] = $issue_url;
-            
-            // Check if issue_node has field_issue_number
-            if ($issue_node->hasField('field_issue_number') && !$issue_node->field_issue_number->isEmpty()) {
-                $issue_number = $issue_node->get('field_issue_number')->value;
-                $issue = 'no. ' . $issue_number;
-                $variables['issue'] = $issue;
-            }
-        }
+  if (!empty($variables['node']->field_volume_reference) && !$variables['node']->field_volume_reference->isEmpty()) {
+    $volume_reference = $variables['node']->field_volume_reference->entity;
+    if ($volume_reference && $volume_reference->hasField('field_volume_number') && !$volume_reference->get('field_volume_number')->isEmpty()) {
+      $volume_number = $volume_reference->get('field_volume_number')->value;
+      $volume = 'vol. ' . $volume_number;
+      $variables['volume'] = $volume;
     }
+  }
 
-    $volume = null;
-    if (!empty($variables['node']->field_volume_reference) && !$variables['node']->field_volume_reference->isEmpty()) {
-        $volume_reference = $variables['node']->field_volume_reference->entity;
-        if ($volume_reference && $volume_reference->hasField('field_volume_number') && !$volume_reference->get('field_volume_number')->isEmpty()) {
-            $volume_number = $volume_reference->get('field_volume_number')->value;
-            $volume = 'vol. ' . $volume_number;
-            $variables['volume'] = $volume;
-        }
+  $issue = null;
+  if (!empty($variables['node']->field_issue_number) && !$variables['node']->field_issue_number->isEmpty()) {
+    $issue_number = $variables['node']->field_issue_number->getValue();
+    if (!empty($issue_number[0]['value'])) {
+      $issue_number = $issue_number[0]['value'];
+      $issue = 'no. ' . $issue_number;
+      $variables['issue'] = $issue;
     }
+  }
 
-    // Only set volume_issue if both volume and issue are defined
-    if (isset($volume) && isset($issue)) {
-        $variables['volume_issue'] = $volume . ', ' . $issue;
-    } elseif (isset($volume)) {
-        $variables['volume_issue'] = $volume;
-    } elseif (isset($issue)) {
-        $variables['volume_issue'] = $issue;
+  // Only set volume_issue if both volume and issue are defined
+  if (isset($volume) && isset($issue)) {
+    $variables['volume_issue'] = $volume . ', ' . $issue;
+  } elseif (isset($volume)) {
+    $variables['volume_issue'] = $volume;
+  } elseif (isset($issue)) {
+    $variables['volume_issue'] = $issue;
+  }
+
+  if (!empty($variables['node']->field_short_description) && !$variables['node']->field_short_description->isEmpty()) {
+    $label = $variables['node']->field_short_description->getValue();
+    if (!empty($label[0]['value'])) {
+      $variables['label'] = $label[0]['value'];
     }
-
-    if ($variables['view_mode'] == 'teaser') {
-        if (!empty($variables['node']->field_person_bio) && !$variables['node']->field_person_bio->isEmpty()) {
-            $contributors = array();
-            foreach ($variables['node']->field_person_bio->getValue() as $contributor) {
-                if (isset($contributor['value'])) {
-                    $contributors[] = $contributor['value'];
-                }
-            }
-            if (!empty($contributors)) {
-                $contributors = implode(', ', $contributors);
-                $variables['contributors'] = $contributors;
-            }
-        }
-    }
-}
-
-function however_preprocess_node__journal_issue(&$variables, $hook) {
-    $volume = null;
-
-    if (!empty($variables['node']->field_volume_reference) && !$variables['node']->field_volume_reference->isEmpty()) {
-        $volume_reference = $variables['node']->field_volume_reference->entity;
-        if ($volume_reference && $volume_reference->hasField('field_volume_number') && !$volume_reference->get('field_volume_number')->isEmpty()) {
-            $volume_number = $volume_reference->get('field_volume_number')->value;
-            $volume = 'vol. ' . $volume_number;
-            $variables['volume'] = $volume;
-        }
-    }
-
-    $issue = null;
-    if (!empty($variables['node']->field_issue_number) && !$variables['node']->field_issue_number->isEmpty()) {
-        $issue_number = $variables['node']->field_issue_number->getValue();
-        if (!empty($issue_number[0]['value'])) {
-            $issue_number = $issue_number[0]['value'];
-            $issue = 'no. ' . $issue_number;
-            $variables['issue'] = $issue;
-        }
-    }
-
-    // Only set volume_issue if both volume and issue are defined
-    if (isset($volume) && isset($issue)) {
-        $variables['volume_issue'] = $volume . ', ' . $issue;
-    } elseif (isset($volume)) {
-        $variables['volume_issue'] = $volume;
-    } elseif (isset($issue)) {
-        $variables['volume_issue'] = $issue;
-    }
-
-    if (!empty($variables['node']->field_short_description) && !$variables['node']->field_short_description->isEmpty()) {
-        $label = $variables['node']->field_short_description->getValue();
-        if (!empty($label[0]['value'])) {
-            $variables['label'] = $label[0]['value'];
-        }
-    }
+  }
 }
