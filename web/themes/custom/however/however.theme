@@ -5,6 +5,10 @@ use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\Core\Render\Markup;
 
+/**
+ * Add 'has-sidebar' class to html element when sidebar region has content.
+ * Used for CSS layout adjustments.
+ */
 function however_preprocess_html(&$variables, $hook)
 {
   if (!empty($variables['page']['sidebar'])) {
@@ -12,31 +16,47 @@ function however_preprocess_html(&$variables, $hook)
   }
 }
 
+/**
+ * Page-level preprocessing. Currently empty but available for future use.
+ */
 function however_preprocess_page(&$variables, $hook) {}
 
+/**
+ * Main node preprocessing dispatcher.
+ * Calls specific functions based on node type and view mode if they exist.
+ */
 function however_preprocess_node(&$variables, $hook)
 {
+  // Try to call node-type-specific preprocessing function
   $function = __FUNCTION__ . '__' . $variables['node']->getType();
-  // Each node type can have its own specific function
   if (function_exists($function)) {
     $function($variables, $hook);
   }
+
+  // Try to call view-mode-specific preprocessing function
   $function = __FUNCTION__ . '__' . $variables['view_mode'];
-  // Each node type can have its own specific function
   if (function_exists($function)) {
     $function($variables, $hook);
   }
 }
 
+/**
+ * Hide the title for contributor name nodes (they're used as inline references).
+ */
 function however_preprocess_node__contributor_name(&$variables, $hook)
 {
   $variables['title_attributes']['class'][] = 'visually-hidden';
 }
 
+/**
+ * Process How2 Issue nodes to extract and format volume/issue numbers.
+ * Creates template variables: volume, issue, volume_issue, label.
+ */
 function however_preprocess_node__how2_issue(&$variables, $hook)
 {
   $volume = null;
 
+  // Extract volume number from volume reference field
   if (!empty($variables['node']->field_volume_reference) && !$variables['node']->field_volume_reference->isEmpty()) {
     $volume_reference = $variables['node']->field_volume_reference->entity;
     if ($volume_reference && $volume_reference->hasField('field_volume_number') && !$volume_reference->get('field_volume_number')->isEmpty()) {
@@ -46,6 +66,7 @@ function however_preprocess_node__how2_issue(&$variables, $hook)
     }
   }
 
+  // Extract issue number from issue field
   $issue = null;
   if (!empty($variables['node']->field_issue_number) && !$variables['node']->field_issue_number->isEmpty()) {
     $issue_number = $variables['node']->field_issue_number->getValue();
@@ -56,7 +77,7 @@ function however_preprocess_node__how2_issue(&$variables, $hook)
     }
   }
 
-  // Only set volume_issue if both volume and issue are defined
+  // Create combined volume/issue string (handles cases where one might be missing)
   if (isset($volume) && isset($issue)) {
     $variables['volume_issue'] = $volume . ', ' . $issue;
   } elseif (isset($volume)) {
@@ -65,6 +86,7 @@ function however_preprocess_node__how2_issue(&$variables, $hook)
     $variables['volume_issue'] = $issue;
   }
 
+  // Add short description as a label if available
   if (!empty($variables['node']->field_short_description) && !$variables['node']->field_short_description->isEmpty()) {
     $label = $variables['node']->field_short_description->getValue();
     if (!empty($label[0]['value'])) {
@@ -73,23 +95,29 @@ function however_preprocess_node__how2_issue(&$variables, $hook)
   }
 }
 
+/**
+ * Process How2 Section nodes.
+ * Extracts volume/issue info from referenced issue and volume nodes.
+ * Creates template variables: issue_pub_date, issue_url, issue, volume, volume_issue.
+ */
 function however_preprocess_node__how2_section(&$variables, $hook)
 {
-  // Check if field_issue_reference exists and has a value
+  // Get publication date and URL from referenced issue
   if (!empty($variables['node']->field_issue_reference) && !$variables['node']->field_issue_reference->isEmpty()) {
     $issue_node = $variables['node']->field_issue_reference->entity;
 
-    // Check if issue_node exists and has the field_publication_date_display field
+    // Extract publication date from issue
     if ($issue_node && $issue_node->hasField('field_publication_date_display') && !$issue_node->field_publication_date_display->isEmpty()) {
       $issue_pub_date = $issue_node->field_publication_date_display->value;
       $variables['issue_pub_date'] = $issue_pub_date;
     }
 
+    // Get issue URL and number
     if ($issue_node) {
       $issue_url = $issue_node->toUrl()->toString();
       $variables['issue_url'] = $issue_url;
 
-      // Check if issue_node has field_issue_number
+      // Extract issue number
       if ($issue_node->hasField('field_issue_number') && !$issue_node->field_issue_number->isEmpty()) {
         $issue_number = $issue_node->get('field_issue_number')->value;
         $issue = 'no. ' . $issue_number;
@@ -98,6 +126,7 @@ function however_preprocess_node__how2_section(&$variables, $hook)
     }
   }
 
+  // Extract volume number from volume reference
   $volume = null;
   if (!empty($variables['node']->field_volume_reference->getValue())) {
     $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
@@ -105,7 +134,7 @@ function however_preprocess_node__how2_section(&$variables, $hook)
     $variables['volume'] = $volume;
   }
 
-  // Only set volume_issue if both volume and issue are defined
+  // Create combined volume/issue string
   if (isset($volume) && isset($variables['issue'])) {
     $variables['volume_issue'] = $volume . ', ' . $variables['issue'];
   } elseif (isset($volume)) {
@@ -115,23 +144,29 @@ function however_preprocess_node__how2_section(&$variables, $hook)
   }
 }
 
+/**
+ * Process How2 Article nodes.
+ * Similar to sections - extracts volume/issue info from references.
+ * In teaser view mode, also processes contributor names.
+ */
 function however_preprocess_node__how2_article(&$variables, $hook)
 {
-  // Check if issue reference exists and is not empty
+  // Get publication date and URL from referenced issue (same logic as sections)
   if (!empty($variables['node']->field_issue_reference) && !$variables['node']->field_issue_reference->isEmpty()) {
     $issue_node = $variables['node']->field_issue_reference->entity;
 
-    // Check if issue_node exists and has the field_publication_date_display field
+    // Extract publication date from issue
     if ($issue_node && $issue_node->hasField('field_publication_date_display') && !$issue_node->field_publication_date_display->isEmpty()) {
       $issue_pub_date = $issue_node->field_publication_date_display->value;
       $variables['issue_pub_date'] = $issue_pub_date;
     }
 
+    // Get issue URL and number
     if ($issue_node) {
       $issue_url = $issue_node->toUrl()->toString();
       $variables['issue_url'] = $issue_url;
 
-      // Check if issue_node has field_issue_number
+      // Extract issue number
       if ($issue_node->hasField('field_issue_number') && !$issue_node->field_issue_number->isEmpty()) {
         $issue_number = $issue_node->get('field_issue_number')->value;
         $issue = 'no. ' . $issue_number;
@@ -140,6 +175,7 @@ function however_preprocess_node__how2_article(&$variables, $hook)
     }
   }
 
+  // Extract volume number from volume reference
   $volume = null;
   if (!empty($variables['node']->field_volume_reference->getValue())) {
     $volume_number = $variables['node']->field_volume_reference->entity->get('field_volume_number')->value;
@@ -147,7 +183,7 @@ function however_preprocess_node__how2_article(&$variables, $hook)
     $variables['volume'] = $volume;
   }
 
-  // Only set volume_issue if both volume and issue are defined
+  // Create combined volume/issue string
   if (isset($volume) && isset($variables['issue'])) {
     $variables['volume_issue'] = $volume . ', ' . $variables['issue'];
   } elseif (isset($volume)) {
@@ -156,6 +192,7 @@ function however_preprocess_node__how2_article(&$variables, $hook)
     $variables['volume_issue'] = $variables['issue'];
   }
 
+  // For teaser view mode, extract contributor names and format as comma-separated list
   if ($variables['view_mode'] == 'teaser') {
     if (!empty($variables['node']->field_person_bio->getValue())) {
       $contributors = array();
@@ -171,27 +208,33 @@ function however_preprocess_node__how2_article(&$variables, $hook)
   }
 }
 
+/**
+ * Process How(ever) Article nodes.
+ * Same logic as How2 articles but handles the different field structure.
+ */
 function however_preprocess_node__how_ever_article(&$variables, $hook)
 {
-  // Check if field_issue_reference exists and is not empty
+  // Initialize variables to avoid undefined variable issues
   $issue_pub_date = null;
   $issue_url = null;
   $issue = null;
 
+  // Get publication date and URL from referenced issue
   if (!empty($variables['node']->field_issue_reference) && !$variables['node']->field_issue_reference->isEmpty()) {
     $issue_node = $variables['node']->field_issue_reference->entity;
 
-    // Check if issue_node exists and has the field_publication_date_display field
+    // Extract publication date from issue
     if ($issue_node && $issue_node->hasField('field_publication_date_display') && !$issue_node->field_publication_date_display->isEmpty()) {
       $issue_pub_date = $issue_node->field_publication_date_display->value;
       $variables['issue_pub_date'] = $issue_pub_date;
     }
 
+    // Get issue URL and number
     if ($issue_node) {
       $issue_url = $issue_node->toUrl()->toString();
       $variables['issue_url'] = $issue_url;
 
-      // Check if issue_node has field_issue_number
+      // Extract issue number
       if ($issue_node->hasField('field_issue_number') && !$issue_node->field_issue_number->isEmpty()) {
         $issue_number = $issue_node->get('field_issue_number')->value;
         $issue = 'no. ' . $issue_number;
@@ -200,6 +243,7 @@ function however_preprocess_node__how_ever_article(&$variables, $hook)
     }
   }
 
+  // Extract volume number from volume reference (more defensive checking here)
   $volume = null;
   if (!empty($variables['node']->field_volume_reference) && !$variables['node']->field_volume_reference->isEmpty()) {
     $volume_reference = $variables['node']->field_volume_reference->entity;
@@ -210,7 +254,7 @@ function however_preprocess_node__how_ever_article(&$variables, $hook)
     }
   }
 
-  // Only set volume_issue if both volume and issue are defined
+  // Create combined volume/issue string
   if (isset($volume) && isset($issue)) {
     $variables['volume_issue'] = $volume . ', ' . $issue;
   } elseif (isset($volume)) {
@@ -219,6 +263,7 @@ function however_preprocess_node__how_ever_article(&$variables, $hook)
     $variables['volume_issue'] = $issue;
   }
 
+  // For teaser view mode, process contributors (with additional safety checks)
   if ($variables['view_mode'] == 'teaser') {
     if (!empty($variables['node']->field_person_bio) && !$variables['node']->field_person_bio->isEmpty()) {
       $contributors = array();
@@ -227,6 +272,7 @@ function however_preprocess_node__how_ever_article(&$variables, $hook)
           $contributors[] = $contributor['value'];
         }
       }
+      // Only set contributors variable if we actually found some
       if (!empty($contributors)) {
         $contributors = implode(', ', $contributors);
         $variables['contributors'] = $contributors;
@@ -235,10 +281,15 @@ function however_preprocess_node__how_ever_article(&$variables, $hook)
   }
 }
 
+/**
+ * Process How(ever) Journal Issue nodes.
+ * Same volume/issue extraction logic as How2 issues.
+ */
 function however_preprocess_node__journal_issue(&$variables, $hook)
 {
   $volume = null;
 
+  // Extract volume number from volume reference
   if (!empty($variables['node']->field_volume_reference) && !$variables['node']->field_volume_reference->isEmpty()) {
     $volume_reference = $variables['node']->field_volume_reference->entity;
     if ($volume_reference && $volume_reference->hasField('field_volume_number') && !$volume_reference->get('field_volume_number')->isEmpty()) {
@@ -248,6 +299,7 @@ function however_preprocess_node__journal_issue(&$variables, $hook)
     }
   }
 
+  // Extract issue number from issue field
   $issue = null;
   if (!empty($variables['node']->field_issue_number) && !$variables['node']->field_issue_number->isEmpty()) {
     $issue_number = $variables['node']->field_issue_number->getValue();
@@ -258,7 +310,7 @@ function however_preprocess_node__journal_issue(&$variables, $hook)
     }
   }
 
-  // Only set volume_issue if both volume and issue are defined
+  // Create combined volume/issue string
   if (isset($volume) && isset($issue)) {
     $variables['volume_issue'] = $volume . ', ' . $issue;
   } elseif (isset($volume)) {
@@ -267,6 +319,7 @@ function however_preprocess_node__journal_issue(&$variables, $hook)
     $variables['volume_issue'] = $issue;
   }
 
+  // Add short description as a label if available
   if (!empty($variables['node']->field_short_description) && !$variables['node']->field_short_description->isEmpty()) {
     $label = $variables['node']->field_short_description->getValue();
     if (!empty($label[0]['value'])) {
