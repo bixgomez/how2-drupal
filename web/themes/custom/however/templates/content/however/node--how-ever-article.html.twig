@@ -67,6 +67,31 @@
  *
  */
 #}
+
+{% include "@article/article.html.twig" with {
+  journal: "How2",
+  journal_url: "/how2",
+  title: label,
+  title_display: content.field_title_display,
+  hide_title: node.field_hide_the_node_title[0].value,
+  volume_issue: volume_issue,
+  issue_pub_date: issue_pub_date,
+  issue_url: issue_url,
+  archive_url: ontent.field_archive_url,
+  person_bio: content.field_person_bio,
+  page_images: content.field_journal_page_images_media,
+  working_notes: content.field_working_notes,
+  node_body_sections: node.field_body_sections,
+  content_body_sections: content.field_body_sections,
+
+} %}
+
+THE BLOCK:
+{{ drupal_view('article_section', 'block_2') }}
+/THE BLOCK:
+
+{# 
+
 {%
     set classes = [
     'node',
@@ -79,54 +104,46 @@
 ]
 %}
 {{ attach_library('classy/node') }}
-<article{{ attributes.addClass(classes) }}>
+<article{{attributes.addClass(classes)}}>
 
-    {{ drupal_view('article_section', 'block_2') }}
+	THE BLOCK:
+	{{ drupal_view('article_section', 'block_2') }}
+	/THE BLOCK:
 
-    <div class="issue-meta">
-        <div class="left">
-            <div class="journal-name"><a href="/however">HOW(ever)</a></div>
-            <div class="issue-volume-number">{{ volume_issue }}</div>
-            <div class="issue-pub-date">{{ issue_pub_date }}</div>
-            {% if issue_url %}
-                <div><a href="{{ issue_url }}">table of contents</a></div>
-            {% endif %}
-        </div>
-        <div class="right">
-            {{ content.field_archive_url }}
-        </div>
-    </div>
+	<div{{content_attributes.addClass('node__content')}}>
 
-    <div{{ content_attributes.addClass('node__content') }}>
+		<div class="article-meta">
+			{% if content.field_person_bio.0 %}
+				<p class="author-name">{{ content.field_person_bio.0['#paragraph'].field_person.entity.title.value }}</p>
+			{% endif %}
+		</div>
 
-        <div class="article-meta">
-            {% if content.field_person_bio.0 %}
-                <p class="author-name">{{ content.field_person_bio.0['#paragraph'].field_person.entity.title.value }}</p>
-            {% endif %}
-        </div>
+		<div class="article-content">
 
-        <div class="article-content">
+			{{ content.field_journal_page_images_media }}
 
-            {{ content.field_journal_page_images_media }}
-        
-            <div class="content-text-inner">
+			<div class="content-text-inner">
 
-                {{ content.field_person_bio }}
-                
-                <h1>{{ label }}</h1>
-                
-                {{ content.field_working_notes }}
-                
-                <ul class="body-section-links">
-                    {% for section in node.field_body_sections %}
-                        <li><a href="#section-{{ loop.index }}">{{ section.entity.field_title.value }}</a></li>
-                    {% endfor %}
-                </ul>
-                
-                {{ content.field_body_sections }}
+				{{ content.field_person_bio }}
 
-            </div>
-        </div>
-    </div>
+				<h1>{{ label }}</h1>
 
-</article>
+				{{ content.field_working_notes }}
+
+				<ul class="body-section-links">
+					{% for section in node.field_body_sections %}
+						<li>
+							<a href="#section-{{ loop.index }}">{{ section.entity.field_title.value }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+
+				{{ content.field_body_sections }}
+
+			</div>
+		</div>
+	</div>
+
+</article> 
+
+#}

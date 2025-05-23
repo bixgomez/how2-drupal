@@ -14,11 +14,14 @@ libraries:
 
 components:
   namespaces:
+    article: components/article
+    section: components/section
     issue: components/issue
     volume: components/volume
     section-teaser: components/section-teaser
     publication-teaser: components/publication-teaser
     issues-grid: components/issues-grid
+    issue-meta: components/issue-meta
 
 regions:
   branding: 'Branding'

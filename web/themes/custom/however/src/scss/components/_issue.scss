@@ -15,19 +15,6 @@
   margin-top: 0.25rem;
 }
 
-.issue-elements {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.issue-element {
-  border: 1px solid color.adjust(#000, $alpha: -0.875);
-  background-color: color.adjust(#000, $alpha: -0.99);
-  margin: 0;
-  padding: 1rem;
-}
-
 .issue-image {
   margin: 0 0 0.5rem;
   overflow: hidden;

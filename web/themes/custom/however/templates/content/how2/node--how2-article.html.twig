@@ -67,6 +67,31 @@
  *
  */
 #}
+
+{% include "@article/article.html.twig" with {
+  journal: "HOW(ever)",
+  journal_url: "/however",
+  title: label,
+  title_display: content.field_title_display,
+  hide_title: node.field_hide_the_node_title[0].value,
+  volume_issue: volume_issue,
+  issue_pub_date: issue_pub_date,
+  issue_url: issue_url,
+  archive_url: ontent.field_archive_url,
+  person_bio: content.field_person_bio,
+  page_images: content.field_journal_page_images_media,
+  working_notes: content.field_working_notes,
+  node_body_sections: node.field_body_sections,
+  content_body_sections: content.field_body_sections,
+} %}
+
+
+THE BLOCK:
+{{ drupal_view('article_section', 'block_1') }}
+/THE BLOCK:
+
+{# 
+
 {%
     set classes = [
     'node',
@@ -79,43 +104,37 @@
 ]
 %}
 {{ attach_library('classy/node') }}
-<article{{ attributes.addClass(classes) }}>
+<article{{attributes.addClass(classes)}}>
 
-    {{ drupal_view('article_section', 'block_1') }}
+	THE BLOCK:
+	{{ drupal_view('article_section', 'block_1') }}
+	/THE BLOCK:
 
-    <div class="issue-meta">
-        <div class="left">
-            <div class="journal-name"><a href="/how2">How2</a></div>
-            <div class="issue-volume-number">{{ volume_issue }}</div>
-            <div class="issue-pub-date">{{ issue_pub_date }}</div>
-            <div><a href="{{ issue_url }}">table of contents</a></div>
-        </div>
-        <div class="right">
-            {{ content.field_archive_url }}
-        </div>
-    </div>
+	<div{{content_attributes.addClass('node__content')}}>
 
-    <div{{ content_attributes.addClass('node__content') }}>
+		{{ content.field_title_display }}
 
-        {{ content.field_title_display }}
+		{{ content.field_person_bio }}
 
-        {{ content.field_person_bio }}
+		{% if node.field_hide_the_node_title[0].value != 1 %}
+			<h1>{{ label }}</h1>
+			<h1>{{ content.field_title_display }}</h1>
+		{% endif %}
 
-        {% if node.field_hide_the_node_title[0].value != 1 %}
-            <h1>{{ label }}</h1>
-            <h1>{{ content.field_title_display }}</h1>
-        {% endif %}
+		{{ content.field_working_notes }}
 
-        {{ content.field_working_notes }}
+		<ul class="body-section-links">
+			{% for section in node.field_body_sections %}
+				<li>
+					<a href="#section-{{ loop.index }}">{{ section.entity.field_title.value }}</a>
+				</li>
+			{% endfor %}
+		</ul>
 
-        <ul class="body-section-links">
-            {% for section in node.field_body_sections %}
-                <li><a href="#section-{{ loop.index }}">{{ section.entity.field_title.value }}</a></li>
-            {% endfor %}
-        </ul>
+		{{ content.field_body_sections }}
 
-        {{ content.field_body_sections }}
+	</div>
 
-    </div>
+</article> 
 
-</article>
+#}

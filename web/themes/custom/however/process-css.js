@@ -30,7 +30,8 @@ const srcDir = path.join(projectRoot, "src");
 const distDir = path.join(projectRoot, "dist");
 
 // CSS input paths - we process three different CSS sources:
-const tailwindInput = path.join(srcDir, "css", "tailwind.css"); // Tailwind + custom properties
+const tailwindDirectives = `@import "tailwindcss";`; // Tailwind base
+const customCssInput = path.join(srcDir, "css", "tailwind.css");
 const scssEntry = path.join(srcDir, "scss", "styles.scss"); // Main Sass compilation
 const componentCssGlob = path.join("components", "**", "*.css"); // Individual component styles
 
@@ -45,12 +46,6 @@ const distJsDir = path.join(distDir, "js");
 // Ensure output directories exist before we start building
 ensureDir(distCssDir);
 ensureDir(distJsDir);
-
-// Create a minimal tailwind.css file if it doesn't exist
-// This prevents build errors on fresh installs
-if (!fs.existsSync(tailwindInput)) {
-  fs.writeFileSync(tailwindInput, '@import "tailwindcss";\n');
-}
 
 // Load PostCSS plugins from our config file
 // This approach lets us maintain config in a separate file while still
@@ -76,7 +71,7 @@ async function processCSS() {
     console.log("▶️  Building CSS…");
 
     // 1) Read Tailwind CSS file (includes @import "tailwindcss" + custom properties)
-    const twCss = fs.readFileSync(tailwindInput, "utf8");
+    const customCss = fs.readFileSync(customCssInput, "utf8");
 
     // 2) Collect all component CSS files and combine them
     //    This allows each component to have its own CSS file that gets included
@@ -95,7 +90,12 @@ async function processCSS() {
 
     // 4) Combine all three CSS sources into one string
     //    Order matters: Tailwind base → Component styles → Sass styles
-    const combined = [twCss, compCss, sassResult.css].join("\n\n");
+    const combined = [
+      tailwindDirectives,
+      customCss,
+      compCss,
+      sassResult.css,
+    ].join("\n\n");
 
     // 5) Run the combined CSS through PostCSS (primarily Tailwind processing)
     //    This processes @apply directives, adds vendor prefixes, etc.
@@ -172,8 +172,9 @@ if (process.argv.includes("--watch")) {
       componentCssGlob, // Component CSS files
       "tailwind.config.js", // Tailwind configuration changes
       "postcss.config.js", // PostCSS configuration changes
-      tailwindInput, // Main Tailwind file
+      customCssInput, // Main Tailwind file
       "src/scss/**/*.scss", // Sass source files
+      "src/css/**/*.css", // Watch all CSS files in src/css
     ])
     .on("change", () => processCSS());
 

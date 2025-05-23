@@ -1,0 +1,63 @@
+<article class="section">
+
+	<h2 class="dev-heading">This is a section (not an article)</h2>
+
+	<div class="page-sections">
+
+		<div class="page-section">
+			<h3 class="dev-heading">issue-meta</h3>
+			<p class="dev-text">
+				This is not currently working for sections; I am investigating.
+			</p>
+			{% include "@issue-meta/issue-meta.html.twig" with {
+				journal: journal,
+				journal_url: journal_url,
+				volume_issue: volume_issue,
+				issue_pub_date: issue_pub_date,
+				issue_url: issue_url,
+				archive_url: archive_url,
+			} %}
+		</div>
+
+		<div class="page-section">
+			<h3 class="dev-heading">images</h3>
+			<p class="dev-text">
+				Do we want images for sections?  Will sections ever have images?
+			</p>
+			{{ images }}
+		</div>
+
+		<div class="page-section">
+			<h3 class="dev-heading">body</h3>
+			<p class="dev-text">
+				Do we always have body text?
+			</p>
+			{{ body }}
+		</div>
+
+		<div class="page-section">
+			<h3 class="dev-heading">piece</h3>
+			<p class="dev-text">
+				I am not sure exactly what this field is used for.
+			</p>
+			{{ piece }}
+		</div>
+
+		<div class="page-section">
+			<h3 class="dev-heading">working_notes</h3>
+			<p class="dev-text">
+				Where do we want this to appear?
+			</p>
+			{{ working_notes }}
+		</div>
+
+		<div class="page-section">
+			<h3 class="dev-heading">person_bio</h3>
+			<p class="dev-text">
+				Do we always have this field?  Does it ever display an actual bio?
+			</p>
+			{{ person_bio }}
+		</div>
+	</div>
+
+</article>

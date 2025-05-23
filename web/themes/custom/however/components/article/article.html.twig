@@ -1,0 +1,110 @@
+<article class="article">
+
+	<h2 class="dev-heading">This is an article (not a section)</h2>
+
+	<div class="page-sections">
+
+		<div class="page-section">
+			<h3 class="dev-heading">issue-meta</h3>
+			<p class="dev-text">
+				This works ok for articles, but might look into improving its references to vol & issue.
+			</p>
+
+			{% include "@issue-meta/issue-meta.html.twig" with {
+				journal: journal,
+				journal_url: journal_url,
+				volume_issue: volume_issue,
+				issue_pub_date: issue_pub_date,
+				issue_url: issue_url,
+				archive_url: archive_url,
+			} %}
+		</div>
+
+		<div class="page-section article-meta">
+			<h3 class="dev-heading">person_bio</h3>
+			<p class="dev-text">
+				This seems to only display the person's name.
+			</p>
+			{% if person_bio.0 %}
+				<p class="author-name">{{ person_bio.0['#paragraph'].field_person.entity.title.value }}</p>
+			{% endif %}
+		</div>
+
+		<div class="page-section">
+			<h3 class="dev-heading">title and title_display</h3>
+			<p class="dev-text">
+				This should display the title_display field if there is one, falling back to title if there is no title_display text.
+			</p>
+			{{ title }}
+			{{ title_display }}
+		</div>
+
+		<div class="page-section">
+			<h3 class="dev-heading">working_notes</h3>
+			<p class="dev-text">
+				Where do we want this to appear?
+			</p>
+			{{ working_notes }}
+		</div>
+
+		<div class="page-section">
+			<h3 class="dev-heading">node_body_sections</h3>
+			<p class="dev-text">
+				Where do we want this to appear? I am not sure what this field is.
+			</p>
+			{% if node_body_sections is not empty %}
+				<ul class="body-section-links">
+					{% for section in node_body_sections %}
+						<li>
+							<a href="#section-{{ loop.index }}">{{ section.entity.field_title.value }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+			{{ dump(node_body_sections) }}
+		</div>
+
+		<div class="page-section">
+			<h3 class="dev-heading">content_body_sections</h3>
+			<p class="dev-text">
+				Where do we want this to appear? I am not sure what this field is.
+			</p>
+			{{ content_body_sections }}
+			{{ dump(content_body_sections) }}
+		</div>
+
+		<div class="page-section">
+			<h3 class="dev-heading">person_bio</h3>
+			<p class="dev-text">
+				Do we always have this field?  Does it ever display an actual bio?
+			</p>
+			{{ person_bio }}
+		</div>
+
+		<div class="page-section">
+			<h3 class="dev-heading">page_images</h3>
+			<p class="dev-text">
+				Do we want images for articles?  Will articles ever have images?
+			</p>
+			{{ images }}
+		</div>
+
+	</div>
+
+	hide_title
+	{{ dump(hide_title) }}
+	<br>
+	person_bio
+	{{ dump(person_bio) }}
+	<br>
+	page_images
+	{{ dump(page_images) }}
+	<br>
+
+
+	{% if person_bio.0 %}
+		<p class="author-name">
+			{{ person_bio.0['#paragraph'].field_person.entity.title.value }}
+		</p>
+	{% endif %}
+</div></article>

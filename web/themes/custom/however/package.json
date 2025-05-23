@@ -22,5 +22,8 @@
     "stylelint-scss": "^6.12.0",
     "tailwindcss": "^4.1.7",
     "terser": "^5.24.0"
+  },
+  "dependencies": {
+    "postcss-import": "^16.1.0"
   }
 }

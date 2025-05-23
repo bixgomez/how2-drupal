@@ -1,0 +1,70 @@
+/* stylelint-disable scss/at-rule-no-unknown */
+/* stylelint-disable at-rule-no-deprecated */
+
+:root {
+  --color-yellow: #ebe6d1;
+  --color-primary: #9e2727;
+  --color-primary-dark: #6b1919;
+  --color-secondary: #d3ceb6; /* yellow-dark */
+  --color-accent: #fffcf0; /* yellow-light */
+}
+
+a {
+  @apply text-[var(--color-primary)] 
+    hover:text-[var(--color-primary-dark)] 
+    underline 
+    transition-colors 
+    duration-150;
+}
+
+.button {
+  @apply inline-flex
+         gap-1
+         px-4
+         py-2
+         font-medium
+         rounded
+         transition-colors
+         duration-150
+         bg-[var(--color-primary)]
+         text-white
+         text-base
+         border
+         border-[var(--color-primary)] 
+         rounded
+         inline-block
+         no-underline
+         hover:text-white
+         hover:bg-[var(--color-primary-dark)]
+         hover:border-[var(--color-primary-dark)];
+}
+
+.button--primary {
+  @apply bg-[var(--color-primary)]  
+         hover:bg-[var(--color-primary-dark)]
+         border-[var(--color-primary)] 
+         hover:border-[var(--color-primary-dark)]
+         text-white
+         hover:text-white;
+}
+
+.button--secondary {
+  @apply bg-[var(--color-accent)]  
+         hover:bg-[var(--color-accent)] 
+         text-[var(--color-primary)]
+         hover:text-[var(--color-primary-dark)]
+         border-[var(--color-primary)] 
+         hover:border-[var(--color-primary-dark)];
+}
+
+.button--small {
+  @apply px-3
+         py-1 
+         text-sm;
+}
+
+.button--large {
+  @apply px-5
+         py-3 
+         text-lg;
+}

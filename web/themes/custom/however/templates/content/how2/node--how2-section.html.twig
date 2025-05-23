@@ -67,37 +67,33 @@
  *
  */
 #}
-{%
-    set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'node--article'
-]
-%}
-{{ attach_library('classy/node') }}
-<article{{ attributes.addClass(classes) }}>
-    <h2 class="subtitle text-center">{{ content.field_subtitle.0 }}</h2>
-    <div class="issue-meta">
-        <div class="left">
-        <div class="journal-name"><a href="/how2">How2</a></div>
-        <div class="issue-volume-number">{{ volume_issue }}</div>
-        <div class="issue-pub-date">{{ issue_pub_date }}</div>
-        <div><a href="{{ issue_url }}">table of contents</a></div>
-        </div>
-        <div class="right">
-            {{ content.field_archive_url }}
-        </div>
-    </div>
 
-    <div{{ content_attributes.addClass('node__content') }}>
-        {{ content.field_person_bio }}
-        {{ content.field_working_notes }}
-        {{ content.field_image_caption }}
-        {{ content.field_how2_piece }}
-    </div>
+{% include "@section/section.html.twig" with {
+  journal: "How2",
+  journal_url: "",
+  title: label,
+  subtitle: content.field_subtitle.0,
+  volume_issue: volume_issue,
+  issue_pub_date: issue_pub_date,
+  issue_url: issue_url,
+  archive_url: content.field_archive_url,
+  image_caption: content.field_image_caption,
+  images: content.field_journal_page_images_media,
+  body: body,
+  piece: content.field_how2_piece,
+  working_notes: content.field_working_notes,
+  person_bio: content.field_person_bio,
+} %}
 
+{# 
+<article{{attributes.addClass(classes)}}>
+	<h2 class="subtitle text-center">{{ content.field_subtitle.0 }}</h2>
+
+	<div{{content_attributes.addClass('node__content')}}>
+		{{ content.field_person_bio }}
+		{{ content.field_working_notes }}
+		{{ content.field_image_caption }}
+		{{ content.field_how2_piece }}
+	</div>
 </article>
+#}

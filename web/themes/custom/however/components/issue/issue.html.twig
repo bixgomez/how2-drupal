@@ -1,6 +1,6 @@
-<article class="issue issue-elements">
+<article class="issue page-sections">
 
-  <div class="issue-element issue-header">
+  <div class="page-section issue-header">
     <div class="issue-image">
       {{ featured_image }}
     </div>
@@ -60,9 +60,9 @@
   </div>
 
   {% if sections_old %}
-    <div class="issue-element sections">
-      <h3>Sections (old)</h3>
-      <p>
+    <div class="page-section sections">
+      <h3 class="dev-heading">Sections (old)</h3>
+      <p class="dev-text">
         These are the "old" sections -- they only allow for sections to be added to them.  
         We need to replace all of these with the "new" sections below, which allow not only for
         sections, but also for articles to be added directly.
@@ -76,9 +76,9 @@
   {% endif %}
   
   {% if sections_new %}
-    <div class="issue-element sections">
-      <h3>Sections (new)</h3>
-      <p>
+    <div class="page-section sections">
+      <h3 class="dev-heading">Sections (new)</h3>
+      <p class="dev-text">
         These are the "new" sections -- they allow not only for sections, but also for articles 
         to be added directly. Alas, the only "easy" way to migrate the sections to this new
         area is to do it manually.  We can start this process soon.
@@ -92,9 +92,9 @@
   {% endif %}
 
   {% if masthead %}
-    <div class="issue-element issue-masthead" id="masthead">
-      <h3>Masthead</h3>
-      <p>
+    <div class="page-section issue-masthead" id="masthead">
+      <h3 class="dev-heading">Masthead</h3>
+      <p class="dev-text">
         In the current version of the site, the masthead is displayed in a modal popup window.
         Do we want to continue to do this?  It seems like important information we might want
         to always display on the page somewhere.  In a sidebar, perhaps?
@@ -106,22 +106,22 @@
   {% endif %}
 
   {% if page_facsimiles %}
-    <div class="issue-element page-facsimiles" id="page-facsimiles">
-      <h3>Page Facsimiles</h3>
-      <p>
+    <div class="page-section page-facsimiles" id="page-facsimiles">
+      <h3 class="dev-heading">Page Facsimiles</h3>
+      <p class="dev-text">
         Might be good to add a bit of instruction here, like "click on each page to reveal 
         a large version" or something.
       </p>
-      <div class="issue-element tab-body">
+      <div class="page-section tab-body">
         {{ page_facsimiles }}
       </div>
     </div>
   {% endif %}
 
   {% if person_bio %}
-    <div class="issue-element people" id="people">
-      <h3>Person Bio (?)</h3>
-        <p>
+    <div class="page-section people" id="people">
+      <h3 class="dev-heading">Person Bio (?)</h3>
+        <p class="dev-text">
           I noticed that each issue has a field that holds all the people associated with it,
           along with their bios.  Do we want to use this for anything, or display it anywhere?
         </p>

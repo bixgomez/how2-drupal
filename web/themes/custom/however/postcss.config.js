@@ -1,6 +1,8 @@
-// postcss.config.js - change to CommonJS format
 module.exports = {
   plugins: {
+    "postcss-import": {
+      root: __dirname,
+    },
     "@tailwindcss/postcss": {},
   },
 };

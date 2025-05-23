@@ -3,47 +3,13 @@
 @use "sass:math";
 
 .node {
-  .issue-meta {
-    display: flex;
-    margin: 18px 0;
-    font-weight: 700;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  a {
+    color: vars.$text-color;
+    text-decoration: none;
 
-    .left {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-
-      > div:not(:last-of-type)::after {
-        content: "";
-        height: 10px;
-        width: 10px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        margin-left: 12px;
-      }
+    &:hover {
+      text-decoration: underline;
     }
-
-    .right {
-    }
-
-    a {
-      color: vars.$text-color;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-
-  &.node--view-mode-full > .issue-meta {
-    border-top: 1px solid #919191;
-    border-bottom: 1px solid #919191;
-    padding: 18px 0;
-    margin: 54px 0 62px !important;
   }
 }
 

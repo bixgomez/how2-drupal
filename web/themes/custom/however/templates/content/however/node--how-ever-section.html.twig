@@ -67,45 +67,39 @@
  *
  */
 #}
-{%
-    set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'node--article'
-]
-%}
-{{ attach_library('classy/node') }}
-<article{{ attributes.addClass(classes) }}>
-    <h2 class="subtitle text-center">{{ content.field_subtitle.0 }}</h2>
-    <div class="issue-meta">
-        <div class="left">
-        <div class="journal-name"><a href="/however">HOW(ever)</a></div>
-        <div class="issue-volume-number">{{ volume_issue }}</div>
-        <div class="issue-pub-date">{{ issue_pub_date }}</div>
-        {% if issue_url %}
-            <div><a href="{{ issue_url }}">table of contents</a></div>
-        {% endif %}
-        </div>
-        <div class="right">
-            {{ content.field_archive_url }}
-        </div>
-    </div>
 
-    <div{{ content_attributes.addClass('node__content') }}>
-        <div class="article-content">
-            {{ content.field_journal_page_images_media }}
+{% include "@section/section.html.twig" with {
+  journal: "HOW(ever)",
+  journal_url: "",
+  title: label,
+  subtitle: content.field_subtitle.0,
+  volume_issue: volume_issue,
+  issue_pub_date: issue_pub_date,
+  issue_url: issue_url,
+  archive_url: content.field_archive_url,
+  image_caption: content.field_image_caption,
+  images: content.field_journal_page_images_media,
+  body: content.body,
+  piece: content.field_how_ever_piece,
+  working_notes: content.field_working_notes,
+  person_bio: content.field_person_bio,
+} %}
 
-            <div class="content-text-inner">
-                {{ content.body }}
-                {{ content.field_how_ever_piece }}
-                {{ content.field_working_notes }}
-                {{ content.field_person_bio }}
-            </div>
-        </div>
-    </div>
+{#
+<article{{attributes.addClass(classes)}}>
+	<h2 class="subtitle text-center">{{ content.field_subtitle.0 }}</h2>
 
+	<div{{content_attributes.addClass('node__content')}}>
+		<div class="article-content">
+			{{ content.field_journal_page_images_media }}
+
+			<div class="content-text-inner">
+				{{ content.body }}
+				{{ content.field_how_ever_piece }}
+				{{ content.field_working_notes }}
+				{{ content.field_person_bio }}
+			</div>
+		</div>
+	</div>
 </article>
+#}
