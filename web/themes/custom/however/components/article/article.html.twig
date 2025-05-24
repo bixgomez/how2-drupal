@@ -11,12 +11,12 @@
 			</p>
 
 			{% include "@issue-meta/issue-meta.html.twig" with {
-				journal: journal,
+				journal_name: journal,
 				journal_url: journal_url,
 				volume_issue: volume_issue,
 				issue_pub_date: issue_pub_date,
-				issue_url: issue_url,
-				archive_url: archive_url,
+				issue_url: issue_url[0]['#url'].toString(),
+				archive_url: archive_url[0]['#url'].toString(),
 			} %}
 		</div>
 

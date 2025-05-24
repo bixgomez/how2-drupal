@@ -9,6 +9,25 @@
   --color-accent: #fffcf0; /* yellow-light */
 }
 
+@theme {
+  --font-size-2xs: 0.625rem;
+  --font-size-3xs: 0.5rem;
+  --color-primary: #9e2727;
+  --color-primary-dark: #6b1919;
+}
+
+@utility text-2xs {
+  font-size: var(--font-size-2xs);
+}
+
+@utility text-3xs {
+  font-size: var(--font-size-3xs);
+}
+
+@utility text-primary {
+  color: var(--color-primary);
+}
+
 a {
   @apply text-[var(--color-primary)] 
     hover:text-[var(--color-primary-dark)] 

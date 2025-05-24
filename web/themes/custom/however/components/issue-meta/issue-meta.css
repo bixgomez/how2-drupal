@@ -1,25 +1,14 @@
 .issue-meta {
   display: flex;
+  flex-flow: column wrap;
+  gap: 0.5rem;
   font-weight: 700;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: flex-start;
   border-top: 1px solid #919191;
   border-bottom: 1px solid #919191;
   padding: 18px 0;
 
-  .left {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-
-    > div:not(:last-of-type)::after {
-      content: "";
-      height: 10px;
-      width: 10px;
-      background-color: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      margin-left: 12px;
-    }
+  > div {
+    background-color: pink;
   }
 }

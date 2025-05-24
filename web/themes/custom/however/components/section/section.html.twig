@@ -9,20 +9,24 @@
 			<p class="dev-text">
 				This is not currently working for sections; I am investigating.
 			</p>
+
+			{{ dump(issue_url) }}
+			{{ dump( archive_url[0]['#url'].toString() ) }}
+
 			{% include "@issue-meta/issue-meta.html.twig" with {
-				journal: journal,
+				journal_name: journal,
 				journal_url: journal_url,
 				volume_issue: volume_issue,
 				issue_pub_date: issue_pub_date,
-				issue_url: issue_url,
-				archive_url: archive_url,
+				issue_url: issue_url[0]['#url'].toString(),
+				archive_url: archive_url[0]['#url'].toString(),
 			} %}
 		</div>
 
 		<div class="page-section">
 			<h3 class="dev-heading">images</h3>
 			<p class="dev-text">
-				Do we want images for sections?  Will sections ever have images?
+				Images currently appear in the left sidebar.
 			</p>
 			{{ images }}
 		</div>
@@ -30,7 +34,7 @@
 		<div class="page-section">
 			<h3 class="dev-heading">body</h3>
 			<p class="dev-text">
-				Do we always have body text?
+				Body text is the actual text of the piece.
 			</p>
 			{{ body }}
 		</div>
@@ -38,7 +42,7 @@
 		<div class="page-section">
 			<h3 class="dev-heading">piece</h3>
 			<p class="dev-text">
-				I am not sure exactly what this field is used for.
+				This is a list of the articles assigned to this section.
 			</p>
 			{{ piece }}
 		</div>
@@ -54,7 +58,7 @@
 		<div class="page-section">
 			<h3 class="dev-heading">person_bio</h3>
 			<p class="dev-text">
-				Do we always have this field?  Does it ever display an actual bio?
+				Where do we want this to appear?
 			</p>
 			{{ person_bio }}
 		</div>

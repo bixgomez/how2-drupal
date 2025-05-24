@@ -22,6 +22,10 @@
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
+    --font-size-2xs: 0.625rem;
+    --font-size-3xs: 0.5rem;
+    --color-primary: #9e2727;
+    --color-primary-dark: #6b1919;
   }
 }
 @layer base {
@@ -309,6 +313,12 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .bg-primary-dark {
+    background-color: var(--color-primary-dark);
+  }
   .px-4 {
     padding-inline: calc(var(--spacing) * 4);
   }
@@ -317,6 +327,15 @@
   }
   .text-right {
     text-align: right;
+  }
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .text-primary-dark {
+    color: var(--color-primary-dark);
   }
   .blur {
     --tw-blur: blur(8px);
@@ -456,14 +475,6 @@ a {
   font-size: var(--text-lg);
   line-height: var(--tw-leading, var(--text-lg--line-height));
 }
-@layer utilities {
-  .text-primary {
-    color: var(--color-primary);
-  }
-  .text-2xs {
-    font-size: 0.625rem;
-  }
-}
 .page-sections {
   display: flex;
   flex-direction: column;
@@ -476,8 +487,7 @@ div.page-section {
   padding: 1rem;
 }
 .dev-text {
-  font-size: var(--text-xs);
-  line-height: var(--tw-leading, var(--text-xs--line-height));
+  font-size: var(--font-size-2xs);
   border: 1px solid rgb(0 0 0 / 18%);
   background-color: rgb(0 0 0 / 8%);
   padding: 0.5rem;
@@ -485,6 +495,8 @@ div.page-section {
   font-family: monospace;
 }
 .dev-heading {
+  font-size: var(--text-xs);
+  line-height: var(--tw-leading, var(--text-xs--line-height));
   margin-bottom: 0.5rem;
   font-family: monospace;
 }
@@ -651,48 +663,16 @@ h2.section-teaser-title {
 }
 .issue-meta {
   display: flex;
+  flex-flow: column wrap;
+  gap: 0.5rem;
   font-weight: 700;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: flex-start;
   border-top: 1px solid #919191;
   border-bottom: 1px solid #919191;
   padding: 18px 0;
-  .left {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    > div:not(:last-of-type)::after {
-      content: "";
-      height: 10px;
-      width: 10px;
-      background-color: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      margin-left: 12px;
-    }
+  > div {
+    background-color: pink;
   }
-}
-.page-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-div.page-section {
-  border: 1px solid rgb(0 0 0 / 15%);
-  background-color: rgb(0 0 0 / 5%);
-  margin: 0;
-  padding: 1rem;
-}
-.dev-text {
-  border: 1px solid rgb(0 0 0 / 18%);
-  background-color: rgb(0 0 0 / 8%);
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  font-family: monospace;
-}
-.dev-heading {
-  margin-bottom: 0.5rem;
-  font-family: monospace;
 }
 ﻿html {
   font-size: 16px;
