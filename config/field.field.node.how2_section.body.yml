@@ -11,7 +11,7 @@ id: node.how2_section.body
 field_name: body
 entity_type: node
 bundle: how2_section
-label: 'Teaser Text'
+label: Body
 description: ''
 required: false
 translatable: true
@@ -20,4 +20,5 @@ default_value_callback: ''
 settings:
   display_summary: false
   required_summary: false
+  allowed_formats: {  }
 field_type: text_with_summary

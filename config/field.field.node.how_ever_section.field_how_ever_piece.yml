@@ -7,6 +7,7 @@ dependencies:
     - node.type.how_ever_section
     - paragraphs.paragraphs_type.how_ever_subsection
     - paragraphs.paragraphs_type.link_section_title
+    - paragraphs.paragraphs_type.open_title_text
     - paragraphs.paragraphs_type.section_links
   module:
     - entity_reference_revisions
@@ -14,7 +15,7 @@ id: node.how_ever_section.field_how_ever_piece
 field_name: field_how_ever_piece
 entity_type: node
 bundle: how_ever_section
-label: 'HOW(ever) pieces'
+label: 'HOW(ever) Pieces'
 description: ''
 required: false
 translatable: false
@@ -27,30 +28,34 @@ settings:
       section_links: section_links
       how_ever_subsection: how_ever_subsection
       link_section_title: link_section_title
+      open_title_text: open_title_text
     negate: 0
     target_bundles_drag_drop:
+      body_sections:
+        weight: -12
+        enabled: false
       how2_section_links:
-        weight: -14
+        weight: -17
         enabled: false
       how2_subsection:
-        weight: -11
+        weight: -16
         enabled: false
       how_ever_subsection:
-        weight: -16
+        weight: -18
         enabled: true
       link_section_title:
-        weight: -15
+        weight: -14
         enabled: true
       open_title_text:
-        weight: -10
-        enabled: false
+        weight: -11
+        enabled: true
       person_bio:
-        weight: -12
+        weight: -15
         enabled: false
       photo_caption:
         weight: -13
         enabled: false
       section_links:
-        weight: -17
+        weight: -19
         enabled: true
 field_type: entity_reference_revisions

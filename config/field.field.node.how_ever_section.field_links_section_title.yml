@@ -1,0 +1,19 @@
+uuid: fc3fdfa6-362c-4dcc-8046-fbda6ca8663d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_links_section_title
+    - node.type.how_ever_section
+id: node.how_ever_section.field_links_section_title
+field_name: field_links_section_title
+entity_type: node
+bundle: how_ever_section
+label: 'Links Section Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

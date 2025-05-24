@@ -9,10 +9,13 @@ dependencies:
     - field.field.node.how2_section.field_how2_piece
     - field.field.node.how2_section.field_image_caption
     - field.field.node.how2_section.field_issue_reference
+    - field.field.node.how2_section.field_journal_page_images_media
     - field.field.node.how2_section.field_links_section_title
     - field.field.node.how2_section.field_person_bio
+    - field.field.node.how2_section.field_show_full_section_page
     - field.field.node.how2_section.field_subtitle
     - field.field.node.how2_section.field_tags
+    - field.field.node.how2_section.field_teaser_text
     - field.field.node.how2_section.field_volume_reference
     - field.field.node.how2_section.field_working_notes
     - node.type.how2_section
@@ -39,10 +42,14 @@ hidden:
   field_how2_piece: true
   field_image_caption: true
   field_issue_reference: true
+  field_journal_page_images_media: true
   field_links_section_title: true
+  field_show_full_section_page: true
   field_subtitle: true
   field_tags: true
+  field_teaser_text: true
   field_volume_reference: true
   field_working_notes: true
+  footnotes_group: true
   links: true
   search_api_excerpt: true

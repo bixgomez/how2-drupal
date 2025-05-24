@@ -8,16 +8,20 @@ dependencies:
     - field.field.node.how2_section.field_how2_piece
     - field.field.node.how2_section.field_image_caption
     - field.field.node.how2_section.field_issue_reference
+    - field.field.node.how2_section.field_journal_page_images_media
     - field.field.node.how2_section.field_links_section_title
     - field.field.node.how2_section.field_person_bio
+    - field.field.node.how2_section.field_show_full_section_page
     - field.field.node.how2_section.field_subtitle
     - field.field.node.how2_section.field_tags
+    - field.field.node.how2_section.field_teaser_text
     - field.field.node.how2_section.field_volume_reference
     - field.field.node.how2_section.field_working_notes
     - node.type.how2_section
   module:
     - field_group
     - link
+    - media_library
     - paragraphs
     - path
     - text
@@ -29,7 +33,7 @@ third_party_settings:
       label: 'Links Section'
       region: content
       parent_name: ''
-      weight: 11
+      weight: 12
       format_type: fieldset
       format_settings:
         classes: ''
@@ -39,13 +43,13 @@ third_party_settings:
         required_fields: true
     group_metadata:
       children:
-        - field_tags
         - field_volume_reference
         - field_issue_reference
+        - field_tags
       label: Metadata
       region: content
       parent_name: ''
-      weight: 12
+      weight: 13
       format_type: fieldset
       format_settings:
         classes: ''
@@ -60,7 +64,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 10
+    weight: 5
     region: content
     settings:
       rows: 9
@@ -68,15 +72,9 @@ content:
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
-  created:
-    type: datetime_timestamp
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_archive_url:
     type: link_default
-    weight: 9
+    weight: 7
     region: content
     settings:
       placeholder_url: ''
@@ -95,14 +93,16 @@ content:
       closed_mode_threshold: 0
       add_mode: dropdown
       form_display_mode: default
-      default_paragraph_type: ''
+      default_paragraph_type: _none
       features:
+        add_above: '0'
         collapse_edit_all: collapse_edit_all
+        convert: '0'
         duplicate: duplicate
     third_party_settings: {  }
   field_image_caption:
     type: paragraphs
-    weight: 8
+    weight: 9
     region: content
     settings:
       title: Paragraph
@@ -124,9 +124,24 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_journal_page_images_media:
+    type: media_library_widget
+    weight: 11
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_links_section_title:
+    type: string_textfield
+    weight: 14
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_person_bio:
     type: paragraphs
-    weight: 7
+    weight: 10
     region: content
     settings:
       title: Paragraph
@@ -142,9 +157,16 @@ content:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
     third_party_settings: {  }
+  field_show_full_section_page:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_subtitle:
     type: string_textfield
-    weight: 5
+    weight: 6
     region: content
     settings:
       size: 60
@@ -152,12 +174,20 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
-    weight: 10
+    weight: 13
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_teaser_text:
+    type: text_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
       placeholder: ''
     third_party_settings: {  }
   field_volume_reference:
@@ -168,7 +198,7 @@ content:
     third_party_settings: {  }
   field_working_notes:
     type: text_textarea
-    weight: 6
+    weight: 8
     region: content
     settings:
       rows: 5
@@ -176,13 +206,13 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 3
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 4
+    weight: 2
     region: content
     settings:
       display_label: true
@@ -197,7 +227,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 1
+    weight: 15
     region: content
     settings:
       match_operator: CONTAINS
@@ -206,6 +236,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
-  field_links_section_title: true
+  created: true
   promote: true
   sticky: true

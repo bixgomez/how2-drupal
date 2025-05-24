@@ -1,16 +1,16 @@
-uuid: 4ca9206d-d08d-45ad-a2b8-00654e14a9c7
+uuid: 22c04aab-6565-4afe-be73-0ca7f41d22df
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_teaser_text
-    - node.type.how_ever_section
+    - node.type.how2_section
   module:
     - text
-id: node.how_ever_section.field_teaser_text
+id: node.how2_section.field_teaser_text
 field_name: field_teaser_text
 entity_type: node
-bundle: how_ever_section
+bundle: how2_section
 label: 'Teaser Text'
 description: "Section teaser that's displayed on the issue TOC."
 required: false

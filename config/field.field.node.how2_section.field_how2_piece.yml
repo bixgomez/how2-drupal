@@ -15,7 +15,7 @@ id: node.how2_section.field_how2_piece
 field_name: field_how2_piece
 entity_type: node
 bundle: how2_section
-label: 'How2 Section Links'
+label: 'How2 Pieces'
 description: ''
 required: false
 translatable: false
@@ -26,30 +26,36 @@ settings:
   handler_settings:
     target_bundles:
       how2_section_links: how2_section_links
-      link_section_title: link_section_title
       how2_subsection: how2_subsection
+      link_section_title: link_section_title
       open_title_text: open_title_text
     negate: 0
     target_bundles_drag_drop:
+      body_sections:
+        weight: -12
+        enabled: false
       how2_section_links:
-        weight: 3
+        weight: -17
         enabled: true
       how2_subsection:
-        weight: 8
+        weight: -16
         enabled: true
+      how_ever_subsection:
+        weight: -18
+        enabled: false
       link_section_title:
-        weight: 7
+        weight: -14
         enabled: true
       open_title_text:
-        weight: 11
+        weight: -11
         enabled: true
       person_bio:
-        weight: 6
+        weight: -15
         enabled: false
       photo_caption:
-        weight: 7
+        weight: -13
         enabled: false
       section_links:
-        weight: 4
+        weight: -19
         enabled: false
 field_type: entity_reference_revisions

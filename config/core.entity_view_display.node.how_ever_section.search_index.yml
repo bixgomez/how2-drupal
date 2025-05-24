@@ -1,9 +1,9 @@
-uuid: ecad5641-b01d-43e2-8996-65f21d3d6326
+uuid: e8a32b07-2983-4505-b309-7d55da08d9aa
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.search_index
     - field.field.node.how_ever_section.body
     - field.field.node.how_ever_section.field_archive_url
     - field.field.node.how_ever_section.field_how_ever_piece
@@ -20,36 +20,50 @@ dependencies:
     - field.field.node.how_ever_section.field_working_notes
     - node.type.how_ever_section
   module:
-    - entity_reference_revisions
+    - link
     - user
-id: node.how_ever_section.teaser
+id: node.how_ever_section.search_index
 targetEntityType: node
 bundle: how_ever_section
-mode: teaser
+mode: search_index
 content:
-  field_person_bio:
-    type: entity_reference_revisions_entity_view
+  field_archive_url:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_subtitle:
+    type: string
     label: hidden
     settings:
-      view_mode: name_only
-      link: ''
+      link_to_entity: false
     third_party_settings: {  }
     weight: 0
     region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
 hidden:
   body: true
-  field_archive_url: true
   field_how_ever_piece: true
   field_image_caption: true
   field_issue_reference: true
   field_journal_page_images_media: true
   field_links_section_title: true
+  field_person_bio: true
   field_show_full_section_page: true
-  field_subtitle: true
   field_tags: true
   field_teaser_text: true
   field_volume_reference: true
   field_working_notes: true
   footnotes_group: true
-  links: true
   search_api_excerpt: true
