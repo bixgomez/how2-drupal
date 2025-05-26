@@ -1,14 +1,14 @@
 .issue-meta {
   display: flex;
-  flex-flow: column wrap;
   gap: 0.5rem;
   font-weight: 700;
   justify-content: flex-start;
   border-top: 1px solid #919191;
   border-bottom: 1px solid #919191;
-  padding: 18px 0;
+  padding: 0.5rem 0;
 
   > div {
-    background-color: pink;
+    width: min-content;
+    white-space: nowrap;
   }
 }

@@ -1,23 +1,38 @@
 <div class="issue-meta">
 
-	{{ dump(journal_name) }}
 	{% if journal_name %}
 		<div class="journal-name">
 			<a href="{{ journal_url }}">{{ journal_name }}</a>
 		</div>
 	{% endif %}
 
-	{{ dump(volume_issue) }}
 	{% if volume_issue %}
 		<div class="issue-volume-number">
 			{{ volume_issue }}
 		</div>
 	{% endif %}
 
-	{{ dump(issue_pub_date) }}
 	{% if issue_pub_date %}
 		<div class="issue-pub-date">
 			{{ issue_pub_date }}
+		</div>
+	{% endif %}
+
+	{% if masthead %}
+		<div class="issue-pub-date">
+			<a href="{{ masthead }}">Masthead</a>
+		</div>
+	{% endif %}
+
+	{% if person_bio %}
+		<div class="issue-pub-date">
+			<a href="{{ person_bio }}">Bios</a>
+		</div>
+	{% endif %}
+
+	{% if page_facsimiles %}
+		<div class="issue-pub-date">
+			<a href="{{ page_facsimiles }}">Page Facsimiles</a>
 		</div>
 	{% endif %}
 
@@ -30,6 +45,12 @@
 	{% if archive_url|render|trim is not empty %}
 		<div class="archive-url">
 			<a href="{{ archive_url }}">html archive</a>
+		</div>
+	{% endif %}
+
+	{% if pdf_url|render|trim is not empty %}
+		<div class="pdf-url">
+			<a href="{{ pdf_url }}">Download PDF</a>
 		</div>
 	{% endif %}
 

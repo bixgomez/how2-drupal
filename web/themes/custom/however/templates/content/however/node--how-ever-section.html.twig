@@ -68,14 +68,30 @@
  */
 #}
 
+{# <h4>content</h4>
+{{ dump(content) }}
+
+<h4>content.field_volume_reference</h4>
+{{ dump(content.field_volume_reference[0]['#title']) }}
+
+<h4>content.field_issue_reference</h4>
+{{ dump(content.field_issue_reference[0]) }}
+
+<h4>node.field_issue_reference.entity</h4>
+{{ dump(node.field_issue_reference.entity.id) }}
+
+<h4>issue_url</h4>
+{% set issue_url = url('entity.node.canonical', {'node': node.field_issue_reference.entity.id}) %}
+{{ dump(issue_url) }} #}
+
 {% include "@section/section.html.twig" with {
-  journal: "HOW(ever)",
+  journal: "",
   journal_url: "",
   title: label,
   subtitle: content.field_subtitle.0,
-  volume_issue: volume_issue,
+  volume_issue: content.field_issue_reference[0]['#title'],
   issue_pub_date: issue_pub_date,
-  issue_url: issue_url,
+  issue_url: url('entity.node.canonical', {'node': node.field_issue_reference.entity.id}),
   archive_url: content.field_archive_url,
   image_caption: content.field_image_caption,
   images: content.field_journal_page_images_media,

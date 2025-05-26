@@ -1,3 +1,41 @@
 .issue {
-  /* border: 1px dashed #ccc; */
+  padding: 0;
+  margin: 0;
+}
+
+.issue-header {
+  display: flex;
+  gap: 2rem;
+  margin: 0 0 1rem;
+}
+
+.issue-title {
+  margin-top: 0.25rem;
+  flex-grow: 1;
+}
+
+.issue-image {
+  margin: 0 0 0.5rem;
+  overflow: hidden;
+  position: relative;
+  width: 30%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  * {
+    display: contents;
+  }
+
+  img {
+    display: block;
+    padding: 0;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.issue-sections {
+  display: block;
+  column-count: 3;
 }

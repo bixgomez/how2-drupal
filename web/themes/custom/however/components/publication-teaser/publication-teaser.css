@@ -82,32 +82,6 @@
     }
   }
 
-  .issue-meta {
-    display: flex;
-    margin: 0;
-    flex-wrap: wrap;
-    justify-content: center;
-    font-weight: normal;
-    font-size: 6cqi;
-
-    .left {
-      display: flex;
-      gap: 2cqi;
-      flex-wrap: wrap;
-
-      > div:not(:last-of-type)::after {
-        content: "";
-        height: 2cqi;
-        width: 2cqi;
-        padding-bottom: 2cqi;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        margin-left: 2cqi;
-      }
-    }
-  }
-
   .publication-teaser-link {
     display: block;
     background: transparent;
