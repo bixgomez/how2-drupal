@@ -5,23 +5,23 @@
 	<div class="page-sections">
 
 		<div class="page-section">
+			<h3 class="dev-heading">title and title_display</h3>
+			<p class="dev-text">
+				This should display the title_display field if there is one, falling back to title if there is no title_display text.
+			</p>
+
+			{% if title_display %}
+				{{ title_display }}
+			{% elseif title %}
+				{{ title }}
+			{% endif %}
+		</div>
+
+		<div class="page-section">
 			<h3 class="dev-heading">issue-meta</h3>
 			<p class="dev-text">
 				This is configured a bit differently for articles vs sections, but I think it's ok.
 			</p>
-
-			{# <h4>volume_issue</h4>
-									{{ dump(volume_issue) }}
-						
-									<h4>issue_pub_date</h4>
-									{{ dump(issue_pub_date) }}
-						
-									<h4>issue_url</h4>
-									{{ dump(issue_url) }}
-						
-									<h4>archive_url</h4>
-									{{ dump(archive_url) }} #}
-
 
 			{% include "@issue-meta/issue-meta.html.twig" with {
 				journal_name: journal,

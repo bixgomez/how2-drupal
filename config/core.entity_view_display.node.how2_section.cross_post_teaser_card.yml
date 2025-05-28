@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.how2_section.field_subtitle
     - field.field.node.how2_section.field_tags
     - field.field.node.how2_section.field_teaser_text
+    - field.field.node.how2_section.field_title_display
     - field.field.node.how2_section.field_volume_reference
     - field.field.node.how2_section.field_working_notes
     - node.type.how2_section
@@ -75,6 +76,7 @@ hidden:
   field_show_full_section_page: true
   field_tags: true
   field_teaser_text: true
+  field_title_display: true
   field_working_notes: true
   footnotes_group: true
   links: true

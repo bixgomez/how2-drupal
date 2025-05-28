@@ -1,0 +1,34 @@
+<article{{attributes.addClass(classes)}}>
+
+	<div class="teaser-card-image section-teaser-image">
+		{{ image_caption }}
+	</div>
+
+	{% if title %}
+		{{ title_prefix }}
+		<h2 class="teaser-card-title section-teaser-title">
+			<span>
+				<a href="{{ url }}" rel="bookmark">{{ title }}</a>
+			</span>
+		</h2>
+		{{ title_suffix }}
+	{% endif %}
+
+	{% if subtitle %}
+		<h3 class="teaser-card-subtitle section-teaser-subtitle">{{ subtitle }}</h3>
+	{% endif %}
+
+	{% if teaser_text %}
+		{{ teaser_text }}
+	{% endif %}
+
+	{% if body %}
+		{{ body }}
+	{% endif %}
+
+	<div class="info-box">
+		<div class="info-bit">{{ volume_reference }}</div>
+		<div class="info-bit">{{ issue_reference }}</div>
+	</div>
+
+</article>

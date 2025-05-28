@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.how_ever_section.field_subtitle
     - field.field.node.how_ever_section.field_tags
     - field.field.node.how_ever_section.field_teaser_text
+    - field.field.node.how_ever_section.field_title_display
     - field.field.node.how_ever_section.field_volume_reference
     - field.field.node.how_ever_section.field_working_notes
     - node.type.how_ever_section
@@ -64,6 +65,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_title_display:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
     region: content
   field_volume_reference:
     type: entity_reference_label

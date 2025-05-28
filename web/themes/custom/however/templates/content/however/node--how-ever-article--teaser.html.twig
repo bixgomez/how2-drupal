@@ -67,37 +67,24 @@
  *
  */
 #}
-{%
-    set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-]
-%}
-{{ attach_library('classy/node') }}
-<article{{ attributes.addClass(classes) }}>
-    {% if content.field_person_bio['#items'] %}
-        <div class="contributor"><strong>
-        {% if content.field_person_bio['#items']|length == 1 %}
-            {{ content.field_person_bio['#items'].entity.field_person.0.entity.title.value }}
-        {% else %}
-            {% for person in content.field_person_bio['#items'] %}
-                {% if loop.length == 2 %}
-                    {{ person.entity.field_person.0.entity.title.value }}{{ not loop.last ? ' & ' }}
-                {% else %}
-                    {{ person.entity.field_person.0.entity.title.value }}{{ not loop.last ? ', ' }}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-        </strong></div>
-    {% endif %}
-    {{ title_prefix }}
-        <div{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-        </div>
-    {{ title_suffix }}
 
-</article>
+{%
+  set classes = [
+    'section-teaser',
+    'section-teaser__article',
+  ]
+%}
+
+{% include "@section-teaser/section-teaser.html.twig" with {
+  title: label,
+  title_display: content.field_title_display,
+  url: url,
+  title_prefix: title_prefix,
+  title_suffix: title_suffix,
+  subtitle: content.field_subtitle,
+  body: content.body,
+  teaser_text: content.field_teaser_text,
+  volume_reference: content.field_volume_reference.0['#title'],
+  issue_reference: content.field_issue_reference.0['#title'],
+  classes: classes,
+} %}

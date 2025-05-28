@@ -19,6 +19,7 @@ components:
     issue: components/issue
     volume: components/volume
     section-teaser: components/section-teaser
+    article-teaser: components/article-teaser
     publication-teaser: components/publication-teaser
     issues-grid: components/issues-grid
     issue-meta: components/issue-meta

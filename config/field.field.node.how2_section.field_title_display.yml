@@ -1,0 +1,24 @@
+uuid: 3f163d51-f1c6-4a94-9566-0a22a8ae4d8d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_title_display
+    - filter.format.title_display
+    - node.type.how2_section
+  module:
+    - text
+id: node.how2_section.field_title_display
+field_name: field_title_display
+entity_type: node
+bundle: how2_section
+label: 'Title (Display)'
+description: 'This is the title that will be displayed on the page itself, and in search results.  It will not be used for searching and sorting, only for display.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - title_display
+field_type: text_long

@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.how2_section.field_subtitle
     - field.field.node.how2_section.field_tags
     - field.field.node.how2_section.field_teaser_text
+    - field.field.node.how2_section.field_title_display
     - field.field.node.how2_section.field_volume_reference
     - field.field.node.how2_section.field_working_notes
     - node.type.how2_section
@@ -33,7 +34,7 @@ third_party_settings:
       label: 'Links Section'
       region: content
       parent_name: ''
-      weight: 12
+      weight: 13
       format_type: fieldset
       format_settings:
         classes: ''
@@ -49,7 +50,7 @@ third_party_settings:
       label: Metadata
       region: content
       parent_name: ''
-      weight: 13
+      weight: 14
       format_type: fieldset
       format_settings:
         classes: ''
@@ -64,7 +65,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 5
+    weight: 6
     region: content
     settings:
       rows: 9
@@ -74,7 +75,7 @@ content:
     third_party_settings: {  }
   field_archive_url:
     type: link_default
-    weight: 7
+    weight: 8
     region: content
     settings:
       placeholder_url: ''
@@ -102,7 +103,7 @@ content:
     third_party_settings: {  }
   field_image_caption:
     type: paragraphs
-    weight: 9
+    weight: 10
     region: content
     settings:
       title: Paragraph
@@ -126,14 +127,14 @@ content:
     third_party_settings: {  }
   field_journal_page_images_media:
     type: media_library_widget
-    weight: 11
+    weight: 12
     region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
   field_links_section_title:
     type: string_textfield
-    weight: 14
+    weight: 15
     region: content
     settings:
       size: 60
@@ -141,7 +142,7 @@ content:
     third_party_settings: {  }
   field_person_bio:
     type: paragraphs
-    weight: 10
+    weight: 11
     region: content
     settings:
       title: Paragraph
@@ -159,14 +160,14 @@ content:
     third_party_settings: {  }
   field_show_full_section_page:
     type: boolean_checkbox
-    weight: 4
+    weight: 5
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_subtitle:
     type: string_textfield
-    weight: 6
+    weight: 7
     region: content
     settings:
       size: 60
@@ -184,11 +185,19 @@ content:
     third_party_settings: {  }
   field_teaser_text:
     type: text_textarea
-    weight: 3
+    weight: 4
     region: content
     settings:
       rows: 5
       placeholder: ''
+    third_party_settings: {  }
+  field_title_display:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 1
+      placeholder: 'Title as displayed on the page.  This will not be used for searching; only for display.'
     third_party_settings: {  }
   field_volume_reference:
     type: options_select
@@ -198,7 +207,7 @@ content:
     third_party_settings: {  }
   field_working_notes:
     type: text_textarea
-    weight: 8
+    weight: 9
     region: content
     settings:
       rows: 5
@@ -206,13 +215,13 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 1
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 2
+    weight: 3
     region: content
     settings:
       display_label: true
@@ -227,7 +236,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 15
+    weight: 16
     region: content
     settings:
       match_operator: CONTAINS

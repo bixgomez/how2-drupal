@@ -4,6 +4,24 @@
 
 	<div class="page-sections">
 
+		{% if not hide_title %}
+			<div class="page-section">
+
+				{{ dump(hide_title) }}
+
+				<h3 class="dev-heading">title and title_display</h3>
+				<p class="dev-text">
+					This should display the title_display field if there is one, falling back to title if there is no title_display text.
+				</p>
+
+				{% if title_display %}
+					{{ title_display }}
+				{% elseif title %}
+					{{ title }}
+				{% endif %}
+			</div>
+		{% endif %}
+
 		<div class="page-section">
 			<h3 class="dev-heading">issue-meta</h3>
 			<p class="dev-text">
@@ -31,15 +49,6 @@
 		</div>
 
 		<div class="page-section">
-			<h3 class="dev-heading">title and title_display</h3>
-			<p class="dev-text">
-				This should display the title_display field if there is one, falling back to title if there is no title_display text.
-			</p>
-			{{ title }}
-			{{ title_display }}
-		</div>
-
-		<div class="page-section">
 			<h3 class="dev-heading">working_notes</h3>
 			<p class="dev-text">
 				Where do we want this to appear?
@@ -61,7 +70,6 @@
 					{% endfor %}
 				</ul>
 			{% endif %}
-			{{ dump(node_body_sections) }}
 		</div>
 
 		<div class="page-section">
@@ -89,22 +97,11 @@
 			{{ images }}
 		</div>
 
+		{% if person_bio.0 %}
+			<p class="author-name">
+				{{ person_bio.0['#paragraph'].field_person.entity.title.value }}
+			</p>
+		{% endif %}
+
 	</div>
-
-	hide_title
-	{{ dump(hide_title) }}
-	<br>
-	person_bio
-	{{ dump(person_bio) }}
-	<br>
-	page_images
-	{{ dump(page_images) }}
-	<br>
-
-
-	{% if person_bio.0 %}
-		<p class="author-name">
-			{{ person_bio.0['#paragraph'].field_person.entity.title.value }}
-		</p>
-	{% endif %}
-</div></article>
+</article>

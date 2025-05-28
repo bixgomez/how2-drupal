@@ -70,29 +70,29 @@
 
 {% set sections_old_entities = [] %}
 {% if content.field_section[0] is defined %}
-  {% for item in node.field_section %}
-    {% if item.entity %}
-      {% set sections_old_entities = sections_old_entities|merge([item.entity]) %}
-    {% endif %}
-  {% endfor %}
+	{% for item in node.field_section %}
+		{% if item.entity %}
+			{% set sections_old_entities = sections_old_entities|merge([item.entity]) %}
+		{% endif %}
+	{% endfor %}
 {% endif %}
 
 {% set sections_new_entities = [] %}
 {% if content.field_sections_however[0] is defined %}
-  {% for item in node.field_sections_however %}
-    {% if item.entity %}
-      {% set sections_new_entities = sections_new_entities|merge([item.entity]) %}
-    {% endif %}
-  {% endfor %}
+	{% for item in node.field_sections_however %}
+		{% if item.entity %}
+			{% set sections_new_entities = sections_new_entities|merge([item.entity]) %}
+		{% endif %}
+	{% endfor %}
 {% endif %}
 
 {% set person_bio_entities = [] %}
 {% if content.field_person_bio[0] is defined %}
-  {% for item in node.field_person_bio %}
-    {% if item.entity %}
-      {% set person_bio_entities = person_bio_entities|merge([item.entity]) %}
-    {% endif %}
-  {% endfor %}
+	{% for item in node.field_person_bio %}
+		{% if item.entity %}
+			{% set person_bio_entities = person_bio_entities|merge([item.entity]) %}
+		{% endif %}
+	{% endfor %}
 {% endif %}
 
 {% include "@issue/issue.html.twig" with {
