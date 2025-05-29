@@ -28,6 +28,10 @@
   color: var(--color-primary);
 }
 
+.container {
+  max-width: 1060px;
+}
+
 a {
   @apply text-[var(--color-primary)] 
     hover:text-[var(--color-primary-dark)] 

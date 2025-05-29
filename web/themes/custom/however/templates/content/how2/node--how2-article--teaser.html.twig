@@ -67,37 +67,39 @@
  *
  */
 #}
-{%
-    set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-]
-%}
-{{ attach_library('classy/node') }}
-<article{{ attributes.addClass(classes) }}>
-    {% if content.field_person_bio['#items'] %}
-        <div class="contributor"><strong>
-        {% if content.field_person_bio['#items']|length == 1 %}
-            {{ content.field_person_bio['#items'].entity.field_person.0.entity.title.value }}
-        {% else %}
-            {% for person in content.field_person_bio['#items'] %}
-                {% if loop.length == 2 %}
-                    {{ person.entity.field_person.0.entity.title.value }}{{ not loop.last ? ' & ' }}
-                {% else %}
-                    {{ person.entity.field_person.0.entity.title.value }}{{ not loop.last ? ', ' }}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-        </strong></div>
-    {% endif %}
-    {{ title_prefix }}
-        <div{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-        </div>
-    {{ title_suffix }}
 
-</article>
+{% set items = content.field_person_bio['#items'] %}
+{% if items %}
+	{# precompute once #}
+	{% set total = items|length %}
+
+	{# accumulator for all the names #}
+	{% set names = '' %}
+
+	{# single-person case #}
+	{% if total == 1 %}
+		{% set names = items.0.entity.field_person.0.entity.title.value %}
+	{% else %}
+		{# multiple people #}
+		{% for item in items %}
+			{# append the name itself #}
+			{% set names = names ~ item.entity.field_person.0.entity.title.value %}
+
+			{# choose separator: “ & ” if exactly two people, otherwise comma #}
+			{% if total == 2 %}
+				{% set names = names ~ (not loop.last ? ' & ' : '') %}
+			{% else %}
+				{% set names = names ~ (not loop.last ? ', ' : '') %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endif %}
+
+{% include "@article-teaser/article-teaser.html.twig" with {
+    title_prefix: title_prefix,
+    title_suffix: title_suffix,
+    title: label,
+    title_display: content.field_title_display,
+    url: url,
+    names: names
+} %}

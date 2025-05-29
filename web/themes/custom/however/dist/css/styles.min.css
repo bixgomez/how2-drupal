@@ -380,6 +380,9 @@
   --color-secondary: #d3ceb6;
   --color-accent: #fffcf0;
 }
+.container {
+  max-width: 1060px;
+}
 a {
   color: var(--color-primary);
   text-decoration-line: underline;
@@ -697,6 +700,15 @@ h2.section-teaser-title {
 .issue-sections {
   display: block;
   column-count: 3;
+}
+.article-teaser {
+  margin-bottom: 0.5rem;
+  .article-contributor {
+    font-size: 1rem;
+  }
+  .article-title {
+    font-size: 1rem;
+  }
 }
 ﻿html {
   font-size: 16px;
