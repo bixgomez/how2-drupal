@@ -70,7 +70,7 @@
 
 {% include "@section/section.html.twig" with {
   journal: "How2",
-  journal_url: "",
+  journal_url: "/how2",
   title: label,
   title_display: content.field_title_display,
   subtitle: content.field_subtitle.0,
@@ -81,20 +81,7 @@
   image_caption: content.field_image_caption,
   images: content.field_journal_page_images_media,
   body: body,
-  piece: content.field_how2_piece,
+  pieces: content.field_how2_piece,
   working_notes: content.field_working_notes,
   person_bio: content.field_person_bio,
 } %}
-
-{# 
-<article{{attributes.addClass(classes)}}>
-	<h2 class="subtitle text-center">{{ content.field_subtitle.0 }}</h2>
-
-	<div{{content_attributes.addClass('node__content')}}>
-		{{ content.field_person_bio }}
-		{{ content.field_working_notes }}
-		{{ content.field_image_caption }}
-		{{ content.field_how2_piece }}
-	</div>
-</article>
-#}

@@ -38,6 +38,8 @@
  */
 #}
 
-{% for item in items %}
-	<h2 class="article-teaser-section-title">{{ item.content }}</h2>
-{% endfor %}
+<div class="article-contributor font-semibold">
+	{% for item in items %}
+		{{ item.content }}
+	{% endfor %}
+</div>
