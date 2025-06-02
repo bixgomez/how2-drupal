@@ -1,15 +1,31 @@
 <article class="section">
 
-	<div class="section-header">
-		<div class="section-header-image">
-			{% if image_caption['#items'] and image_caption['#items']|length > 0 %}
-				{{ image_caption }}
-			{% endif %}
+	{% set has_image = 0 %}
+	{% set the_image = '' %}
 
-			{% if images['#items'] and images['#items']|length > 0 %}
-				{{ images }}
-			{% endif %}
-		</div>
+	{% if image_caption['#items'] and image_caption['#items']|length > 0 %}
+		{% set image_caption_content = image_caption|render|striptags|trim %}
+		{% if image_caption_content and image_caption_content != '' %}
+			{% set has_image = 1 %}
+			{% set the_image = image_caption %}
+		{% endif %}
+	{% endif %}
+
+	{% if images['#items'] and images['#items']|length > 0 %}
+		{% set images_content = images|render|trim %}
+		{% if '<img' in images_content %}
+			{% set has_image = 1 %}
+			{% set the_image = images %}
+		{% endif %}
+	{% endif %}
+
+	<div class="section-header {% if has_image %}has-image{% endif %}">
+
+		{% if has_image %}
+			<div class="section-header-image">
+				{{ the_image }}
+			</div>
+		{% endif %}
 
 		<div class="section-header-text">
 			{% if title_display|render|trim %}
