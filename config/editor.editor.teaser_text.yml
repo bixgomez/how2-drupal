@@ -1,21 +1,26 @@
-uuid: 2f26fdfe-5967-4469-a238-f6e28ebd6e8a
+uuid: 040783b9-032a-4faa-b23b-70e9a4885c73
 langcode: en
 status: true
 dependencies:
   config:
-    - filter.format.title_display
+    - filter.format.teaser_text
   module:
     - ckeditor5
-format: title_display
+format: teaser_text
 editor: ckeditor5
 settings:
   toolbar:
     items:
+      - heading
       - bold
       - italic
       - underline
       - strikethrough
       - link
-  plugins: {  }
+  plugins:
+    ckeditor5_heading:
+      enabled_headings:
+        - heading3
+        - heading4
 image_upload:
   status: false

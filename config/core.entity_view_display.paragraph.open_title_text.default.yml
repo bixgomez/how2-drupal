@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.paragraph.open_title_text.field_text
     - field.field.paragraph.open_title_text.field_title
+    - field.field.paragraph.open_title_text.field_title_display
     - paragraphs.paragraphs_type.open_title_text
   module:
     - text
@@ -18,7 +19,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_title:
     type: string
@@ -27,6 +28,13 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_title_display:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   search_api_excerpt: true

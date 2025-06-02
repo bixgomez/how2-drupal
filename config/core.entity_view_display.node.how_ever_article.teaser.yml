@@ -20,6 +20,7 @@ dependencies:
     - node.type.how_ever_article
   module:
     - entity_reference_revisions
+    - text
     - user
 id: node.how_ever_article.teaser
 targetEntityType: node
@@ -33,6 +34,13 @@ content:
       view_mode: name_only
       link: ''
     third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title_display:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
     weight: 0
     region: content
 hidden:
@@ -45,7 +53,6 @@ hidden:
   field_media_type: true
   field_section_reference: true
   field_tags: true
-  field_title_display: true
   field_volume_reference: true
   field_working_notes: true
   footnotes_group: true

@@ -1,9 +1,9 @@
-uuid: 6de424d9-08bf-4e64-b745-e322fc86c55e
+uuid: 0bbdd81b-8e70-4a76-8e34-b4e9fcdaacf8
 langcode: en
 status: true
 dependencies: {  }
-name: 'Title Display'
-format: title_display
+name: 'Teaser Text'
+format: teaser_text
 weight: 0
 filters:
   filter_html:
@@ -12,6 +12,6 @@ filters:
     status: true
     weight: -10
     settings:
-      allowed_html: '<br> <p> <strong> <em> <u> <s> <a href>'
+      allowed_html: '<br> <p> <h3> <h4> <strong> <em> <u> <s> <a href>'
       filter_html_help: true
       filter_html_nofollow: false

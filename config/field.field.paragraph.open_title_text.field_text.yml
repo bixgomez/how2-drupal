@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_text
+    - filter.format.teaser_text
     - paragraphs.paragraphs_type.open_title_text
   module:
     - text
@@ -17,5 +18,7 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats:
+    - teaser_text
 field_type: text_long
