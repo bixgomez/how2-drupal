@@ -44,8 +44,6 @@ nav ul.menu {
       position: relative;
       padding: 0.25rem 0;
 
-      // background-color: pink;
-
       > a {
         color: vars.$text-color;
         font-weight: bold;
@@ -103,8 +101,6 @@ ul.menu li.menu-item--expanded {
     text-decoration: none;
     margin: 0;
     display: inline-block;
-
-    // background-color: pink;
 
     &:hover {
       text-decoration: underline;

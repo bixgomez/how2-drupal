@@ -744,9 +744,6 @@ h2.section-teaser-title {
     font-weight: 700;
   }
 }
-.person-bio {
-  background-color: pink;
-}
 .issue-meta {
   display: flex;
   gap: 0.5rem;
