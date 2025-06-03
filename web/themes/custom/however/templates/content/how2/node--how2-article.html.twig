@@ -69,8 +69,8 @@
 #}
 
 {% include "@article/article.html.twig" with {
-  journal: "HOW(ever)",
-  journal_url: "/however",
+  journal: "How2",
+  journal_url: "/how2",
   title: label,
   title_display: content.field_title_display,
   hide_title: node.field_hide_the_node_title[0].value,
@@ -85,56 +85,4 @@
   content_body_sections: content.field_body_sections,
 } %}
 
-
-THE BLOCK:
 {{ drupal_view('article_section', 'block_1') }}
-/THE BLOCK:
-
-{# 
-
-{%
-    set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'node--article'
-]
-%}
-{{ attach_library('classy/node') }}
-<article{{attributes.addClass(classes)}}>
-
-	THE BLOCK:
-	{{ drupal_view('article_section', 'block_1') }}
-	/THE BLOCK:
-
-	<div{{content_attributes.addClass('node__content')}}>
-
-		{{ content.field_title_display }}
-
-		{{ content.field_person_bio }}
-
-		{% if node.field_hide_the_node_title[0].value != 1 %}
-			<h1>{{ label }}</h1>
-			<h1>{{ content.field_title_display }}</h1>
-		{% endif %}
-
-		{{ content.field_working_notes }}
-
-		<ul class="body-section-links">
-			{% for section in node.field_body_sections %}
-				<li>
-					<a href="#section-{{ loop.index }}">{{ section.entity.field_title.value }}</a>
-				</li>
-			{% endfor %}
-		</ul>
-
-		{{ content.field_body_sections }}
-
-	</div>
-
-</article> 
-
-#}

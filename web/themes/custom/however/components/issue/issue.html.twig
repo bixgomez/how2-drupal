@@ -52,19 +52,21 @@
 		</div>
 	</div>
 
-	{% if sections_old %}
-		<div class="page-section sections">
-			<h3 class="dev-heading">Sections (old)</h3>
-			<p class="dev-text">
-				These are the "old" sections -- they only allow for sections to be added to them. We need to replace all of these with the "new" sections below, which allow not only for sections, but also for articles to be added directly.
-			</p>
-			<div class="issue-sections">
-				{% for section in sections_old %}
-					{{ drupal_entity('node', section.id(), 'teaser_card') }}
-				{% endfor %}
-			</div>
-		</div>
-	{% endif %}
+	{# 
+			{% if sections_old %}
+				<div class="page-section sections">
+					<h3 class="dev-heading">Sections (old)</h3>
+					<p class="dev-text">
+						These are the "old" sections -- they only allow for sections to be added to them. We need to replace all of these with the "new" sections below, which allow not only for sections, but also for articles to be added directly.
+					</p>
+					<div class="issue-sections">
+						{% for section in sections_old %}
+							{{ drupal_entity('node', section.id(), 'teaser_card') }}
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+			#}
 
 	{% if sections_new %}
 		<div class="page-section sections">
