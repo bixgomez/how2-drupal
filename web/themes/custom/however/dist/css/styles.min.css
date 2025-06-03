@@ -714,6 +714,39 @@ h2.section-teaser-title {
     text-indent: -9999rem;
   }
 }
+.person-bio-card {
+  margin: 1rem 0;
+  padding: 1rem 0;
+  border-top: 3px solid #909090;
+  border-bottom: 3px solid #909090;
+  display: flex;
+  gap: 1rem;
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .headshot {
+    margin: 0;
+  }
+  .bio-content {
+    flex-grow: 1;
+  }
+  .field--name-field-person {
+    margin-bottom: calc(var(--spacing) * 4);
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+  .field--name-field-override-role {
+    font-weight: 700;
+  }
+}
+.person-bio {
+  background-color: pink;
+}
 .issue-meta {
   display: flex;
   gap: 0.5rem;
@@ -789,8 +822,15 @@ h2.section-teaser-title {
   margin: 1rem 0 0.25rem;
 }
 .article {
-  .author-name,
+  .author-name {
+    margin: calc(var(--spacing) * 0);
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
   .field--name-field-title {
+    margin: calc(var(--spacing) * 0);
     margin-bottom: calc(var(--spacing) * 4);
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
@@ -821,33 +861,33 @@ body .page-header,body .page-footer {
 body .page-content-area {
   flex-grow: 1;
 }
-h1,h2,.field--name-field-person-bio .field--name-field-person,h3,h4,.block-inline-blockcontent-carousel h2 {
+h1,h2,h3,h4,.block-inline-blockcontent-carousel h2 {
   line-height: 1.25;
   font-weight: 700;
 }
-h1 a,h2 a,.field--name-field-person-bio .field--name-field-person a,h3 a,h4 a,.block-inline-blockcontent-carousel h2 a {
+h1 a,h2 a,h3 a,h4 a,.block-inline-blockcontent-carousel h2 a {
   text-decoration: none;
 }
-h1:first-child,h2:first-child,.field--name-field-person-bio .field--name-field-person:first-child,h3:first-child,h4:first-child {
+h1:first-child,h2:first-child,h3:first-child,h4:first-child {
   margin-top: 0;
 }
-h1:last-child,h2:last-child,.field--name-field-person-bio .field--name-field-person:last-child,h3:last-child,h4:last-child {
+h1:last-child,h2:last-child,h3:last-child,h4:last-child {
   margin-bottom: 0;
 }
 h1,.block-inline-blockcontent-carousel h2 {
   font-size: 1.75rem;
   margin-bottom: .25em;
 }
-h2,.field--name-field-person-bio .field--name-field-person {
+h2 {
   font-size: 1.125rem;
 }
 @media all and (width >= 768px) {
-  h2,.field--name-field-person-bio .field--name-field-person {
+  h2 {
     font-size: 1.2375rem;
   }
 }
 @media all and (width >= 1024px) {
-  h2,.field--name-field-person-bio .field--name-field-person {
+  h2 {
     font-size: 1.5rem;
   }
 }
@@ -1305,25 +1345,6 @@ a.more:hover {
   margin-top: 0;
   color: #424242;
   font-size: 12px;
-}
-.field--name-field-person-bio {
-  margin: 54px 0 36px;
-  padding: 36px 0;
-  border-top: 3px solid #909090;
-  border-bottom: 3px solid #909090;
-}
-.field--name-field-person-bio .headshot {
-  margin: 0 0 20px;
-}
-@media all and (width >= 768px) {
-  .field--name-field-person-bio .headshot {
-    max-width: 200px;
-    float: left;
-    margin: 0 30px 0 0;
-  }
-}
-.field--name-field-person-bio .field--name-field-override-role {
-  font-weight: 700;
 }
 .field--name-body table {
   border: none;

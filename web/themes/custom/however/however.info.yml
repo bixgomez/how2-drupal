@@ -23,6 +23,8 @@ components:
     publication-teaser: components/publication-teaser
     issues-grid: components/issues-grid
     issue-meta: components/issue-meta
+    person-bio: components/person-bio
+    person-bio-card: components/person-bio-card
 
 regions:
   branding: 'Branding'

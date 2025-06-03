@@ -130,31 +130,6 @@
   }
 }
 
-.field--name-field-person-bio {
-  margin: 54px 0 36px;
-  padding: 36px 0;
-  border-top: 3px solid #909090;
-  border-bottom: 3px solid #909090;
-
-  .headshot {
-    margin: 0 0 20px;
-
-    @media all and (width >= 768px) {
-      max-width: 200px;
-      float: left;
-      margin: 0 30px 0 0;
-    }
-  }
-
-  .field--name-field-person {
-    @extend h2;
-  }
-
-  .field--name-field-override-role {
-    font-weight: 700;
-  }
-}
-
 .field--name-body table {
   border: none;
 

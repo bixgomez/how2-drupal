@@ -1,0 +1,32 @@
+.person-bio-card {
+  margin: 1rem 0;
+  padding: 1rem 0;
+  border-top: 3px solid #909090;
+  border-bottom: 3px solid #909090;
+  display: flex;
+  gap: 1rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .headshot {
+    margin: 0;
+  }
+
+  .bio-content {
+    flex-grow: 1;
+  }
+
+  .field--name-field-person {
+    @apply text-2xl font-bold mb-4;
+  }
+
+  .field--name-field-override-role {
+    font-weight: 700;
+  }
+}

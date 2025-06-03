@@ -1,6 +1,9 @@
 .article {
-  .author-name,
+  .author-name {
+    @apply text-2xl font-bold m-0;
+  }
+
   .field--name-field-title {
-    @apply text-2xl font-bold mb-4;
+    @apply text-2xl font-bold m-0 mb-4;
   }
 }

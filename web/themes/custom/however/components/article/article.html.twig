@@ -22,15 +22,17 @@
 			person_bio_link: "#bios"
 		} %}
 
-		<div class="page-section">
-			<h3 class="dev-heading">page_images</h3>
-			<p class="dev-text">
-				Do we want images for articles?  Will articles ever have images?
-			</p>
-			{{ images }}
-		</div>
+		{% if images['#items'] and not images['#items'].isEmpty %}
+			<div class="page-section">
+				<h3 class="dev-heading">page_images</h3>
+				<p class="dev-text">
+					Do we want images for articles?  Will articles ever have images?
+				</p>
+				{{ images }}
+			</div>
+		{% endif %}
 
-		{% if person_bio.0 %}
+		{% if person_bio.0['#paragraph'].field_person.entity.title.value %}
 			<div class="page-section">
 					<p class="author-name">{{ person_bio.0['#paragraph'].field_person.entity.title.value }}</p>
 			</div>
@@ -48,24 +50,27 @@
 			</div>
 		{% endif %}
 
-{% for key, item in node_body_sections %}
+	{% for key, item in node_body_sections %}
     {% if key is same as(0) or key is same as(1) %}
         {% set paragraph = item.entity %}
 			<div id="section-{{ loop.index }}" class="page-section">
         {{ drupal_entity('paragraph', paragraph.id.value) }}
 			</div>
     {% endif %}
-{% endfor %}
+	{% endfor %}
 
-		{% if working_notes['#items'] and not working_notes['#items'].isEmpty %}
-			<div class="page-section">
-				{{ working_notes }}
-			</div>
-		{% endif %}
+	{% if working_notes['#items'] and not working_notes['#items'].isEmpty %}
+		<div class="page-section">
+			{{ working_notes }}
+		</div>
+	{% endif %}
 
+	{% if person_bio['#items'] and not person_bio['#items'].isEmpty %}
 		<div id="bios" class="page-section">
 			{{ person_bio }}
 		</div>
+	{% endif %}
 
-	</div>
+</div>
+
 </article>

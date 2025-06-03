@@ -1,0 +1,15 @@
+<div class="person-bio-card">
+
+    {% if image_url %}
+        <div class="headshot">
+            <img alt="{{ image_alt ? image_alt : name }}" src="{{ image_url }}" />
+        </div>
+    {% endif %}
+    
+    <div class="bio-content">
+        {{ name_linked }}
+        {{ hide_role == '0' ? role : '' }}
+        {{ bio_override ? bio_override|raw : bio|raw }}
+    </div>
+
+</div>
