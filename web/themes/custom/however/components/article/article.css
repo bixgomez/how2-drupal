@@ -1,3 +1,6 @@
-.volume {
-  /* border: 1px dashed #ccc; */
+.article {
+  .author-name,
+  .field--name-field-title {
+    @apply text-2xl font-bold mb-4;
+  }
 }

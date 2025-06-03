@@ -17,8 +17,11 @@
     --text-base--line-height: calc(1.5 / 1);
     --text-lg: 1.125rem;
     --text-lg--line-height: calc(1.75 / 1.125);
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: calc(2 / 1.5);
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
+    --font-weight-bold: 700;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -784,6 +787,16 @@ h2.section-teaser-title {
 .article-teaser-section-title {
   font-size: 1.25rem;
   margin: 1rem 0 0.25rem;
+}
+.article {
+  .author-name,
+  .field--name-field-title {
+    margin-bottom: calc(var(--spacing) * 4);
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
 }
 ﻿html {
   font-size: 16px;
