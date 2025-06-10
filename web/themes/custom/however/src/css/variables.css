@@ -29,7 +29,23 @@
 }
 
 .container {
-  max-width: 1060px;
+  @apply max-w-6xl mx-auto; 
+}
+
+.content {
+  @apply max-w-3xl mx-auto;
+}
+
+.content-section {
+  @apply my-6 pt-6 border-t-1 border-[color:var(--color-primary)];
+
+  &:first-child {
+    @apply mt-0 pt-0 border-t-0;
+  }
+
+  &:last-child {
+    @apply mb-0;
+  }
 }
 
 a {

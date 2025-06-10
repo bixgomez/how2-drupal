@@ -8,7 +8,9 @@
     
     <div class="bio-content">
         {{ name_linked }}
-        {{ hide_role == '0' ? role : '' }}
+        {% if hide_role == '0' %}
+            <div class="role">{{ role }}</div>
+        {% endif %}
         {{ bio_override ? bio_override|raw : bio|raw }}
     </div>
 
