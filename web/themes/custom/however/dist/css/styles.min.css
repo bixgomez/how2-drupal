@@ -523,6 +523,40 @@ div.page-section {
 .sf-dump {
   margin: 0 0 0.5rem;
 }
+.footnotes {
+  position: relative;
+  margin: 2em 0;
+  padding: 1em 0 0;
+  border-top: 1px solid #000;
+  font-size: 0.9em;
+}
+.footnotes__item-wrapper {
+  display: grid;
+  grid-template-columns: minmax(auto, 1.25em) 1fr;
+}
+.footnote__citation,
+.footnotes__item-backlink {
+  text-decoration: none;
+  font-weight: 600;
+}
+p, 
+ul,
+ol,
+pre,
+blockquote {
+  margin-bottom: 1.25em;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1.5em;
+  margin-bottom: .5em;
+  line-height: 1.2;
+}
+li {
+  margin-bottom: 0.5em;
+}
+:last-child {
+  margin-bottom: 0;
+}
 .section-teaser {
   box-sizing: border-box;
   font-size: 1rem;

@@ -45,22 +45,22 @@
 
 			<h2 class="dev-heading">This is a section (not an article)</h2>
 
+			{% if person_bio['#items'] and person_bio['#items']|length > 0 %}
+				{{ person_bio }}
+			{% endif %}
+
+			{% if working_notes['#items'] and working_notes['#items']|length > 0 %}
+				{{ working_notes }}
+			{% endif %}
+
+			<div class="section-pieces">
+				{{ pieces }}
+			</div>
+
 			{% if body %}
 				{{ body }}
 			{% endif %}
 		</div>
 	</div>
-
-	<div class="section-pieces">
-		{{ pieces }}
-	</div>
-
-	{% if working_notes['#items'] and working_notes['#items']|length > 0 %}
-		{{ working_notes }}
-	{% endif %}
-
-	{% if person_bio['#items'] and person_bio['#items']|length > 0 %}
-		{{ person_bio }}
-	{% endif %}
 
 </div></article>

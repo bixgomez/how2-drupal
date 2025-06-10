@@ -32,9 +32,21 @@
 			</div>
 		{% endif %}
 
-		{% if person_bio.0['#paragraph'].field_person.entity.title.value %}
+		{# {% if person_bio.0['#paragraph'].field_person.entity.title.value %}
 			<div class="page-section">
 					<p class="author-name">{{ person_bio.0['#paragraph'].field_person.entity.title.value }}</p>
+			</div>
+		{% endif %} #}
+
+		{% if working_notes['#items'] and not working_notes['#items'].isEmpty %}
+			<div class="page-section">
+				{{ working_notes }}
+			</div>
+		{% endif %}
+
+		{% if person_bio['#items'] and not person_bio['#items'].isEmpty %}
+			<div id="bios" class="page-section">
+				{{ person_bio }}
 			</div>
 		{% endif %}
 
@@ -58,18 +70,6 @@
 			</div>
     {% endif %}
 	{% endfor %}
-
-	{% if working_notes['#items'] and not working_notes['#items'].isEmpty %}
-		<div class="page-section">
-			{{ working_notes }}
-		</div>
-	{% endif %}
-
-	{% if person_bio['#items'] and not person_bio['#items'].isEmpty %}
-		<div id="bios" class="page-section">
-			{{ person_bio }}
-		</div>
-	{% endif %}
 
 </div>
 

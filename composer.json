@@ -27,7 +27,7 @@
         "drupal/search_api_page": "^1.0@beta",
         "drupal/twig_tweak": "^3.3",
         "drupal/better_exposed_filters": "^6.0",
-        "drupal/footnotes": "^4.0@alpha",
+        "drupal/footnotes": "^4.0@beta",
         "drupal/sendgrid_integration": "^2.0",
         "drupal/layout_builder_component_attributes": "^2.1",
         "drupal/layout_builder_modal": "^1.1",
