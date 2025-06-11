@@ -1,57 +1,64 @@
 <article class="article">
-
-	<h2 class="dev-heading">This is an article (not a section)</h2>
-
-	{% if not hide_title %}
-		{% if title_display %}
-			{{ title_display }}
-		{% elseif title %}
-			{{ title }}
-		{% endif %}
-	{% endif %}
-
-	{% include "@issue-meta/issue-meta.html.twig" with {
-		journal_name: journal,
-		journal_url: journal_url,
-		volume_issue: volume_issue,
-		issue_pub_date: issue_pub_date,
-		issue_url: issue_url,
-		archive_url: archive_url[0]['#url'].toString(),
-		person_bio_link: "#bios"
-	} %}
-
 	<div class="content">
 
-		{% if images['#items'] and not images['#items'].isEmpty %}
-			<div class="content-section">
-				<h3 class="dev-heading">page_images</h3>
-				<p class="dev-text">
-					Do we want images for articles?  Will articles ever have images?
-				</p>
-				{{ images }}
-			</div>
+		{% if not hide_title %}
+				{% if title_display|render|trim %}
+					<div class="content-section content-section--lg">
+						<h1>{{ title_display }}</h1>
+					</div>
+				{% elseif title %}
+					<div class="content-section content-section--lg">
+						<h1>{{ title }}</h1>
+					</div>
+				{% endif %}
 		{% endif %}
+		
+		<div class="content-section content-section--sm">
+			{% include "@issue-meta/issue-meta.html.twig" with {
+				journal_name: journal,
+				journal_url: journal_url,
+				volume_issue: volume_issue,
+				issue_pub_date: issue_pub_date,
+				issue_url: issue_url,
+				archive_url: archive_url[0]['#url'].toString(),
+				person_bio_link: "#bios",
+				section_links: section_links,
+			} %}	
+		</div>
+		
+		<div class="content-section content-section--sm">
+			<h2 class="dev-heading">This is an article (not a section)</h2>
+		</div>
+
+		{# 
+		{% if section_links %}
+			{% set section_link = section_links|first %}
+			<a href="{{ section_link.url }}" class="back-to-section">
+				← Back to {{ section_link.title }}
+			</a>
+		{% endif %}
+		#}
 
 		{# {% if person_bio.0['#paragraph'].field_person.entity.title.value %}
-			<div class="content-section">
+			<div class="content-section content-section--lg">
 					<p class="author-name">{{ person_bio.0['#paragraph'].field_person.entity.title.value }}</p>
 			</div>
 		{% endif %} #}
 
 		{% if working_notes['#items'] and not working_notes['#items'].isEmpty %}
-			<div class="content-section">
+			<div class="content-section content-section--lg">
 				{{ working_notes }}
 			</div>
 		{% endif %}
 
 		{% if person_bio['#items'] and not person_bio['#items'].isEmpty %}
-			<div id="bios" class="content-section">
+			<div id="bios" class="content-section content-section--lg">
 				{{ person_bio }}
 			</div>
 		{% endif %}
 
 		{% if node_body_sections|length > 1 %}
-			<div class="content-section">
+			<div class="content-section content-section--lg">
 				<ul class="body-section-links">
 					{% for section in node_body_sections %}
 						<li>
@@ -65,12 +72,21 @@
 		{% for key, item in node_body_sections %}
 			{% if key is same as(0) or key is same as(1) %}
 					{% set paragraph = item.entity %}
-				<div id="section-{{ loop.index }}" class="content-section">
+				<div id="section-{{ loop.index }}" class="content-section content-section--lg">
 					{{ drupal_entity('paragraph', paragraph.id.value) }}
 				</div>
 			{% endif %}
 		{% endfor %}
 
-	</div>
+		{% if images['#items'] and not images['#items'].isEmpty %}
+			<div class="content-section content-section--lg">
+				<h2>Article Images</h2>
+				<p>
+					Click on an image to open a full-screen version.
+				</p>
+				{{ images }}
+			</div>
+		{% endif %}
 
+	</div>
 </article>

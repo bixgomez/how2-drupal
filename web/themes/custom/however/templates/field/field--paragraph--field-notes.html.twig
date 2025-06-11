@@ -38,8 +38,8 @@
  */
 #}
 
-{% for item in items %}
-	<div class="article-teaser">
-		{{ item.content }}
-	</div>
-{% endfor %}
+<div class="notes">
+  {% for item in items %}
+    {{ item.content }}
+  {% endfor %}
+</div>

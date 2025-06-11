@@ -1,122 +1,121 @@
 <article class="issue page-sections">
 
-	<div class="page-section issue-header">
-		<div class="issue-image">
-			{{ featured_image }}
-		</div>
+	<div class="content">
 
-		<div class="issue-title">
-			{{ title_prefix }}
-			<h1>{{ journal }}
-				Vol.
-				{{volume}},	No.
-				{{issue}}
-				({{ date }})</h1>
-			{{ title_suffix }}
+		<div class="issue-header">
+			<div class="issue-image">
+				{{ featured_image }}
+			</div>
 
-			{# Issue navigation #}
-			{% if issue_navigation.prev or issue_navigation.next %}
-				<div class="flex justify-between my-3">
-					{% if issue_navigation.prev %}
-						<div class="w-1/2 flex justify-start">
-							<a href="{{ path('entity.node.canonical', {'node': issue_navigation.prev.id}) }}" class="button button--primary button--small">
-								{{ issue_navigation.prev.label }}
-							</a>
-						</div>
-					{% endif %}
+			<div class="issue-title">
+				{{ title_prefix }}
+				<h1>{{ journal }}
+					Vol.
+					{{volume}},	No.
+					{{issue}}
+					({{ date }})</h1>
+				{{ title_suffix }}
 
-					{% if issue_navigation.next %}
-						<div class="w-1/2 flex justify-end">
-							<a href="{{ path('entity.node.canonical', {'node': issue_navigation.next.id}) }}" class="button button--primary button--small">
-								{{ issue_navigation.next.label }}
-							</a>
-						</div>
-					{% endif %}
-				</div>
-			{% endif %}
+				{# Issue navigation #}
+				{% if issue_navigation.prev or issue_navigation.next %}
+					<div class="flex justify-between my-3">
+						{% if issue_navigation.prev %}
+							<div class="w-1/2 flex justify-start">
+								<a href="{{ path('entity.node.canonical', {'node': issue_navigation.prev.id}) }}" class="button button--primary button--small">
+									{{ issue_navigation.prev.label }}
+								</a>
+							</div>
+						{% endif %}
 
-			{% include "@issue-meta/issue-meta.html.twig" with {
-				journal_name: journal,
-				journal_url: journal_url,
-				volume_issue: volume_issue,
-				issue_pub_date: date,
-				archive_url: archive_url[0]['#url'].toString(),
-        masthead: masthead,
-        person_bio: person_bio,
-        pdf_url: pdf_url,
-				masthead: '#masthead',
-				person_bio_link: '#people',
-				page_facsimiles: '#page-facsimiles',
-			} %}
-
-		</div>
-	</div>
-
-	{# 
-			{% if sections_old %}
-				<div class="page-section sections">
-					<h3 class="dev-heading">Sections (old)</h3>
-					<p class="dev-text">
-						These are the "old" sections -- they only allow for sections to be added to them. We need to replace all of these with the "new" sections below, which allow not only for sections, but also for articles to be added directly.
-					</p>
-					<div class="issue-sections">
-						{% for section in sections_old %}
-							{{ drupal_entity('node', section.id(), 'teaser_card') }}
-						{% endfor %}
+						{% if issue_navigation.next %}
+							<div class="w-1/2 flex justify-end">
+								<a href="{{ path('entity.node.canonical', {'node': issue_navigation.next.id}) }}" class="button button--primary button--small">
+									{{ issue_navigation.next.label }}
+								</a>
+							</div>
+						{% endif %}
 					</div>
+				{% endif %}
+
+				{% include "@issue-meta/issue-meta.html.twig" with {
+					journal_name: journal,
+					journal_url: journal_url,
+					volume_issue: volume_issue,
+					issue_pub_date: date,
+					archive_url: archive_url[0]['#url'].toString(),
+					masthead: masthead,
+					person_bio: person_bio,
+					pdf_url: pdf_url,
+					masthead: '#masthead',
+					person_bio_link: '#people',
+					page_facsimiles: '#page-facsimiles',
+				} %}
+
+			</div>
+		</div>
+
+		{# 
+				{% if sections_old %}
+					<div class="page-section sections">
+						<h3 class="dev-heading">Sections (old)</h3>
+						<p class="dev-text">
+							These are the "old" sections -- they only allow for sections to be added to them. We need to replace all of these with the "new" sections below, which allow not only for sections, but also for articles to be added directly.
+						</p>
+						<div class="issue-sections">
+							{% for section in sections_old %}
+								{{ drupal_entity('node', section.id(), 'teaser_card') }}
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+				#}
+
+		{% if sections_new %}
+			<div class="content-section content-section--lg sections">
+				<p class="dev-text">
+					<b>Sections (new)</b>: These are the "new" sections -- they allow not only for sections, but also for articles to be added directly. Alas, the only "easy" way to migrate the sections to this new area is to do it manually.  We can start this process soon.
+				</p>
+				<div class="issue-sections">
+					{% for section in sections_new %}
+						{{ drupal_entity('node', section.id(), 'teaser_card') }}
+					{% endfor %}
 				</div>
-			{% endif %}
-			#}
-
-	{% if sections_new %}
-		<div class="page-section sections">
-			<h3 class="dev-heading">Sections (new)</h3>
-			<p class="dev-text">
-				These are the "new" sections -- they allow not only for sections, but also for articles to be added directly. Alas, the only "easy" way to migrate the sections to this new area is to do it manually.  We can start this process soon.
-			</p>
-			<div class="issue-sections">
-				{% for section in sections_new %}
-					{{ drupal_entity('node', section.id(), 'teaser_card') }}
-				{% endfor %}
 			</div>
-		</div>
-	{% endif %}
+		{% endif %}
 
-	{% if masthead %}
-		<div class="page-section issue-masthead" id="masthead">
-			<h3 class="dev-heading">Masthead</h3>
-			<p class="dev-text">
-				In the current version of the site, the masthead is displayed in a modal popup window. Do we want to continue to do this?  It seems like important information we might want to always display on the page somewhere.  In a sidebar, perhaps?
-			</p>
-			<div class="masthead">
-				{{ masthead|raw }}
+		{% if masthead %}
+			<div class="content-section content-section--lg issue-masthead" id="masthead">
+				<p class="dev-text">
+					<b>Masthead</b>: In the current version of the site, the masthead is displayed in a modal popup window. Do we want to continue to do this?  It seems like important information we might want to always display on the page somewhere.  In a sidebar, perhaps?
+				</p>
+				<div class="masthead">
+					{{ masthead|raw }}
+				</div>
 			</div>
-		</div>
-	{% endif %}
+		{% endif %}
 
-	{% if page_facsimiles %}
-		<div class="page-section page-facsimiles" id="page-facsimiles">
-			<h3 class="dev-heading">Page Facsimiles</h3>
-			<p class="dev-text">
-				Might be good to add a bit of instruction here, like "click on each page to reveal a large version" or something.
-			</p>
-			<div class="page-section tab-body">
+		{% if page_facsimiles %}
+			<div class="content-section content-section--lg page-facsimiles" id="page-facsimiles">
+				<h2>Page Facsimiles</h2>
+				<p>
+					Click on an image to open a full-screen version.
+				</p>
 				{{ page_facsimiles }}
 			</div>
-		</div>
-	{% endif %}
+		{% endif %}
 
-	{% if person_bio %}
-		<div class="page-section people" id="people">
-			<h3 class="dev-heading">Person Bio (?)</h3>
-			<p class="dev-text">
-				I noticed that each issue has a field that holds all the people associated with it, along with their bios.  Do we want to use this for anything, or display it anywhere?
-			</p>
-			<div class="person-bio">
-				{% for paragraph in person_bio %}
-					{{ drupal_entity('paragraph', paragraph.id(), 'default') }}
-				{% endfor %}
+		{% if person_bio %}
+			<div class="content-section content-section--lg people" id="people">
+				<h3 class="dev-heading">Person Bio (?)</h3>
+				<p class="dev-text">
+					I noticed that each issue has a field that holds all the people associated with it, along with their bios.  Do we want to use this for anything, or display it anywhere?
+				</p>
+				<div class="person-bio">
+					{% for paragraph in person_bio %}
+						{{ drupal_entity('paragraph', paragraph.id(), 'default') }}
+					{% endfor %}
+				</div>
 			</div>
-		</div>
-	{% endif %}
+		{% endif %}
+	</div>
 </article>

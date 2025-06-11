@@ -39,18 +39,17 @@
  */
 #}
 
-<div class="article-teaser">
-	{% set title = content.field_title.0['#context'].value|replace({'<p>': '', '</p>': ''}) %}
-	{% set title_display =  content.field_title_display.0['#text']|replace({'<p>': '', '</p>': ''}) %}
-	{% set text = content.field_text.0['#text']|replace({'<p>': '', '</p>': ''}) %}
+{% set title = content.field_title.0['#context'].value|replace({'<p>': '', '</p>': ''}) %}
+{% set title_display =  content.field_title_display.0['#text']|replace({'<p>': '', '</p>': ''}) %}
+{% set text = content.field_text.0['#text']|replace({'<p>': '', '</p>': ''}) %}
 
-	<div class="article-contributor font-semibold">
-		{% if title_display %}
-			{{ title_display|raw }}
-		{% else %}
-			{{ title|raw }}
-		{% endif %}
-	</div>
-
-	<h2 class="article-title">{{ text|raw }}</h2>
+<div class="article-contributor font-semibold">
+	{% if title_display %}
+		{{ title_display|raw }}
+	{% else %}
+		{{ title|raw }}
+	{% endif %}
 </div>
+
+<h2 class="article-title">{{ text|raw }}</h2>
+

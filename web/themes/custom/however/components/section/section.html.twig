@@ -1,39 +1,36 @@
+{% set has_image = 0 %}
+{% set the_image = '' %}
+
+{% if image_caption['#items'] and image_caption['#items']|length > 0 %}
+	{% set image_caption_content = image_caption|render|striptags|trim %}
+	{% if image_caption_content and image_caption_content != '' %}
+		{% set has_image = 1 %}
+		{% set the_image = image_caption %}
+	{% endif %}
+{% endif %}
+
+{% if images['#items'] and images['#items']|length > 0 %}
+	{% set images_content = images|render|trim %}
+	{% if '<img' in images_content %}
+		{% set has_image = 1 %}
+		{% set the_image = images %}
+	{% endif %}
+{% endif %}
+
 <article class="section">
+	<div class="content">
 
-	{% set has_image = 0 %}
-	{% set the_image = '' %}
-
-	{% if image_caption['#items'] and image_caption['#items']|length > 0 %}
-		{% set image_caption_content = image_caption|render|striptags|trim %}
-		{% if image_caption_content and image_caption_content != '' %}
-			{% set has_image = 1 %}
-			{% set the_image = image_caption %}
-		{% endif %}
-	{% endif %}
-
-	{% if images['#items'] and images['#items']|length > 0 %}
-		{% set images_content = images|render|trim %}
-		{% if '<img' in images_content %}
-			{% set has_image = 1 %}
-			{% set the_image = images %}
-		{% endif %}
-	{% endif %}
-
-	<div class="section-header {% if has_image %}has-image{% endif %}">
-
-		{% if has_image %}
-			<div class="section-header-image">
-				{{ the_image }}
+		{% if title_display|render|trim %}
+			<div class="content-section content-section--lg">
+				<h1>{{ title_display }}</h1>
+			</div>
+		{% elseif title %}
+			<div class="content-section content-section--lg">
+				<h1>{{ title }}</h1>
 			</div>
 		{% endif %}
 
-		<div class="section-header-text">
-			{% if title_display|render|trim %}
-				<h1>{{ title_display }}</h1>
-			{% elseif title %}
-				<h1>{{ title }}</h1>
-			{% endif %}
-
+		<div class="content-section content-section--sm">
 			{% include "@issue-meta/issue-meta.html.twig" with {
 				journal_name: journal,
 				journal_url: journal_url,
@@ -42,25 +39,50 @@
 				issue_url: issue_url,
 				archive_url: archive_url[0]['#url'].toString(),
 			} %}
-
-			<h2 class="dev-heading">This is a section (not an article)</h2>
-
-			{% if person_bio['#items'] and person_bio['#items']|length > 0 %}
-				{{ person_bio }}
-			{% endif %}
-
-			{% if working_notes['#items'] and working_notes['#items']|length > 0 %}
-				{{ working_notes }}
-			{% endif %}
-
-			<div class="section-pieces">
-				{{ pieces }}
-			</div>
-
-			{% if body %}
-				{{ body }}
-			{% endif %}
 		</div>
+
+		<div class="content-section content-section--sm">
+			<h2 class="dev-heading">This is a section (not an article)</h2>
+		</div>
+
+		{% if person_bio['#items'] and person_bio['#items']|length > 0 %}
+			<div class="content-section content-section--lg">
+				{{ person_bio }}
+			</div>
+		{% endif %}
+
+		{# {{ dump(working_notes) }} #}
+
+		{% if working_notes[0]['#text'] %}
+			<div class="content-section content-section--lg">
+			  {{ working_notes }}
+			</div>
+		{% endif %}
+
+		{% if pieces[0] %}
+			<div class="content-section content-section--lg">
+				<div class="article-teasers">
+			  	{{ pieces }}
+				</div>
+			</div>
+		{% endif %}
+
+		{% if body %}
+			<div class="content-section content-section--lg">
+			  {{ body }}
+			</div>
+		{% endif %}
+
+		{% if has_image %}
+			<div class="content-section content-section--lg">
+				<h2>Section Images</h2>
+				<p>
+					Click on an image to open a full-screen version.
+				</p>
+				{{ images }}
+			</div>
+		{% endif %}
+
 	</div>
 
-</div></article>
+</article>

@@ -24,6 +24,7 @@
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
+    --leading-tight: 1.25;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -399,13 +400,12 @@
   max-width: var(--container-3xl);
 }
 .content-section {
-  margin-block: calc(var(--spacing) * 6);
+  margin: calc(var(--spacing) * 0);
   border-top-style: var(--tw-border-style);
   border-top-width: 1px;
   border-color: var(--color-primary);
-  padding-top: calc(var(--spacing) * 6);
+  padding-block: calc(var(--spacing) * 4);
   &:first-child {
-    margin-top: calc(var(--spacing) * 0);
     border-top-style: var(--tw-border-style);
     border-top-width: 0px;
     padding-top: calc(var(--spacing) * 0);
@@ -413,6 +413,15 @@
   &:last-child {
     margin-bottom: calc(var(--spacing) * 0);
   }
+}
+.content-section--sm {
+  padding-block: calc(var(--spacing) * 2);
+}
+.content-section--md {
+  padding-block: calc(var(--spacing) * 4);
+}
+.content-section--lg {
+  padding-block: calc(var(--spacing) * 6);
 }
 a {
   color: var(--color-primary);
@@ -567,15 +576,25 @@ ul,
 ol,
 pre,
 blockquote {
+  margin-top: .25em;
   margin-bottom: 1.25em;
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 h1, h2, h3, h4, h5, h6 {
   margin-top: 1.5em;
-  margin-bottom: .5em;
+  margin-bottom: .25em;
   line-height: 1.2;
 }
 li {
   margin-bottom: 0.5em;
+}
+:first-child {
+  margin-top: 0;
 }
 :last-child {
   margin-bottom: 0;
@@ -812,10 +831,11 @@ h2.section-teaser-title {
   gap: 0.5rem;
   font-weight: 700;
   justify-content: flex-start;
-  border-top: 1px solid #919191;
-  border-bottom: 1px solid #919191;
-  padding: 0.5rem 0;
-  margin: 0 0 1rem;
+  border-top: 0 solid #919191;
+  border-bottom: 0 solid #919191;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
   > div {
     width: min-content;
     white-space: nowrap;
@@ -860,7 +880,7 @@ h2.section-teaser-title {
   margin: 1rem 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .75rem;
   &:first-child {
     margin-top: 0;
   }
@@ -870,11 +890,33 @@ h2.section-teaser-title {
 }
 .article-teaser {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
   .article-contributor {
-    font-size: 1rem;
+    margin: calc(var(--spacing) * 0);
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+    --tw-leading: var(--leading-tight);
+    line-height: var(--leading-tight);
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
   }
   .article-title {
-    font-size: 1rem;
+    margin: calc(var(--spacing) * 0);
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+    --tw-leading: var(--leading-tight);
+    line-height: var(--leading-tight);
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
+  .notes {
+    p {
+      margin-block: calc(var(--spacing) * 0);
+      --tw-leading: var(--leading-tight);
+      line-height: var(--leading-tight);
+    }
   }
 }
 .article-teaser-section-title {
@@ -2164,6 +2206,10 @@ table tr td,table tr th {
   syntax: "*";
   inherits: false;
 }
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -2188,6 +2234,7 @@ table tr td,table tr th {
       --tw-drop-shadow-alpha: 100%;
       --tw-drop-shadow-size: initial;
       --tw-duration: initial;
+      --tw-leading: initial;
     }
   }
 }

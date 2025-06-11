@@ -54,4 +54,12 @@
 		</div>
 	{% endif %}
 
+	{% if section_links %}
+		{% for section_link in section_links %}
+			<div class="section-link">
+				<a href="{{ section_link.url }}">{{ section_link.title }}</a>
+			</div>
+		{% endfor %}
+	{% endif %}
+
 </div>

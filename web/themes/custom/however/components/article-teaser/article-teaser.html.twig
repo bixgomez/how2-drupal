@@ -1,25 +1,24 @@
-<article class="article-teaser">
+<div class="article-contributor">
+	{{ names }}
+</div>
 
-	<div class="article-contributor font-semibold">
-		{{ names }}
-	</div>
-
-	{{ title_prefix|default }}
-	<h2 class="article-title">
-		{% if url %}
-			<a href="{{ url }}" rel="bookmark">
-			{% endif %}
-			{% if title_display['#items'] is not empty %}
-				{{ title_display }}
-			{% elseif title['#items'] is not empty %}
-				{{ title }}
-			{% else %}
-				{{ title|raw }}
-			{% endif %}
-			{% if url %}
-			</a>
-		{% endif %}
-	</h2>
-	{{ title_suffix|default }}
-	{{ subtext }}
-</article>
+{{ title_prefix|default }}
+<h2 class="article-title">
+	{% if url %}
+		<a href="{{ url }}" rel="bookmark">
+	{% endif %}
+	
+	{% if title_display['#items'] is not empty %}
+		{{ title_display }}
+	{% elseif title['#items'] is not empty %}
+		{{ title }}
+	{% else %}
+		{{ title|raw }}
+	{% endif %}
+	
+	{% if url %}
+		</a>
+	{% endif %}
+</h2>
+{{ title_suffix|default }}
+{{ subtext }}

@@ -57,17 +57,30 @@ ul,
 ol,
 pre,
 blockquote {
+  margin-top: .25em;
   margin-bottom: 1.25em;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 1.5em;
-  margin-bottom: .5em;
+  margin-bottom: .25em;
   line-height: 1.2;
 }
 
 li {
   margin-bottom: 0.5em;
+}
+
+:first-child {
+  margin-top: 0;
 }
 
 :last-child {

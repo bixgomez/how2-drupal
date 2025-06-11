@@ -37,27 +37,7 @@
  * @see template_preprocess_field()
  */
 #}
-{%
-    set classes = [
-    'field',
-    'field--name-' ~ field_name|clean_class,
-    'field--type-' ~ field_type|clean_class,
-    'field--label-' ~ label_display,
-    label_display == 'inline' ? 'clearfix',
-]
-%}
-{%
-    set title_classes = [
-    'field__label',
-    label_display == 'visually_hidden' ? 'visually-hidden',
-]
-%}
 
-<div{{ attributes.addClass(classes, 'field__items') }}>
-    {% for item in items %}
-        <div{{ item.attributes.addClass('field__item') }}>
-            <strong>Name</strong> &mdash; <a href="{{ item.content['#node'].url.value }}">{{ item.content['#node'].title.value }}</a>
-        </div>
-        {{ dump(item.content['#node'].field_person_bio.0|keys) }}
-    {% endfor %}
-</div>
+{% for item in items %}
+  {{ item.content }}
+{% endfor %}

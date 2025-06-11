@@ -37,15 +37,27 @@
 }
 
 .content-section {
-  @apply my-6 pt-6 border-t-1 border-[color:var(--color-primary)];
+  @apply m-0 py-4 border-t-1 border-[color:var(--color-primary)];
 
   &:first-child {
-    @apply mt-0 pt-0 border-t-0;
+    @apply pt-0 border-t-0;
   }
 
   &:last-child {
     @apply mb-0;
   }
+}
+
+.content-section--sm {
+  @apply py-2;
+}
+
+.content-section--md {
+  @apply py-4;
+}
+
+.content-section--lg {
+  @apply py-6;
 }
 
 a {

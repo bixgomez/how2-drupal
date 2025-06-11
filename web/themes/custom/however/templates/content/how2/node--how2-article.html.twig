@@ -68,6 +68,17 @@
  */
 #}
 
+{# Build section links #}
+{% set section_links = [] %}
+{% if parent_sections %}
+  {% for section in parent_sections %}
+    {% set section_links = section_links|merge([{
+      'title': section.title.value,
+      'url': path('entity.node.canonical', {'node': section.id})
+    }]) %}
+  {% endfor %}
+{% endif %}
+
 {% include "@article/article.html.twig" with {
   journal: "How2",
   journal_url: "/how2",
@@ -83,7 +94,6 @@
   working_notes: content.field_working_notes,
   node_body_sections: node.field_body_sections,
   content_body_sections: content.field_body_sections,
-  body: content.body.0['#text']
+  body: content.body.0['#text'],
+  section_links: section_links,
 } %}
-
-{{ drupal_view('article_section', 'block_1') }}

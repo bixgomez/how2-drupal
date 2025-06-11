@@ -27,6 +27,8 @@ function however_preprocess_page(&$variables, $hook) {}
  */
 function however_preprocess_node(&$variables, $hook)
 {
+  $node = $variables['node'];
+
   // Try to call node-type-specific preprocessing function
   $function = __FUNCTION__ . '__' . $variables['node']->getType();
   if (function_exists($function)) {
@@ -37,6 +39,15 @@ function however_preprocess_node(&$variables, $hook)
   $function = __FUNCTION__ . '__' . $variables['view_mode'];
   if (function_exists($function)) {
     $function($variables, $hook);
+  }
+
+  // Add section links for articles
+  if (in_array($node->getType(), ['how2_article', 'how_ever_article'])) {
+    // Debug: let's see what we're working with
+    \Drupal::logger('however')->info('Looking for sections containing article ID: @nid', ['@nid' => $node->id()]);
+    $variables['parent_sections'] = get_article_sections($node->id());
+    \Drupal::logger('however')->info('Found @count sections', ['@count' => count($variables['parent_sections'])]);
+ 
   }
 }
 
@@ -326,4 +337,49 @@ function however_preprocess_node__journal_issue(&$variables, $hook)
       $variables['label'] = $label[0]['value'];
     }
   }
+}
+
+/**
+ * Get all sections that reference a given article.
+ * 
+ * @param int $article_nid
+ *   The node ID of the article to search for.
+ * 
+ * @return array
+ *   Array of loaded section node entities, or empty array if none found.
+ */
+function get_article_sections($article_nid) {
+  // Find paragraphs that reference this article (both types)
+  $paragraph_query = \Drupal::entityQuery('paragraph')
+    ->condition('type', ['section_links', 'how2_section_links'], 'IN')
+    ->condition('field_unit', $article_nid)
+    ->accessCheck(FALSE);
+  
+  $paragraph_nids = $paragraph_query->execute();
+  
+  if (!$paragraph_nids) {
+    return [];
+  }
+  
+  $sections = [];
+  
+  // Find how_ever_sections that reference these paragraphs
+  $section_query1 = \Drupal::entityQuery('node')
+    ->condition('type', 'how_ever_section')
+    ->condition('field_how_ever_piece', $paragraph_nids, 'IN')
+    ->accessCheck(FALSE);
+  
+  // Find how2_sections that reference these paragraphs  
+  $section_query2 = \Drupal::entityQuery('node')
+    ->condition('type', 'how2_section')
+    ->condition('field_how2_piece', $paragraph_nids, 'IN')
+    ->accessCheck(FALSE);
+  
+  $section_nids = array_merge($section_query1->execute(), $section_query2->execute());
+  
+  if ($section_nids) {
+    return \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($section_nids);
+  }
+  
+  return [];
 }
