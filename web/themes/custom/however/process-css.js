@@ -34,6 +34,7 @@ const tailwindDirectives = `@import "tailwindcss";`; // Tailwind base
 const customCssInput = path.join(srcDir, "css", "tailwind.css");
 const scssEntry = path.join(srcDir, "scss", "styles.scss"); // Main Sass compilation
 const componentCssGlob = path.join("components", "**", "*.css"); // Individual component styles
+const srcComponentCssGlob = path.join("src", "css", "components", "**", "*.css");
 
 // CSS output paths
 const distCssDir = path.join(distDir, "css");
@@ -73,8 +74,14 @@ async function processCSS() {
     // 1) Read Tailwind CSS file (includes @import "tailwindcss" + custom properties)
     const customCss = fs.readFileSync(customCssInput, "utf8");
 
-    // 2) Collect all component CSS files and combine them
-    //    This allows each component to have its own CSS file that gets included
+    // 2a) Collect all component CSS files and combine them
+    //     This allows each component to have its own CSS file that gets included
+    const srcCompCss = glob
+      .sync(srcComponentCssGlob)
+      .map((f) => `/* —— ${f} —— */\n` + fs.readFileSync(f, "utf8"))
+      .join("\n\n");
+
+    // 2b) Collect component folder CSS files
     const compCss = glob
       .sync(componentCssGlob)
       .map((f) => `/* —— ${f} —— */\n` + fs.readFileSync(f, "utf8"))
@@ -93,6 +100,7 @@ async function processCSS() {
     const combined = [
       tailwindDirectives,
       customCss,
+      srcCompCss,
       compCss,
       sassResult.css,
     ].join("\n\n");
@@ -170,6 +178,7 @@ if (process.argv.includes("--watch")) {
     .watch([
       "templates/**/*.twig", // Template changes might affect Tailwind class usage
       componentCssGlob, // Component CSS files
+      srcComponentCssGlob,
       "tailwind.config.js", // Tailwind configuration changes
       "postcss.config.js", // PostCSS configuration changes
       customCssInput, // Main Tailwind file

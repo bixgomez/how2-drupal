@@ -1,0 +1,108 @@
+/* Faceted Search Styles */
+
+/* Clean up the sidebar region */
+.region-sidebar {
+  @apply space-y-6;
+}
+
+/* Facet block containers */
+.block-facets {
+  @apply bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden;
+}
+
+.block-facets h2 {
+  @apply text-lg font-semibold text-gray-900 px-4 py-3 bg-gray-50 border-b border-gray-200 m-0;
+}
+
+/* Hide inactive/empty facets */
+.facet-inactive.hidden {
+  @apply hidden;
+}
+
+/* Facet widget container */
+.facets-widget-links {
+  @apply p-0;
+}
+
+/* Facet list styling */
+.facets-widget-links ul {
+  @apply list-none p-0 m-0;
+}
+
+/* Individual facet items */
+.facet-item {
+  @apply border-b border-gray-100 last:border-b-0;
+}
+
+.facet-item a {
+  @apply block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 no-underline;
+}
+
+/* Active facet items */
+.facet-item a.is-active {
+  @apply bg-primary/10 text-primary border-l-4 border-l-primary;
+}
+
+.facet-item a.is-active:hover {
+  @apply bg-primary/20;
+}
+
+/* Facet item content layout */
+.facet-item a {
+  @apply flex items-center justify-between;
+}
+
+/* Facet value and count styling */
+.facet-item__value {
+  @apply flex-1 text-sm font-medium;
+}
+
+.facet-item__count {
+  @apply text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full ml-2;
+}
+
+/* Active item count styling */
+.facet-item a.is-active .facet-item__count {
+  @apply bg-primary/20 text-primary;
+}
+
+/* Remove/deactivate button */
+.facet-item__status.js-facet-deactivate {
+  @apply inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-primary hover:bg-primary-dark rounded-full cursor-pointer transition-colors duration-200 mr-2;
+  font-size: 0; /* Hide the original text */
+}
+
+.facet-item__status.js-facet-deactivate::before {
+  content: "×";
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Show more/less link */
+.facets-soft-limit-link {
+  @apply block px-4 py-3 text-sm text-primary hover:text-primary-dark hover:bg-gray-50 border-t border-gray-100 transition-colors duration-200 no-underline;
+}
+
+/* Empty facet state */
+.facet-empty {
+  @apply p-4 text-gray-500 text-sm italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .region-sidebar {
+    @apply space-y-4;
+  }
+  
+  .block-facets h2 {
+    @apply text-base px-3 py-2;
+  }
+  
+  .facet-item a {
+    @apply px-3 py-2;
+  }
+  
+  .facets-soft-limit-link {
+    @apply px-3 py-2;
+  }
+}
