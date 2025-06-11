@@ -1,5 +1,6 @@
 /* Faceted Search Styles */
 
+
 /* Clean up the sidebar region */
 .region-sidebar {
   @apply space-y-6;
@@ -31,11 +32,15 @@
 
 /* Individual facet items */
 .facet-item {
-  @apply border-b border-gray-100 last:border-b-0;
+  @apply border-b border-gray-100 last:border-b-0 m-0;
 }
 
 .facet-item a {
   @apply block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 no-underline;
+
+  &:hover {
+    @apply no-underline;
+  }
 }
 
 /* Active facet items */
@@ -69,6 +74,7 @@
 /* Remove/deactivate button */
 .facet-item__status.js-facet-deactivate {
   @apply inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-primary hover:bg-primary-dark rounded-full cursor-pointer transition-colors duration-200 mr-2;
+
   font-size: 0; /* Hide the original text */
 }
 
@@ -89,7 +95,7 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .region-sidebar {
     @apply space-y-4;
   }
@@ -105,4 +111,12 @@
   .facets-soft-limit-link {
     @apply px-3 py-2;
   }
+}
+
+.facets-widget-links ul {
+  @apply flex flex-col;
+}
+
+.facet-item:has(a.is-active) {
+  order: -1; /* Move active items to top */
 }
