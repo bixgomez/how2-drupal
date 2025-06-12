@@ -2510,6 +2510,9 @@ h2.section-teaser-title {
     font-weight: var(--font-weight-bold);
   }
 }
+body {
+  background-color: pink;
+}
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;
@@ -2729,5 +2732,3 @@ h2.section-teaser-title {
     }
   }
 }
-
-
