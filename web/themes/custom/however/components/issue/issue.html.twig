@@ -9,11 +9,7 @@
 
 			<div class="issue-title">
 				{{ title_prefix }}
-				<h1>{{ journal }}
-					Vol.
-					{{volume}},	No.
-					{{issue}}
-					({{ date }})</h1>
+				<h1>{{ journal }}	Vol. {{volume}},No. {{issue}} ({{ date }})</h1>
 				{{ title_suffix }}
 
 				{# Issue navigation #}
@@ -37,20 +33,24 @@
 					</div>
 				{% endif %}
 
-				{% include "@issue-meta/issue-meta.html.twig" with {
-					journal_name: journal,
-					journal_url: journal_url,
-					volume_issue: volume_issue,
-					issue_pub_date: date,
-					archive_url: archive_url[0]['#url'].toString(),
-					masthead: masthead,
-					person_bio: person_bio,
-					pdf_url: pdf_url,
-					masthead: '#masthead',
-					person_bio_link: '#people',
-					page_facsimiles: '#page-facsimiles',
-				} %}
 
+				<div class="content-section content-section--sm">
+					{% include "@issue-meta/issue-meta.html.twig" with {
+						journal_name: journal,
+						journal_url: journal_url,
+						volume: volume,
+						issue: issue,
+						volume_issue: volume_issue,
+						issue_pub_date: date,
+						archive_url: archive_url[0]['#url'].toString(),
+						masthead: masthead,
+						person_bio: person_bio,
+						pdf_url: pdf_url,
+						masthead: '#masthead',
+						person_bio_link: '#people',
+						page_facsimiles: '#page-facsimiles',
+					} %}
+				</div>
 			</div>
 		</div>
 

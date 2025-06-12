@@ -1,16 +1,26 @@
 .issue-meta {
   display: flex;
+  flex-direction: column;
   gap: 0.5rem;
   font-weight: 700;
   justify-content: flex-start;
-  border-top: 0 solid #919191;
-  border-bottom: 0 solid #919191;
   padding: 0;
   margin: 0;
-  line-height: 1;
 
-  > div {
-    width: min-content;
-    white-space: nowrap;
+  > .row {
+    display: flex;
+    gap: 0.5rem;
+    font-weight: 700;
+    justify-content: flex-start;
+    border-top: 0 solid #919191;
+    border-bottom: 0 solid #919191;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+
+    > div {
+      width: min-content;
+      white-space: nowrap;
+    }
   }
 }

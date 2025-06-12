@@ -39,11 +39,13 @@
 		{% endif %}
 		#}
 
-		{# {% if person_bio.0['#paragraph'].field_person.entity.title.value %}
+		{# 
+		{% if person_bio.0['#paragraph'].field_person.entity.title.value %}
 			<div class="content-section content-section--lg">
 					<p class="author-name">{{ person_bio.0['#paragraph'].field_person.entity.title.value }}</p>
 			</div>
-		{% endif %} #}
+		{% endif %}
+		#}
 
 		{% if working_notes['#items'] and not working_notes['#items'].isEmpty %}
 			<div class="content-section content-section--lg">
@@ -71,7 +73,7 @@
 
 		{% for key, item in node_body_sections %}
 			{% if key is same as(0) or key is same as(1) %}
-					{% set paragraph = item.entity %}
+				{% set paragraph = item.entity %}
 				<div id="section-{{ loop.index }}" class="content-section content-section--lg">
 					{{ drupal_entity('paragraph', paragraph.id.value) }}
 				</div>
@@ -90,3 +92,4 @@
 
 	</div>
 </article>
+ß

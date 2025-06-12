@@ -1,65 +1,73 @@
 <div class="issue-meta">
 
-	{% if journal_name %}
-		<div class="journal-name">
-			<a href="{{ journal_url }}">{{ journal_name }}</a>
-		</div>
-	{% endif %}
+	<div class="row row-first">
 
-	{% if volume_issue %}
-		<div class="issue-volume-number">
-			{{ volume_issue }}
-		</div>
-	{% endif %}
-
-	{% if issue_pub_date %}
-		<div class="issue-pub-date">
-			{{ issue_pub_date }}
-		</div>
-	{% endif %}
-
-	{% if masthead %}
-		<div class="masthead">
-			<a href="{{ masthead }}">Masthead</a>
-		</div>
-	{% endif %}
-
-	{% if person_bio %}
-		<div class="person-bio">
-			<a href="{{ person_bio_link }}">Bios</a>
-		</div>
-	{% endif %}
-
-	{% if page_facsimiles %}
-		<div class="page-facsimiles">
-			<a href="{{ page_facsimiles }}">Page Facsimiles</a>
-		</div>
-	{% endif %}
-
-	{% if issue_url|render|trim is not empty %}
-		<div class="issue-url">
-			<a href="{{ issue_url }}">table of contents</a>
-		</div>
-	{% endif %}
-
-	{% if archive_url|render|trim is not empty %}
-		<div class="archive-url">
-			<a href="{{ archive_url }}">html archive</a>
-		</div>
-	{% endif %}
-
-	{% if pdf_url|render|trim is not empty %}
-		<div class="pdf-url">
-			<a href="{{ pdf_url }}">Download PDF</a>
-		</div>
-	{% endif %}
-
-	{% if section_links %}
-		{% for section_link in section_links %}
-			<div class="section-link">
-				<a href="{{ section_link.url }}">{{ section_link.title }}</a>
+		{% if journal_name %}
+			<div class="journal-name">
+				<a href="{{ journal_url }}">{{ journal_name }}</a>
 			</div>
-		{% endfor %}
-	{% endif %}
+		{% endif %}
 
+		{% if volume_issue %}
+			<div class="issue-volume-number">
+				Vol. {{volume}}, No. {{issue}}
+			</div>
+		{% endif %}
+
+		{% if issue_pub_date %}
+			<div class="issue-pub-date">
+				{{ issue_pub_date }}
+			</div>
+		{% endif %}
+
+	</div>
+
+	<div class="row row-second">
+
+		{% if masthead %}
+			<div class="masthead">
+				<a href="{{ masthead }}">Masthead</a>
+			</div>
+		{% endif %}
+
+{#  
+		{% if person_bio %}
+			<div class="person-bio">
+				<a href="{{ person_bio_link }}">Bios</a>
+			</div>
+		{% endif %}#}
+
+		{% if page_facsimiles %}
+			<div class="page-facsimiles">
+				<a href="{{ page_facsimiles }}">Page Facsimiles</a>
+			</div>
+		{% endif %}
+
+		{% if issue_url|render|trim is not empty %}
+			<div class="issue-url">
+				<a href="{{ issue_url }}">Issue TOC</a>
+			</div>
+		{% endif %}
+
+		{% if archive_url|render|trim is not empty %}
+			<div class="archive-url">
+				<a href="{{ archive_url }}">html archive</a>
+			</div>
+		{% endif %}
+
+		{% if pdf_url|render|trim is not empty %}
+			<div class="pdf-url">
+				<a href="{{ pdf_url }}">Download PDF</a>
+			</div>
+		{% endif %}
+
+		{% if section_links %}
+			{% for section_link in section_links %}
+				<div class="section-link">
+					> <a href="{{ section_link.url }}">{{ section_link.title }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+
+	</div>
 </div>
