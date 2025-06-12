@@ -3,17 +3,54 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.body_sections.field_references
+    - field.field.paragraph.body_sections.field_references_title
     - field.field.paragraph.body_sections.field_text
     - field.field.paragraph.body_sections.field_title
     - field.field.paragraph.body_sections.field_title_display
     - paragraphs.paragraphs_type.body_sections
   module:
+    - field_group
     - text
+third_party_settings:
+  field_group:
+    group_references:
+      children:
+        - field_references_title
+        - field_references
+      label: References
+      region: content
+      parent_name: ''
+      weight: 3
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: false
 id: paragraph.body_sections.default
 targetEntityType: paragraph
 bundle: body_sections
 mode: default
 content:
+  field_references:
+    type: text_textarea
+    weight: 6
+    region: content
+    settings:
+      rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  field_references_title:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_text:
     type: text_textarea
     weight: 2
