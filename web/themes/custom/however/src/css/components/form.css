@@ -1,0 +1,28 @@
+input[type="text"],
+input[type="password"],
+input[type="search"],
+input[type="address"],
+input[type="email"],
+input[type="url"],
+input[type="tel"] {
+  @apply h-[34px] border border-gray-700 px-4 box-border;
+  color: var(--color-primary);
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+input[type="search"]::placeholder,
+input[type="address"]::placeholder,
+input[type="email"]::placeholder,
+input[type="url"]::placeholder,
+input[type="tel"]::placeholder {
+  color: var(--color-primary);
+}
+
+.webform-submission-form .form-item {
+  @apply mb-[6px];
+}
+
+.form-item > label {
+  @apply block font-bold;
+}

@@ -1,0 +1,14 @@
+#page-footer {
+  border-top: 4px solid var(--color-primary-dark);
+  background: var(--color-accent);
+
+  @apply m-0;
+}
+
+#block-footerbottom .field--name-body {
+  @apply flex gap-[18px];
+}
+
+#block-footerbottom .field--name-body p {
+  @apply m-0;
+}

@@ -1,0 +1,154 @@
+#block-however-page-title {
+  @apply text-center;
+}
+
+#block-how2logo,
+#block-howeverlogo,
+#block-howeverlogo-2 {
+  @apply text-center;
+}
+
+#block-how2logo .field img,
+#block-howeverlogo .field img,
+#block-howeverlogo-2 .field img {
+  @apply max-w-[200px];
+}
+
+.block-inline-blockimage-carousel {
+  @apply max-w-[92%] mx-auto;
+}
+
+@media (width >= 40em) {
+  .block-inline-blockimage-carousel {
+    @apply max-w-full;
+  }
+}
+
+.block-inline-blockimage-carousel .media--type-image {
+  @apply p-2;
+}
+
+.block-inline-blockimage-carousel .media--type-image img {
+  box-shadow: 2px 1px 8px 0 rgb(85 85 85 / 30%);
+}
+
+.block-inline-blockimage-carousel .media--type-image .field--name-field-caption {
+  @apply mt-[6px];
+}
+
+.block.journal-teaser {
+  @apply text-center max-w-[78%] mx-auto my-6;
+}
+
+@media (width >= 40em) {
+  .block.journal-teaser {
+    @apply max-w-full m-0;
+  }
+}
+
+.block.journal-teaser .journal-logo {
+  @apply mt-3 mb-0 mx-0;
+}
+
+.block.journal-teaser .journal-logo img {
+  @apply h-7 w-auto;
+}
+
+.block.journal-teaser p {
+  @apply my-2 mx-0;
+}
+
+.block.journal-teaser a.link {
+  color: var(--color-text);
+
+  @apply text-sm;
+}
+
+.block#about-site {
+  @apply text-justify;
+}
+
+.block#about-site h2 {
+  @apply font-black uppercase tracking-[2px] text-center relative text-base my-[6px] mx-0;
+}
+
+.block#about-site h2::before,
+.block#about-site h2::after {
+  @apply absolute top-[calc(50%-0.5px)] w-[18%] content-[''];
+
+  border: 0.625px solid var(--color-text);
+}
+
+.block#about-site h2::before {
+  @apply left-0;
+}
+
+.block#about-site h2::after {
+  @apply right-0;
+}
+
+.block#about-site p {
+  @apply m-0;
+}
+
+.block.ad-block {
+  @apply py-9 px-12 border border-gray-600 mb-6;
+
+  box-shadow: 4px 4px 0 0 #000;
+}
+
+@media (width >= 40em) {
+  .block.ad-block {
+    @apply mb-0;
+  }
+}
+
+.block.ad-block.scholarship {
+  background: #fdf8e3;
+}
+
+.block.ad-block.about {
+  background: #eed7d7;
+}
+
+.block.ad-block .field--name-body {
+  @apply flex justify-between items-center;
+}
+
+.block.ad-block .field--name-body .content p {
+  @apply leading-5;
+}
+
+.block.ad-block .field--name-body .cta {
+  @apply w-[140px] text-right flex-[0_0_142px];
+}
+
+.block.ad-block h3 {
+  @apply m-0;
+}
+
+.block.ad-block p {
+  @apply m-0;
+}
+
+.block-inline-blockcontent-carousel {
+  @apply max-w-[85%] mx-auto;
+}
+
+@media (width >= 40em) {
+  .block-inline-blockcontent-carousel {
+    @apply max-w-full m-0;
+  }
+}
+
+.block-inline-blockcontent-carousel h2 {
+  @apply text-center mt-0 mb-3;
+}
+
+.block-inline-blockcontent-carousel .field--name-field-content-embed {
+  @apply -mx-[15px];
+}
+
+.block-inline-blockcontent-carousel .field--name-field-content-embed .field__item.slick-slide {
+  @apply mx-[15px];
+}

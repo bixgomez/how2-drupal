@@ -1,19 +1,30 @@
 /* stylelint-disable scss/at-rule-no-unknown */
 /* stylelint-disable at-rule-no-deprecated */
 
-:root {
-  --color-yellow: #ebe6d1;
-  --color-primary: #9e2727;
-  --color-primary-dark: #6b1919;
-  --color-secondary: #d3ceb6; /* yellow-dark */
-  --color-accent: #fffcf0; /* yellow-light */
-}
-
 @theme {
   --font-size-2xs: 0.625rem;
   --font-size-3xs: 0.5rem;
+  --color-body: #333;
   --color-primary: #9e2727;
   --color-primary-dark: #6b1919;
+  --color-secondary: #d3ceb6;
+  --color-accent: #fffcf0;
+  --color-yellow: #ebe6d1;
+  --font-family-sans: "Urbanist", sans-serif;
+  --font-family-serif: "Libre Caslon Text", serif;
+  
+  /* Converted from Sass variables */
+  --color-grey-dark: #333;
+  --color-text: #333;
+  --color-yellow-light: #fffcf0;
+  --color-yellow-dark: #d3ceb6;
+  --color-red-dark: #9e2727;
+  --color-red: red;
+  --line-height-xs: 1;
+  --line-height-sm: 1.25;
+  --line-height-md: 1.5;
+  --line-height-lg: 1.75;
+  --line-height-xl: 2;
 }
 
 @utility text-2xs {

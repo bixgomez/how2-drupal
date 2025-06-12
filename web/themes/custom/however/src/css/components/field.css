@@ -1,0 +1,117 @@
+.field--name-field-volume-reference a,
+.field--name-field-issue-reference a,
+.journal-name a {
+  @apply font-bold no-underline;
+  color: var(--color-text);
+}
+
+.field--name-field-volume-reference a:hover,
+.field--name-field-issue-reference a:hover,
+.journal-name a:hover {
+  @apply underline;
+}
+
+.field--name-field-tags {
+  @apply my-[18px] mx-0;
+}
+
+.field--name-field-tags .field__items {
+  @apply flex gap-3;
+}
+
+.field--name-field-tags .field__items .field__item a {
+  @apply no-underline py-[3px] px-4 rounded-[14px];
+  color: var(--color-text);
+  background: var(--color-yellow-dark);
+}
+
+.field--name-field-how-2-sections,
+.field--name-field-sections-how2,
+.field--name-field-sections-however,
+.field--name-field-section {
+  column-count: 3;
+  @apply my-6 mx-0 p-0;
+  column-gap: 1.5em;
+}
+
+.field--name-field-how-2-sections > .field__item,
+.field--name-field-sections-how2 > .field__item,
+.field--name-field-sections-however > .field__item,
+.field--name-field-section > .field__item {
+  @apply inline-block w-full mb-[18px] box-border;
+}
+
+.field--name-field-journal-page-images-media {
+  @apply flex flex-row flex-wrap justify-center gap-[42px];
+}
+
+.field--name-field-journal-page-images-media > .field__item {
+  @apply min-w-[100px] max-w-[220px];
+}
+
+.field--name-field-journal-page-images-media > .field__item img {
+  @apply w-full;
+}
+
+.field--name-field-journal-page-images-media > .field__item > article {
+  @apply h-full;
+}
+
+@media (min-width: 480px) {
+  .node--type-how-ever-issue .field--name-field-journal-page-images-media > .field__item {
+    width: calc(33% - 42px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .node--type-how-ever-issue .field--name-field-journal-page-images-media > .field__item {
+    width: calc(25% - 42px);
+  }
+}
+
+.node--type-how-ever-article .field--name-field-journal-page-images-media .field__item,
+.node--type-how-ever-section .field--name-field-journal-page-images-media .field__item {
+  @apply w-[120px];
+}
+
+@media (min-width: 1024px) {
+  .node--type-how-ever-article .field--name-field-journal-page-images-media .field__item,
+  .node--type-how-ever-section .field--name-field-journal-page-images-media .field__item {
+    @apply w-[200px];
+  }
+  
+  .node--type-how-ever-article .field--name-field-journal-page-images-media,
+  .node--type-how-ever-section .field--name-field-journal-page-images-media {
+    @apply block;
+  }
+}
+
+.field--name-field-section .node {
+  background: #fffcf7;
+}
+
+.field--name-field-archive-url a,
+.field--name-field-however-page-facimile-link a {
+  @apply font-semibold no-underline;
+  color: var(--color-text);
+}
+
+.field--name-field-archive-url a:hover,
+.field--name-field-however-page-facimile-link a:hover {
+  @apply underline;
+}
+
+.field--name-field-caption p {
+  @apply text-center mt-0 text-xs;
+  color: #424242;
+}
+
+.field--name-body table {
+  @apply border-0;
+}
+
+.field--name-body table tbody,
+.field--name-body table tr,
+.field--name-body table td {
+  @apply border-0;
+}

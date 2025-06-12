@@ -1,0 +1,12 @@
+table {
+  background-color: #f2f2f2; /* color.scale(black, $lightness: 95%) */
+}
+
+table tr {
+  @apply border-t border-l border-gray-500;
+}
+
+table tr td,
+table tr th {
+  @apply border-r border-b border-gray-500 py-[2px] px-1 leading-[1.4] text-left align-top;
+}

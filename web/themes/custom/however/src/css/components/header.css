@@ -1,0 +1,31 @@
+.page-header {
+  background-color: var(--color-accent);
+  border-bottom: 4px solid var(--color-primary-dark);
+}
+
+.page-header .layout-container {
+  @apply flex justify-between items-center;
+}
+
+.region-branding {
+  @apply flex justify-center items-center max-w-[200px];
+}
+
+#block-however-branding {
+  @apply contents;
+}
+
+a.site-logo {
+  @apply flex justify-center items-center;
+}
+
+a.site-logo img {
+  @apply block p-0 m-0;
+}
+
+.admin-info {
+  background-color: var(--color-secondary);
+  border-bottom: 4px solid var(--color-primary-dark);
+
+  @apply py-2;
+}

@@ -1,0 +1,103 @@
+.node--view-mode-teaser-card > h2 {
+  @apply text-base border-b border-gray-400 pb-3 text-center;
+}
+
+.node--view-mode-teaser-card > h2 a {
+  color: var(--color-text);
+}
+
+.node--view-mode-teaser-card .field--name-field-image-caption {
+  @apply text-center -mt-3;
+}
+
+.node--view-mode-teaser-card .field--name-field-subtitle {
+  @apply text-center;
+}
+
+.node--view-mode-cross-post-teaser-card {
+  @apply p-0 text-center;
+}
+
+.node--view-mode-cross-post-teaser-card > .image-top {
+  @apply relative min-h-6;
+}
+
+.node--view-mode-cross-post-teaser-card > .image-top .content-type {
+  @apply absolute left-0 top-0 bg-gray-900 text-white py-[2px] px-3 text-xs font-bold leading-none;
+
+  border-radius: 0 0 4px;
+}
+
+.node--view-mode-cross-post-teaser-card > .image-top .volume-issue {
+  @apply absolute right-[10px] bg-gray-900 text-white leading-none text-sm p-3 rounded-[28px];
+
+  bottom: -24px;
+}
+
+.node--view-mode-cross-post-teaser-card > .image-top img {
+  @apply inline-block;
+}
+
+.node--view-mode-cross-post-teaser-card > .image-top .field--name-field-caption {
+  @apply hidden;
+}
+
+.node--view-mode-cross-post-teaser-card > .content {
+  @apply py-2 px-6 pb-9;
+}
+
+.node--view-mode-cross-post-teaser-card > .content .journal-logo img {
+  @apply inline-block;
+}
+
+.node--view-mode-cross-post-teaser-card > .content .pub-date {
+  @apply text-xs;
+}
+
+.node--view-mode-cross-post-teaser-card > .content h3 {
+  @apply m-[10px] leading-[1.125];
+}
+
+.node--view-mode-cross-post-teaser-card > .content h3 a {
+  @apply no-underline;
+
+  color: var(--color-text);
+}
+
+.node--view-mode-cross-post-teaser-card > .content h3 a:hover {
+  @apply underline;
+}
+
+.teaser-card--issue {
+  @apply p-0;
+}
+
+.teaser-card--issue .field--name-field-cover-thumbnail {
+  @apply text-center aspect-square;
+}
+
+.teaser-card--issue .field--name-field-cover-thumbnail img {
+  @apply object-contain object-center h-full -mb-1;
+}
+
+.teaser-card--issue .node__content {
+  @apply py-8 px-6 text-center;
+}
+
+.teaser-card--issue .field--name-field-issue-number {
+  @apply inline-block bg-gray-800 text-5xl text-white font-bold rounded-[30px] w-[60px] h-[60px] leading-[60px] absolute left-2/5 right-2/5;
+
+  top: 245px;
+}
+
+.teaser-card--issue h2 {
+  @apply text-lg mb-0;
+}
+
+.teaser-card--issue h2 a {
+  color: var(--color-text);
+}
+
+.teaser-card--issue h2 a:hover {
+  @apply underline;
+}

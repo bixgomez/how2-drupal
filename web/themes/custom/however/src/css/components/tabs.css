@@ -1,0 +1,21 @@
+.tabs.primary {
+  @apply text-lg m-0 flex gap-1;
+}
+
+.tabs.primary li a {
+  @apply text-base font-semibold leading-none py-[0.35em] px-2 rounded transition-all duration-200 ease-linear;
+
+  background-color: rgb(255 255 255 / 30%); /* color.adjust(#fff, $alpha: -0.7) */
+}
+
+.tabs.primary li a:hover {
+  @apply bg-white text-red-500;
+}
+
+.tabs.primary li a.is-active {
+  background-color: rgb(255 255 255 / 75%); /* color.adjust(#fff, $alpha: -0.25) */
+}
+
+.tabs.primary li a.is-active:hover {
+  @apply bg-white text-red-500;
+}

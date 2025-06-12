@@ -1,0 +1,139 @@
+nav ul.menu {
+  @apply m-0 flex;
+}
+
+nav ul.menu ul.menu {
+  @apply block;
+}
+
+.region-navigation {
+  @apply hidden;
+}
+
+@media (width >= 768px) {
+  .region-navigation {
+    @apply flex flex-grow justify-between items-center ml-8;
+  }
+  
+  .region-navigation .block-menu {
+    @apply flex-grow;
+  }
+  
+  .region-navigation .block.views-exposed-form {
+    @apply flex-shrink;
+  }
+}
+
+.region-navigation .block-menu {
+  @apply flex flex-nowrap justify-start items-center;
+}
+
+.region-navigation .block-menu > ul.menu {
+  @apply justify-end gap-6;
+}
+
+.region-navigation .block-menu > ul.menu > li.menu-item {
+  @apply relative py-1;
+}
+
+.region-navigation .block-menu > ul.menu > li.menu-item > a {
+  @apply font-bold no-underline block py-1;
+
+  color: var(--color-text);
+}
+
+.region-navigation .block-menu > ul.menu > li.menu-item > a:hover,
+.region-navigation .block-menu > ul.menu > li.menu-item > a.active,
+.region-navigation .block-menu > ul.menu > li.menu-item > a.active-trail {
+  @apply underline;
+}
+
+.region-navigation .block-menu .menu-item--collapsed {
+  list-style-image: none;
+  list-style-type: none;
+}
+
+ul.menu li.menu-item--expanded {
+  @apply list-none;
+
+  list-style-image: none;
+  list-style-type: none;
+}
+
+/* Dropdowns */
+#block-however-main-menu > ul.menu > li.menu-item--expanded > ul {
+  @apply hidden absolute bg-white left-0 m-0 w-40 gap-0 p-0 box-border;
+
+  box-shadow: 2px 1px 8px 0 rgb(85 85 85 / 30%);
+  z-index: 1000;
+  top: 2.25rem;
+}
+
+#block-however-main-menu > ul.menu > li.menu-item--expanded > ul li {
+  @apply m-0 p-0;
+}
+
+#block-however-main-menu > ul.menu > li.menu-item--expanded > ul li a {
+  @apply w-full py-1 px-2 no-underline m-0 inline-block;
+}
+
+#block-however-main-menu > ul.menu > li.menu-item--expanded > ul li a:hover {
+  @apply underline;
+}
+
+#block-however-main-menu > ul.menu > li.menu-item--expanded:hover > ul {
+  @apply block;
+}
+
+#page-footer .block-menu ul.menu {
+  @apply gap-8 m-0 p-0;
+}
+
+#page-footer .block-menu ul.menu li {
+  @apply m-0 p-0;
+}
+
+#page-footer .block-menu ul.menu li a {
+  @apply font-bold no-underline;
+
+  color: var(--color-text);
+}
+
+#page-footer .block-menu ul.menu li a:hover {
+  @apply underline;
+}
+
+.mobile-menu-icon {
+  @apply md:hidden;
+}
+
+#mobile-navigation {
+  @apply hidden bg-white py-[54px] px-[18px] text-center;
+}
+
+#mobile-navigation.active {
+  @apply block absolute w-full h-screen inset-0;
+}
+
+#mobile-navigation .close-modal {
+  @apply absolute top-3 right-3;
+}
+
+#mobile-navigation #block-mainnavigation > ul.menu {
+  @apply block text-center;
+}
+
+#mobile-navigation #block-mainnavigation > ul.menu > li {
+  @apply mb-6;
+}
+
+#mobile-navigation #block-mainnavigation > ul.menu > li.menu-item--collapsed {
+  list-style-type: none !important;
+  list-style-image: none !important;
+}
+
+#mobile-navigation #block-mainnavigation > ul.menu > li > a {
+  @apply text-2xl font-black no-underline;
+
+  color: var(--color-text);
+}

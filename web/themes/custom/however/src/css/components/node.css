@@ -1,0 +1,216 @@
+.node--view-mode-search-result {
+  @apply mb-[54px];
+}
+
+.node--view-mode-search-result h2 {
+  @apply mb-2;
+}
+
+.node--view-mode-search-result .field--name-field-person::before {
+  @apply italic mr-1;
+
+  content: "by";
+}
+
+@media (width >= 1024px) {
+  .issue-top-content {
+    @apply flex justify-center gap-9 items-center max-w-[92%] mx-auto;
+  }
+  
+  .issue-top-content .image {
+    @apply w-1/4;
+  }
+  
+  .issue-top-content .issue-title-meta {
+    width: calc(75% - 36px);
+  }
+}
+
+.node--issue.node--view-mode-teaser .issue-volume-number,
+.node--issue.node--view-mode-teaser .field--name-field-publication-date-display {
+  text-decoration: none !important;
+  color: #0f0f0f !important;
+}
+
+.node--issue.node--view-mode-full #masthead {
+  @apply hidden;
+}
+
+.node--type-how2-volume .field--name-field-how2-issue,
+.node--type-how2-volume .field--name-field-how-ever-issue,
+.node--type-however-volume .field--name-field-how2-issue,
+.node--type-however-volume .field--name-field-how-ever-issue {
+  @apply flex flex-col flex-wrap justify-center gap-[30px];
+}
+
+.node--type-how2-volume .field--name-field-how2-issue > .field__item,
+.node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
+.node--type-however-volume .field--name-field-how2-issue > .field__item,
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item {
+  @apply min-w-[280px];
+}
+
+.node--type-how2-volume .field--name-field-how2-issue > .field__item > article,
+.node--type-how2-volume .field--name-field-how-ever-issue > .field__item > article,
+.node--type-however-volume .field--name-field-how2-issue > .field__item > article,
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item > article {
+  @apply h-full;
+}
+
+@media (width >= 480px) {
+  .node--type-how2-volume .field--name-field-how2-issue,
+  .node--type-how2-volume .field--name-field-how-ever-issue,
+  .node--type-however-volume .field--name-field-how2-issue,
+  .node--type-however-volume .field--name-field-how-ever-issue {
+    @apply flex-row;
+  }
+  
+  .node--type-how2-volume .field--name-field-how2-issue > .field__item,
+  .node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
+  .node--type-however-volume .field--name-field-how2-issue > .field__item,
+  .node--type-however-volume .field--name-field-how-ever-issue > .field__item {
+    width: calc(50% - 30px);
+  }
+}
+
+@media (width >= 768px) {
+  .node--type-how2-volume .field--name-field-how2-issue > .field__item,
+  .node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
+  .node--type-however-volume .field--name-field-how2-issue > .field__item,
+  .node--type-however-volume .field--name-field-how-ever-issue > .field__item {
+    width: calc(33% - 30px);
+  }
+}
+
+@media (width >= 1024px) {
+  .node--type-how2-volume .field--name-field-how2-issue > .field__item,
+  .node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
+  .node--type-however-volume .field--name-field-how2-issue > .field__item,
+  .node--type-however-volume .field--name-field-how-ever-issue > .field__item {
+    width: calc(25% - 30px);
+  }
+}
+
+.node--type-journal-issue .issue-tabs ul {
+  @apply flex flex-row justify-start gap-6 list-none my-6 mx-0 p-0;
+
+  margin: 24px 0 36px;
+}
+
+.node--type-journal-issue .issue-tabs ul li {
+  @apply m-0 p-0;
+}
+
+.node--type-journal-issue .issue-tabs ul li a {
+  @apply font-black no-underline pb-[3px];
+
+  color: var(--color-text);
+}
+
+.node--type-journal-issue .issue-tabs ul li a.active,
+.node--type-journal-issue .issue-tabs ul li a:hover {
+  border-bottom: 3px solid var(--color-primary);
+}
+
+.node--type-journal-issue .tab-body {
+  @apply hidden opacity-0 transition-opacity duration-500 ease-out;
+
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.node--type-journal-issue .tab-body.active {
+  @apply block opacity-100;
+
+  animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.node--type-how2-section.node--view-mode-full .node__content,
+.node--type-how-ever-section.node--view-mode-full .node__content {
+  @apply max-w-[748px] mx-auto;
+}
+
+.node--type-how2-section.node--view-mode-full .field--name-field-image-caption,
+.node--type-how-ever-section.node--view-mode-full .field--name-field-image-caption {
+  @apply float-right w-2/5 max-w-[300px] mb-6 ml-12 mt-0 mr-0;
+}
+
+.node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how2-piece,
+.node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece,
+.node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how2-piece,
+.node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece {
+  @apply mb-[54px];
+}
+
+.node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how2-piece > .field__item,
+.node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece > .field__item,
+.node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how2-piece > .field__item,
+.node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece > .field__item {
+  @apply mb-[22px];
+}
+
+.node--type-how2-section.node--view-mode-teaser .section-title a,
+.node--type-how-ever-section.node--view-mode-teaser .section-title a {
+  @apply font-bold;
+
+  color: var(--color-text);
+}
+
+.node--type-how2-section.node--view-mode-teaser .node--type-how2-section.node--view-mode-full .field--name-field-how2-piece > .field__item,
+.node--type-how2-section.node--view-mode-teaser .node--type-how-ever-section.node--view-mode-full .field--name-field-how-ever-piece > .field__item,
+.node--type-how-ever-section.node--view-mode-teaser .node--type-how2-section.node--view-mode-full .field--name-field-how2-piece > .field__item,
+.node--type-how-ever-section.node--view-mode-teaser .node--type-how-ever-section.node--view-mode-full .field--name-field-how-ever-piece > .field__item {
+  @apply leading-[1.8] mb-[0.4em] mt-0 mx-0;
+}
+
+.node--article .view-article-section {
+  @apply text-center;
+}
+
+.node--article .node__content {
+  @apply max-w-[748px] mx-auto;
+}
+
+.node--article .field--name-body,
+.node--article .field--name-field-body-sections {
+  font-family: var(--font-family-serif);
+}
+
+.node--article .field--name-body p,
+.node--article .field--name-field-body-sections p {
+  @apply leading-[1.8];
+}
+
+.node--article .field--name-field-body-sections .field--name-field-title {
+  @apply font-bold text-xl my-3 mx-0;
+}
+
+.node--type-how-ever-section.node--view-mode-full .node__content,
+.node--type-how-ever-article.node--view-mode-full .node__content {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.node--type-how-ever-section.node--view-mode-full .node__content .article-content,
+.node--type-how-ever-article.node--view-mode-full .node__content .article-content {
+  @apply flex gap-20;
+}
+
+.node--type-how-ever-section.node--view-mode-full .node__content .content-text-inner,
+.node--type-how-ever-article.node--view-mode-full .node__content .content-text-inner {
+  width: calc(100% - 280px);
+}
+
+.node .author-name {
+  @apply text-2xl;
+}

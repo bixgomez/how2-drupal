@@ -1,5 +1,3 @@
-@use "variables" as vars;
-
 .sr-only {
   position: absolute;
   left: -10000px;
