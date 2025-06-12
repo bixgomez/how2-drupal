@@ -39,14 +39,10 @@
  */
 #}
 
-{{ dump(content.field_title.0['#context'].value) }}
-{{ dump(content.field_title_display.0['#text']) }}
-{{ dump(content.field_text.0['#text']) }}
-{{ dump(content.field_references_title.0['#context'].value) }}
-{{ dump(content.field_references.0['#text']) }}
-
-{{ content.field_title.0['#context'].value }}
-{{ content.field_title_display.0['#text'] }}
-{{ content.field_text.0['#text'] }}
-{{ content.field_references_title.0['#context'].value }}
-{{ content.field_references.0['#text'] }}
+{% include "@body-section/body-section.html.twig" with {
+  title: content.field_title.0['#context'].value,
+  title_display: content.field_title_display.0['#text'],
+  body: content.field_text.0['#text'],
+  references_title: content.field_references_title.0['#context'].value,
+  references: content.field_references.0['#text'],
+} %}

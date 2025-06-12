@@ -1,34 +1,39 @@
-<article{{attributes.addClass(classes)}}>
+<article class="body-section">
 
-	<div class="teaser-card-image section-teaser-image">
-		{{ image_caption }}
-	</div>
+	{# {{ dump(title) }}
+	{{ dump(title_display) }}
+	{{ dump(body) }}
+	{{ dump(references_title) }}
+	{{ dump(references) }} #}
 
-	{% if title %}
-		{{ title_prefix }}
-		<h2 class="teaser-card-title section-teaser-title">
-			<span>
-				<a href="{{ url }}" rel="bookmark">{{ title }}</a>
-			</span>
+	{% if title_display %}
+		<h2 class="body-section-title">
+			{{ title_display|raw }}
 		</h2>
-		{{ title_suffix }}
-	{% endif %}
-
-	{% if subtitle %}
-		<h3 class="teaser-card-subtitle section-teaser-subtitle">{{ subtitle }}</h3>
-	{% endif %}
-
-	{% if teaser_text %}
-		{{ teaser_text }}
+	{% elseif title %}
+		<h2 class="body-section-title">
+			{{ title }}
+		</h2>
 	{% endif %}
 
 	{% if body %}
-		{{ body }}
+		<div class="body-section-text">
+			{{ body|raw }}
+		</div>
 	{% endif %}
 
-	{# <div class="info-box">
-			<div class="info-bit">{{ volume_reference }}</div>
-			<div class="info-bit">{{ issue_reference }}</div>
-		</div> #}
+  {% if references_title or references %}
+		{% if references_title %}
+			<h3 class="body-section-references-title">
+				{{ references_title }}
+			</h3>
+		{% endif %}
+
+		{% if references %}
+			<div class="body-section-references">
+				{{ references|raw }}
+			</div>
+		{% endif %}
+	{% endif %}
 
 </article>

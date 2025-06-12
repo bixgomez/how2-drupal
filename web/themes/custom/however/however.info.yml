@@ -25,6 +25,7 @@ components:
     issue-meta: components/issue-meta
     person-bio: components/person-bio
     person-bio-card: components/person-bio-card
+    body-section: components/body-section
 
 regions:
   branding: 'Branding'
