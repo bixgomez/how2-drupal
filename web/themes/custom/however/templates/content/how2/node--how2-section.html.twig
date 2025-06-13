@@ -74,6 +74,8 @@
   title: label,
   title_display: content.field_title_display,
   subtitle: content.field_subtitle.0,
+	volume: content.field_volume_reference['#items'].entity.field_volume_number.value,
+	issue: content.field_issue_reference['#items'].entity.field_issue_number.value,
   volume_issue: volume_issue,
   issue_pub_date: issue_pub_date,
   issue_url: issue_url,
