@@ -28,10 +28,9 @@ bundle: how_ever_article
 mode: default
 content:
   body:
-    type: text_summary_or_trimmed
-    label: above
-    settings:
-      trim_length: 600
+    type: text_default
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
     weight: 10
     region: content

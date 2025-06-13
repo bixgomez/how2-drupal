@@ -49,6 +49,7 @@
 
 		{% if working_notes['#items'] and not working_notes['#items'].isEmpty %}
 			<div class="content-section content-section--lg">
+				<h3>Working Notes</h3>
 				{{ working_notes }}
 			</div>
 		{% endif %}
@@ -56,6 +57,13 @@
 		{% if person_bio['#items'] and not person_bio['#items'].isEmpty %}
 			<div id="bios" class="content-section content-section--lg">
 				{{ person_bio }}
+			</div>
+		{% endif %}
+
+
+		{% if content.body[0]['#text'] %}
+			<div class="content-section content-section--lg">
+				{{ body }}
 			</div>
 		{% endif %}
 
@@ -71,14 +79,25 @@
 			</div>
 		{% endif %}
 
-		{% for key, item in node_body_sections %}
+		{# {{ dump(content_body_sections) }} #}
+
+		{% for key, item in content_body_sections %}
+    {% if key is same as(0) or key is same as(1) %}
+        {% set paragraph = item['#paragraph'] %}
+        <div id="section-{{ loop.index }}" class="content-section content-section--lg">
+            {{ drupal_entity('paragraph', paragraph.id.value) }}
+        </div>
+    {% endif %}
+{% endfor %}
+
+		{# {% for key, item in node_body_sections %}
 			{% if key is same as(0) or key is same as(1) %}
 				{% set paragraph = item.entity %}
 				<div id="section-{{ loop.index }}" class="content-section content-section--lg">
 					{{ drupal_entity('paragraph', paragraph.id.value) }}
 				</div>
 			{% endif %}
-		{% endfor %}
+		{% endfor %} #}
 
 		{% if images['#items'] and not images['#items'].isEmpty %}
 			<div class="content-section content-section--lg">
@@ -92,4 +111,3 @@
 
 	</div>
 </article>
-ß

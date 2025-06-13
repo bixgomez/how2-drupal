@@ -23,17 +23,20 @@
 	{% endif %}
 
   {% if references_title or references %}
-		{% if references_title %}
-			<h3 class="body-section-references-title">
-				{{ references_title }}
-			</h3>
-		{% endif %}
+    <div class="body-section-references">
+			{% if references_title %}
+				<h3 class="references-title">
+					{{ references_title }}
+				</h3>
+			{% endif %}
 
-		{% if references %}
-			<div class="body-section-references">
-				{{ references|raw }}
-			</div>
-		{% endif %}
+			{% if references %}
+				<div class="references">
+					{{ references|raw }}
+				</div>
+			{% endif %}
+		</div>
+
 	{% endif %}
 
 </article>
