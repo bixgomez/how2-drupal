@@ -290,9 +290,6 @@
   .\!my-5 {
     margin-block: calc(var(--spacing) * 5) !important;
   }
-  .my-2 {
-    margin-block: calc(var(--spacing) * 2);
-  }
   .my-3 {
     margin-block: calc(var(--spacing) * 3);
   }
@@ -359,9 +356,6 @@
   }
   .bg-accent {
     background-color: var(--color-accent);
-  }
-  .bg-gray-200 {
-    background-color: var(--color-gray-200);
   }
   .bg-primary {
     background-color: var(--color-primary);
