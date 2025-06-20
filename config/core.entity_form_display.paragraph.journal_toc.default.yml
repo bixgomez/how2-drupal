@@ -1,0 +1,21 @@
+uuid: 02f6cc50-c677-4cb0-bb58-1ecd8f42b456
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.journal_toc.field_journal
+    - paragraphs.paragraphs_type.journal_toc
+id: paragraph.journal_toc.default
+targetEntityType: paragraph
+bundle: journal_toc
+mode: default
+content:
+  field_journal:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

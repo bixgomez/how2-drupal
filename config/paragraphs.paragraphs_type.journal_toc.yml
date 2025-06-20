@@ -1,0 +1,12 @@
+uuid: f81387d6-671e-42e9-84ea-17859351516a
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: rSX-VJPvWIvO_7g-NiOoFOiAFYdF1BJihwSyRMUdXSM
+id: journal_toc
+label: 'Journal TOC'
+icon_uuid: null
+icon_default: null
+description: 'Displays a table of contents for However or How2 journal'
+behavior_plugins: {  }

@@ -1,0 +1,58 @@
+uuid: 266aed60-d18a-46c3-96d6-fd96b0518147
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraphs
+    - node.type.page
+    - paragraphs.paragraphs_type.journal_toc
+  module:
+    - entity_reference_revisions
+id: node.page.field_paragraphs
+field_name: field_paragraphs
+entity_type: node
+bundle: page
+label: Paragraphs
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      journal_toc: journal_toc
+    negate: 0
+    target_bundles_drag_drop:
+      body_sections:
+        weight: 11
+        enabled: false
+      how2_section_links:
+        weight: 12
+        enabled: false
+      how2_subsection:
+        weight: 13
+        enabled: false
+      how_ever_subsection:
+        weight: 14
+        enabled: false
+      journal_toc:
+        weight: 15
+        enabled: true
+      link_section_title:
+        weight: 16
+        enabled: false
+      open_title_text:
+        weight: 17
+        enabled: false
+      person_bio:
+        weight: 18
+        enabled: false
+      photo_caption:
+        weight: 19
+        enabled: false
+      section_links:
+        weight: 20
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,21 @@
+uuid: fc2b4b3a-58c3-46e2-a6b2-2a1078cff34a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_journal
+    - paragraphs.paragraphs_type.journal_toc
+  module:
+    - options
+id: paragraph.journal_toc.field_journal
+field_name: field_journal
+entity_type: paragraph
+bundle: journal_toc
+label: Journal
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

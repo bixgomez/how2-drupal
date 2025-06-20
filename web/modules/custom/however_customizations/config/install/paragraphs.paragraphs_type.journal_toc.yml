@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: journal_toc
+label: 'Journal TOC'
+icon_uuid: null
+icon_default: null
+description: 'Displays a table of contents for However or How2 journal'
+behavior_plugins: {  }
+locked: true

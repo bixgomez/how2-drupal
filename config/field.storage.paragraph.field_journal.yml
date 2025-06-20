@@ -1,0 +1,29 @@
+uuid: bf169cd5-749f-4542-9b83-8cb50ba9b357
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+_core:
+  default_config_hash: DG1UEJ-hgM0yPeIAJO1FwSsIRQ7k43UXUmG5O5WrGZw
+id: paragraph.field_journal
+field_name: field_journal
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: however
+      label: However
+    -
+      value: how2
+      label: How2
+  allowed_values_function: ''
+module: options
+locked: true
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
