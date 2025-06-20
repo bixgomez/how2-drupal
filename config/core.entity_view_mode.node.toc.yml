@@ -1,0 +1,11 @@
+uuid: f5b7da6b-8d87-442d-92a0-c17de131666a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.toc
+label: TOC
+description: 'Displays a table of contents for either volume or issue.'
+targetEntityType: node
+cache: true

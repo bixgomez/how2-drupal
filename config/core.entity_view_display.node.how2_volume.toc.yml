@@ -1,0 +1,37 @@
+uuid: f3ca0818-7f92-4a9c-8bfd-8fbff635441f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.toc
+    - field.field.node.how2_volume.field_archive_url
+    - field.field.node.how2_volume.field_how2_issue
+    - field.field.node.how2_volume.field_volume_number
+    - node.type.how2_volume
+  module:
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.how2_volume.toc
+targetEntityType: node
+bundle: how2_volume
+mode: toc
+content:
+  field_how2_issue:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: toc
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_archive_url: true
+  field_volume_number: true
+  footnotes_group: true
+  links: true
+  search_api_excerpt: true

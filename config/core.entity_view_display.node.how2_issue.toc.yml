@@ -1,0 +1,71 @@
+uuid: af0633c0-e394-4429-84d1-588baccfcc9d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.toc
+    - field.field.node.how2_issue.field_archive_url
+    - field.field.node.how2_issue.field_cover_thumbnail
+    - field.field.node.how2_issue.field_how_2_sections
+    - field.field.node.how2_issue.field_issue_number
+    - field.field.node.how2_issue.field_masthead
+    - field.field.node.how2_issue.field_person_bio
+    - field.field.node.how2_issue.field_publication_date_display
+    - field.field.node.how2_issue.field_sections_how2
+    - field.field.node.how2_issue.field_short_description
+    - field.field.node.how2_issue.field_volume_number
+    - field.field.node.how2_issue.field_volume_reference
+    - node.type.how2_issue
+  module:
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.how2_issue.toc
+targetEntityType: node
+bundle: how2_issue
+mode: toc
+content:
+  field_issue_number:
+    type: number_unformatted
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_publication_date_display:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_short_description:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_volume_number:
+    type: number_unformatted
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_archive_url: true
+  field_cover_thumbnail: true
+  field_how_2_sections: true
+  field_masthead: true
+  field_person_bio: true
+  field_sections_how2: true
+  field_volume_reference: true
+  footnotes_group: true
+  links: true
+  search_api_excerpt: true
