@@ -395,15 +395,9 @@ function however_preprocess_paragraph__journal_toc(&$variables) {
   $journal_type = $paragraph->get('field_journal')->value;
   
   if ($journal_type === 'however') {
-    // Query However volumes and issues
     $volume_type = 'however_volume';
-    $issue_type = 'journal_issue';
-    $volume_field = 'field_how_ever_issue';
   } elseif ($journal_type === 'how2') {
-    // Query How2 volumes and issues
     $volume_type = 'how2_volume';
-    $issue_type = 'how2_issue';
-    $volume_field = 'field_how2_issue';
   } else {
     return;
   }
@@ -416,45 +410,17 @@ function however_preprocess_paragraph__journal_toc(&$variables) {
     ->accessCheck(TRUE);
   $volume_nids = $volume_query->execute();
   
-  $volumes_with_issues = [];
+  $rendered_volumes = [];
   
   if ($volume_nids) {
     $volumes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($volume_nids);
+    $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
     
     foreach ($volumes as $volume) {
-      $volume_data = [
-        'entity' => $volume,
-        'title' => $volume->getTitle(),
-        'url' => $volume->toUrl(),
-        'issues' => []
-      ];
-      
-      // Get referenced issues for this volume
-      if ($volume->hasField($volume_field) && !$volume->get($volume_field)->isEmpty()) {
-        $issue_references = $volume->get($volume_field)->referencedEntities();
-        
-        // Sort issues by issue number
-        usort($issue_references, function($a, $b) {
-          $a_num = $a->get('field_issue_number')->value ?? 0;
-          $b_num = $b->get('field_issue_number')->value ?? 0;
-          return $a_num - $b_num;
-        });
-        
-        foreach ($issue_references as $issue) {
-          if ($issue->isPublished()) {
-            $volume_data['issues'][] = [
-              'entity' => $issue,
-              'title' => $issue->getTitle(),
-              'url' => $issue->toUrl(),
-            ];
-          }
-        }
-      }
-      
-      $volumes_with_issues[] = $volume_data;
+      $rendered_volumes[] = $view_builder->view($volume, 'toc');
     }
   }
   
   $variables['journal_type'] = $journal_type;
-  $variables['volumes'] = $volumes_with_issues;
+  $variables['rendered_volumes'] = $rendered_volumes;
 }
