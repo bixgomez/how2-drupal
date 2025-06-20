@@ -1,22 +1,5 @@
-{# templates/paragraph/paragraph--journal-toc.html.twig #}
-
 <div class="journal-toc">
-  {% if volumes %}
-    <ul class="volumes-list">
-      {% for volume in volumes %}
-        <li class="volume-item">
-          <a href="{{ volume.url }}">{{ volume.title }}</a>
-          {% if volume.issues %}
-            <ul class="issues-list">
-              {% for issue in volume.issues %}
-                <li class="issue-item">
-                  <a href="{{ issue.url }}">{{ issue.title }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
+  {% for volume in rendered_volumes %}
+    {{ volume }}
+  {% endfor %}
 </div>
