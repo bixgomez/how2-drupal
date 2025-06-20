@@ -1,0 +1,18 @@
+.journal-toc {
+ @apply space-y-6;
+}
+
+ul.volumes-list {
+ @apply list-none space-y-4;
+}
+
+li.volume-item {
+}
+
+ul.issues-list {
+ @apply list-none mt-2 mb-4 ml-4 space-y-1;
+}
+
+li.issue-item {
+ @apply text-sm;
+}
