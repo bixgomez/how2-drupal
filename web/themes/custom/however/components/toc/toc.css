@@ -1,0 +1,23 @@
+ul.toc-volumes {
+  @apply list-none space-y-4;
+}
+
+li.toc-volume {
+  /* background-color: pink; */
+}
+
+ul.toc-issues {
+  @apply list-none mt-2 mb-4 ml-4 space-y-1;
+}
+
+li.issue-item {
+  @apply text-sm;
+}
+
+.toc-volume-title {
+  @apply text-xl font-bold mb-2 no-underline hover:underline;
+}
+
+.toc-issue-title {
+  @apply text-lg mb-1 no-underline hover:underline;
+}

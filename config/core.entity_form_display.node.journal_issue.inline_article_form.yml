@@ -1,9 +1,9 @@
-uuid: 39ac6e08-ea8e-417b-94cd-ec288c32c3ca
+uuid: 2ebbc9c7-ea99-4857-8fd0-f076559ece29
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_form_mode.node.inline_article_form
     - field.field.node.journal_issue.body
     - field.field.node.journal_issue.field_archive_url
     - field.field.node.journal_issue.field_cover_thumbnail
@@ -20,61 +20,83 @@ dependencies:
     - field.field.node.journal_issue.field_volume_reference
     - node.type.journal_issue
   module:
-    - image
-    - user
-id: node.journal_issue.teaser
+    - link
+    - path
+id: node.journal_issue.inline_article_form
 targetEntityType: node
 bundle: journal_issue
-mode: teaser
+mode: inline_article_form
 content:
-  field_cover_thumbnail:
-    type: image
-    label: hidden
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 0
+  created:
+    type: datetime_timestamp
+    weight: 10
     region: content
-  field_issue_number:
-    type: number_integer
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
+    settings: {  }
     third_party_settings: {  }
-    weight: 1
-    region: content
-  field_publication_date_display:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
+  field_archive_url:
+    type: link_default
     weight: 2
     region: content
-  field_volume_number:
-    type: number_integer
-    label: above
     settings:
-      thousand_separator: ''
-      prefix_suffix: true
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
-    weight: 0
+  path:
+    type: path
+    weight: 30
     region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 15
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 120
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 16
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
   body: true
-  field_archive_url: true
+  field_cover_thumbnail: true
+  field_issue_number: true
   field_journal_page_images_media: true
   field_journal_pdf: true
   field_masthead: true
   field_person_bio: true
+  field_publication_date_display: true
   field_section: true
   field_sections_however: true
   field_short_description: true
+  field_volume_number: true
   field_volume_reference: true
-  footnotes_group: true
-  links: true
-  search_api_excerpt: true

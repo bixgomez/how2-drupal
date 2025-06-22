@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.journal_issue.body
+    - field.field.node.journal_issue.field_archive_url
     - field.field.node.journal_issue.field_cover_thumbnail
     - field.field.node.journal_issue.field_issue_number
     - field.field.node.journal_issue.field_journal_page_images_media
@@ -20,6 +21,7 @@ dependencies:
   module:
     - entity_reference_revisions
     - image
+    - link
     - text
     - user
 id: node.journal_issue.default
@@ -32,7 +34,19 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 12
+    region: content
+  field_archive_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 3
     region: content
   field_cover_thumbnail:
     type: image
@@ -43,7 +57,7 @@ content:
       image_loading:
         attribute: lazy
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   field_issue_number:
     type: number_integer
@@ -52,7 +66,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 4
+    weight: 6
     region: content
   field_journal_page_images_media:
     type: entity_reference_entity_view
@@ -61,7 +75,7 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 11
+    weight: 9
     region: content
   field_journal_pdf:
     type: entity_reference_entity_view
@@ -70,14 +84,14 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 2
+    weight: 4
     region: content
   field_masthead:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 7
+    weight: 10
     region: content
   field_person_bio:
     type: entity_reference_revisions_entity_view
@@ -86,7 +100,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 9
+    weight: 11
     region: content
   field_publication_date_display:
     type: string
@@ -94,7 +108,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 10
+    weight: 2
     region: content
   field_section:
     type: entity_reference_entity_view
@@ -103,7 +117,7 @@ content:
       view_mode: teaser_card
       link: false
     third_party_settings: {  }
-    weight: 5
+    weight: 7
     region: content
   field_sections_however:
     type: entity_reference_label
@@ -111,7 +125,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 6
+    weight: 8
     region: content
   field_short_description:
     type: string
@@ -119,7 +133,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 8
+    weight: 0
     region: content
   field_volume_number:
     type: number_integer
@@ -128,7 +142,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 3
+    weight: 5
     region: content
 hidden:
   field_volume_reference: true

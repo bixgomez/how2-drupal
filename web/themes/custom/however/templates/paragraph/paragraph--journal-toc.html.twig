@@ -1,5 +1,3 @@
-<div class="journal-toc">
-  {% for volume in rendered_volumes %}
-    {{ volume }}
-  {% endfor %}
-</div>
+{% include "@toc/toc-volumes.html.twig" with {
+  volume: volume,
+} %}

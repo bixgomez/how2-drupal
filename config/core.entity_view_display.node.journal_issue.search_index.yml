@@ -1,9 +1,9 @@
-uuid: 39ac6e08-ea8e-417b-94cd-ec288c32c3ca
+uuid: 99d84c7c-21f9-4122-9cfe-0413b94d3649
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.search_index
     - field.field.node.journal_issue.body
     - field.field.node.journal_issue.field_archive_url
     - field.field.node.journal_issue.field_cover_thumbnail
@@ -20,61 +20,43 @@ dependencies:
     - field.field.node.journal_issue.field_volume_reference
     - node.type.journal_issue
   module:
-    - image
+    - link
     - user
-id: node.journal_issue.teaser
+id: node.journal_issue.search_index
 targetEntityType: node
 bundle: journal_issue
-mode: teaser
+mode: search_index
 content:
-  field_cover_thumbnail:
-    type: image
-    label: hidden
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 0
-    region: content
-  field_issue_number:
-    type: number_integer
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 1
-    region: content
-  field_publication_date_display:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_volume_number:
-    type: number_integer
+  field_archive_url:
+    type: link
     label: above
     settings:
-      thousand_separator: ''
-      prefix_suffix: true
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
     third_party_settings: {  }
-    weight: 0
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
     region: content
 hidden:
   body: true
-  field_archive_url: true
+  field_cover_thumbnail: true
+  field_issue_number: true
   field_journal_page_images_media: true
   field_journal_pdf: true
   field_masthead: true
   field_person_bio: true
+  field_publication_date_display: true
   field_section: true
   field_sections_however: true
   field_short_description: true
+  field_volume_number: true
   field_volume_reference: true
   footnotes_group: true
-  links: true
   search_api_excerpt: true

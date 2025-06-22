@@ -26,6 +26,7 @@ components:
     person-bio: components/person-bio
     person-bio-card: components/person-bio-card
     body-section: components/body-section
+    toc: components/toc
 
 regions:
   branding: 'Branding'

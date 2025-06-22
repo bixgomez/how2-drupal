@@ -1,20 +1,20 @@
-uuid: c1fb17f2-e8a5-49c1-bcb7-389003251bee
+uuid: 91315bf5-0c00-448d-9d20-bda906c0bcb6
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.body
-    - node.type.journal_issue
+    - node.type.how2_issue
   module:
     - text
-id: node.journal_issue.body
+id: node.how2_issue.body
 field_name: body
 entity_type: node
-bundle: journal_issue
+bundle: how2_issue
 label: Transcript
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

@@ -38,7 +38,15 @@
  */
 #}
 
-{% include "@issues-grid/issues-grid.html.twig" with {
-  title: label,
-  issues: items
-} %}
+{% if element['#view_mode'] == 'toc' %}
+  {# TOC-specific rendering #}
+  {% for item in items %}
+    {{ item.content }}
+  {% endfor %}
+{% else %}
+  {# Default rendering #}
+  {% include "@issues-grid/issues-grid.html.twig" with {
+    title: label,
+    issues: items
+  } %}
+{% endif %}

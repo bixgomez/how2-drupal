@@ -5,10 +5,13 @@ dependencies:
   config:
     - core.entity_form_mode.node.inline_article_form
     - core.entity_form_mode.paragraph.person_without_bio
+    - field.field.node.how2_issue.body
     - field.field.node.how2_issue.field_archive_url
     - field.field.node.how2_issue.field_cover_thumbnail
     - field.field.node.how2_issue.field_how_2_sections
     - field.field.node.how2_issue.field_issue_number
+    - field.field.node.how2_issue.field_journal_page_images_media
+    - field.field.node.how2_issue.field_journal_pdf
     - field.field.node.how2_issue.field_masthead
     - field.field.node.how2_issue.field_person_bio
     - field.field.node.how2_issue.field_publication_date_display
@@ -24,6 +27,7 @@ dependencies:
     - image
     - inline_entity_form
     - link
+    - media_library
     - path
     - text
 third_party_settings:
@@ -59,7 +63,7 @@ third_party_settings:
       label: People
       region: content
       parent_name: ''
-      weight: 9
+      weight: 11
       format_type: fieldset
       format_settings:
         classes: ''
@@ -67,14 +71,40 @@ third_party_settings:
         id: ''
         description: ''
         required_fields: true
+    group_journal_files:
+      children:
+        - field_journal_page_images_media
+        - field_journal_pdf
+      label: 'Journal Files'
+      region: content
+      parent_name: ''
+      weight: 10
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: false
 id: node.how2_issue.default
 targetEntityType: node
 bundle: how2_issue
 mode: default
 content:
+  body:
+    type: text_textarea_with_summary
+    weight: 6
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
   field_archive_url:
     type: link_default
-    weight: 6
+    weight: 7
     region: content
     settings:
       placeholder_url: ''
@@ -90,7 +120,7 @@ content:
     third_party_settings: {  }
   field_how_2_sections:
     type: inline_entity_form_complex
-    weight: 7
+    weight: 8
     region: content
     settings:
       form_mode: inline_article_form
@@ -112,6 +142,20 @@ content:
     region: content
     settings:
       placeholder: ''
+    third_party_settings: {  }
+  field_journal_page_images_media:
+    type: media_library_widget
+    weight: 13
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_journal_pdf:
+    type: media_library_widget
+    weight: 14
+    region: content
+    settings:
+      media_types: {  }
     third_party_settings: {  }
   field_masthead:
     type: text_textarea
@@ -144,7 +188,7 @@ content:
     third_party_settings: {  }
   field_sections_how2:
     type: entity_reference_modal
-    weight: 8
+    weight: 9
     region: content
     settings:
       add_new_button_title: +
@@ -188,7 +232,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 10
+    weight: 12
     region: content
     settings:
       display_label: true
@@ -202,10 +246,17 @@ content:
       placeholder: ''
     third_party_settings: {  }
   uid:
-    type: entity_reference_autocomplete
-    weight: 11
+    type: entity_reference_modal
+    weight: 14
     region: content
     settings:
+      add_new_button_title: +
+      modal_form_mode: default
+      modal_width: 80%
+      modal_title: 'Add new'
+      duplicate: false
+      search: true
+      bootstrap: false
       match_operator: CONTAINS
       match_limit: 10
       size: 60

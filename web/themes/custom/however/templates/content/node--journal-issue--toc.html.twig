@@ -1,9 +1,5 @@
-{{ title_prefix }}
-{% if label and not page %}
-  <h2{{ title_attributes }}>
-    <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-  </h2>
-{% endif %}
-{{ title_suffix }}
-
-{{ content }}
+{% include "@toc/toc-issue.html.twig" with {
+  volume_num: content.field_volume_number.0['#markup'],
+  issue_num: content.field_issue_number.0['#markup'],
+  date: content.field_publication_date_display.0['#context'].value,
+} %}
