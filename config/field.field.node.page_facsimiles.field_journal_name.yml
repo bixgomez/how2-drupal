@@ -1,0 +1,23 @@
+uuid: 8685b797-47dc-4fb7-b6ed-d87978234dac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_journal_name
+    - node.type.page_facsimiles
+  module:
+    - options
+id: node.page_facsimiles.field_journal_name
+field_name: field_journal_name
+entity_type: node
+bundle: page_facsimiles
+label: 'Journal Name'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: however
+default_value_callback: ''
+settings: {  }
+field_type: list_string

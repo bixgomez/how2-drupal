@@ -1,0 +1,24 @@
+uuid: 8aa956fd-0ff5-44a8-b40e-2035679ffbfb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.page_facsimiles
+  module:
+    - text
+id: node.page_facsimiles.body
+field_name: body
+entity_type: node
+bundle: page_facsimiles
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

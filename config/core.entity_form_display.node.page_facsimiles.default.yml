@@ -1,0 +1,71 @@
+uuid: 5d551414-b90d-448a-953c-c77eb0cfe5b9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.page_facsimiles.body
+    - field.field.node.page_facsimiles.field_issue_number
+    - field.field.node.page_facsimiles.field_issue_reference
+    - field.field.node.page_facsimiles.field_journal_name
+    - field.field.node.page_facsimiles.field_volume_number
+    - node.type.page_facsimiles
+  module:
+    - path
+id: node.page_facsimiles.default
+targetEntityType: node
+bundle: page_facsimiles
+mode: default
+content:
+  field_issue_number:
+    type: number
+    weight: 3
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_issue_reference:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_journal_name:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_volume_number:
+    type: number
+    weight: 2
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  promote: true
+  sticky: true
+  uid: true

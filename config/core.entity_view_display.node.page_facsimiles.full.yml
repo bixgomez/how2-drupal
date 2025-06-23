@@ -1,0 +1,48 @@
+uuid: c9886ee8-8b45-4e16-81bb-e02cd25ace7a
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.page_facsimiles.body
+    - field.field.node.page_facsimiles.field_issue_number
+    - field.field.node.page_facsimiles.field_issue_reference
+    - field.field.node.page_facsimiles.field_journal_name
+    - field.field.node.page_facsimiles.field_volume_number
+    - node.type.page_facsimiles
+  module:
+    - user
+id: node.page_facsimiles.full
+targetEntityType: node
+bundle: page_facsimiles
+mode: full
+content:
+  field_issue_number:
+    type: number_integer
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 99
+    region: content
+  field_volume_number:
+    type: number_integer
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 98
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  body: true
+  field_issue_reference: true
+  field_journal_name: true
+  footnotes_group: true
+  search_api_excerpt: true

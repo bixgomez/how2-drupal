@@ -161,4 +161,73 @@ class HoweverCustomizationsCommands extends DrushCommands {
     
     $this->output()->writeln("Title update complete. Updated {$total_updated} nodes in total.");
   }
+
+  /**
+   * Creates page facsimiles nodes for all existing issues.
+   *
+   * @command however-customizations:create-page-facsimiles
+   * @aliases how-pages
+   */
+  public function createPageFacsimiles() {
+    $this->output()->writeln('Creating page facsimiles for existing issues...');
+  
+    // Content types to process
+    $issue_types = ['how2_issue', 'journal_issue'];
+    $total_created = 0;
+    
+    foreach ($issue_types as $issue_type) {
+      // Load all nodes of this type that have the required fields
+      $query = \Drupal::entityQuery('node')
+        ->condition('type', $issue_type)
+        ->exists('field_volume_number')
+        ->exists('field_issue_number')
+        ->accessCheck(FALSE);
+      $nids = $query->execute();
+      
+      $this->output()->writeln("Found " . count($nids) . " {$issue_type} nodes.");
+      
+      if (!empty($nids)) {
+        $nodes = Node::loadMultiple($nids);
+        
+        foreach ($nodes as $node) {
+          // Check if page facsimiles already exists for this issue
+          $existing_query = \Drupal::entityQuery('node')
+            ->condition('type', 'page_facsimiles')
+            ->condition('field_issue_reference', $node->id())
+            ->accessCheck(FALSE);
+          $existing = $existing_query->execute();
+          
+          if (!empty($existing)) {
+            $this->output()->writeln("Page facsimiles already exists for {$node->getTitle()}");
+            continue;
+          }
+          
+          $this->output()->writeln("Need to create page facsimiles for {$node->getTitle()}");
+          // Extract data for the page facsimiles node
+          $volume_number = $node->get('field_volume_number')->value;
+          $issue_number = $node->get('field_issue_number')->value;
+
+          // Determine journal name based on content type
+          $journal_name = ($issue_type === 'how2_issue') ? 'how2' : 'however';
+
+          $this->output()->writeln("Ready to create page facsimiles for {$node->getTitle()} - {$journal_name} v{$volume_number} n{$issue_number}");
+          // Create the page facsimiles node
+          $page_facsimiles = Node::create([
+            'type' => 'page_facsimiles',
+            'title' => "{$journal_name} Volume {$volume_number} Issue {$issue_number}: Page Facsimiles",
+            'field_issue_reference' => $node->id(),
+            'field_volume_number' => $volume_number,
+            'field_issue_number' => $issue_number,
+            'field_journal_name' => $journal_name,
+            'status' => 1, // Published
+          ]);
+
+          $page_facsimiles->save();
+          $total_created++;
+
+          $this->output()->writeln("✓ Created page facsimiles for {$node->getTitle()}");
+        }
+      }
+    }
+  }
 }

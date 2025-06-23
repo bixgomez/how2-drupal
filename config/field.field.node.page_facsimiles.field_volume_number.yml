@@ -1,0 +1,23 @@
+uuid: 60b9e0d2-9cf2-4191-829f-8cde44245a7c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_volume_number
+    - node.type.page_facsimiles
+id: node.page_facsimiles.field_volume_number
+field_name: field_volume_number
+entity_type: node
+bundle: page_facsimiles
+label: 'Volume Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -12,7 +12,7 @@ label: 'Back-end Description'
 description: ''
 required: true
 translatable: true
-default_value: {  }
+default_value: 'Title will be automatically generated on save.'
 default_value_callback: ''
 settings: {  }
 field_type: string

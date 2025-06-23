@@ -199,3 +199,73 @@ function however_customizations_preprocess_node(&$variables) {
     ];
   }
 }
+
+/**
+ * Implements hook_node_insert().
+ * 
+ * Automatically creates a corresponding page_facsimiles node when a new
+ * how2_issue or journal_issue is created. This ensures every issue has
+ * a dedicated page for displaying its page facsimile images at the URL:
+ * /[journal]/v[volume]/n[issue]/page-facsimiles
+ */
+function however_customizations_node_insert($node) {
+  if (in_array($node->bundle(), ['how2_issue', 'journal_issue'])) {
+    // Only create if the issue has the required fields
+    if ($node->hasField('field_volume_number') && !$node->get('field_volume_number')->isEmpty() &&
+        $node->hasField('field_issue_number') && !$node->get('field_issue_number')->isEmpty()) {
+      
+      // Extract data for the page facsimiles node
+      $volume_number = $node->get('field_volume_number')->value;
+      $issue_number = $node->get('field_issue_number')->value;
+      $journal_name = ($node->bundle() === 'how2_issue') ? 'how2' : 'however';
+      
+      // Create the page facsimiles node
+      $page_facsimiles = \Drupal\node\Entity\Node::create([
+        'type' => 'page_facsimiles',
+        'title' => ucfirst($journal_name) . " Volume {$volume_number} Issue {$issue_number}: Page Facsimiles",
+        'field_issue_reference' => $node->id(),
+        'field_volume_number' => $volume_number,
+        'field_issue_number' => $issue_number,
+        'field_journal_name' => $journal_name,
+        'status' => 1, // Published
+      ]);
+      
+      $page_facsimiles->save();
+      
+      \Drupal::logger('however_customizations')->info('Created page facsimiles node for @title', [
+        '@title' => $node->getTitle(),
+      ]);
+    }
+  }
+}
+
+/**
+ * Implements hook_node_delete().
+ * 
+ * Automatically deletes the corresponding page_facsimiles node when a
+ * how2_issue or journal_issue is deleted. This keeps the site clean by
+ * removing orphaned page facsimile nodes that would no longer have
+ * any content to display.
+ */
+function however_customizations_node_delete($node) {
+  if (in_array($node->bundle(), ['how2_issue', 'journal_issue'])) {
+    // Find any page_facsimiles nodes that reference this issue
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'page_facsimiles')
+      ->condition('field_issue_reference', $node->id())
+      ->accessCheck(FALSE);
+    $facsimile_nids = $query->execute();
+    
+    if (!empty($facsimile_nids)) {
+      // Load and delete the page facsimiles nodes
+      $facsimile_nodes = \Drupal\node\Entity\Node::loadMultiple($facsimile_nids);
+      foreach ($facsimile_nodes as $facsimile_node) {
+        $facsimile_node->delete();
+        
+        \Drupal::logger('however_customizations')->info('Deleted page facsimiles node for @title', [
+          '@title' => $node->getTitle(),
+        ]);
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+uuid: 00b56b99-0b1a-4a74-99e2-516e25c6a0a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_issue_number
+    - node.type.page_facsimiles
+id: node.page_facsimiles.field_issue_number
+field_name: field_issue_number
+entity_type: node
+bundle: page_facsimiles
+label: 'Issue Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

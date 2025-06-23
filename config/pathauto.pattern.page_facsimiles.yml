@@ -1,0 +1,22 @@
+uuid: 35b3f885-378d-4ede-a469-b095d9c1a021
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: page_facsimiles
+label: 'Page Facsimiles'
+type: 'canonical_entities:node'
+pattern: '[node:field_journal_name]/v[node:field_volume_number]/n[node:field_issue_number]/page-facsimiles'
+selection_criteria:
+  85e7825a-863d-44b8-aceb-2c07e06599fd:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 85e7825a-863d-44b8-aceb-2c07e06599fd
+    context_mapping:
+      node: node
+    bundles:
+      page_facsimiles: page_facsimiles
+selection_logic: and
+weight: -5
+relationships: {  }
