@@ -10,7 +10,7 @@ id: node.how2_issue.field_journal_page_images_media
 field_name: field_journal_page_images_media
 entity_type: node
 bundle: how2_issue
-label: 'Journal Page Images'
+label: 'Page Facsimiles'
 description: ''
 required: false
 translatable: false
