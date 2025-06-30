@@ -79,8 +79,6 @@
 %}
 {{ attach_library('classy/node') }}
 <article{{ attributes.addClass(classes) }}>
-  <div class="content">
-
     <h1 class="text-center text-3xl font-bold pb-8">{{ label }}</h1>
 
     {{ title_prefix }}
@@ -94,5 +92,4 @@
     <div{{ content_attributes.addClass('node__content') }}>
       {{ content }}
     </div>
-  </div>
 </article>
