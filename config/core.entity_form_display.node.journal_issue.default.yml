@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_form_mode.node.inline_article_form
     - field.field.node.journal_issue.body
     - field.field.node.journal_issue.field_archive_url
     - field.field.node.journal_issue.field_cover_thumbnail
@@ -24,7 +23,6 @@ dependencies:
     - entity_reference_modal
     - field_group
     - image
-    - inline_entity_form
     - link
     - media_library
     - paragraphs
@@ -211,8 +209,8 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_masthead: true
+  field_section: true
   promote: true
   sticky: true
   uid: true
-  field_masthead: true
-  field_section: true
