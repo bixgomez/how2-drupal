@@ -1,9 +1,9 @@
-uuid: 1828aa1d-b6eb-419a-bbb6-92627d67dcc2
+uuid: 9e3768b2-30c8-4b3f-88b1-80d606d4970f
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_form_mode.node.inline_article_form
+    - core.entity_view_mode.node.toc
     - field.field.node.how2_section.body
     - field.field.node.how2_section.field_archive_url
     - field.field.node.how2_section.field_how2_piece
@@ -23,59 +23,36 @@ dependencies:
     - field.field.node.how2_section.field_working_notes
     - node.type.how2_section
   module:
-    - field_group
-third_party_settings:
-  field_group:
-    group_links_section:
-      children:
-        - field_how2_piece
-      label: 'Links Section'
-      region: hidden
-      parent_name: ''
-      weight: 14
-      format_type: fieldset
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        description: ''
-        required_fields: true
-    group_metadata:
-      children:
-        - field_issue_reference
-        - field_tags
-        - field_volume_reference
-      label: Metadata
-      region: hidden
-      parent_name: ''
-      weight: 13
-      format_type: fieldset
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        description: ''
-        required_fields: true
-id: node.how2_section.inline_article_form
+    - user
+id: node.how2_section.toc
 targetEntityType: node
 bundle: how2_section
-mode: inline_article_form
+mode: toc
 content:
-  title:
-    type: string_textfield
-    weight: 0
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
+  field_issue_number:
+    type: number_unformatted
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
+  field_volume_number:
+    type: number_unformatted
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
 hidden:
   body: true
-  created: true
   field_archive_url: true
   field_how2_piece: true
   field_image_caption: true
-  field_issue_number: true
   field_issue_reference: true
   field_journal_page_images_media: true
   field_links_section_title: true
@@ -85,11 +62,7 @@ hidden:
   field_tags: true
   field_teaser_text: true
   field_title_display: true
-  field_volume_number: true
   field_volume_reference: true
   field_working_notes: true
-  path: true
-  promote: true
-  status: true
-  sticky: true
-  uid: true
+  footnotes_group: true
+  search_api_excerpt: true

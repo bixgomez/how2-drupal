@@ -1,9 +1,9 @@
-uuid: 235ad654-4ee3-465f-b393-77de8ccd4886
+uuid: 45755aff-8954-49ca-9a6d-7ade2806275d
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.search_result
+    - core.entity_view_mode.node.cross_post_teaser_card
     - field.field.node.how2_article.body
     - field.field.node.how2_article.field_archive_url
     - field.field.node.how2_article.field_body_sections
@@ -21,63 +21,40 @@ dependencies:
     - field.field.node.how2_article.field_working_notes
     - node.type.how2_article
   module:
-    - entity_reference_revisions
-    - layout_builder
     - user
-third_party_settings:
-  layout_builder:
-    enabled: false
-    allow_custom: false
-id: node.how2_article.search_result
+id: node.how2_article.cross_post_teaser_card
 targetEntityType: node
 bundle: how2_article
-mode: search_result
+mode: cross_post_teaser_card
 content:
-  field_issue_reference:
-    type: entity_reference_label
+  field_issue_number:
+    type: number_integer
     label: hidden
     settings:
-      link: true
+      thousand_separator: ''
+      prefix_suffix: true
     third_party_settings: {  }
     weight: 3
     region: content
-  field_person_bio:
-    type: entity_reference_revisions_entity_view
-    label: hidden
-    settings:
-      view_mode: name_only
-      link: ''
+  links:
+    settings: {  }
     third_party_settings: {  }
-    weight: 0
-    region: content
-  field_tags:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 4
-    region: content
-  field_volume_reference:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 2
+    weight: 100
     region: content
 hidden:
   body: true
   field_archive_url: true
   field_body_sections: true
   field_hide_the_node_title: true
-  field_issue_number: true
+  field_issue_reference: true
   field_journal_page_images_media: true
   field_media_type: true
+  field_person_bio: true
   field_section_reference: true
+  field_tags: true
   field_title_display: true
   field_volume_number: true
+  field_volume_reference: true
   field_working_notes: true
   footnotes_group: true
-  links: true
   search_api_excerpt: true

@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.how2_article.field_archive_url
     - field.field.node.how2_article.field_body_sections
     - field.field.node.how2_article.field_hide_the_node_title
+    - field.field.node.how2_article.field_issue_number
     - field.field.node.how2_article.field_issue_reference
     - field.field.node.how2_article.field_journal_page_images_media
     - field.field.node.how2_article.field_media_type
@@ -14,6 +15,7 @@ dependencies:
     - field.field.node.how2_article.field_section_reference
     - field.field.node.how2_article.field_tags
     - field.field.node.how2_article.field_title_display
+    - field.field.node.how2_article.field_volume_number
     - field.field.node.how2_article.field_volume_reference
     - field.field.node.how2_article.field_working_notes
     - node.type.how2_article
@@ -30,7 +32,9 @@ third_party_settings:
     group_issue_metadata:
       children:
         - field_volume_reference
+        - field_volume_number
         - field_issue_reference
+        - field_issue_number
         - field_section_reference
         - field_tags
         - field_media_type
@@ -99,9 +103,16 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  field_issue_number:
+    type: number
+    weight: 30
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   field_issue_reference:
     type: options_select
-    weight: 28
+    weight: 29
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -114,7 +125,7 @@ content:
     third_party_settings: {  }
   field_media_type:
     type: options_select
-    weight: 31
+    weight: 33
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -138,13 +149,13 @@ content:
     third_party_settings: {  }
   field_section_reference:
     type: options_select
-    weight: 29
+    weight: 31
     region: content
     settings: {  }
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
-    weight: 30
+    weight: 32
     region: content
     settings:
       match_operator: CONTAINS
@@ -159,6 +170,13 @@ content:
     settings:
       rows: 1
       placeholder: 'Title as displayed on the page.  This will not be used for searching; only for display.'
+    third_party_settings: {  }
+  field_volume_number:
+    type: number
+    weight: 28
+    region: content
+    settings:
+      placeholder: ''
     third_party_settings: {  }
   field_volume_reference:
     type: options_select

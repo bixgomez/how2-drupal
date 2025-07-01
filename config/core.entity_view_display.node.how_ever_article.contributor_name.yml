@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.how_ever_article.field_archive_url
     - field.field.node.how_ever_article.field_body_sections
     - field.field.node.how_ever_article.field_hide_the_node_title
+    - field.field.node.how_ever_article.field_issue_number
     - field.field.node.how_ever_article.field_issue_reference
     - field.field.node.how_ever_article.field_journal_page_images_media
     - field.field.node.how_ever_article.field_media_type
@@ -15,6 +16,7 @@ dependencies:
     - field.field.node.how_ever_article.field_section_reference
     - field.field.node.how_ever_article.field_tags
     - field.field.node.how_ever_article.field_title_display
+    - field.field.node.how_ever_article.field_volume_number
     - field.field.node.how_ever_article.field_volume_reference
     - field.field.node.how_ever_article.field_working_notes
     - node.type.how_ever_article
@@ -45,12 +47,14 @@ hidden:
   field_archive_url: true
   field_body_sections: true
   field_hide_the_node_title: true
+  field_issue_number: true
   field_issue_reference: true
   field_journal_page_images_media: true
   field_media_type: true
   field_section_reference: true
   field_tags: true
   field_title_display: true
+  field_volume_number: true
   field_volume_reference: true
   field_working_notes: true
   footnotes_group: true

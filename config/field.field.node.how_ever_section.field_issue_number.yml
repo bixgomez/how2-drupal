@@ -1,0 +1,23 @@
+uuid: 79e3a445-6275-46da-ab77-8c2d9890c5bc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_issue_number
+    - node.type.how_ever_section
+id: node.how_ever_section.field_issue_number
+field_name: field_issue_number
+entity_type: node
+bundle: how_ever_section
+label: 'Issue Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

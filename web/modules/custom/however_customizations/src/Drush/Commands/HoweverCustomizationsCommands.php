@@ -11,19 +11,43 @@ use Drupal\node\Entity\Node;
 class HoweverCustomizationsCommands extends DrushCommands {
 
   /**
-   * Updates volume numbers for how2_issue and journal_issue nodes.
+   * Updates volume and issue numbers for all content types with auto-populated fields.
    *
    * @command however-customizations:update-volume-numbers
    * @aliases how-vol
    */
   public function updateVolumeNumbers() {
-    $this->output()->writeln('Starting volume number update...');
+    $this->output()->writeln('Starting volume/issue number update...');
     
-    // Content types to process
-    $content_types = ['how2_issue', 'journal_issue'];
-    $count = 0;
+    // Use the same mappings as entity_presave
+    $content_mappings = [
+      'how2_issue' => [
+        'reference_field' => 'field_volume_reference',
+        'number_field' => 'field_volume_number',
+      ],
+      'journal_issue' => [
+        'reference_field' => 'field_volume_reference',
+        'number_field' => 'field_volume_number',
+      ],
+      'how_ever_article' => [
+        'reference_field' => 'field_issue_reference',
+        'copy_fields' => [
+          'field_volume_number' => 'field_volume_number',
+          'field_issue_number' => 'field_issue_number',
+        ],
+      ],
+      'how2_article' => [
+        'reference_field' => 'field_issue_reference',
+        'copy_fields' => [
+          'field_volume_number' => 'field_volume_number',
+          'field_issue_number' => 'field_issue_number',
+        ],
+      ],
+    ];
     
-    foreach ($content_types as $content_type) {
+    $total_updated = 0;
+    
+    foreach ($content_mappings as $content_type => $mapping) {
       // Load all nodes of this type
       $query = \Drupal::entityQuery('node')
         ->condition('type', $content_type)
@@ -32,41 +56,66 @@ class HoweverCustomizationsCommands extends DrushCommands {
       
       if (!empty($nids)) {
         $this->output()->writeln("Processing {$content_type}: " . count($nids) . " nodes found.");
+        $count = 0;
         
-        // Process nodes in smaller batches to avoid memory issues
+        // Process nodes in smaller batches
         $chunks = array_chunk($nids, 50, TRUE);
         
         foreach ($chunks as $chunk) {
           $nodes = Node::loadMultiple($chunk);
           
           foreach ($nodes as $node) {
-            // Skip if no volume reference
-            if ($node->field_volume_reference->isEmpty()) {
+            // Skip if no reference
+            if ($node->{$mapping['reference_field']}->isEmpty()) {
               continue;
             }
             
-            // Get referenced volume
-            $volume_reference = $node->field_volume_reference->entity;
+            // Get referenced entity
+            $referenced_entity = $node->{$mapping['reference_field']}->entity;
             
-            if ($volume_reference && 
-                $volume_reference->hasField('field_volume_number') && 
-                !$volume_reference->field_volume_number->isEmpty()) {
+            if ($referenced_entity) {
+              $updated = FALSE;
               
-              // Get and set volume number
-              $volume_number = $volume_reference->field_volume_number->value;
-              $node->field_volume_number->value = $volume_number;
+              // Handle single field copy (issues → volumes)
+              if (isset($mapping['number_field'])) {
+                if ($referenced_entity->hasField('field_volume_number') && 
+                    !$referenced_entity->field_volume_number->isEmpty()) {
+                  
+                  $volume_number = $referenced_entity->field_volume_number->value;
+                  $node->{$mapping['number_field']}->value = $volume_number;
+                  $updated = TRUE;
+                }
+              }
               
-              // Save node but skip the hook we created earlier
-              $node->however_skip_presave = TRUE;
-              $node->save();
-              $count++;
+              // Handle multiple field copy (articles → issues)
+              if (isset($mapping['copy_fields'])) {
+                foreach ($mapping['copy_fields'] as $source_field => $target_field) {
+                  if ($referenced_entity->hasField($source_field) && 
+                      !$referenced_entity->{$source_field}->isEmpty()) {
+                    
+                    $field_value = $referenced_entity->{$source_field}->value;
+                    $node->{$target_field}->value = $field_value;
+                    $updated = TRUE;
+                  }
+                }
+              }
+              
+              if ($updated) {
+                // Save with skip flag
+                $node->however_skip_presave = TRUE;
+                $node->save();
+                $count++;
+              }
             }
           }
         }
+        
+        $this->output()->writeln("Updated {$count} {$content_type} nodes.");
+        $total_updated += $count;
       }
     }
     
-    $this->output()->writeln("Update complete. Updated $count nodes.");
+    $this->output()->writeln("Update complete. Updated {$total_updated} nodes total.");
   }
 
   /**

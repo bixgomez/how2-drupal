@@ -45,10 +45,26 @@ function however_customizations_form_alter(&$form, FormStateInterface $form_stat
     $form['title']['widget'][0]['value']['#description'] = t('This title is automatically generated based on the Volume Number. Example: @example', 
       ['@example' => $example]);
   }
+
+  // Target the node edit forms for our article content types
+  if (in_array($form_id, ['node_how_ever_article_edit_form', 'node_how_ever_article_form',
+                          'node_how2_article_edit_form', 'node_how2_article_form'])) {
+    // Gray out volume and issue number fields
+    $form['field_volume_number']['widget'][0]['value']['#disabled'] = TRUE;
+    $form['field_issue_number']['widget'][0]['value']['#disabled'] = TRUE;
+    
+    // Add helpful descriptions
+    $form['field_volume_number']['widget'][0]['value']['#description'] = t('This will be set automatically from the referenced issue on save.');
+    $form['field_issue_number']['widget'][0]['value']['#description'] = t('This will be set automatically from the referenced issue on save.');
+  }
   
   // Target the node edit forms for our issue content types
   if (in_array($form_id, ['node_journal_issue_edit_form', 'node_journal_issue_form', 
                           'node_how2_issue_edit_form', 'node_how2_issue_form'])) {
+    
+    // Gray out volume number field since it's auto-populated from volume reference
+    $form['field_volume_number']['widget'][0]['value']['#disabled'] = TRUE;
+    $form['field_volume_number']['widget'][0]['value']['#description'] = t('This will be set automatically from the referenced volume on save.');
     
     // Get content type name for the message
     $example = '';
@@ -136,6 +152,20 @@ function however_customizations_entity_presave(Drupal\Core\Entity\EntityInterfac
       'reference_field' => 'field_volume_reference',
       'number_field' => 'field_volume_number',
     ],
+    'how_ever_article' => [
+      'reference_field' => 'field_issue_reference', // references an issue
+      'copy_fields' => [
+        'field_volume_number' => 'field_volume_number',
+        'field_issue_number' => 'field_issue_number',
+      ],
+    ],
+    'how2_article' => [
+      'reference_field' => 'field_issue_reference', // references an issue
+      'copy_fields' => [
+        'field_volume_number' => 'field_volume_number',
+        'field_issue_number' => 'field_issue_number',
+      ],
+    ],
   ];
     
   // Check if this is one of our target content types
@@ -145,19 +175,31 @@ function however_customizations_entity_presave(Drupal\Core\Entity\EntityInterfac
     // Check if reference field has a value
     if (!$entity->{$mapping['reference_field']}->isEmpty()) {
       
-      // Get the referenced volume entity
-      $volume_reference = $entity->{$mapping['reference_field']}->entity;
+      // Get the referenced entity
+      $referenced_entity = $entity->{$mapping['reference_field']}->entity;
       
-      if ($volume_reference) {
-        // Assuming the volume entity has a field called 'field_volume_number'
-        if ($volume_reference->hasField('field_volume_number') && 
-            !$volume_reference->field_volume_number->isEmpty()) {
-          
-          // Get the volume number from the referenced entity
-          $volume_number = $volume_reference->field_volume_number->value;
-          
-          // Set the volume number on the current entity
-          $entity->{$mapping['number_field']}->value = $volume_number;
+      if ($referenced_entity) {
+        
+        // Handle single field copy (existing issues → volumes)
+        if (isset($mapping['number_field'])) {
+          if ($referenced_entity->hasField('field_volume_number') && 
+              !$referenced_entity->field_volume_number->isEmpty()) {
+            
+            $volume_number = $referenced_entity->field_volume_number->value;
+            $entity->{$mapping['number_field']}->value = $volume_number;
+          }
+        }
+        
+        // Handle multiple field copy (new articles → issues)
+        if (isset($mapping['copy_fields'])) {
+          foreach ($mapping['copy_fields'] as $source_field => $target_field) {
+            if ($referenced_entity->hasField($source_field) && 
+                !$referenced_entity->{$source_field}->isEmpty()) {
+              
+              $field_value = $referenced_entity->{$source_field}->value;
+              $entity->{$target_field}->value = $field_value;
+            }
+          }
         }
       }
     }

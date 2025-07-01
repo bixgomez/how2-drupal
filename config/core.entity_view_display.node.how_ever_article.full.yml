@@ -1,9 +1,9 @@
-uuid: 6257de33-9b17-4a2c-b5a5-648a37b3d705
+uuid: cf37d518-bd90-49d1-9e80-ceddd688091b
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_form_mode.node.inline_article_form
+    - core.entity_view_mode.node.full
     - field.field.node.how_ever_article.body
     - field.field.node.how_ever_article.field_archive_url
     - field.field.node.how_ever_article.field_body_sections
@@ -21,77 +21,40 @@ dependencies:
     - field.field.node.how_ever_article.field_working_notes
     - node.type.how_ever_article
   module:
-    - link
-    - path
-id: node.how_ever_article.inline_article_form
+    - user
+id: node.how_ever_article.full
 targetEntityType: node
 bundle: how_ever_article
-mode: inline_article_form
+mode: full
 content:
-  created:
-    type: datetime_timestamp
-    weight: 10
+  field_issue_number:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 4
     region: content
+  field_volume_number:
+    type: number_integer
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
     settings: {  }
     third_party_settings: {  }
-  field_archive_url:
-    type: link_default
-    weight: 2
+    weight: 100
     region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-  path:
-    type: path
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  promote:
-    type: boolean_checkbox
-    weight: 15
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  status:
-    type: boolean_checkbox
-    weight: 120
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  sticky:
-    type: boolean_checkbox
-    weight: 16
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  title:
-    type: string_textfield
-    weight: -5
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  uid:
-    type: entity_reference_autocomplete
-    weight: 5
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
 hidden:
   body: true
+  field_archive_url: true
   field_body_sections: true
   field_hide_the_node_title: true
-  field_issue_number: true
   field_issue_reference: true
   field_journal_page_images_media: true
   field_media_type: true
@@ -99,6 +62,7 @@ hidden:
   field_section_reference: true
   field_tags: true
   field_title_display: true
-  field_volume_number: true
   field_volume_reference: true
   field_working_notes: true
+  footnotes_group: true
+  search_api_excerpt: true

@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.how_ever_article.field_archive_url
     - field.field.node.how_ever_article.field_body_sections
     - field.field.node.how_ever_article.field_hide_the_node_title
+    - field.field.node.how_ever_article.field_issue_number
     - field.field.node.how_ever_article.field_issue_reference
     - field.field.node.how_ever_article.field_journal_page_images_media
     - field.field.node.how_ever_article.field_media_type
@@ -15,6 +16,7 @@ dependencies:
     - field.field.node.how_ever_article.field_section_reference
     - field.field.node.how_ever_article.field_tags
     - field.field.node.how_ever_article.field_title_display
+    - field.field.node.how_ever_article.field_volume_number
     - field.field.node.how_ever_article.field_volume_reference
     - field.field.node.how_ever_article.field_working_notes
     - node.type.how_ever_article
@@ -27,6 +29,15 @@ targetEntityType: node
 bundle: how_ever_article
 mode: teaser
 content:
+  field_issue_number:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
   field_person_bio:
     type: entity_reference_revisions_entity_view
     label: hidden
@@ -40,6 +51,15 @@ content:
     type: text_default
     label: hidden
     settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_volume_number:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
     third_party_settings: {  }
     weight: 0
     region: content
