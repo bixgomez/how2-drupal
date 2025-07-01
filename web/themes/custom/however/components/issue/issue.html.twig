@@ -1,3 +1,6 @@
+{% set volume_url = journal_url ~ '/v' ~ volume_num %}
+{% set issue_url = volume_url ~ '/n' ~ issue_num %}
+
 <article class="issue page-sections">
 
 	<div class="content">
@@ -9,7 +12,7 @@
 
 			<div class="issue-title">
 				{{ title_prefix }}
-				<h1>{{ journal }}	Vol. {{volume}},No. {{issue}} ({{ date }})</h1>
+				<h1>{{ journal }}	Vol. {{volume_num}},No. {{issue_num}} ({{ date }})</h1>
 				{{ title_suffix }}
 
 				{# Issue navigation #}
@@ -33,13 +36,14 @@
 					</div>
 				{% endif %}
 
-
 				<div class="content-section content-section--sm">
 					{% include "@issue-meta/issue-meta.html.twig" with {
 						journal_name: journal,
 						journal_url: journal_url,
-						volume: volume,
-						issue: issue,
+						volume_url: volume_url,
+						issue_url: issue_url,
+						volume_num: volume_num,
+						issue_num: issue_num,
 						volume_issue: volume_issue,
 						issue_pub_date: date,
 						archive_url: archive_url[0]['#url'].toString(),
@@ -47,7 +51,8 @@
 						pdf_url: pdf_url,
 						masthead: '#masthead',
 						person_bio_link: '#people',
-						page_facsimiles: '#page-facsimiles',
+						page_facsimiles: page_facsimiles,
+						hide_issue_toc: true
 					} %}
 				</div>
 			</div>

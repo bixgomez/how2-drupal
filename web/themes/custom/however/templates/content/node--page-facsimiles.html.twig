@@ -1,3 +1,9 @@
 <h1>{{ label }}</h1>
 
+{{ dump(node.field_volume_reference) }}
+{{ dump(node.field_issue_reference) }}
+
+{{ dump(node.field_volume_number) }}
+{{ dump(node.field_issue_number) }}
+
 {{ node.field_issue_reference.entity.field_journal_page_images_media|view }}
