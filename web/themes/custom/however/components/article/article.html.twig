@@ -82,13 +82,13 @@
 		{# {{ dump(content_body_sections) }} #}
 
 		{% for key, item in content_body_sections %}
-    {% if key is same as(0) or key is same as(1) %}
+    	{% if key is same as(0) or key is same as(1) %}
         {% set paragraph = item['#paragraph'] %}
         <div id="section-{{ loop.index }}" class="content-section content-section--lg">
             {{ drupal_entity('paragraph', paragraph.id.value) }}
         </div>
-    {% endif %}
-{% endfor %}
+    	{% endif %}
+		{% endfor %}
 
 		{# {% for key, item in node_body_sections %}
 			{% if key is same as(0) or key is same as(1) %}

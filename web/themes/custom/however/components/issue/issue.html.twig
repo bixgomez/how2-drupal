@@ -43,7 +43,6 @@
 						volume_issue: volume_issue,
 						issue_pub_date: date,
 						archive_url: archive_url[0]['#url'].toString(),
-						masthead: masthead,
 						person_bio: person_bio,
 						pdf_url: pdf_url,
 						masthead: '#masthead',
@@ -55,20 +54,20 @@
 		</div>
 
 		{# 
-				{% if sections_old %}
-					<div class="page-section sections">
-						<h3 class="dev-heading">Sections (old)</h3>
-						<p class="dev-text">
-							These are the "old" sections -- they only allow for sections to be added to them. We need to replace all of these with the "new" sections below, which allow not only for sections, but also for articles to be added directly.
-						</p>
-						<div class="issue-sections">
-							{% for section in sections_old %}
-								{{ drupal_entity('node', section.id(), 'teaser_card') }}
-							{% endfor %}
-						</div>
-					</div>
-				{% endif %}
-				#}
+		{% if sections_old %}
+			<div class="page-section sections">
+				<h3 class="dev-heading">Sections (old)</h3>
+				<p class="dev-text">
+					These are the "old" sections -- they only allow for sections to be added to them. We need to replace all of these with the "new" sections below, which allow not only for sections, but also for articles to be added directly.
+				</p>
+				<div class="issue-sections">
+					{% for section in sections_old %}
+						{{ drupal_entity('node', section.id(), 'teaser_card') }}
+					{% endfor %}
+				</div>
+			</div>
+		{% endif %}
+		#}
 
 		{% if sections_new %}
 			<div class="content-section content-section--lg sections">
@@ -79,17 +78,6 @@
 					{% for section in sections_new %}
 						{{ drupal_entity('node', section.id(), 'teaser_card') }}
 					{% endfor %}
-				</div>
-			</div>
-		{% endif %}
-
-		{% if masthead %}
-			<div class="content-section content-section--lg issue-masthead" id="masthead">
-				<p class="dev-text">
-					<b>Masthead</b>: In the current version of the site, the masthead is displayed in a modal popup window. Do we want to continue to do this?  It seems like important information we might want to always display on the page somewhere.  In a sidebar, perhaps?
-				</p>
-				<div class="masthead">
-					{{ masthead|raw }}
 				</div>
 			</div>
 		{% endif %}
