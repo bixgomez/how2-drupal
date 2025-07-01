@@ -43,6 +43,20 @@ class HoweverCustomizationsCommands extends DrushCommands {
           'field_issue_number' => 'field_issue_number',
         ],
       ],
+      'how_ever_section' => [
+        'reference_field' => 'field_issue_reference',
+        'copy_fields' => [
+          'field_volume_number' => 'field_volume_number',
+          'field_issue_number' => 'field_issue_number',
+        ],
+      ],
+      'how2_section' => [
+        'reference_field' => 'field_issue_reference',
+        'copy_fields' => [
+          'field_volume_number' => 'field_volume_number',
+          'field_issue_number' => 'field_issue_number',
+        ],
+      ],
     ];
     
     $total_updated = 0;
@@ -87,7 +101,7 @@ class HoweverCustomizationsCommands extends DrushCommands {
                 }
               }
               
-              // Handle multiple field copy (articles → issues)
+              // Handle multiple field copy (articles & sections → issues)
               if (isset($mapping['copy_fields'])) {
                 foreach ($mapping['copy_fields'] as $source_field => $target_field) {
                   if ($referenced_entity->hasField($source_field) && 
