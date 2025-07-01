@@ -226,6 +226,88 @@ class HoweverCustomizationsCommands extends DrushCommands {
   }
 
   /**
+   * Creates masthead articles from journal issues.
+   *
+   * @command however-customizations:create-masthead-articles
+   * @aliases how-masthead
+   */
+  public function createMastheadArticles() {
+    $this->output()->writeln('Creating masthead articles from journal issues...');
+    
+    $total_created = 0;
+    
+    // Load all journal_issue nodes that have masthead content
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'journal_issue')
+      ->exists('field_masthead')
+      ->accessCheck(FALSE);
+    $nids = $query->execute();
+    
+    $this->output()->writeln("Found " . count($nids) . " journal_issue nodes with masthead content.");
+    
+    if (!empty($nids)) {
+      // Process in batches
+      $chunks = array_chunk($nids, 50, TRUE);
+      
+      foreach ($chunks as $chunk) {
+        $issues = Node::loadMultiple($chunk);
+        
+        foreach ($issues as $issue) {
+          // Skip if masthead field is empty
+          if ($issue->get('field_masthead')->isEmpty()) {
+            continue;
+          }
+          
+          // Check if masthead article already exists for this issue
+          $existing_query = \Drupal::entityQuery('node')
+            ->condition('type', 'how_ever_article')
+            ->condition('field_issue_reference', $issue->id())
+            ->condition('title', 'Masthead')
+            ->accessCheck(FALSE);
+          $existing = $existing_query->execute();
+          
+          if (!empty($existing)) {
+            $this->output()->writeln("Masthead article already exists for {$issue->getTitle()}");
+            continue;
+          }
+          
+          // Get masthead content
+          $masthead_content = $issue->get('field_masthead')->value;
+          $masthead_format = $issue->get('field_masthead')->format;
+          
+          // Get volume reference from the issue
+          $volume_reference = null;
+          if (!$issue->get('field_volume_reference')->isEmpty()) {
+            $volume_reference = $issue->get('field_volume_reference')->target_id;
+          }
+          
+          $this->output()->writeln("Creating masthead article for {$issue->getTitle()}");
+          
+          // Create the masthead article
+          $masthead_article = Node::create([
+            'type' => 'how_ever_article',
+            'title' => 'Masthead',
+            'field_issue_reference' => $issue->id(),
+            'field_volume_reference' => $volume_reference,
+            'body' => [
+              'value' => $masthead_content,
+              'format' => $masthead_format ?: 'basic_html',
+            ],
+            'status' => 1, // Published
+          ]);
+          
+          $masthead_article->save();
+          $total_created++;
+          
+          $this->output()->writeln("✓ Created masthead article for {$issue->getTitle()}");
+        }
+      }
+    }
+    
+    $this->output()->writeln("Masthead creation complete. Created {$total_created} articles total.");
+  }
+
+  /**
    * Creates page facsimiles nodes for all existing issues.
    *
    * @command however-customizations:create-page-facsimiles
