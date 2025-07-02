@@ -1,9 +1,11 @@
 <h1>{{ label }}</h1>
 
-{{ dump(node.field_volume_reference) }}
-{{ dump(node.field_issue_reference) }}
+<h2>Todo:</h2>
+<p>
+  Make a component for this!
+</p>
 
-{{ dump(node.field_volume_number) }}
-{{ dump(node.field_issue_number) }}
+{{ dump(node.field_volume_number.value) }}
+{{ dump(node.field_issue_number.value) }}
 
 {{ node.field_issue_reference.entity.field_journal_page_images_media|view }}

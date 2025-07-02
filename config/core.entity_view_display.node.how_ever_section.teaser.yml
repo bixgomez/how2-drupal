@@ -1,6 +1,6 @@
 uuid: ecad5641-b01d-43e2-8996-65f21d3d6326
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser

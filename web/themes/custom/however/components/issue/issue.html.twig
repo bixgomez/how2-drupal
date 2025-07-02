@@ -87,7 +87,7 @@
 			</div>
 		{% endif %}
 
-		{% if page_facsimiles %}
+		{# {% if page_facsimiles %}
 			<div class="content-section content-section--lg page-facsimiles" id="page-facsimiles">
 				<h2>Page Facsimiles</h2>
 				<p>
@@ -95,13 +95,14 @@
 				</p>
 				{{ page_facsimiles }}
 			</div>
-		{% endif %}
+		{% endif %} #}
 
 		{% if person_bio %}
 			<div class="content-section content-section--lg people" id="people">
 				<h3 class="dev-heading">Person Bio (?)</h3>
 				<p class="dev-text">
-					I noticed that each issue has a field that holds all the people associated with it, along with their bios.  Do we want to use this for anything, or display it anywhere?
+					I noticed that each issue has a field that holds all the people associated with it, along with their bios.  
+					Do we want to use this for anything, or display it anywhere?
 				</p>
 				<div class="person-bio">
 					{% for paragraph in person_bio %}

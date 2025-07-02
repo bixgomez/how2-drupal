@@ -36,6 +36,13 @@ targetEntityType: node
 bundle: how_ever_section
 mode: teaser_card
 content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
   field_image_caption:
     type: entity_reference_revisions_entity_view
     label: hidden
@@ -45,55 +52,40 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_issue_reference:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 3
-    region: content
   field_subtitle:
     type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_teaser_text:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
   field_title_display:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 0
-    region: content
-  field_volume_reference:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
 hidden:
-  body: true
   field_archive_url: true
   field_how_ever_piece: true
   field_issue_number: true
+  field_issue_reference: true
   field_journal_page_images_media: true
   field_links_section_title: true
   field_person_bio: true
   field_show_full_section_page: true
   field_tags: true
   field_volume_number: true
+  field_volume_reference: true
   field_working_notes: true
   footnotes_group: true
   links: true

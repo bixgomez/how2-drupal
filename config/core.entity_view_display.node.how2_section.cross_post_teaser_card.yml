@@ -1,6 +1,6 @@
 uuid: 3f893aaa-64ed-4a9e-8d26-58ce09c8e424
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.cross_post_teaser_card

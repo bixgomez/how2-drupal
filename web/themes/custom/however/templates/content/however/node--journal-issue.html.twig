@@ -1,19 +1,10 @@
-{% set sections_old_entities = [] %}
-{% if content.field_section[0] is defined %}
-	{% for item in node.field_section %}
-		{% if item.entity %}
-			{% set sections_old_entities = sections_old_entities|merge([item.entity]) %}
-		{% endif %}
-	{% endfor %}
-{% endif %}
-
 {% set sections_new_entities = [] %}
 {% if content.field_sections_however[0] is defined %}
-	{% for item in node.field_sections_however %}
-		{% if item.entity %}
-			{% set sections_new_entities = sections_new_entities|merge([item.entity]) %}
-		{% endif %}
-	{% endfor %}
+  {% for item in node.field_sections_however %}
+    {% if item.entity and item.entity.id() != node.id() %}
+      {% set sections_new_entities = sections_new_entities|merge([item.entity]) %}
+    {% endif %}
+  {% endfor %}
 {% endif %}
 
 {% set person_bio_entities = [] %}
@@ -38,7 +29,6 @@
   featured_image: content.field_cover_thumbnail,
   masthead: content.field_masthead.0['#text'],
   short_description: node.field_short_description,
-  sections_old: sections_old_entities,
   sections_new: sections_new_entities,
   person_bio: person_bio_entities,
   page_facsimiles: content.field_journal_page_images_media,

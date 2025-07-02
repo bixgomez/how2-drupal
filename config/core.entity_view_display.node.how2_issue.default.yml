@@ -34,7 +34,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 12
+    weight: 11
     region: content
   field_archive_url:
     type: link
@@ -59,15 +59,6 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_how_2_sections:
-    type: entity_reference_entity_view
-    label: hidden
-    settings:
-      view_mode: teaser_card
-      link: false
-    third_party_settings: {  }
-    weight: 7
-    region: content
   field_issue_number:
     type: number_integer
     label: hidden
@@ -84,7 +75,7 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 9
+    weight: 8
     region: content
   field_journal_pdf:
     type: entity_reference_entity_view
@@ -100,7 +91,7 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 10
+    weight: 9
     region: content
   field_person_bio:
     type: entity_reference_revisions_entity_view
@@ -109,7 +100,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 11
+    weight: 10
     region: content
   field_publication_date_display:
     type: string
@@ -126,7 +117,7 @@ content:
       view_mode: teaser_card
       link: false
     third_party_settings: {  }
-    weight: 8
+    weight: 7
     region: content
   field_short_description:
     type: string
@@ -146,6 +137,7 @@ content:
     weight: 5
     region: content
 hidden:
+  field_how_2_sections: true
   field_volume_reference: true
   footnotes_group: true
   links: true
