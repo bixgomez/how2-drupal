@@ -266,6 +266,17 @@ function however_customizations_preprocess_node(&$variables) {
       'next' => $navigation['next'],
     ];
   }
+
+  // For page_facsimiles content type
+  if ($node->bundle() === 'page_facsimiles') {
+    // Check the referenced issue to determine journal
+    if ($node->hasField('field_issue_reference') && !$node->get('field_issue_reference')->isEmpty()) {
+      $issue = $node->get('field_issue_reference')->entity;
+      if ($issue) {
+        $variables['journal_machine_name'] = ($issue->bundle() === 'journal_issue') ? 'however' : 'how2';
+      }
+    }
+  }
 }
 
 /**

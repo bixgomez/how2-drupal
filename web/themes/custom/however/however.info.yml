@@ -27,6 +27,7 @@ components:
     person-bio-card: components/person-bio-card
     body-section: components/body-section
     toc: components/toc
+    page-facsimiles: components/page-facsimiles
 
 regions:
   branding: 'Branding'

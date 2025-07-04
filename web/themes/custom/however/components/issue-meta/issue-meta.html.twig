@@ -8,7 +8,7 @@
 			</div>
 		{% endif %}
 
-		{% if volume_issue %}
+		{% if volume_num and issue_num %}
 			<div class="issue-volume-number">
 				Vol. {{volume_num}}, No. {{issue_num}}
 			</div>
@@ -22,49 +22,39 @@
 
 	</div>
 
-	{% set has_second_row_content = 
-		page_facsimiles['#items'] or 
-		(issue_url|render|trim is not empty and not hide_issue_toc) or
-		archive_url|render|trim is not empty or
-		pdf_url|render|trim is not empty or
-		section_links
-	%}
+	<div class="row row-second">
 
-	{% if has_second_row_content %}
-		<div class="row row-second">
+		{% if page_facsimiles['#items'] %}
+			<div class="page-facsimiles">
+				<a href="{{ issue_url }}/page-facsimiles">Page Facsimiles</a>
+			</div>
+		{% endif %}
 
-			{% if page_facsimiles['#items'] %}
-				<div class="page-facsimiles">
-					<a href="{{ issue_url }}/page-facsimiles">Page Facsimiles</a>
+		{% if issue_url|render|trim is not empty and not hide_issue_toc %}
+			<div class="issue-url">
+				<a href="{{ issue_url }}">Issue TOC</a>
+			</div>
+		{% endif %}
+
+		{% if archive_url|render|trim is not empty %}
+			<div class="archive-url">
+				<a href="{{ archive_url }}">html archive</a>
+			</div>
+		{% endif %}
+
+		{% if pdf_url|render|trim is not empty %}
+			<div class="pdf-url">
+				<a href="{{ pdf_url }}">Download PDF</a>
+			</div>
+		{% endif %}
+
+		{% if section_links %}
+			{% for section_link in section_links %}
+				<div class="section-link">
+					> <a href="{{ section_link.url }}">{{ section_link.title }}</a>
 				</div>
-			{% endif %}
+			{% endfor %}
+		{% endif %}
 
-			{% if issue_url|render|trim is not empty and not hide_issue_toc %}
-				<div class="issue-url">
-					<a href="{{ issue_url }}">Issue TOC</a>
-				</div>
-			{% endif %}
-
-			{% if archive_url|render|trim is not empty %}
-				<div class="archive-url">
-					<a href="{{ archive_url }}">html archive</a>
-				</div>
-			{% endif %}
-
-			{% if pdf_url|render|trim is not empty %}
-				<div class="pdf-url">
-					<a href="{{ pdf_url }}">Download PDF</a>
-				</div>
-			{% endif %}
-
-			{% if section_links %}
-				{% for section_link in section_links %}
-					<div class="section-link">
-						> <a href="{{ section_link.url }}">{{ section_link.title }}</a>
-					</div>
-				{% endfor %}
-			{% endif %}
-
-		</div>
-	{% endif %}
+	</div>
 </div>

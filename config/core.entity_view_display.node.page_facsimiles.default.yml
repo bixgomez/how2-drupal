@@ -19,7 +19,7 @@ mode: default
 content:
   field_issue_number:
     type: number_integer
-    label: inline
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -36,14 +36,14 @@ content:
     region: content
   field_journal_name:
     type: list_default
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content
   field_volume_number:
     type: number_integer
-    label: inline
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
