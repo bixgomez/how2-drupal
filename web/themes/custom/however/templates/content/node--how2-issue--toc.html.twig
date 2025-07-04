@@ -1,5 +1,11 @@
+{% set pdf_url = file_url(content.field_journal_pdf['#items'].entity.field_media_document.entity.uri.value) %}
+{% set has_page_facsimiles = content.field_journal_page_images_media.0['#plain_text'] is defined %}
+
 {% include "@toc/toc-issue.html.twig" with {
   volume_num: content.field_volume_number.0['#markup'],
   issue_num: content.field_issue_number.0['#markup'],
   date: content.field_publication_date_display.0['#context'].value,
+  title_display: content.field_short_description.0['#context'].value,
+  has_page_facsimiles: has_page_facsimiles,
+  pdf_url: pdf_url,
 } %}

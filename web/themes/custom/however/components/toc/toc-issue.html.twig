@@ -1,5 +1,17 @@
 <li class="toc-issue">
-<a href="{{ url }}" class="toc-issue-title" rel="bookmark">
-Vol. {{ volume_num }} No. {{ issue_num }} ({{date}})
-</a>
+  <span class="toc-issue-title">
+    Vol. {{ volume_num }} No. {{ issue_num }} ({{date}})
+  </span>
+
+  <a href="{{ url }}" class="toc-issue-link" rel="bookmark">
+    Web Version
+  </a>
+
+  {% if has_page_facsimiles %}
+    <a href="{{ url }}/page-facsimiles" class="toc-issue-link">Page Facsimiles</a>
+  {% endif %}
+
+  {% if pdf_url %}
+    <a href="{{ pdf_url }}" class="toc-issue-link" download target="_blank">Download PDF</a>
+  {% endif %}
 </li>

@@ -10,14 +10,14 @@ ul.toc-issues {
   @apply list-none mt-2 mb-4 ml-4 space-y-1;
 }
 
-li.issue-item {
-  @apply text-sm;
+li.toc-issue > * {
+  @apply text-lg mb-1 mr-2;
 }
 
 .toc-volume-title {
   @apply text-xl font-bold mb-2 no-underline hover:underline;
 }
 
-.toc-issue-title {
-  @apply text-lg mb-1 no-underline hover:underline;
+.toc-issue-link {
+  @apply no-underline hover:underline;
 }

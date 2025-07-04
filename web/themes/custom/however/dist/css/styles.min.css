@@ -2216,9 +2216,11 @@ ul.toc-issues {
     margin-block-end: calc(calc(var(--spacing) * 1) * calc(1 - var(--tw-space-y-reverse)));
   }
 }
-li.issue-item {
-  font-size: var(--text-sm);
-  line-height: var(--tw-leading, var(--text-sm--line-height));
+li.toc-issue > * {
+  margin-right: calc(var(--spacing) * 2);
+  margin-bottom: calc(var(--spacing) * 1);
+  font-size: var(--text-lg);
+  line-height: var(--tw-leading, var(--text-lg--line-height));
 }
 .toc-volume-title {
   margin-bottom: calc(var(--spacing) * 2);
@@ -2233,10 +2235,7 @@ li.issue-item {
     }
   }
 }
-.toc-issue-title {
-  margin-bottom: calc(var(--spacing) * 1);
-  font-size: var(--text-lg);
-  line-height: var(--tw-leading, var(--text-lg--line-height));
+.toc-issue-link {
   text-decoration-line: none;
   &:hover {
     @media (hover: hover) {
