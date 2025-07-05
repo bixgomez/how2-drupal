@@ -12,27 +12,33 @@
 
 			<div class="issue-title">
 				{{ title_prefix }}
-				<h1>{{ journal }}	Vol. {{volume_num}}, No. {{issue_num}} ({{ date }})</h1>
+
+        {% if title_display %}
+				  <h1>{{ title_display }}</h1>
+				{% else %}
+  				<h1>{{ journal }}	Vol. {{volume_num}}, No. {{issue_num}} ({{ date }})</h1>
+				{% endif %}
+				
 				{{ title_suffix }}
 
 				{# Issue navigation #}
 				{% if issue_navigation.prev or issue_navigation.next %}
 					<div class="flex justify-between my-3">
-						{% if issue_navigation.prev %}
-							<div class="w-1/2 flex justify-start">
+						<div class="w-1/2 flex justify-start">
+						  {% if issue_navigation.prev %}
 								<a href="{{ path('entity.node.canonical', {'node': issue_navigation.prev.id}) }}" class="button button--primary button--small">
 									{{ issue_navigation.prev.label }}
 								</a>
-							</div>
-						{% endif %}
+						  {% endif %}
+						</div>
 
-						{% if issue_navigation.next %}
-							<div class="w-1/2 flex justify-end">
+						<div class="w-1/2 flex justify-end">
+						  {% if issue_navigation.next %}
 								<a href="{{ path('entity.node.canonical', {'node': issue_navigation.next.id}) }}" class="button button--primary button--small">
 									{{ issue_navigation.next.label }}
 								</a>
-							</div>
-						{% endif %}
+						  {% endif %}
+						</div>
 					</div>
 				{% endif %}
 
@@ -76,9 +82,9 @@
 
 		{% if sections_new %}
 			<div class="content-section content-section--lg sections">
-				<p class="dev-text">
+				{# <p class="dev-text">
 					<b>Sections (new)</b>: These are the "new" sections -- they allow not only for sections, but also for articles to be added directly. Alas, the only "easy" way to migrate the sections to this new area is to do it manually.  We can start this process soon.
-				</p>
+				</p> #}
 				<div class="issue-sections">
 					{% for section in sections_new %}
 						{{ drupal_entity('node', section.id(), 'teaser_card') }}
@@ -97,7 +103,7 @@
 			</div>
 		{% endif %} #}
 
-		{% if person_bio %}
+		{# {% if person_bio %}
 			<div class="content-section content-section--lg people" id="people">
 				<h3 class="dev-heading">Person Bio (?)</h3>
 				<p class="dev-text">
@@ -110,6 +116,6 @@
 					{% endfor %}
 				</div>
 			</div>
-		{% endif %}
+		{% endif %} #}
 	</div>
 </article>

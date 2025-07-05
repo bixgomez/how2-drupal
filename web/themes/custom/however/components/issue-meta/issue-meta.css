@@ -1,7 +1,6 @@
 .issue-meta {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   font-weight: 700;
   justify-content: flex-start;
   padding: 0;
@@ -21,6 +20,10 @@
     > div {
       width: min-content;
       white-space: nowrap;
+    }
+
+    &.row-second > div {
+      margin-top: .5rem;
     }
   }
 }

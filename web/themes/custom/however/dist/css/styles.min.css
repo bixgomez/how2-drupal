@@ -2197,33 +2197,39 @@ input[type="tel"]::placeholder {
 .block-inline-blockcontent-carousel .field--name-field-content-embed .field__item.slick-slide {
   margin-inline: 15px;
 }
-ul.toc-volumes {
+table.toc-volumes {
   list-style-type: none;
   :where(& > :not(:last-child)) {
     --tw-space-y-reverse: 0;
     margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
     margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
   }
-}
-ul.toc-issues {
-  margin-top: calc(var(--spacing) * 2);
-  margin-bottom: calc(var(--spacing) * 4);
-  margin-left: calc(var(--spacing) * 4);
-  list-style-type: none;
-  :where(& > :not(:last-child)) {
-    --tw-space-y-reverse: 0;
-    margin-block-start: calc(calc(var(--spacing) * 1) * var(--tw-space-y-reverse));
-    margin-block-end: calc(calc(var(--spacing) * 1) * calc(1 - var(--tw-space-y-reverse)));
+  background-color: transparent;
+  border: 0;
+  margin: 0 auto;
+  tr, td {
+    background-color: transparent;
+    border: 0;
   }
 }
-li.toc-issue > * {
-  margin-right: calc(var(--spacing) * 2);
-  margin-bottom: calc(var(--spacing) * 1);
-  font-size: var(--text-lg);
-  line-height: var(--tw-leading, var(--text-lg--line-height));
+tr.toc-issue {
+  td {
+    padding-right: calc(var(--spacing) * 2);
+    padding-bottom: calc(var(--spacing) * 2);
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
+    span, a {
+      display: block;
+    }
+  }
+  span.toc-issue-title {
+    padding-right: calc(var(--spacing) * 3);
+    padding-left: calc(var(--spacing) * 4);
+  }
 }
-.toc-volume-title {
-  margin-bottom: calc(var(--spacing) * 2);
+a.toc-volume-title {
+  padding-top: calc(var(--spacing) * 3);
+  padding-bottom: calc(var(--spacing) * 2);
   font-size: var(--text-xl);
   line-height: var(--tw-leading, var(--text-xl--line-height));
   --tw-font-weight: var(--font-weight-bold);
@@ -2234,6 +2240,7 @@ li.toc-issue > * {
       text-decoration-line: underline;
     }
   }
+  display: block;
 }
 .toc-issue-link {
   text-decoration-line: none;
@@ -2484,7 +2491,6 @@ h3.section-teaser-subtitle {
 .issue-meta {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   font-weight: 700;
   justify-content: flex-start;
   padding: 0;
@@ -2502,6 +2508,9 @@ h3.section-teaser-subtitle {
     > div {
       width: min-content;
       white-space: nowrap;
+    }
+    &.row-second > div {
+      margin-top: .5rem;
     }
   }
 }
