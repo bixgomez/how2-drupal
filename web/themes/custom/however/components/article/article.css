@@ -7,3 +7,10 @@
     @apply text-2xl font-bold m-0 mb-4;
   }
 }
+
+.body-section-links a {
+
+    @apply text-lg font-bold my-3;
+
+
+}

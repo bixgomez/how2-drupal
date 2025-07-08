@@ -14,15 +14,22 @@
 		{{ title_suffix }}
 	{% endif %}
 
+	{{ dump(subtitle) }}
+	{{ dump(teaser_text) }}
+	{{ dump(body) }}
+
 	{% if subtitle %}
+		SUBTITLE!<br>
 		<h3 class="teaser-card-subtitle section-teaser-subtitle">{{ subtitle }}</h3>
 	{% endif %}
 
 	{% if teaser_text %}
+		TEASER TEXT!<br>
 		{{ teaser_text }}
 	{% endif %}
 
 	{% if body %}
+		BODY!<br>
 		{{ body }}
 	{% endif %}
 

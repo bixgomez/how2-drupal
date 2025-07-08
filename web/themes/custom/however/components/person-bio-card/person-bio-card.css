@@ -5,6 +5,8 @@
   border-bottom: 0;
   display: flex;
   gap: 1rem;
+  width: 100%;
+  container-type: inline-size;
 
   &:first-child {
     margin-top: 0;
@@ -15,8 +17,24 @@
   }
 
   .headshot {
+    display: block;
     margin: 0;
+    padding: 0;
+    width: 20cqi;
+    flex-shrink: 0;
+
+    img {
+      display: block;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: auto;
+    }
   }
+
+  .bio-content {
+    display: block;
+  }  
 
   .field--name-field-person {
     @apply text-2xl font-bold m-0;
@@ -32,8 +50,4 @@
   p {
     margin-top: .75rem;
   }
-
-  .bio-content {
-    flex-grow: 1;
-  }  
 }

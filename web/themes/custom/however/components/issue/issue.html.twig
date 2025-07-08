@@ -23,23 +23,12 @@
 
 				{# Issue navigation #}
 				{% if issue_navigation.prev or issue_navigation.next %}
-					<div class="flex justify-between my-3">
-						<div class="w-1/2 flex justify-start">
-						  {% if issue_navigation.prev %}
-								<a href="{{ path('entity.node.canonical', {'node': issue_navigation.prev.id}) }}" class="button button--primary button--small">
-									{{ issue_navigation.prev.label }}
-								</a>
-						  {% endif %}
-						</div>
-
-						<div class="w-1/2 flex justify-end">
-						  {% if issue_navigation.next %}
-								<a href="{{ path('entity.node.canonical', {'node': issue_navigation.next.id}) }}" class="button button--primary button--small">
-									{{ issue_navigation.next.label }}
-								</a>
-						  {% endif %}
-						</div>
-					</div>
+					{% include "@publication-pager/publication-pager.html.twig" with {
+						prev_link: issue_navigation.prev ? path('entity.node.canonical', {'node': issue_navigation.prev.id}) : null,
+						prev_text: issue_navigation.prev ? issue_navigation.prev.label : null,
+						next_link: issue_navigation.next ? path('entity.node.canonical', {'node': issue_navigation.next.id}) : null,
+						next_text: issue_navigation.next ? issue_navigation.next.label : null,
+					} %}
 				{% endif %}
 
 				<div class="content-section content-section--sm">

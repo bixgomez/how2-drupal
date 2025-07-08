@@ -44,7 +44,7 @@
 }
 
 .content {
-  @apply max-w-3xl mx-auto;
+  @apply w-full max-w-3xl mx-auto;
 }
 
 .content-section {

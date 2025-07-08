@@ -1,0 +1,19 @@
+  <div class="publication-pager my-3">
+    <div class="flex justify-between">
+      <div class="w-1/2 flex justify-start">
+        {% if prev_link is not empty %}
+          <a href="{{ prev_link }}" class="button button--primary button--small">
+            {{ prev_text }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="w-1/2 flex justify-end">
+        {% if next_link is not empty %}
+          <a href="{{ next_link }}" class="button button--primary button--small">
+            {{ next_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>

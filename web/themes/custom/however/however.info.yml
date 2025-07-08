@@ -28,6 +28,7 @@ components:
     body-section: components/body-section
     toc: components/toc
     page-facsimiles: components/page-facsimiles
+    publication-pager: components/publication-pager
 
 regions:
   branding: 'Branding'
