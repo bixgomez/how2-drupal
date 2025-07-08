@@ -11,6 +11,116 @@ use Drupal\node\Entity\Node;
 class HoweverCustomizationsCommands extends DrushCommands {
 
   /**
+   * Replaces old domain URLs with relative paths across all text fields.
+   *
+   * @command however-customizations:replace-urls
+   * @aliases how-urls
+   */
+  public function replaceUrls() {
+    $this->output()->writeln('Starting URL replacement...');
+    
+    $old_domain = 'https://howeverhow2archive.org/';
+    $new_path = '/';
+    $total_updated = 0;
+    
+    // First, handle paragraph entities (where most links live)
+    $this->output()->writeln('Processing paragraph entities...');
+    
+    $paragraph_query = \Drupal::entityQuery('paragraph')
+      ->accessCheck(FALSE);
+    $paragraph_ids = $paragraph_query->execute();
+    
+    if (!empty($paragraph_ids)) {
+      $this->output()->writeln('Found ' . count($paragraph_ids) . ' paragraph entities to check.');
+      
+      // Process in batches
+      $chunks = array_chunk($paragraph_ids, 50, TRUE);
+      
+      foreach ($chunks as $chunk) {
+        $paragraphs = \Drupal::entityTypeManager()
+          ->getStorage('paragraph')
+          ->loadMultiple($chunk);
+        
+        foreach ($paragraphs as $paragraph) {
+          $fields = $paragraph->getFields();
+          $paragraph_updated = FALSE;
+          
+          foreach ($fields as $field_name => $field) {
+            // Skip system fields
+            if (strpos($field_name, 'field_') !== 0) {
+              continue;
+            }
+            
+            $field_type = $field->getFieldDefinition()->getType();
+            if (in_array($field_type, ['text', 'text_long', 'text_with_summary'])) {
+              $field_value = $field->value;
+              
+              if ($field_value && strpos($field_value, $old_domain) !== FALSE) {
+                $new_value = str_replace($old_domain, $new_path, $field_value);
+                $paragraph->set($field_name, $new_value);
+                $paragraph_updated = TRUE;
+                
+                $this->output()->writeln("  Updated paragraph {$paragraph->id()}: {$field_name}");
+              }
+            }
+          }
+          
+          if ($paragraph_updated) {
+            $paragraph->save();
+            $total_updated++;
+          }
+        }
+      }
+    }
+    
+    // Then handle regular node fields
+    $this->output()->writeln('Processing node entities...');
+    
+    $field_storages = \Drupal::entityTypeManager()
+      ->getStorage('field_storage_config')
+      ->loadByProperties(['type' => ['text', 'text_long', 'text_with_summary']]);
+    
+    foreach ($field_storages as $field_storage) {
+      $field_name = $field_storage->getName();
+      $entity_type = $field_storage->getTargetEntityTypeId();
+      
+      // Only process node entities
+      if ($entity_type !== 'node') {
+        continue;
+      }
+      
+      // Load entities that contain the old domain
+      $query = \Drupal::entityQuery($entity_type)
+        ->condition($field_name, $old_domain, 'CONTAINS')
+        ->accessCheck(FALSE);
+      
+      $entity_ids = $query->execute();
+      
+      if (!empty($entity_ids)) {
+        $entities = \Drupal::entityTypeManager()
+          ->getStorage($entity_type)
+          ->loadMultiple($entity_ids);
+        
+        foreach ($entities as $entity) {
+          if ($entity->hasField($field_name)) {
+            $field_value = $entity->get($field_name)->value;
+            if (strpos($field_value, $old_domain) !== FALSE) {
+              $new_value = str_replace($old_domain, $new_path, $field_value);
+              $entity->set($field_name, $new_value);
+              $entity->save();
+              $total_updated++;
+              
+              $this->output()->writeln("  Updated {$entity_type} {$entity->id()}: {$field_name}");
+            }
+          }
+        }
+      }
+    }
+    
+    $this->output()->writeln("URL replacement complete. Updated {$total_updated} entities total.");
+  }
+
+  /**
    * Updates volume and issue numbers for all content types with auto-populated fields.
    *
    * @command however-customizations:update-volume-numbers
