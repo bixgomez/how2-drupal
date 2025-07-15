@@ -4,22 +4,24 @@
 		{{ image_caption }}
 	</div>
 
-	{% if title %}
-		{{ title_prefix }}
-		<h2 class="teaser-card-title item-teaser-title">
-			<span>
-				<a href="{{ url }}" rel="bookmark">{{ title }}</a>
-			</span>
-		</h2>
-		{{ title_suffix }}
-	{% endif %}
+	{% if title or subtitle %}
+		<div class="teaser-card-header">
+			{% if title %}
+				{{ title_prefix }}
+				<h2 class="teaser-card-title item-teaser-title">
+						<a href="{{ url }}" rel="bookmark">{{ title }}</a>
+				</h2>
+				{{ title_suffix }}
+			{% endif %}
 
-	{% if subtitle %}
-		<h3 class="teaser-card-subtitle item-teaser-subtitle">{{ subtitle }}</h3>
+			{% if subtitle %}
+				<h3 class="teaser-card-subtitle item-teaser-subtitle">{{ subtitle }}</h3>
+			{% endif %}
+		</div>
 	{% endif %}
 
 	{% if teaser_text %}
-		<div class="teaser-card-teaser-text">
+		<div class="teaser-card-body">
 			{{ teaser_text }}
 		</div>
 	{% endif %}

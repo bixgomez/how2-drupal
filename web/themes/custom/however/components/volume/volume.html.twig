@@ -12,9 +12,9 @@
 		{% if volume_navigation.prev or volume_navigation.next %}
 			{% include "@publication-pager/publication-pager.html.twig" with {
 				prev_link: volume_navigation.prev ? path('entity.node.canonical', {'node': volume_navigation.prev.id}) : null,
-				prev_text: volume_navigation.prev ? volume_navigation.prev.label : null,
+				prev_text: 'previous volume',
 				next_link: volume_navigation.next ? path('entity.node.canonical', {'node': volume_navigation.next.id}) : null,
-				next_text: volume_navigation.next ? volume_navigation.next.label : null,
+				next_text: 'next volume',
 			} %}
 		{% endif %}
 

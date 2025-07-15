@@ -25,9 +25,9 @@
 				{% if issue_navigation.prev or issue_navigation.next %}
 					{% include "@publication-pager/publication-pager.html.twig" with {
 						prev_link: issue_navigation.prev ? path('entity.node.canonical', {'node': issue_navigation.prev.id}) : null,
-						prev_text: issue_navigation.prev ? issue_navigation.prev.label : null,
+						prev_text: 'previous issue',
 						next_link: issue_navigation.next ? path('entity.node.canonical', {'node': issue_navigation.next.id}) : null,
-						next_text: issue_navigation.next ? issue_navigation.next.label : null,
+						next_text: 'next issue',
 					} %}
 				{% endif %}
 
