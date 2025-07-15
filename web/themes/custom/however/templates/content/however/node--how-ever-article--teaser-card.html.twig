@@ -1,18 +1,21 @@
 {%
   set classes = [
-    'section-teaser',
-    'section-teaser__article',
+    'item-teaser',
+    'item-teaser__article',
   ]
 %}
 
-{% include "@section-teaser/section-teaser.html.twig" with {
+{# Clean the fields before passing to component #}
+{% set clean_subtitle = content.field_subtitle['#items'] ? content.field_subtitle : false %}
+{% set clean_teaser = content.field_teaser_text['#items'] ? content.field_teaser_text : false %}
+
+{% include "@item-teaser/item-teaser.html.twig" with {
   title: label,
   title_display: content.field_title_display,
   url: url,
   title_prefix: title_prefix,
   title_suffix: title_suffix,
-  subtitle: content.field_subtitle,
-  body: content.body,
-  teaser_text: content.field_teaser_text,
+  subtitle: clean_subtitle,
+  teaser_text: clean_teaser,
   classes: classes,
 } %}

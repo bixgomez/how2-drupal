@@ -1,4 +1,4 @@
-.section-teaser {
+.item-teaser {
   box-sizing: border-box;
   font-size: 1rem;
   background-color: rgb(0 0 255 / 7.5%);
@@ -31,7 +31,7 @@
   }
 }
 
-.section-teaser__section {
+.item-teaser__section {
   background-color: rgb(255 165 0 / 10%);
 
   &:hover {
@@ -39,7 +39,7 @@
   }
 }
 
-.section-teaser__article {
+.item-teaser__article {
   background-color: rgb(128 0 128 / 10%);
 
   &:hover {
@@ -47,14 +47,14 @@
   }
 }
 
-h2.section-teaser-title {
+h2.item-teaser-title {
   @apply text-base;
   margin: 0 0 0.75em;
   padding: 0 0 0.75em;
   border-bottom: 1px solid rgb(0 0 0 / 25%);
 }
 
-h3.section-teaser-subtitle,
+h3.item-teaser-subtitle,
 h3.body-section-references-title {
   @apply text-base;
   margin: 0 0 0.25em;

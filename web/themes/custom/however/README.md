@@ -133,7 +133,7 @@ Each component lives in `components/[name]/` with:
 **Registered components in `however.info.yml`:**
 - `issue`
 - `volume` 
-- `section-teaser`
+- `item-teaser`
 - `publication-teaser`
 - `issues-grid`
 
@@ -191,11 +191,11 @@ This starts:
 
 ```
 however/
-├── components/              # Reusable UI components
+├── components/             # Reusable UI components
 │   ├── issue/              # Issue display component
 │   ├── issues-grid/        # Issues grid layout
 │   ├── publication-teaser/ # Publication preview cards
-│   ├── section-teaser/     # Section preview cards
+│   ├── item-teaser/        # Section/article preview cards
 │   └── volume/             # Volume display component
 ├── dist/                   # Built assets (auto-generated)
 │   ├── css/
@@ -205,11 +205,11 @@ however/
 │   ├── js/
 │   └── scss/
 ├── templates/              # Drupal template overrides
-│   ├── content/           # Node templates
-│   ├── field/             # Field templates
-│   ├── layout/            # Layout templates
-│   └── paragraph/         # Paragraph templates
-└── vendor/                # Third-party libraries
+│   ├── content/            # Node templates
+│   ├── field/              # Field templates
+│   ├── layout/             # Layout templates
+│   └── paragraph/          # Paragraph templates
+└── vendor/                 # Third-party libraries
 ```
 
 ## Customization

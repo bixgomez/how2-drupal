@@ -1,14 +1,3 @@
-{#
-<h1>{{ label }}</h1>
-
-{{ dump(journal_machine_name) }}
-{{ content.field_journal_name }}
-{{ dump(node.field_volume_number.value) }}
-{{ dump(node.field_issue_number.value) }}
-
-{{ node.field_issue_reference.entity.field_journal_page_images_media|view }}
-#}
-
 {% include "@page-facsimiles/page-facsimiles.html.twig" with {
   title: label,
   journal: journal_machine_name,

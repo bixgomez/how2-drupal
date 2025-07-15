@@ -43,17 +43,11 @@
 			} %}
 		</div>
 
-		{# <div class="content-section content-section--sm">
-			<h2 class="dev-heading">This is a section (not an article)</h2>
-		</div> #}
-
 		{% if person_bio['#items'] and person_bio['#items']|length > 0 %}
 			<div class="content-section content-section--lg">
 				{{ person_bio }}
 			</div>
 		{% endif %}
-
-		{# {{ dump(working_notes) }} #}
 
 		{% if working_notes[0]['#text'] %}
 			<div class="content-section content-section--lg">
