@@ -1,9 +1,9 @@
-uuid: 5ac17c03-9643-474c-aeee-8ced045b6bba
+uuid: f25080f2-3cbf-470e-9723-b46e688b1bdb
 langcode: en
 status: false
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.cross_post_teaser_card
     - field.field.node.page.body
     - field.field.node.page.field_cover_thumbnail
     - field.field.node.page.field_facsimile_pages
@@ -11,43 +11,22 @@ dependencies:
     - field.field.node.page.field_paragraphs
     - field.field.node.page.field_title_display
     - field.field.node.page.layout_builder__layout
+    - image.style.large
     - node.type.page
   module:
     - image
-    - text
     - user
-_core:
-  default_config_hash: 8BgdRtLbtQ0F__o0FHSH0Mx5fvXOra9tfT1GmNKbRYw
-id: node.page.teaser
+id: node.page.cross_post_teaser_card
 targetEntityType: node
 bundle: page
-mode: teaser
+mode: cross_post_teaser_card
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    weight: 100
-    region: content
   field_cover_thumbnail:
     type: image
     label: hidden
     settings:
       image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 0
-    region: content
-  field_facsimile_pages:
-    type: image
-    label: hidden
-    settings:
-      image_link: ''
-      image_style: ''
+      image_style: large
       image_loading:
         attribute: lazy
     third_party_settings: {  }
@@ -56,9 +35,11 @@ content:
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 101
+    weight: 100
     region: content
 hidden:
+  body: true
+  field_facsimile_pages: true
   field_however_pages: true
   field_paragraphs: true
   field_title_display: true

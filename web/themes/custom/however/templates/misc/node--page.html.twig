@@ -1,0 +1,36 @@
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+
+{{ attach_library('classy/node') }}
+
+<article{{ attributes.addClass(classes) }}>
+      {% if node.field_title_display.value %}
+        <h1 class="text-center text-3xl pb-8">
+          {{ node.field_title_display.value|raw }}
+        </h1>
+      {% else %}
+        <h1 class="text-center text-3xl pb-8">
+          {{ label }}
+        </h1>
+      {% endif %}
+
+    {{ title_prefix }}
+    {% if label and not page %}
+      <h2{{ title_attributes }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h2>
+    {% endif %}
+    {{ title_suffix }}
+
+    <div{{ content_attributes.addClass('node__content') }}>
+      {{ content }}
+    </div>
+</article>

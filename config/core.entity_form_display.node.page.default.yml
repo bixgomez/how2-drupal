@@ -4,9 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_cover_thumbnail
     - field.field.node.page.field_facsimile_pages
     - field.field.node.page.field_however_pages
     - field.field.node.page.field_paragraphs
+    - field.field.node.page.field_title_display
     - field.field.node.page.layout_builder__layout
     - image.style.thumbnail
     - node.type.page
@@ -24,7 +26,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 1
+    weight: 2
     region: content
     settings:
       rows: 9
@@ -32,15 +34,7 @@ content:
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
-  field_facsimile_pages:
-    type: image_image
-    weight: 3
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-  field_however_pages:
+  field_cover_thumbnail:
     type: image_image
     weight: 4
     region: content
@@ -50,7 +44,7 @@ content:
     third_party_settings: {  }
   field_paragraphs:
     type: paragraphs
-    weight: 2
+    weight: 3
     region: content
     settings:
       title: Paragraph
@@ -67,6 +61,14 @@ content:
         collapse_edit_all: collapse_edit_all
         convert: '0'
         duplicate: duplicate
+    third_party_settings: {  }
+  field_title_display:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 1
+      placeholder: 'Title as displayed on the page.  This will not be used for searching; only for display.'
     third_party_settings: {  }
   path:
     type: path
@@ -91,6 +93,8 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_facsimile_pages: true
+  field_however_pages: true
   layout_builder__layout: true
   promote: true
   sticky: true
