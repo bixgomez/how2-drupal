@@ -1,25 +1,27 @@
 <tr class="toc-issue">
   <td>
     <span class="toc-issue-title">
-      Vol. {{ volume_num }} No. {{ issue_num }} ({{date}})
+      <a href="{{ url }}" class="toc-issue-link" rel="bookmark">
+        Vol. {{ volume_num }} No. {{ issue_num }} ({{date}})
+      </a>
     </span>
   </td>
 
-  <td>
+  {# <td>
     <a href="{{ url }}" class="toc-issue-link" rel="bookmark">
       Web Version
     </a>
-  </td>
+  </td> #}
 
-  {% if has_page_facsimiles %}
+  {# {% if has_page_facsimiles %}
     <td>
       <a href="{{ url }}/page-facsimiles" class="toc-issue-link">Page Facsimiles</a>
     </td>
-  {% endif %}
+  {% endif %} #}
 
-  {% if pdf_url %}
+  {# {% if pdf_url %}
     <td>
       <a href="{{ pdf_url }}" class="toc-issue-link" download target="_blank">Download PDF</a>
     </td>
-  {% endif %}
+  {% endif %} #}
 </tr>
