@@ -47,19 +47,18 @@
 		{% endif %}
 		#}
 
-		{% if working_notes['#items'] and not working_notes['#items'].isEmpty %}
-			<div class="content-section content-section--lg">
-				<h3>Working Notes</h3>
-				{{ working_notes }}
-			</div>
-		{% endif %}
-
 		{% if person_bio['#items'] and not person_bio['#items'].isEmpty %}
 			<div id="bios" class="content-section content-section--lg">
 				{{ person_bio }}
 			</div>
 		{% endif %}
 
+		{% if working_notes['#items'] and not working_notes['#items'].isEmpty %}
+			<div class="content-section content-section--lg">
+				<h3>Working Notes</h3>
+				{{ working_notes }}
+			</div>
+		{% endif %}
 
 		{% if content.body[0]['#text'] %}
 			<div class="content-section content-section--lg">
