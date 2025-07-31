@@ -43,11 +43,13 @@
 			} %}
 		</div>
 
+    {# 
 		{% if person_bio['#items'] and person_bio['#items']|length > 0 %}
 			<div class="content-section content-section--lg">
 				{{ person_bio }}
 			</div>
 		{% endif %}
+		 #}
 
 		{% if working_notes[0]['#text'] %}
 			<div class="content-section content-section--lg">
@@ -63,7 +65,7 @@
 			</div>
 		{% endif %}
 
-		{% if body %}
+		{% if body.0['#text'] %}
 			<div class="content-section content-section--lg">
 			  {{ body }}
 			</div>
