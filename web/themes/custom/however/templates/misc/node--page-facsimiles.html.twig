@@ -1,8 +1,13 @@
-{% include "@page-facsimiles/page-facsimiles.html.twig" with {
-  title: label,
+{% set issue = node.field_issue_reference.entity %}
+
+{% include '@page-facsimiles/page-facsimiles.html.twig' with {
+  title:             label,
   journal: journal_machine_name,
   journal_name: content.field_journal_name.0['#markup'],
   volume_num: node.field_volume_number.value,
   issue_num: node.field_issue_number.value,
-  page_facsimiles: node.field_issue_reference.entity.field_journal_page_images_media|view
+  page_facsimiles:   issue.field_journal_page_images_media|view,
+  title_prefix:      title_prefix,
+  title_suffix:      title_suffix,
+  title_display:     issue.field_short_description.value
 } %}

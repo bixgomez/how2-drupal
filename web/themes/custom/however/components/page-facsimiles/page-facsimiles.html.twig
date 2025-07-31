@@ -2,12 +2,18 @@
 {% set volume_url = journal_url ~ '/v' ~ volume_num %}
 {% set issue_url = volume_url ~ '/n' ~ issue_num %}
 
-<h1>
-	{{ journal_name }}
-  Vol. {{ volume_num }},
-  No. {{ issue_num }}:
-	Page Facsimiles
-</h1>
+{{ title_prefix }}
+{% if title_display %}
+	<h1>{{ title_display }}</h1>
+{% else %}
+	<h1>
+		{{ journal_name }}
+		Vol. {{ volume_num }},
+		No. {{ issue_num }}:
+		Page Facsimiles
+	</h1>
+{% endif %}				
+{{ title_suffix }}
 
 <div class="content-section content-section--sm">
 	{% include "@issue-meta/issue-meta.html.twig" with {
