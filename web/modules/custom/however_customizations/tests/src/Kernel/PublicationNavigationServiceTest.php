@@ -95,4 +95,41 @@ class PublicationNavigationServiceTest extends KernelTestBase {
       $this->navigationService
     );
   }
+
+  /**
+   * Test volume navigation.
+   */
+  public function testVolumeNavigation()
+  {
+    // Create test volume nodes
+    $volume1 = Node::create([
+      'type' => 'however_volume',
+      'title' => 'Volume 1',
+      'field_volume_number' => 1,
+      'status' => 1,
+    ]);
+    $volume1->save();
+
+    $volume2 = Node::create([
+      'type' => 'however_volume',
+      'title' => 'Volume 2',
+      'field_volume_number' => 2,
+      'status' => 1,
+    ]);
+    $volume2->save();
+
+    $volume3 = Node::create([
+      'type' => 'however_volume',
+      'title' => 'Volume 3',
+      'field_volume_number' => 3,
+      'status' => 1,
+    ]);
+    $volume3->save();
+
+    // Test navigation for volume 2 (should have both prev and next)
+    $navigation = $this->navigationService->getVolumeNavigation($volume2);
+
+    $this->assertEquals($volume1->id(), $navigation['prev']->id());
+    $this->assertEquals($volume3->id(), $navigation['next']->id());
+  }
 }
