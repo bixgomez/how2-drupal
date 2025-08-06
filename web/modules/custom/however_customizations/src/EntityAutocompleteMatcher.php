@@ -24,8 +24,8 @@ class EntityAutocompleteMatcher extends CoreEntityAutocompleteMatcher
    * {@inheritdoc}
    */
   public function __construct(
-    EntityTypeManagerInterface $entity_type_manager,
-    SelectionPluginManagerInterface $selection_manager
+    SelectionPluginManagerInterface $selection_manager,
+    EntityTypeManagerInterface $entity_type_manager
   ) {
     // Pass both arguments to the parent.
     $this->entityTypeManager = $entity_type_manager;

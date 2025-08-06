@@ -3,8 +3,8 @@ services:
     class: Drupal\however_customizations\EntityAutocompleteMatcher
     decorates: entity.autocomplete_matcher
     arguments:
-      - '@entity_type.manager'
       - '@plugin.manager.entity_reference_selection'
+      - '@entity_type.manager'
       
   however_customizations.publication_navigation:
     class: Drupal\however_customizations\PublicationNavigationService
