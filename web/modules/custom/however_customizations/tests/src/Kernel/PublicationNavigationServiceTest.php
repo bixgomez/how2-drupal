@@ -1,9 +1,33 @@
 <?php
 
+/**
+ * @file
+ * PublicationNavigationServiceTest.php
+ *
+ * To run this test:
+ * 
+ * 1. From the DDEV project root:
+ *    ddev ssh
+ *    cd web
+ * 
+ * 2. Run all the tests:
+ *    SIMPLETEST_DB=mysql://db:db@db/db ../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./modules/custom/however_customizations/tests/
+ * 
+ * 3. To run just this specific test:
+ *    SIMPLETEST_DB=mysql://db:db@db/db ../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./modules/custom/however_customizations/tests/src/Kernel/PublicationNavigationServiceTest.php
+ * 
+ * Requirements:
+ * - DDEV environment
+ * - Drupal 10 with testing dependencies
+ */
+
 namespace Drupal\Tests\however_customizations\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\Entity\Node;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\node\Entity\NodeType;
 
 /**
  * Tests the PublicationNavigationService.
@@ -36,12 +60,30 @@ class PublicationNavigationServiceTest extends KernelTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    
     $this->installEntitySchema('node');
     $this->installEntitySchema('user');
     $this->installConfig(['system']);
-    
     $this->navigationService = $this->container->get('however_customizations.publication_navigation');
+
+    // Create however_volume content type
+    NodeType::create([
+      'type' => 'however_volume',
+      'name' => 'However Volume',
+    ])->save();
+
+    // Create field storage for volume number
+    FieldStorageConfig::create([
+      'field_name' => 'field_volume_number',
+      'entity_type' => 'node',
+      'type' => 'integer',
+    ])->save();
+
+    // Create field instance
+    FieldConfig::create([
+      'field_name' => 'field_volume_number',
+      'entity_type' => 'node',
+      'bundle' => 'however_volume',
+    ])->save();
   }
 
   /**
