@@ -358,6 +358,23 @@ All Drush commands use chunked processing (50 entities per batch) to handle larg
 - **Modules:** Core Entity, Field, Node modules
 - **Optional:** Paragraphs module for enhanced functionality
 
+## Testing
+
+### Running Tests
+
+From your DDEV environment:
+
+```bash
+# SSH into container and navigate to web directory
+ddev ssh
+cd web
+
+# Run all module tests
+SIMPLETEST_DB=mysql://db:db@db/db ../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./modules/custom/however_customizations/tests/
+
+# Run specific test class
+SIMPLETEST_DB=mysql://db:db@db/db ../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./modules/custom/however_customizations/tests/src/Kernel/PublicationNavigationServiceTest.php
+
 ## Credits
 
-Custom module developed for the However project.
+Custom module developed for the However project by Richard Gilbert.
