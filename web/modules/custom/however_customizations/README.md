@@ -370,10 +370,10 @@ ddev ssh
 cd web
 
 # Run all module tests
-SIMPLETEST_DB=mysql://db:db@db/db ../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./modules/custom/however_customizations/tests/
+SIMPLETEST_DB=mysql://db:db@db/db ../vendor/bin/phpunit --debug --verbose --testdox -c ./core/phpunit.xml.dist ./modules/custom/however_customizations/tests/
 
 # Run specific test class
-SIMPLETEST_DB=mysql://db:db@db/db ../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./modules/custom/however_customizations/tests/src/Kernel/PublicationNavigationServiceTest.php
+SIMPLETEST_DB=mysql://db:db@db/db ../vendor/bin/phpunit --debug --verbose --testdox -c ./core/phpunit.xml.dist ./modules/custom/however_customizations/tests/src/Kernel/PublicationNavigationServiceTest.php
 
 ## Credits
 
