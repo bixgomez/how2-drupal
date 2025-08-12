@@ -7,6 +7,7 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_help().
@@ -344,6 +345,103 @@ function however_customizations_node_delete($node) {
         \Drupal::logger('however_customizations')->info('Deleted page facsimiles node for @title', [
           '@title' => $node->getTitle(),
         ]);
+      }
+    }
+  }
+}
+
+// function however_customizations_preprocess_menu(&$variables)
+// {
+//   if ($variables['menu_name'] !== 'main') {
+//     return;
+//   }
+
+//   \Drupal::logger('however_customizations')->info('Menu preprocess running for main menu');
+
+//   foreach ($variables['items'] as &$item) {
+//     if (isset($item['url']) && $item['url']->getRouteName() === 'entity.node.canonical') {
+//       $node_id = $item['url']->getRouteParameters()['node'];
+//       \Drupal::logger('however_customizations')->info('Found node @nid in menu', ['@nid' => $node_id]);
+
+//       $node = \Drupal::entityTypeManager()->getStorage('node')->load($node_id);
+
+//       if ($node && $node->bundle() === 'journal') {
+//         \Drupal::logger('however_customizations')->info('Found journal landing page: @title', ['@title' => $node->getTitle()]);
+
+//         $journal_name = $node->get('field_journal_name')->value;
+//         \Drupal::logger('however_customizations')->info('Journal name: @name', ['@name' => $journal_name]);
+
+//         $query = \Drupal::entityQuery('node')
+//           ->condition('type', ['however_volume', 'how2_volume'], 'IN')
+//           ->condition('field_journal_name', $journal_name)
+//           ->condition('status', 1)
+//           ->sort('field_volume_number', 'ASC');
+
+//         $volume_ids = $query->execute();
+//         \Drupal::logger('however_customizations')->info('Found @count volumes', ['@count' => count($volume_ids)]);
+
+//         if (!empty($volume_ids)) {
+//           $volumes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($volume_ids);
+
+//           foreach ($volumes as $volume) {
+//             \Drupal::logger('however_customizations')->info('Adding volume: @title', ['@title' => $volume->getTitle()]);
+
+//             $item['below'][] = [
+//               'title' => $volume->getTitle(),
+//               'url' => Url::fromRoute('entity.node.canonical', ['node' => $volume->id()]),
+//             ];
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+function however_customizations_preprocess_menu(&$variables)
+{
+  if ($variables['menu_name'] !== 'main') {
+    return;
+  }
+
+  \Drupal::logger('however_customizations')->info('*** MENU PREPROCESS running for main menu ***');
+
+  foreach ($variables['items'] as &$item) {
+    if (isset($item['url']) && $item['url']->getRouteName() === 'entity.node.canonical') {
+      $node_id = $item['url']->getRouteParameters()['node'];
+      $node = \Drupal::entityTypeManager()->getStorage('node')->load($node_id);
+
+      if ($node && $node->bundle() === 'journal') {
+        \Drupal::logger('however_customizations')->info('Found journal: @title', ['@title' => $node->getTitle()]);
+
+        $journal_name = $node->get('field_journal_name')->value;
+        \Drupal::logger('however_customizations')->info('Journal name: "@name"', ['@name' => $journal_name]);
+
+        // Query for volumes that match THIS journal
+        $query = \Drupal::entityQuery('node')
+          ->condition('type', ['however_volume', 'how2_volume'], 'IN')
+          ->condition('field_journal_name', $journal_name)
+          ->condition('status', 1)
+          ->sort('field_volume_number', 'ASC')
+          ->accessCheck(FALSE);
+
+        $volume_ids = $query->execute();
+        \Drupal::logger('however_customizations')->info('Found @count volumes for "@journal"', [
+          '@count' => count($volume_ids),
+          '@journal' => $journal_name
+        ]);
+
+        if (!empty($volume_ids)) {
+          $volumes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($volume_ids);
+
+          foreach ($volumes as $volume) {
+            \Drupal::logger('however_customizations')->info('Adding volume: @title', ['@title' => $volume->getTitle()]);
+
+            $item['below'][] = [
+              'title' => $volume->getTitle(),
+              'url' => Url::fromRoute('entity.node.canonical', ['node' => $volume->id()]),
+            ];
+          }
+        }
       }
     }
   }
