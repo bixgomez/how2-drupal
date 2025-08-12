@@ -1,0 +1,48 @@
+uuid: ba262b31-cde4-4f83-bb71-425a1b6fc810
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.journal.body
+    - field.field.node.journal.field_cover_thumbnail
+    - field.field.node.journal.field_paragraphs
+    - node.type.journal
+  module:
+    - entity_reference_revisions
+    - image
+    - user
+id: node.journal.full
+targetEntityType: node
+bundle: journal
+mode: full
+content:
+  field_cover_thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  body: true
+  footnotes_group: true
+  search_api_excerpt: true

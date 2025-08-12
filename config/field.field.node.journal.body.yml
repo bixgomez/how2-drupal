@@ -1,0 +1,24 @@
+uuid: 62729b88-42ea-48a3-b317-17ea73675e1a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.journal
+  module:
+    - text
+id: node.journal.body
+field_name: body
+entity_type: node
+bundle: journal
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

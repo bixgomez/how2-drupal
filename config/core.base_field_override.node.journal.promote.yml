@@ -1,0 +1,22 @@
+uuid: bce18da7-6f31-45b6-a2e0-248a3bbe856e
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.journal
+id: node.journal.promote
+field_name: promote
+entity_type: node
+bundle: journal
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

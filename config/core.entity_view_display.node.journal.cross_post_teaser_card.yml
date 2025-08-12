@@ -1,0 +1,40 @@
+uuid: 54462a82-e010-401f-9d9f-cfa81aae96af
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.cross_post_teaser_card
+    - field.field.node.journal.body
+    - field.field.node.journal.field_cover_thumbnail
+    - field.field.node.journal.field_paragraphs
+    - image.style.large
+    - node.type.journal
+  module:
+    - image
+    - user
+id: node.journal.cross_post_teaser_card
+targetEntityType: node
+bundle: journal
+mode: cross_post_teaser_card
+content:
+  field_cover_thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: large
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  body: true
+  field_paragraphs: true
+  footnotes_group: true
+  search_api_excerpt: true
