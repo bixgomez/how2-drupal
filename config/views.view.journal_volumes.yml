@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.full
     - node.type.how2_volume
     - node.type.however_volume
-    - system.menu.main
   module:
     - node
     - user
@@ -238,11 +237,14 @@ display:
       display_extenders: {  }
       path: however
       menu:
-        type: normal
+        type: none
         title: HOW(ever)
+        description: ''
         weight: -49
+        expanded: false
         menu_name: main
         parent: ''
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
@@ -264,7 +266,7 @@ display:
       display_extenders: {  }
       path: how2
       menu:
-        type: normal
+        type: none
         title: How2
         description: ''
         weight: -48
