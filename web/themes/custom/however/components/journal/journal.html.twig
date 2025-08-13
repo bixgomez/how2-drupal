@@ -1,0 +1,21 @@
+<article class="journal">
+	<div class="content">
+		<div class="journal-image">
+			{{ featured_image }}
+		</div>
+
+		<div class="journal-text">
+			<div class="journal-title">
+				{{ title_prefix }}
+				{{ title_suffix }}
+				<h1>{{ title }}</h1>
+			</div>
+			<div class="journal-body">
+				{{ body|raw }}
+			</div>
+			<div class="journal-paragraphs">
+				{{ paragraphs }}
+			</div>
+		</div>
+	</div>
+</article>

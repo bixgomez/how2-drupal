@@ -1,0 +1,8 @@
+{% include "@journal/journal.html.twig" with {
+  title: label.0['#context'].value,
+  title_prefix: title_prefix,
+  title_suffix: title_suffix,
+  featured_image: content.field_cover_thumbnail,
+  body: content.body.0['#text'],
+  paragraphs: content.field_paragraphs,
+} %}
