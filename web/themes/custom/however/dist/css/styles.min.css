@@ -1050,9 +1050,13 @@ body {
 .tabs.primary {
   margin: calc(var(--spacing) * 0);
   display: flex;
-  gap: calc(var(--spacing) * 1);
+  gap: calc(var(--spacing) * 2);
   font-size: var(--text-lg);
   line-height: var(--tw-leading, var(--text-lg--line-height));
+}
+.tabs.primary li {
+  display: inline-block;
+  margin: 0;
 }
 .tabs.primary li a {
   border-radius: 0.25rem;
@@ -1195,6 +1199,11 @@ table tr th {
 }
 .view-search-results .views-row:first-of-type article h2 {
   margin-top: calc(var(--spacing) * 0);
+}
+.region.region-admin-info {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 2);
 }
 .paragraph--type--person-bio.paragraph--view-mode--name-only {
   display: inline;

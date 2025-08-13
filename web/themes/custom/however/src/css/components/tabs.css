@@ -1,5 +1,10 @@
 .tabs.primary {
-  @apply text-lg m-0 flex gap-1;
+  @apply text-lg m-0 flex gap-2;
+}
+
+.tabs.primary li {
+  display: inline-block;
+  margin: 0;
 }
 
 .tabs.primary li a {

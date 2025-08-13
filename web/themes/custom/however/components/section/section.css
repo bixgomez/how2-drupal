@@ -48,9 +48,6 @@
 }
 
 .section-pieces {
-  /* border: 1px dashed #333; */
-  /* background-color: #ccc; */
-  /* padding: 1rem; */
 
   margin: 1rem 0;
   display: flex;
@@ -64,10 +61,4 @@
   &:last-child {
     margin-bottom: 0;
   }
-}
-
-.section-piece {
-  /* border: 1px solid white; */
-  /* background-color: #ddd; */
-  /* padding: 0.25rem; */
 }
