@@ -397,13 +397,20 @@ function however_customizations_node_delete($node) {
 //   }
 // }
 
+/**
+ * Implements hook_preprocess_menu().
+ * 
+ * Dynamically adds journal volume links as submenu items under journal landing pages
+ * in the main navigation. For each journal landing page (How(ever) or How2), this finds
+ * all published volume nodes with matching journal names and creates dropdown menu items
+ * ordered by volume number. Also adds the 'menu-item--expanded' class to enable proper
+ * CSS styling for hover dropdowns.
+ */
 function however_customizations_preprocess_menu(&$variables)
 {
   if ($variables['menu_name'] !== 'main') {
     return;
   }
-
-  \Drupal::logger('however_customizations')->info('*** MENU PREPROCESS running for main menu ***');
 
   foreach ($variables['items'] as &$item) {
     if (isset($item['url']) && $item['url']->getRouteName() === 'entity.node.canonical') {
@@ -411,12 +418,8 @@ function however_customizations_preprocess_menu(&$variables)
       $node = \Drupal::entityTypeManager()->getStorage('node')->load($node_id);
 
       if ($node && $node->bundle() === 'journal') {
-        \Drupal::logger('however_customizations')->info('Found journal: @title', ['@title' => $node->getTitle()]);
-
         $journal_name = $node->get('field_journal_name')->value;
-        \Drupal::logger('however_customizations')->info('Journal name: "@name"', ['@name' => $journal_name]);
 
-        // Query for volumes that match THIS journal
         $query = \Drupal::entityQuery('node')
           ->condition('type', ['however_volume', 'how2_volume'], 'IN')
           ->condition('field_journal_name', $journal_name)
@@ -425,17 +428,14 @@ function however_customizations_preprocess_menu(&$variables)
           ->accessCheck(FALSE);
 
         $volume_ids = $query->execute();
-        \Drupal::logger('however_customizations')->info('Found @count volumes for "@journal"', [
-          '@count' => count($volume_ids),
-          '@journal' => $journal_name
-        ]);
 
         if (!empty($volume_ids)) {
           $volumes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($volume_ids);
 
-          foreach ($volumes as $volume) {
-            \Drupal::logger('however_customizations')->info('Adding volume: @title', ['@title' => $volume->getTitle()]);
+          // Add expanded class to parent
+          $item['attributes']->addClass('menu-item--expanded');
 
+          foreach ($volumes as $volume) {
             $item['below'][] = [
               'title' => $volume->getTitle(),
               'url' => Url::fromRoute('entity.node.canonical', ['node' => $volume->id()]),
