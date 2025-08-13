@@ -2,6 +2,19 @@
 
 A custom Drupal module that provides specialized functionality for the However project.
 
+## Overview
+
+This module automates content management for two academic journals (**How(ever)** and **How2**) by handling the complex relationships between volumes, issues, sections, and articles.  It eliminates manual data entry, ensures consistency across dozens of pieces of content, and provides intelligent navigation throughout the publication hierarchy.
+
+### Key Problems Solved:
+- **Eliminates repetitive data entry** through automatic field synchronization
+- **Maintains consistency** with auto-generated titles and standardized formatting  
+- **Prevents broken relationships** by managing content lifecycle automatically
+- **Improves editorial workflow** with smart form enhancements and bulk operations
+- **Enables seamless navigation** through intelligent prev/next linking
+
+The module serves as the backbone for managing a large archive of literary journal content, ensuring that volume numbers, issue numbers, and titles remain synchronized across all related content without manual intervention.
+
 ## Features Overview
 
 This module handles content relationships, automatic content generation, navigation, and maintenance tasks across the complex publication hierarchy of volumes, issues, sections, and articles.
@@ -122,7 +135,9 @@ Special handling for Paragraphs module integration:
 The module provides several powerful Drush commands for content management:
 
 ### `however-customizations:update-volume-numbers`
-**Alias:** `how-vol`
+**Alias:** `how-vol`  
+**When to run:** After bulk imports or when field synchronization gets out of sync  
+**Frequency:** As needed for maintenance
 
 Bulk updates volume and issue numbers across all content types based on their entity references.
 
@@ -138,7 +153,9 @@ drush how-vol
 - Skips automatic hooks to prevent loops
 
 ### `however-customizations:update-titles`
-**Alias:** `how-titles`
+**Alias:** `how-titles`  
+**When to run:** After bulk imports or if title formatting rules change  
+**Frequency:** As needed for maintenance
 
 Regenerates titles for all volume and issue content based on current number fields.
 
@@ -154,7 +171,9 @@ drush how-titles
 - Processes in batches for performance
 
 ### `however-customizations:create-masthead-articles`
-**Alias:** `how-masthead`
+**Alias:** `how-masthead`  
+**When to run:** One-time migration (already completed)  
+**Frequency:** Only needed once during initial setup
 
 Creates masthead articles from existing issue masthead content.
 
@@ -170,7 +189,9 @@ drush how-masthead
 - Prevents duplicate creation
 
 ### `however-customizations:create-page-facsimiles`
-**Alias:** `how-pages`
+**Alias:** `how-pages`  
+**When to run:** One-time migration (already completed)  
+**Frequency:** Only needed once; new issues auto-create their page facsimiles
 
 Creates page facsimile nodes for all existing issues that don't have them.
 
@@ -185,8 +206,12 @@ drush how-pages
 - Pre-populates with proper metadata
 - Prevents duplicate creation
 
+**Note:** New issues automatically create page facsimiles via `hook_node_insert()`, so this command was only needed for existing content.
+
 ### `however-customizations:replace-urls`
-**Alias:** `how-urls`
+**Alias:** `how-urls`  
+**When to run:** One-time domain migration (already completed)  
+**Frequency:** Only needed if domain changes again
 
 Replaces old absolute URLs with relative paths across all text content.
 
