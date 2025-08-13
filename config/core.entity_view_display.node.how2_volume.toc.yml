@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.toc
     - field.field.node.how2_volume.field_archive_url
     - field.field.node.how2_volume.field_how2_issue
+    - field.field.node.how2_volume.field_journal_name
     - field.field.node.how2_volume.field_volume_number
     - node.type.how2_volume
   module:
@@ -31,6 +32,7 @@ content:
     region: content
 hidden:
   field_archive_url: true
+  field_journal_name: true
   field_volume_number: true
   footnotes_group: true
   links: true

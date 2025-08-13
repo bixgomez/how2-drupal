@@ -5,10 +5,12 @@ dependencies:
   config:
     - field.field.node.however_volume.field_how_ever_issue
     - field.field.node.however_volume.field_however_page_facimile_link
+    - field.field.node.however_volume.field_journal_name
     - field.field.node.however_volume.field_volume_number
     - node.type.however_volume
   module:
     - link
+    - options
     - user
 id: node.however_volume.default
 targetEntityType: node
@@ -35,6 +37,13 @@ content:
       target: ''
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_journal_name:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
     region: content
 hidden:
   field_volume_number: true

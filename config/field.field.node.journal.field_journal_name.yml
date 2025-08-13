@@ -1,0 +1,23 @@
+uuid: f13a7864-e02c-468e-adb3-930226970ba4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_journal_name
+    - node.type.journal
+  module:
+    - options
+id: node.journal.field_journal_name
+field_name: field_journal_name
+entity_type: node
+bundle: journal
+label: 'Journal Name'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: however
+default_value_callback: ''
+settings: {  }
+field_type: list_string

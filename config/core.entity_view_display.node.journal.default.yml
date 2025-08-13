@@ -5,11 +5,13 @@ dependencies:
   config:
     - field.field.node.journal.body
     - field.field.node.journal.field_cover_thumbnail
+    - field.field.node.journal.field_journal_name
     - field.field.node.journal.field_paragraphs
     - node.type.journal
   module:
     - entity_reference_revisions
     - image
+    - options
     - text
     - user
 id: node.journal.default
@@ -22,7 +24,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_cover_thumbnail:
     type: image
@@ -33,6 +35,13 @@ content:
       image_loading:
         attribute: lazy
     third_party_settings: {  }
+    weight: 1
+    region: content
+  field_journal_name:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
     weight: 0
     region: content
   field_paragraphs:
@@ -42,12 +51,12 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
 hidden:
   footnotes_group: true

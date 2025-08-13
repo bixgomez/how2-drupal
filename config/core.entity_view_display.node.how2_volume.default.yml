@@ -5,10 +5,12 @@ dependencies:
   config:
     - field.field.node.how2_volume.field_archive_url
     - field.field.node.how2_volume.field_how2_issue
+    - field.field.node.how2_volume.field_journal_name
     - field.field.node.how2_volume.field_volume_number
     - node.type.how2_volume
   module:
     - link
+    - options
     - user
 id: node.how2_volume.default
 targetEntityType: node
@@ -35,6 +37,13 @@ content:
       link: false
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_journal_name:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
     region: content
 hidden:
   field_volume_number: true

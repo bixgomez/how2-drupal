@@ -1,0 +1,23 @@
+uuid: db4c7a82-7009-4dd9-aaa3-e2e01c835492
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_journal_name
+    - node.type.however_volume
+  module:
+    - options
+id: node.however_volume.field_journal_name
+field_name: field_journal_name
+entity_type: node
+bundle: however_volume
+label: 'Journal Name'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: however
+default_value_callback: ''
+settings: {  }
+field_type: list_string

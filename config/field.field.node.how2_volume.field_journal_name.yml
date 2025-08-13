@@ -1,0 +1,23 @@
+uuid: 531deab9-f201-4537-8750-3ed104e629e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_journal_name
+    - node.type.how2_volume
+  module:
+    - options
+id: node.how2_volume.field_journal_name
+field_name: field_journal_name
+entity_type: node
+bundle: how2_volume
+label: 'Journal Name'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: how2
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.how2_volume.field_archive_url
     - field.field.node.how2_volume.field_how2_issue
+    - field.field.node.how2_volume.field_journal_name
     - field.field.node.how2_volume.field_volume_number
     - node.type.how2_volume
   module:
@@ -38,6 +39,12 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_journal_name:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_volume_number:
     type: number

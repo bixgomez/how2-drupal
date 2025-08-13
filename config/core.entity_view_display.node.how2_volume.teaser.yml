@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.how2_volume.field_archive_url
     - field.field.node.how2_volume.field_how2_issue
+    - field.field.node.how2_volume.field_journal_name
     - field.field.node.how2_volume.field_volume_number
     - node.type.how2_volume
   module:
@@ -23,5 +24,7 @@ content:
 hidden:
   field_archive_url: true
   field_how2_issue: true
+  field_journal_name: true
   field_volume_number: true
+  footnotes_group: true
   search_api_excerpt: true
