@@ -44,10 +44,10 @@ function however_preprocess_node(&$variables, $hook)
   // Add section links for articles
   if (in_array($node->getType(), ['how2_article', 'how_ever_article'])) {
     // Debug: let's see what we're working with
-    \Drupal::logger('however')->info('Looking for sections containing article ID: @nid', ['@nid' => $node->id()]);
+    // \Drupal::logger('however')->info('Looking for sections containing article ID: @nid', ['@nid' => $node->id()]);
     $variables['parent_sections'] = get_article_sections($node->id());
-    \Drupal::logger('however')->info('Found @count sections', ['@count' => count($variables['parent_sections'])]);
- 
+    // \Drupal::logger('however')->info('Found @count sections', ['@count' => count($variables['parent_sections'])]);
+
   }
 }
 
