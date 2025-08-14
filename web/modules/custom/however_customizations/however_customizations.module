@@ -26,6 +26,26 @@ function however_customizations_help($route_name, RouteMatchInterface $route_mat
  * Implements hook_form_alter().
  */
 function however_customizations_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Suppress page facsimiles creation forms
+  if ($form_id === 'node_page_facsimiles_form') {
+    // Present a message on the "Create Journal Landing Page" screen
+    $form['prevention_message'] = [
+      '#markup' => '<div class="messages messages--error"><h3>Page facsimiles are created automatically</h3><p>These nodes are generated automatically when issues are saved.</p><p>To create a new Page Facsimiles page, add or edit the Page Facsimiles field on any issue node, and the corresponding Page Facsimiles page will be either created or updated.</p><p><a href="/node/add">Add content</a></p><p><a href="/admin/content">Content overview</a></p></div>',
+      '#weight' => -1000,
+    ];
+
+
+    // Hide everything else - all form elements
+    foreach ($form as $key => $element) {
+      if (strpos($key, '#') !== 0 && $key !== 'prevention_message') {
+        $form[$key]['#access'] = FALSE;
+      }
+    }
+
+    return;
+  }
+
   // Target the node edit forms for our volume content types
   if (in_array($form_id, ['node_however_volume_edit_form', 'node_however_volume_form', 
                            'node_how2_volume_edit_form', 'node_how2_volume_form'])) {
@@ -247,8 +267,8 @@ function however_customizations_preprocess_node(&$variables) {
   if (in_array($node->bundle(), $volume_types)) {
     // Get previous and next volumes
     $navigation = $navigation_service->getVolumeNavigation($node);
-    
-    // Add navigation to variables
+
+    // Add previous and next navigation to volume variables
     $variables['volume_navigation'] = [
       'prev' => $navigation['prev'],
       'next' => $navigation['next'],
@@ -260,23 +280,12 @@ function however_customizations_preprocess_node(&$variables) {
   if (in_array($node->bundle(), $issue_types)) {
     // Get previous and next issues
     $navigation = $navigation_service->getIssueNavigation($node);
-    
-    // Add navigation to variables
+
+    // Add previous and next navigation to issue variables
     $variables['issue_navigation'] = [
       'prev' => $navigation['prev'],
       'next' => $navigation['next'],
     ];
-  }
-
-  // For page_facsimiles content type
-  if ($node->bundle() === 'page_facsimiles') {
-    // Check the referenced issue to determine journal
-    if ($node->hasField('field_issue_reference') && !$node->get('field_issue_reference')->isEmpty()) {
-      $issue = $node->get('field_issue_reference')->entity;
-      if ($issue) {
-        $variables['journal_machine_name'] = ($issue->bundle() === 'journal_issue') ? 'however' : 'how2';
-      }
-    }
   }
 }
 

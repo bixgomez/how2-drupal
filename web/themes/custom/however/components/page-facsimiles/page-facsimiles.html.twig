@@ -1,8 +1,9 @@
-{% set journal_url = '/' ~ journal_machine_name %}
-{% set volume_url = journal_url ~ '/v' ~ volume_num %}
-{% set issue_url = volume_url ~ '/n' ~ issue_num %}
+{% if journal_slug and volume_num and issue_num %}
+  {% set journal_url = '/' ~ journal_slug %}
+  {% set volume_url = journal_url ~ '/v' ~ volume_num %}
+  {% set issue_url = volume_url ~ '/n' ~ issue_num %}
+{% endif %}
 
-{{ title_prefix }}
 {% if title_display %}
 	<h1>{{ title_display }}</h1>
 {% else %}
@@ -13,7 +14,6 @@
 		Page Facsimiles
 	</h1>
 {% endif %}				
-{{ title_suffix }}
 
 <div class="content-section content-section--sm">
 	{% include "@issue-meta/issue-meta.html.twig" with {
@@ -28,6 +28,8 @@
 	} %}
 </div>
 
-<div class="page-facsimiles">
-	{{ page_facsimiles }}
-</div>
+{% if page_facsimiles %}
+  <div class="page-facsimiles">
+    {{ page_facsimiles }}
+  </div>
+{% endif %}

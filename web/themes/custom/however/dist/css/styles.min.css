@@ -2450,6 +2450,9 @@ a.toc-volume-title {
     margin-top: .75rem;
   }
 }
+.page-facsimiles {
+  margin-top: 2rem;
+}
 .journal {
   padding: 0;
   margin: 0;
