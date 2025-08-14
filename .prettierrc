@@ -1,0 +1,12 @@
+{
+  "printWidth": 80,
+  "overrides": [
+    {
+      "files": "*.css",
+      "options": {
+        "printWidth": 150,
+        "tabWidth": 2
+      }
+    }
+  ]
+}
