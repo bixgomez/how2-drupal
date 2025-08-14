@@ -104,7 +104,8 @@ web/.ht.router.php
 
 # Local config settings.
 /web/sites/default/settings.ddev.php
-.vscode/*
-!.vscode/settings.json
+**/.vscode/*
+!**/.vscode/settings.json
+
 .DS_Store
 node_modules/

@@ -1,0 +1,14 @@
+{
+  "intelephense.environment.phpVersion": "8.1",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[php]": {
+    "editor.defaultFormatter": "junstyle.php-cs-fixer"
+  },
+  "php-cs-fixer.rules": "@PSR12",
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false
+}
