@@ -29,8 +29,8 @@
 .field--name-field-sections-how2,
 .field--name-field-sections-however,
 .field--name-field-section {
-  column-count: 3;
   @apply my-6 mx-0 p-0;
+  column-count: 3;
   column-gap: 1.5em;
 }
 
@@ -79,7 +79,7 @@
   .node--type-how-ever-section .field--name-field-journal-page-images-media .field__item {
     @apply w-[200px];
   }
-  
+
   .node--type-how-ever-article .field--name-field-journal-page-images-media,
   .node--type-how-ever-section .field--name-field-journal-page-images-media {
     @apply block;

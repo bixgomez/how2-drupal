@@ -1,6 +1,5 @@
 /* Faceted Search Styles */
 
-
 /* Clean up the sidebar region */
 .region-sidebar {
   @apply space-y-6;
@@ -99,15 +98,15 @@
   .region-sidebar {
     @apply space-y-4;
   }
-  
+
   .block-facets h2 {
     @apply text-base px-3 py-2;
   }
-  
+
   .facet-item a {
     @apply px-3 py-2;
   }
-  
+
   .facets-soft-limit-link {
     @apply px-3 py-2;
   }

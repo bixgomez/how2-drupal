@@ -476,12 +476,12 @@ div.page-section {
   text-decoration: none;
   font-weight: 600;
 }
-p, 
+p,
 ul,
 ol,
 pre,
 blockquote {
-  margin-top: .25em;
+  margin-top: 0.25em;
   margin-bottom: 1.25em;
   &:first-child {
     margin-top: 0;
@@ -526,9 +526,14 @@ h6 {
   --tw-font-weight: var(--font-weight-semibold);
   font-weight: var(--font-weight-semibold);
 }
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-top: 1.5em;
-  margin-bottom: .25em;
+  margin-bottom: 0.25em;
   line-height: 1.2;
 }
 li {
@@ -1388,7 +1393,10 @@ table tr th {
 .node--type-how2-section.node--view-mode-teaser .node--type-how2-section.node--view-mode-full .field--name-field-how2-piece > .field__item,
 .node--type-how2-section.node--view-mode-teaser .node--type-how-ever-section.node--view-mode-full .field--name-field-how-ever-piece > .field__item,
 .node--type-how-ever-section.node--view-mode-teaser .node--type-how2-section.node--view-mode-full .field--name-field-how2-piece > .field__item,
-.node--type-how-ever-section.node--view-mode-teaser .node--type-how-ever-section.node--view-mode-full .field--name-field-how-ever-piece > .field__item {
+.node--type-how-ever-section.node--view-mode-teaser
+  .node--type-how-ever-section.node--view-mode-full
+  .field--name-field-how-ever-piece
+  > .field__item {
   margin-inline: calc(var(--spacing) * 0);
   margin-top: calc(var(--spacing) * 0);
   margin-bottom: 0.4em;
@@ -1594,6 +1602,9 @@ ul.menu li.menu-item--expanded {
 img {
   max-width: 100%;
   height: auto;
+  display: block;
+  padding: 0;
+  margin: 0;
 }
 .page-header {
   background-color: var(--color-accent);
@@ -1624,9 +1635,9 @@ a.site-logo img {
   padding: calc(var(--spacing) * 0);
 }
 .admin-info {
+  padding-block: calc(var(--spacing) * 2);
   background-color: var(--color-secondary);
   border-bottom: 4px solid var(--color-primary-dark);
-  padding-block: calc(var(--spacing) * 2);
 }
 input[type="text"],
 input[type="password"],
@@ -1705,10 +1716,10 @@ input[type="tel"]::placeholder {
 .field--name-field-sections-how2,
 .field--name-field-sections-however,
 .field--name-field-section {
-  column-count: 3;
   margin-inline: calc(var(--spacing) * 0);
   margin-block: calc(var(--spacing) * 6);
   padding: calc(var(--spacing) * 0);
+  column-count: 3;
   column-gap: 1.5em;
 }
 .field--name-field-how-2-sections > .field__item,

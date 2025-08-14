@@ -24,8 +24,7 @@ a.site-logo img {
 }
 
 .admin-info {
+  @apply py-2;
   background-color: var(--color-secondary);
   border-bottom: 4px solid var(--color-primary-dark);
-
-  @apply py-2;
 }

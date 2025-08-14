@@ -16,11 +16,11 @@
   .issue-top-content {
     @apply flex justify-center gap-9 items-center max-w-[92%] mx-auto;
   }
-  
+
   .issue-top-content .image {
     @apply w-1/4;
   }
-  
+
   .issue-top-content .issue-title-meta {
     width: calc(75% - 36px);
   }
@@ -64,7 +64,7 @@
   .node--type-however-volume .field--name-field-how-ever-issue {
     @apply flex-row;
   }
-  
+
   .node--type-how2-volume .field--name-field-how2-issue > .field__item,
   .node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
   .node--type-however-volume .field--name-field-how2-issue > .field__item,
@@ -169,7 +169,10 @@
 .node--type-how2-section.node--view-mode-teaser .node--type-how2-section.node--view-mode-full .field--name-field-how2-piece > .field__item,
 .node--type-how2-section.node--view-mode-teaser .node--type-how-ever-section.node--view-mode-full .field--name-field-how-ever-piece > .field__item,
 .node--type-how-ever-section.node--view-mode-teaser .node--type-how2-section.node--view-mode-full .field--name-field-how2-piece > .field__item,
-.node--type-how-ever-section.node--view-mode-teaser .node--type-how-ever-section.node--view-mode-full .field--name-field-how-ever-piece > .field__item {
+.node--type-how-ever-section.node--view-mode-teaser
+  .node--type-how-ever-section.node--view-mode-full
+  .field--name-field-how-ever-piece
+  > .field__item {
   @apply leading-[1.8] mb-[0.4em] mt-0 mx-0;
 }
 

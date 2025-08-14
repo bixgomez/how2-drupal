@@ -14,11 +14,11 @@ nav ul.menu ul.menu {
   .region-navigation {
     @apply flex flex-grow justify-between items-center ml-8;
   }
-  
+
   .region-navigation .block-menu {
     @apply flex-grow;
   }
-  
+
   .region-navigation .block.views-exposed-form {
     @apply flex-shrink;
   }
@@ -38,7 +38,6 @@ nav ul.menu ul.menu {
 
 .region-navigation .block-menu > ul.menu > li.menu-item > a {
   @apply font-bold no-underline block py-1;
-
   color: var(--color-text);
 }
 

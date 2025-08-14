@@ -29,7 +29,7 @@
   .has-sidebar .layout-content {
     @apply float-right w-2/3;
   }
-  
+
   .has-sidebar .layout-sidebar {
     @apply float-left w-1/3 pr-[60px] mt-0;
   }
@@ -40,11 +40,11 @@
   .layout--twocol-section .layout__region {
     @apply box-border;
   }
-  
+
   .layout--twocol-section .layout__region--first {
     @apply pr-[30px];
   }
-  
+
   .layout--twocol-section .layout__region--second {
     @apply pl-[30px];
   }
@@ -55,30 +55,30 @@
   .layout--threecol-section {
     @apply -mx-[30px];
   }
-  
+
   .layout--threecol-section .layout__region {
     @apply box-border;
   }
-  
+
   .layout--threecol-section > .layout__region--first,
   .layout--threecol-section > .layout__region--second,
   .layout--threecol-section > .layout__region--third {
     @apply px-[30px];
   }
-  
+
   /* 33-34-33 Layout */
   .layout--threecol-section--33-34-33 > .layout__region--first,
   .layout--threecol-section--33-34-33 > .layout__region--second,
   .layout--threecol-section--33-34-33 > .layout__region--third {
     flex: 0 1 33.333333%;
   }
-  
+
   /* 25-25-50 Layout */
   .layout--threecol-section--25-25-50 > .layout__region--first,
   .layout--threecol-section--25-25-50 > .layout__region--second {
     flex: 0 1 28%;
   }
-  
+
   .layout--threecol-section--25-25-50 > .layout__region--third {
     flex: 0 1 44%;
   }
@@ -108,11 +108,11 @@
   .has-sidebar .layout--onecol.card-grid .layout__region {
     @apply flex-row gap-[30px];
   }
-  
+
   .layout--onecol.card-grid .layout__region .block {
     width: calc(33.333333% - 15px);
   }
-  
+
   .path-frontpage .layout.card-grid .layout__region--first .block,
   .has-sidebar .layout--onecol.card-grid .layout__region .block {
     width: calc(50% - 15px);

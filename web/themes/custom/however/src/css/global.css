@@ -34,11 +34,11 @@ div.page-section {
 }
 
 .footnotes {
-    position: relative;
-    margin: 2em 0;
-    padding: 1em 0 0;
-    border-top: 1px solid #000;
-    font-size: 0.9em;
+  position: relative;
+  margin: 2em 0;
+  padding: 1em 0 0;
+  border-top: 1px solid #000;
+  font-size: 0.9em;
 }
 
 .footnotes__item-wrapper {
@@ -52,12 +52,12 @@ div.page-section {
   font-weight: 600;
 }
 
-p, 
+p,
 ul,
 ol,
 pre,
 blockquote {
-  margin-top: .25em;
+  margin-top: 0.25em;
   margin-bottom: 1.25em;
 
   &:first-child {
@@ -93,9 +93,14 @@ h6 {
   @apply text-sm font-semibold;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-top: 1.5em;
-  margin-bottom: .25em;
+  margin-bottom: 0.25em;
   line-height: 1.2;
 }
 
@@ -110,4 +115,3 @@ li {
 :last-child {
   margin-bottom: 0;
 }
-
