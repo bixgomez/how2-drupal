@@ -297,11 +297,6 @@ function however_customizations_preprocess_node(&$variables) {
  * /[journal]/v[volume]/n[issue]/page-facsimiles
  */
 function however_customizations_ensure_page_facsimiles($node) {
-  // \Drupal::logger('however_customizations')->info('Ensure page facsimiles called for @bundle @id', [
-  //   '@bundle' => $node->bundle(),
-  //   '@id' => $node->id()
-  // ]);
-
   if (!in_array($node->bundle(), ['how2_issue', 'journal_issue'])) {
     return;
   }
@@ -312,11 +307,6 @@ function however_customizations_ensure_page_facsimiles($node) {
     ->condition('field_issue_reference', $node->id())
     ->accessCheck(FALSE);
   $existing = $query->execute();
-
-  // \Drupal::logger('however_customizations')->info('Found @count existing page facsimiles for issue @id', [
-  //   '@count' => count($existing),
-  //   '@id' => $node->id()
-  // ]);
 
   if (!empty($existing)) {
     return;
@@ -351,7 +341,7 @@ function however_customizations_ensure_page_facsimiles($node) {
  * Implements hook_node_insert().
  */
 function however_customizations_node_insert($node) {
-  // \Drupal::logger('however_customizations')->info('Node insert hook fired for: @title', ['@title' => $node->getTitle()]);
+  // Creates page facsimiles page upon issue creation
   however_customizations_ensure_page_facsimiles($node);
 }
 
@@ -359,7 +349,7 @@ function however_customizations_node_insert($node) {
  * Implements hook_node_update().
  */
 function however_customizations_node_update($node) {
-  // \Drupal::logger('however_customizations')->info('Node update hook fired for: @title', ['@title' => $node->getTitle()]);
+  // Creates page facsimiles page on issue update
   however_customizations_ensure_page_facsimiles($node);
 }
 
@@ -367,9 +357,7 @@ function however_customizations_node_update($node) {
  * Implements hook_node_delete().
  * 
  * Automatically deletes the corresponding page_facsimiles node when a
- * how2_issue or journal_issue is deleted. This keeps the site clean by
- * removing orphaned page facsimile nodes that would no longer have
- * any content to display.
+ * how2_issue or journal_issue is deleted.
  */
 function however_customizations_node_delete($node) {
   if (in_array($node->bundle(), ['how2_issue', 'journal_issue'])) {
@@ -381,14 +369,10 @@ function however_customizations_node_delete($node) {
     $facsimile_nids = $query->execute();
     
     if (!empty($facsimile_nids)) {
-      // Load and delete the page facsimiles nodes
+      // Load and delete the page facsimiles node(s)
       $facsimile_nodes = \Drupal\node\Entity\Node::loadMultiple($facsimile_nids);
       foreach ($facsimile_nodes as $facsimile_node) {
         $facsimile_node->delete();
-
-        // \Drupal::logger('however_customizations')->info('Deleted page facsimiles node for @title', [
-        //   '@title' => $node->getTitle(),
-        // ]);
       }
     }
   }
