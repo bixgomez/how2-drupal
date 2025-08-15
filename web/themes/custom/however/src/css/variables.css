@@ -25,6 +25,13 @@
   --line-height-md: 1.5;
   --line-height-lg: 1.75;
   --line-height-xl: 2;
+
+  /* Overriding breakpoints */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1200px;
 }
 
 @utility text-2xs {

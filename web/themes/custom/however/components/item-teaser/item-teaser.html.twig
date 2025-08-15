@@ -7,11 +7,9 @@
 	{% if title or subtitle %}
 		<div class="teaser-card-header">
 			{% if title %}
-				{{ title_prefix }}
 				<h2 class="teaser-card-title item-teaser-title">
 						<a href="{{ url }}" rel="bookmark">{{ title }}</a>
 				</h2>
-				{{ title_suffix }}
 			{% endif %}
 
 			{% if subtitle %}

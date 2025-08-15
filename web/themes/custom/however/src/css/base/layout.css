@@ -37,10 +37,14 @@
 
 .container {
   @apply max-w-6xl mx-auto;
+
+  container-type: inline-size;
 }
 
 .content {
   @apply w-full max-w-3xl mx-auto;
+
+  container-type: inline-size;
 }
 
 .content-section {

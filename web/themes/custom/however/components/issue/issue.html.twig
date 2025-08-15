@@ -11,13 +11,11 @@
 			</div>
 
 			<div class="issue-title">
-				{{ title_prefix }}
         {% if title_display %}
 				  <h1>{{ title_display }}</h1>
 				{% else %}
   				<h1>{{ journal }}	Vol. {{volume_num}}, No. {{issue_num}} ({{ date }})</h1>
 				{% endif %}				
-				{{ title_suffix }}
 
 				{# Issue navigation #}
 				{% if issue_navigation.prev or issue_navigation.next %}

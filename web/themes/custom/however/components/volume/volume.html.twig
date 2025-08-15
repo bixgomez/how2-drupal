@@ -2,11 +2,9 @@
 
 	<div class="content">
 
-		{{ title_prefix }}
 		{% if title %}
 			<h1 class="text-center !mb-5">{{ title }}</h1>
 		{% endif %}
-		{{ title_suffix }}
 
 		{# Volume navigation #}
 		{% if volume_navigation.prev or volume_navigation.next %}

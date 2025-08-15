@@ -1,3 +1,22 @@
 .page-facsimiles {
   margin-top: 2rem;
 }
+
+.page-facsimiles .field--name-field-journal-page-images-media {
+  @apply flex flex-row flex-wrap justify-center gap-[2cqi];
+
+  > .field__item {
+    @apply w-[100cqi]
+           xs:w-[48cqi]
+           sm:w-[32cqi]
+           md:w-[23.5cqi];
+
+    img {
+      @apply w-full;
+    }
+
+    > article {
+      @apply h-full;
+    }
+  }
+}

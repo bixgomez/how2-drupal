@@ -4,32 +4,36 @@
   {% set issue_url = volume_url ~ '/n' ~ issue_num %}
 {% endif %}
 
-{% if title_display %}
-	<h1>{{ title_display }}</h1>
-{% else %}
-	<h1>
-		{{ journal_name }}
-		Vol. {{ volume_num }},
-		No. {{ issue_num }}:
-		Page Facsimiles
-	</h1>
-{% endif %}				
+<div class="content">
 
-<div class="content-section content-section--sm">
-	{% include "@issue-meta/issue-meta.html.twig" with {
-		journal_name: journal_name,
-		journal_url: journal_url,
-		volume_url: volume_url,
-		issue_url: issue_url,
-		volume_num: volume_num,
-		issue_num: issue_num,
-		hide_issue_toc: false,
-		page_facsimiles:false
-	} %}
+	{% if title_display %}
+		<h1>{{ title_display }}</h1>
+	{% else %}
+		<h1>
+			{{ journal_name }}
+			Vol. {{ volume_num }},
+			No. {{ issue_num }}:
+			Page Facsimiles
+		</h1>
+	{% endif %}				
+
+	<div class="content-section content-section--sm">
+		{% include "@issue-meta/issue-meta.html.twig" with {
+			journal_name: journal_name,
+			journal_url: journal_url,
+			volume_url: volume_url,
+			issue_url: issue_url,
+			volume_num: volume_num,
+			issue_num: issue_num,
+			hide_issue_toc: false,
+			page_facsimiles:false
+		} %}
+	</div>
+
+	{% if page_facsimiles %}
+		<div class="page-facsimiles">
+			{{ page_facsimiles }}
+		</div>
+	{% endif %}
+
 </div>
-
-{% if page_facsimiles %}
-  <div class="page-facsimiles">
-    {{ page_facsimiles }}
-  </div>
-{% endif %}
