@@ -50,7 +50,7 @@
   }
 
   .journal-logo {
-    height: 12cqh;
+    height: 10cqh;
     /* border: 1px solid blue; */
     container-type: size;
 
@@ -80,7 +80,7 @@
 
     a.button {
       display: block;
-      font-size: 45cqh;
+      font-size: 40cqh;
       padding: 13cqh 40cqh;
       width: max-content;
       margin: 0 auto;
