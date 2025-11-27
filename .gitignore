@@ -109,3 +109,5 @@ web/.ht.router.php
 
 .DS_Store
 node_modules/
+CLAUDE.md
+dev_assets

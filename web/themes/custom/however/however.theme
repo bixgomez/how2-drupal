@@ -17,6 +17,30 @@ function however_preprocess_html(&$variables, $hook)
 }
 
 /**
+ * Implements hook_preprocess_layout().
+ * Adds section label as a CSS class to Layout Builder sections.
+ * For example, a section labeled "Home Page Section 1" will get the class "home-page-section-1".
+ */
+function however_preprocess_layout(&$variables)
+{
+  // Check if this is a layout builder section with a label
+  if (!empty($variables['settings']['label'])) {
+    $label = $variables['settings']['label'];
+
+    // Convert label to machine-readable class name
+    // e.g., "Home Page Section 1" becomes "home-page-section-1"
+    $class = strtolower($label);
+    $class = preg_replace('/[^a-z0-9]+/', '-', $class);
+    $class = trim($class, '-');
+
+    // Add the class to the layout's attributes
+    if (!empty($class)) {
+      $variables['attributes']['class'][] = $class;
+    }
+  }
+}
+
+/**
  * Page-level preprocessing. Currently empty but available for future use.
  */
 function however_preprocess_page(&$variables, $hook) {}

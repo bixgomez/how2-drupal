@@ -1644,6 +1644,68 @@ a.site-logo img {
   background-color: var(--color-secondary);
   border-bottom: 4px solid var(--color-primary-dark);
 }
+.home-page-section-1 {
+  .layout__region--first {
+    display: flex;
+    align-items: center;
+    > .block {
+      height: max-content;
+    }
+  }
+}
+.home-page-section-2 {
+  container-type: inline-size;
+  justify-content: center;
+  gap: 3rem;
+  > .layout__region {
+    width: 35cqw;
+    max-width: 300px;
+    padding: 0;
+    container-type: inline-size;
+  }
+}
+.journal-teaser {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  aspect-ratio: 1/1.5;
+  container-type: size;
+  > .field {
+    display: contents;
+    &:after {
+      display: none;
+    }
+  }
+  .journal-logo {
+    height: 12cqh;
+    container-type: size;
+    img {
+      display: block;
+      margin: 0 auto;
+      height: 100cqh;
+    }
+  }
+  .journal-thumb {
+    height: 65cqh;
+    container-type: size;
+    img {
+      display: block;
+      margin: 0 auto;
+      height: 100cqh;
+    }
+  }
+  .journal-link {
+    height: 12cqh;
+    container-type: size;
+    a.button {
+      display: block;
+      font-size: 45cqh;
+      padding: 13cqh 40cqh;
+      width: max-content;
+      margin: 0 auto;
+    }
+  }
+}
 input[type="text"],
 input[type="password"],
 input[type="search"],
@@ -2069,36 +2131,6 @@ input[type="tel"]::placeholder {
 }
 .block-inline-blockimage-carousel .media--type-image .field--name-field-caption {
   margin-top: 6px;
-}
-.block.journal-teaser {
-  margin-inline: auto;
-  margin-block: calc(var(--spacing) * 6);
-  max-width: 78%;
-  text-align: center;
-}
-@media (width >= 40em) {
-  .block.journal-teaser {
-    margin: calc(var(--spacing) * 0);
-    max-width: 100%;
-  }
-}
-.block.journal-teaser .journal-logo {
-  margin-inline: calc(var(--spacing) * 0);
-  margin-top: calc(var(--spacing) * 3);
-  margin-bottom: calc(var(--spacing) * 0);
-}
-.block.journal-teaser .journal-logo img {
-  height: calc(var(--spacing) * 7);
-  width: auto;
-}
-.block.journal-teaser p {
-  margin-inline: calc(var(--spacing) * 0);
-  margin-block: calc(var(--spacing) * 2);
-}
-.block.journal-teaser a.link {
-  color: var(--color-text);
-  font-size: var(--text-sm);
-  line-height: var(--tw-leading, var(--text-sm--line-height));
 }
 .block#about-site {
   text-align: justify;

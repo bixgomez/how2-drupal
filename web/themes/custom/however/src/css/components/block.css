@@ -36,34 +36,6 @@
   @apply mt-[6px];
 }
 
-.block.journal-teaser {
-  @apply text-center max-w-[78%] mx-auto my-6;
-}
-
-@media (width >= 40em) {
-  .block.journal-teaser {
-    @apply max-w-full m-0;
-  }
-}
-
-.block.journal-teaser .journal-logo {
-  @apply mt-3 mb-0 mx-0;
-}
-
-.block.journal-teaser .journal-logo img {
-  @apply h-7 w-auto;
-}
-
-.block.journal-teaser p {
-  @apply my-2 mx-0;
-}
-
-.block.journal-teaser a.link {
-  color: var(--color-text);
-
-  @apply text-sm;
-}
-
 .block#about-site {
   @apply text-justify;
 }
