@@ -838,6 +838,12 @@ a {
 * {
   box-sizing: border-box;
 }
+body {
+  > * {
+    max-width: 100%;
+    overflow: hidden;
+  }
+}
 .layout-container,
 %layout-container {
   width: 92%;
@@ -1580,29 +1586,46 @@ ul.menu li.menu-item--expanded {
   height: 100vh;
   width: 100%;
 }
+#mobile-navigation a {
+  display: block;
+  text-align: center;
+}
 #mobile-navigation .close-modal {
   position: absolute;
-  top: calc(var(--spacing) * 3);
-  right: calc(var(--spacing) * 3);
+  top: 42px;
+  right: 16px;
 }
 #mobile-navigation #block-mainnavigation > ul.menu {
   display: block;
   text-align: center;
 }
 #mobile-navigation #block-mainnavigation > ul.menu > li {
-  margin-bottom: calc(var(--spacing) * 6);
+  margin-block: calc(var(--spacing) * 6);
+  > .menu {
+    margin-top: calc(var(--spacing) * 2);
+  }
 }
 #mobile-navigation #block-mainnavigation > ul.menu > li.menu-item--collapsed {
   list-style-type: none !important;
   list-style-image: none !important;
 }
 #mobile-navigation #block-mainnavigation > ul.menu > li > a {
+  display: block;
+  text-align: center;
   font-size: var(--text-2xl);
   line-height: var(--tw-leading, var(--text-2xl--line-height));
   --tw-font-weight: var(--font-weight-black);
   font-weight: var(--font-weight-black);
-  text-decoration-line: none;
   color: var(--color-text);
+  text-decoration-line: none;
+}
+#mobile-navigation .views-exposed-form .form--inline {
+  justify-content: center;
+}
+body.mobile-menu-open .dialog-off-canvas-main-canvas {
+  > *:not(#mobile-navigation) {
+    display: none;
+  }
 }
 img {
   max-width: 100%;
