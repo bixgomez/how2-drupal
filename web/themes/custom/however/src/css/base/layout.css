@@ -2,6 +2,16 @@
   box-sizing: border-box;
 }
 
+html {
+}
+
+body {
+  > * {
+    max-width: 100%;
+    overflow: hidden;
+  }
+}
+
 .layout-container,
 %layout-container {
   width: 92%;

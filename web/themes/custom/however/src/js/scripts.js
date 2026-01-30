@@ -1,6 +1,13 @@
 (function (Drupal) {
   Drupal.behaviors.customScripts = {
     attach: function (context, settings) {
+      const setMobileMenuBodyClass = () => {
+        const isOpen = document
+          .getElementById("mobile-navigation")
+          ?.classList.contains("active");
+        document.body.classList.toggle("mobile-menu-open", Boolean(isOpen));
+      };
+
       // Mobile menu functionality
       document
         .querySelectorAll(".mobile-menu-icon > a", context)
@@ -12,6 +19,7 @@
             document
               .getElementById("mobile-navigation")
               ?.classList.toggle("active");
+            setMobileMenuBodyClass();
           });
         });
 
@@ -27,6 +35,7 @@
           document
             .getElementById("mobile-navigation")
             ?.classList.toggle("active");
+          setMobileMenuBodyClass();
         });
       });
 
