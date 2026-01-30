@@ -18,10 +18,7 @@ body {
   margin: 0 auto;
   max-width: 1100px;
   transition: width 0.2s linear;
-
-  @media all and (width >= 1024px) {
-    width: 96%;
-  }
+  @apply lg:w-[96%];
 }
 
 .view-content {
