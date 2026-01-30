@@ -7,21 +7,15 @@ nav ul.menu ul.menu {
 }
 
 .region-navigation {
-  @apply hidden;
+  @apply hidden md:flex md:flex-grow md:justify-between md:items-center md:ml-8;
 }
 
-@media (width >= 768px) {
-  .region-navigation {
-    @apply flex flex-grow justify-between items-center ml-8;
-  }
+.region-navigation .block-menu {
+  @apply md:flex-grow;
+}
 
-  .region-navigation .block-menu {
-    @apply flex-grow;
-  }
-
-  .region-navigation .block.views-exposed-form {
-    @apply flex-shrink;
-  }
+.region-navigation .block.views-exposed-form {
+  @apply md:flex-shrink;
 }
 
 .region-navigation .block-menu {

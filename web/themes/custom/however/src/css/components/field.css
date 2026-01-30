@@ -73,17 +73,10 @@
 
 .node--type-how-ever-article .field--name-field-journal-page-images-media .field__item,
 .node--type-how-ever-section .field--name-field-journal-page-images-media .field__item {
-  @apply w-[120px];
+  @apply w-[120px] lg:w-[200px];
 }
 
-@media (min-width: 1024px) {
-  .node--type-how-ever-article .field--name-field-journal-page-images-media .field__item,
-  .node--type-how-ever-section .field--name-field-journal-page-images-media .field__item {
-    @apply w-[200px];
-  }
-
-  .node--type-how-ever-article .field--name-field-journal-page-images-media,
-  .node--type-how-ever-section .field--name-field-journal-page-images-media {
-    @apply block;
-  }
+.node--type-how-ever-article .field--name-field-journal-page-images-media,
+.node--type-how-ever-section .field--name-field-journal-page-images-media {
+  @apply lg:block;
 }
