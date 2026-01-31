@@ -1918,8 +1918,15 @@ input[type="tel"]::placeholder {
 .region-sidebar {
   :where(& > :not(:last-child)) {
     --tw-space-y-reverse: 0;
-    margin-block-start: calc(calc(var(--spacing) * 6) * var(--tw-space-y-reverse));
-    margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
+    margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
+  }
+  @media (width >= 48rem) {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 6) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
+    }
   }
 }
 .block-facets {
@@ -1938,13 +1945,23 @@ input[type="tel"]::placeholder {
   border-bottom-width: 1px;
   border-color: var(--color-gray-200);
   background-color: var(--color-gray-50);
-  padding-inline: calc(var(--spacing) * 4);
-  padding-block: calc(var(--spacing) * 3);
-  font-size: var(--text-lg);
-  line-height: var(--tw-leading, var(--text-lg--line-height));
+  padding-inline: calc(var(--spacing) * 3);
+  padding-block: calc(var(--spacing) * 2);
+  font-size: var(--text-base);
+  line-height: var(--tw-leading, var(--text-base--line-height));
   --tw-font-weight: var(--font-weight-semibold);
   font-weight: var(--font-weight-semibold);
   color: var(--color-gray-900);
+  @media (width >= 48rem) {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+  @media (width >= 48rem) {
+    padding-block: calc(var(--spacing) * 3);
+  }
+  @media (width >= 48rem) {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
 }
 .facet-inactive.hidden {
   display: none;
@@ -1969,8 +1986,8 @@ input[type="tel"]::placeholder {
 }
 .facet-item a {
   display: block;
-  padding-inline: calc(var(--spacing) * 4);
-  padding-block: calc(var(--spacing) * 3);
+  padding-inline: calc(var(--spacing) * 3);
+  padding-block: calc(var(--spacing) * 2);
   color: var(--color-gray-700);
   text-decoration-line: none;
   transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
@@ -1992,6 +2009,12 @@ input[type="tel"]::placeholder {
     @media (hover: hover) {
       color: var(--color-primary);
     }
+  }
+  @media (width >= 48rem) {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+  @media (width >= 48rem) {
+    padding-block: calc(var(--spacing) * 3);
   }
   &:hover {
     text-decoration-line: none;
@@ -2081,8 +2104,8 @@ input[type="tel"]::placeholder {
   border-top-style: var(--tw-border-style);
   border-top-width: 1px;
   border-color: var(--color-gray-100);
-  padding-inline: calc(var(--spacing) * 4);
-  padding-block: calc(var(--spacing) * 3);
+  padding-inline: calc(var(--spacing) * 3);
+  padding-block: calc(var(--spacing) * 2);
   font-size: var(--text-sm);
   line-height: var(--tw-leading, var(--text-sm--line-height));
   color: var(--color-primary);
@@ -2103,6 +2126,12 @@ input[type="tel"]::placeholder {
       color: var(--color-primary-dark);
     }
   }
+  @media (width >= 48rem) {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+  @media (width >= 48rem) {
+    padding-block: calc(var(--spacing) * 3);
+  }
 }
 .facet-empty {
   padding: calc(var(--spacing) * 4);
@@ -2110,29 +2139,6 @@ input[type="tel"]::placeholder {
   line-height: var(--tw-leading, var(--text-sm--line-height));
   color: var(--color-gray-500);
   font-style: italic;
-}
-@media (width <= 768px) {
-  .region-sidebar {
-    :where(& > :not(:last-child)) {
-      --tw-space-y-reverse: 0;
-      margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
-      margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
-    }
-  }
-  .block-facets h2 {
-    padding-inline: calc(var(--spacing) * 3);
-    padding-block: calc(var(--spacing) * 2);
-    font-size: var(--text-base);
-    line-height: var(--tw-leading, var(--text-base--line-height));
-  }
-  .facet-item a {
-    padding-inline: calc(var(--spacing) * 3);
-    padding-block: calc(var(--spacing) * 2);
-  }
-  .facets-soft-limit-link {
-    padding-inline: calc(var(--spacing) * 3);
-    padding-block: calc(var(--spacing) * 2);
-  }
 }
 .facets-widget-links ul {
   display: flex;
