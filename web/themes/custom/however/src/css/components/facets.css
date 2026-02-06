@@ -2,7 +2,7 @@
 
 /* Clean up the sidebar region */
 .region-sidebar {
-  @apply space-y-6;
+  @apply space-y-4 md:space-y-6;
 }
 
 /* Facet block containers */
@@ -11,7 +11,7 @@
 }
 
 .block-facets h2 {
-  @apply text-lg font-semibold text-gray-900 px-4 py-3 bg-gray-50 border-b border-gray-200 m-0;
+  @apply text-base font-semibold text-gray-900 px-3 py-2 md:text-lg md:px-4 md:py-3 bg-gray-50 border-b border-gray-200 m-0;
 }
 
 /* Hide inactive/empty facets */
@@ -35,7 +35,7 @@
 }
 
 .facet-item a {
-  @apply block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 no-underline;
+  @apply block px-3 py-2 md:px-4 md:py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 no-underline;
 
   &:hover {
     @apply no-underline;
@@ -85,7 +85,7 @@
 
 /* Show more/less link */
 .facets-soft-limit-link {
-  @apply block px-4 py-3 text-sm text-primary hover:text-primary-dark hover:bg-gray-50 border-t border-gray-100 transition-colors duration-200 no-underline;
+  @apply block px-3 py-2 md:px-4 md:py-3 text-sm text-primary hover:text-primary-dark hover:bg-gray-50 border-t border-gray-100 transition-colors duration-200 no-underline;
 }
 
 /* Empty facet state */
@@ -93,24 +93,6 @@
   @apply p-4 text-gray-500 text-sm italic;
 }
 
-/* Responsive adjustments */
-@media (width <= 768px) {
-  .region-sidebar {
-    @apply space-y-4;
-  }
-
-  .block-facets h2 {
-    @apply text-base px-3 py-2;
-  }
-
-  .facet-item a {
-    @apply px-3 py-2;
-  }
-
-  .facets-soft-limit-link {
-    @apply px-3 py-2;
-  }
-}
 
 .facets-widget-links ul {
   @apply flex flex-col;
