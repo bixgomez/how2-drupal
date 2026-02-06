@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Custom maintenance page for HOW(ever)/How2.
+ *
+ * A minimal "coming soon" page without the logo.
+ */
+#}
+<!DOCTYPE html>
+<html{{ html_attributes }}>
+<head>
+  <head-placeholder token="{{ placeholder_token }}">
+  <title>{{ head_title|safe_join(' | ') }}</title>
+  <css-placeholder token="{{ placeholder_token }}">
+  <js-placeholder token="{{ placeholder_token }}">
+  <style>
+    body > .dialog-off-canvas-main-canvas {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body{{ attributes.addClass('font-sans bg-gray-100 m-0 p-0 flex items-center justify-center min-h-screen') }}>
+  <div class="text-center p-8 max-w-xl">
+    {% if site_name %}
+      <h1 class="text-3xl text-gray-800 mb-6">{{ site_name }}</h1>
+    {% endif %}
+    <div class="text-lg text-gray-600 leading-relaxed [&_a]:text-blue-600 [&_a]:no-underline hover:[&_a]:underline">
+      {{ page.content }}
+    </div>
+  </div>
+</body>
+</html>
