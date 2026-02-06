@@ -7,21 +7,15 @@ nav ul.menu ul.menu {
 }
 
 .region-navigation {
-  @apply hidden;
+  @apply hidden md:flex md:flex-grow md:justify-between md:items-center md:ml-8;
 }
 
-@media (width >= 768px) {
-  .region-navigation {
-    @apply flex flex-grow justify-between items-center ml-8;
-  }
+.region-navigation .block-menu {
+  @apply md:flex-grow;
+}
 
-  .region-navigation .block-menu {
-    @apply flex-grow;
-  }
-
-  .region-navigation .block.views-exposed-form {
-    @apply flex-shrink;
-  }
+.region-navigation .block.views-exposed-form {
+  @apply md:flex-shrink;
 }
 
 .region-navigation .block-menu {
@@ -114,8 +108,12 @@ ul.menu li.menu-item--expanded {
   @apply block absolute w-full h-screen inset-0;
 }
 
+#mobile-navigation a {
+  @apply text-center block;
+}
+
 #mobile-navigation .close-modal {
-  @apply absolute top-3 right-3;
+  @apply absolute top-[42px] right-[16px];
 }
 
 #mobile-navigation #block-mainnavigation > ul.menu {
@@ -123,7 +121,11 @@ ul.menu li.menu-item--expanded {
 }
 
 #mobile-navigation #block-mainnavigation > ul.menu > li {
-  @apply mb-6;
+  @apply my-6;
+
+  > .menu {
+    @apply mt-2;
+  }
 }
 
 #mobile-navigation #block-mainnavigation > ul.menu > li.menu-item--collapsed {
@@ -132,7 +134,15 @@ ul.menu li.menu-item--expanded {
 }
 
 #mobile-navigation #block-mainnavigation > ul.menu > li > a {
-  @apply text-2xl font-black no-underline;
+  @apply block text-2xl font-black no-underline text-center text-[var(--color-text)];
+}
 
-  color: var(--color-text);
+#mobile-navigation .views-exposed-form .form--inline {
+  @apply justify-center;
+}
+
+body.mobile-menu-open .dialog-off-canvas-main-canvas {
+  > *:not(#mobile-navigation) {
+    display: none;
+  }
 }

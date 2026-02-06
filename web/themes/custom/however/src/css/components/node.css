@@ -12,18 +12,16 @@
   content: "by";
 }
 
-@media (width >= 1024px) {
-  .issue-top-content {
-    @apply flex justify-center gap-9 items-center max-w-[92%] mx-auto;
-  }
+.issue-top-content {
+  @apply lg:flex lg:justify-center lg:gap-9 lg:items-center lg:max-w-[92%] lg:mx-auto;
+}
 
-  .issue-top-content .image {
-    @apply w-1/4;
-  }
+.issue-top-content .image {
+  @apply lg:w-1/4;
+}
 
-  .issue-top-content .issue-title-meta {
-    width: calc(75% - 36px);
-  }
+.issue-top-content .issue-title-meta {
+  @apply lg:w-[calc(75%-36px)];
 }
 
 .node--issue.node--view-mode-teaser .issue-volume-number,
@@ -73,22 +71,11 @@
   }
 }
 
-@media (width >= 768px) {
-  .node--type-how2-volume .field--name-field-how2-issue > .field__item,
-  .node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
-  .node--type-however-volume .field--name-field-how2-issue > .field__item,
-  .node--type-however-volume .field--name-field-how-ever-issue > .field__item {
-    width: calc(33% - 30px);
-  }
-}
-
-@media (width >= 1024px) {
-  .node--type-how2-volume .field--name-field-how2-issue > .field__item,
-  .node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
-  .node--type-however-volume .field--name-field-how2-issue > .field__item,
-  .node--type-however-volume .field--name-field-how-ever-issue > .field__item {
-    width: calc(25% - 30px);
-  }
+.node--type-how2-volume .field--name-field-how2-issue > .field__item,
+.node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
+.node--type-however-volume .field--name-field-how2-issue > .field__item,
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item {
+  @apply md:w-[calc(33%-30px)] lg:w-[calc(25%-30px)];
 }
 
 .node--type-journal-issue .issue-tabs ul {
