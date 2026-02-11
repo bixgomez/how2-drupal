@@ -111,3 +111,5 @@ web/.ht.router.php
 node_modules/
 CLAUDE.md
 dev_assets
+/web/sites/default/settings.php
+settings.php
