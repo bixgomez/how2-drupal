@@ -112,3 +112,5 @@ node_modules/
 CLAUDE.md
 dev_assets
 /web/images
+/web/sites/default/settings.php
+settings.php
