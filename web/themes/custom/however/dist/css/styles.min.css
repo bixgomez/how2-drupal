@@ -1192,12 +1192,15 @@ body {
 table {
   background-color: transparent;
 }
-img[src="0.gif"] {
-  position: relative;
-  visibility: hidden;
+table tr td,
+table tr th {
+  line-height: 1.2;
+  white-space: nowrap;
 }
 img[src="0.gif"] {
-  opacity: 0;
+  display: inline-block;
+  width: 1px !important;
+  height: 1px !important;
 }
 * {
   min-height: calc(var(--spacing) * 0);
