@@ -27,6 +27,12 @@ body {
   }
 }
 
+font {
+  font-family: unset;
+  font-size: unset;
+  line-height: unset;
+}
+
 a {
   @apply text-[var(--color-primary)] 
     hover:text-[var(--color-primary-dark)] 

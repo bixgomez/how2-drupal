@@ -676,6 +676,11 @@ body {
     flex-grow: 1;
   }
 }
+font {
+  font-family: unset;
+  font-size: unset;
+  line-height: unset;
+}
 a {
   color: var(--color-primary);
   text-decoration-line: none;
@@ -1194,7 +1199,6 @@ table {
 }
 table tr td,
 table tr th {
-  line-height: 1.2;
   white-space: nowrap;
 }
 img[src="0.gif"] {
