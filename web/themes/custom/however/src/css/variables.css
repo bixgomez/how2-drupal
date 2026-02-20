@@ -1,6 +1,13 @@
 /* stylelint-disable scss/at-rule-no-unknown */
 /* stylelint-disable at-rule-no-deprecated */
 
+/* Custom media queries (to match Tailwind; processed by postcss-custom-media) */
+@custom-media --sm (width >= 640px);
+@custom-media --md (width >= 768px);
+@custom-media --lg (width >= 1024px);
+@custom-media --xl (width >= 1280px);
+@custom-media --2xl (width >= 1536px);
+
 @theme {
   --font-size-2xs: 0.625rem;
   --font-size-3xs: 0.5rem;
@@ -25,7 +32,6 @@
   --line-height-md: 1.5;
   --line-height-lg: 1.75;
   --line-height-xl: 2;
-
 }
 
 @utility text-2xs {

@@ -8,9 +8,9 @@
   display: inline-block;
   width: 100%;
   margin-bottom: 1rem;
-  transition: 
-    .25s linear background-color,
-    .25s linear border-color;
+  transition:
+    0.25s linear background-color,
+    0.25s linear border-color;
 
   &:hover {
     background-color: rgb(128 0 128 / 5%);
@@ -41,7 +41,7 @@
   }
 }
 
-.item-teaser__section {
+.item-teaser {
   background-color: rgb(255 165 0 / 10%);
 
   &:hover {
@@ -49,10 +49,18 @@
   }
 }
 
+/* .item-teaser__section {
+  background-color: rgb(255 165 0 / 10%);
+
+  &:hover {
+    background-color: rgb(255 165 0 / 5%);
+  }
+} */
+
 h2.item-teaser-title {
   @apply text-base;
   margin: 0;
-  padding: 0
+  padding: 0;
 }
 
 h3.item-teaser-subtitle {

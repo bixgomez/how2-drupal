@@ -3,6 +3,7 @@ module.exports = {
     "postcss-import": {
       root: __dirname,
     },
+    "postcss-custom-media": {},
     "@tailwindcss/postcss": {},
   },
 };

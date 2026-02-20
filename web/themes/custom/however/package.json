@@ -21,5 +21,8 @@
     "stylelint-config-standard": "^39.0.0",
     "tailwindcss": "^4.1.7",
     "terser": "^5.24.0"
+  },
+  "dependencies": {
+    "postcss-custom-media": "^11.0.6"
   }
 }

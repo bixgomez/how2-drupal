@@ -1,16 +1,16 @@
 {% set volume_url = journal_url ~ '/v' ~ volume_num %}
 {% set issue_url = volume_url ~ '/n' ~ issue_num %}
 
-<article class="issue page-sections">
+<article class="issue page-sections p-0 m-0">
 
 	<div class="content">
 
-		<div class="issue-header">
-			<div class="issue-image">
+		<div class="issue-header flex gap-8 mb-4">
+			<div class="issue-image mb-2 overflow-hidden relative w-[30%] flex max-md:hidden items-start justify-start">
 				{{ featured_image }}
 			</div>
 
-			<div class="issue-title">
+			<div class="issue-title mt-1 grow">
         {% if title_display %}
 				  <h1>{{ title_display }}</h1>
 				{% else %}
@@ -56,7 +56,7 @@
 				<p class="dev-text">
 					These are the "old" sections -- they only allow for sections to be added to them. We need to replace all of these with the "new" sections below, which allow not only for sections, but also for articles to be added directly.
 				</p>
-				<div class="issue-sections">
+				<div class="issue-sections block columns-1 md:columns-2 lg:columns-3">
 					{% for section in sections_old %}
 						{{ drupal_entity('node', section.id(), 'teaser_card') }}
 					{% endfor %}
@@ -70,7 +70,7 @@
 				{# <p class="dev-text">
 					<b>Sections (new)</b>: These are the "new" sections -- they allow not only for sections, but also for articles to be added directly. Alas, the only "easy" way to migrate the sections to this new area is to do it manually.  We can start this process soon.
 				</p> #}
-				<div class="issue-sections">
+				<div class="issue-sections block columns-1 md:columns-3">
 					{% for section in sections_new %}
 						{{ drupal_entity('node', section.id(), 'teaser_card') }}
 					{% endfor %}
