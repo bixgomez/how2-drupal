@@ -1,4 +1,5 @@
 <article class="article">
+	{% set person_bio_content = person_bio|render %}
 	<div class="content">
 
 		{% if not hide_title %}
@@ -47,9 +48,9 @@
 		{% endif %}
 		#}
 
-		{% if person_bio['#items'] and not person_bio['#items'].isEmpty %}
+		{% if person_bio_content|striptags|trim %}
 			<div id="bios" class="content-section content-section--lg">
-				{{ person_bio }}
+				{{ person_bio_content|raw }}
 			</div>
 		{% endif %}
 

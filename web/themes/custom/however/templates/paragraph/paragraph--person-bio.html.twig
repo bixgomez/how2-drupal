@@ -1,22 +1,27 @@
-{% set image_alt = paragraph.field_person.0.entity.field_headshot.0.alt %}
-{% set image_url = file_url(paragraph.field_person.0.entity.field_headshot.0.entity.uri.value) %}
+{% set image_alt = paragraph.field_person.0.entity.field_headshot.0.alt|default('') %}
+{% set image_uri = paragraph.field_person.0.entity.field_headshot.0.entity.uri.value|default('') %}
+{% set image_url = image_uri ? file_url(image_uri) : '' %}
 
-{% set name = content.field_person.0['#title'] %}
-{% set name_linked = content.field_person %}
+{% set name = content.field_person.0['#title']|default('') %}
+{% set name_linked = content.field_person|default('') %}
 
-{% set hide_role = paragraph.field_hide_role_from_display.0.value %}
-{% set role = content.field_override_role.0['#plain_text'] %}
+{% set hide_role = paragraph.field_hide_role_from_display.0.value|default('0') %}
+{% set role = content.field_override_role.0['#plain_text']|default('') %}
 
-{% set bio_override = content.field_override_bio.0['#text'] %}
-{% set bio = paragraph.field_person.0.entity.body.0.value|raw %}
+{% set bio_override = content.field_override_bio.0['#text']|default('') %}
+{% set bio = paragraph.field_person.0.entity.body.0.value|default('') %}
+{% set bio_override_content = bio_override|striptags|trim %}
+{% set bio_content = bio|striptags|trim %}
 
-{% include "@person-bio-card/person-bio-card.html.twig" with {
-  image_alt: image_alt,
-  image_url: image_url,
-  name: name,
-  name_linked: name_linked,
-  hide_role: hide_role,
-  role: role,
-  bio_override: bio_override,
-  bio: bio
-} %}
+{% if bio_override_content or bio_content %}
+  {% include "@person-bio-card/person-bio-card.html.twig" with {
+    image_alt: image_alt,
+    image_url: image_url,
+    name: name,
+    name_linked: name_linked,
+    hide_role: hide_role,
+    role: role,
+    bio_override: bio_override,
+    bio: bio
+  } %}
+{% endif %}

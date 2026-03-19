@@ -18,6 +18,8 @@
 {% endif %}
 
 <article class="section">
+	{% set person_bio_content = person_bio|render %}
+
 	<div class="content">
 
 		{% if title_display|render|trim %}
@@ -60,6 +62,12 @@
 		{% if body.0['#text'] %}
 			<div class="content-section content-section--lg">
 			  {{ body }}
+			</div>
+		{% endif %}
+
+		{% if person_bio_content|striptags|trim %}
+			<div id="bios" class="content-section content-section--lg">
+				{{ person_bio_content|raw }}
 			</div>
 		{% endif %}
 

@@ -38,6 +38,19 @@
  */
 #}
 
+{% set rendered_items = [] %}
+
 {% for item in items %}
-  {{ item.content }}
+  {% set rendered_item = item.content|render %}
+  {% if rendered_item|striptags|trim %}
+    {% set rendered_items = rendered_items|merge([rendered_item]) %}
+  {% endif %}
 {% endfor %}
+
+{% if rendered_items %}
+  <div class="person-bio-cards flex flex-col gap-8">
+    {% for rendered_item in rendered_items %}
+      {{ rendered_item|raw }}
+    {% endfor %}
+  </div>
+{% endif %}
