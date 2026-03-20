@@ -1,5 +1,21 @@
 <article class="article">
 	{% set person_bio_content = person_bio|render %}
+	{% set rendered_body_sections = [] %}
+	{% for item in content_body_sections %}
+		{% if item['#paragraph'] is defined %}
+			{% set paragraph = item['#paragraph'] %}
+			{% set section_title_display = paragraph.field_title_display.value|default('') %}
+			{% set section_title = paragraph.field_title.value|default('') %}
+			{% set section_link_title = section_title_display
+				? section_title_display|replace({'<p>': '', '</p>': ''})
+				: section_title %}
+			{% set rendered_body_sections = rendered_body_sections|merge([{
+				paragraph: paragraph,
+				anchor: 'section-' ~ (rendered_body_sections|length + 1),
+				link_title: section_link_title
+			}]) %}
+		{% endif %}
+	{% endfor %}
 	<div class="content">
 
 		{% if not hide_title %}
@@ -67,25 +83,22 @@
 			</div>
 		{% endif %}
 
-		{% if node_body_sections|length > 1 %}
+		{% if rendered_body_sections|length > 1 %}
 			<div class="content-section content-section--lg">
 				<ul class="body-section-links">
-					{% for section in node_body_sections %}
+					{% for section in rendered_body_sections %}
 						<li>
-							<a href="#section-{{ loop.index }}">{{ section.entity.field_title.value }}</a>
+							<a href="#{{ section.anchor }}">{{ section.link_title|raw }}</a>
 						</li>
 					{% endfor %}
 				</ul>
 			</div>
 		{% endif %}
 
-		{% for key, item in content_body_sections %}
-    	{% if key is same as(0) or key is same as(1) %}
-        {% set paragraph = item['#paragraph'] %}
-        <div id="section-{{ key + 1 }}" class="content-section content-section--lg">
-          {{ drupal_entity('paragraph', paragraph.id.value) }}
-        </div>
-    	{% endif %}
+		{% for section in rendered_body_sections %}
+			<div id="{{ section.anchor }}" class="content-section content-section--lg">
+				{{ drupal_entity('paragraph', section.paragraph.id.value) }}
+			</div>
 		{% endfor %}
 
 		{% if images['#items'] and not images['#items'].isEmpty %}
