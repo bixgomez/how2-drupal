@@ -161,6 +161,42 @@ Special handling for Paragraphs module integration:
 
 The module provides several powerful Drush commands for content management:
 
+### `however-customizations:reconcile-export`
+**Alias:** `how-reconcile-export`  
+**When to run:** One-time content reconciliation between the osmarea and archive site instances  
+**Frequency:** Only as needed during cross-instance content reconciliation
+
+Exports nodes changed after a cutoff timestamp into a JSON payload that can be imported into another instance of the site.
+
+```bash
+drush how-reconcile-export --changed-after="2025-11-28 00:00:00" --output=/tmp/however-osmarea-reconcile.json
+```
+
+**What it does:**
+- Finds nodes with `changed` greater than the cutoff timestamp
+- Exports full node field payloads, including paragraph fields
+- Stores entity references by UUID so the destination site can resolve local IDs
+- Includes source metadata for review and dry-run reporting
+
+### `however-customizations:reconcile-import`
+**Alias:** `how-reconcile-import`  
+**When to run:** After copying a reconciliation export to the destination site  
+**Frequency:** Only as needed during cross-instance content reconciliation
+
+Imports a reconciliation JSON payload. The command is a dry-run unless `--apply` is supplied.
+
+```bash
+drush how-reconcile-import /tmp/however-osmarea-reconcile.json --report=/tmp/however-reconcile-dry-run.csv
+drush how-reconcile-import /tmp/however-osmarea-reconcile.json --apply --report=/tmp/however-reconcile-apply.csv
+```
+
+**What it does:**
+- Matches destination nodes by UUID
+- Updates only when the exported source node has a newer `changed` timestamp
+- Skips destination nodes that are newer or have equal timestamps
+- Rebuilds paragraph fields from the source payload
+- Reports missing destination nodes unless `--create-missing` is explicitly supplied
+
 ### `however-customizations:update-volume-numbers`
 **Alias:** `how-vol`  
 **When to run:** After bulk imports or when field synchronization gets out of sync  
