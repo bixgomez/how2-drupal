@@ -1,18 +1,22 @@
 {
   "folders": [
-	{
-		"name": "however",
-		"path": "."
-	},
-	{
-		"name": "however_customizations",
-		"path": "web/modules/custom/however_customizations"
-	},
-	{
-		"name": "however",
-		"path": "web/themes/custom/however"
-	}
-],
+    {
+      "name": "Site Notes",
+      "path": "../../../../home/bixgomez/dev_assets/site_notes/however",
+    },
+    {
+      "name": "Site Root",
+      "path": ".",
+    },
+    {
+      "name": "Custom Module: however_customizations",
+      "path": "web/modules/custom/however_customizations",
+    },
+    {
+      "name": "Custom Theme",
+      "path": "web/themes/custom/however",
+    },
+  ],
   "settings": {
     "intelephense.environment.phpVersion": "8.2",
     "editor.tabSize": 2,
