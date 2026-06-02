@@ -1,0 +1,31 @@
+nid,uuid,type,title,status,changed_local,changed_ts,path
+275,ef54cbe9-60a0-4ec1-a2ef-cfcd64dfe6fd,how2_section,performance,published,"2026-02-09 14:22:36 EST",1770664956,/how2/v1/n2/performance
+1309,8f0d554e-5122-4553-ac87-e003f4292d62,how_ever_article,.endnotes,published,"2026-02-09 14:35:39 EST",1770665739,/however/v3/n1/endnotes/endnotes
+1319,c1bdf42b-8f47-4726-be9d-5a21f65c6dae,how_ever_article,"The A.B.C. of Writing And Other Poems, excerpts",published,"2026-02-09 14:47:07 EST",1770666427,/however/v3/n2/bodies-line-shapes-poem/abc-writing-and-other-poems-excerpts
+1317,94824653-5f6c-454a-82e4-0b740b53db00,how_ever_article,"Three Sentences",published,"2026-02-19 12:59:05 EST",1771523945,/however/v3/n2/bodies-line-shapes-poem/three-sentences
+302,b3bd2b5b-502d-4932-9e49-9b03922ced48,how_ever_section,"Johanna Jordahl",published,"2026-02-22 17:15:49 EST",1771798549,/however/v1/n1/johanna-jordahl
+301,a93bd27a-824f-4477-9943-52b3296b7112,how_ever_section,"WHY HOW(ever)?",published,"2026-02-22 18:04:38 EST",1771801478,/however/v1/n1/why-however
+303,d90a4c40-0622-44f0-b87a-064f922551ec,how_ever_section,"Gail Sher",published,"2026-02-22 18:07:29 EST",1771801649,/however/v1/n1/gail-sher
+1331,5056e7bc-ecf5-45cd-8989-417dbc6111d6,how_ever_article,alerts(,published,"2026-03-09 12:48:39 EDT",1773074919,/however/v/n/alerts-0
+1333,71143d0b-73ef-42cb-8ac5-0cf162f9935b,person,"Gail Sher",published,"2026-03-09 13:18:17 EDT",1773076697,/gail-sher
+37,cebb2f01-8ad0-4425-a5cd-fe6b55f0abc5,journal_issue,"How(ever) Volume 1 Issue 1",published,"2026-03-09 13:24:53 EDT",1773077093,/however/v1/n1
+1335,86090a4f-a9d2-4b79-9067-f2bcdd3fa7d1,how_ever_article,.endnotes,published,"2026-03-09 13:34:43 EDT",1773077683,/however/v1/n1/endnotes-0
+1336,34822a44-7245-4119-abaf-c23c785e5692,how_ever_article,about,published,"2026-03-09 13:40:52 EDT",1773078052,/however/v1/n1/about
+346,dcb6bdec-9d95-4c59-9e68-f096f558c3be,how_ever_section,"Maureen Owen",published,"2026-03-19 12:18:14 EDT",1773937094,/however/v1/n2/maureen-owen
+351,f186513e-2469-403b-b584-4e8c236cc124,how_ever_article,"Maureen Owen",published,"2026-03-19 12:26:45 EDT",1773937605,/however/v1/n2/maureen-owen/maureen-owen
+39,2053af4f-7da6-4212-a917-e012380e11f1,journal_issue,"How(ever) Volume 1 Issue 2",published,"2026-03-19 12:35:44 EDT",1773938144,/however/v1/n2
+354,106be151-82ab-49ff-aa66-c7a7c9ff54b2,how_ever_article,"Jacqueline Quinn",published,"2026-03-19 12:39:40 EDT",1773938380,/however/v1/n2/jacqueline-quinn/jacqueline-quinn
+1329,1b9f4bfa-6a19-4665-bf93-15bcbbf8bf57,how_ever_article,"Johanna Jordahl",published,"2026-03-20 12:19:11 EDT",1774023551,/however/v1/n1/johanna-jordahl/johanna-jordahl
+1332,85db6600-5712-423e-911f-f8a5ce03372d,how_ever_article,alerts(,published,"2026-03-24 14:41:57 EDT",1774377717,/however/v1/n1/alerts-0
+1334,c2bdb811-cf4a-4b1d-8895-6aa45d4ae7e5,how_ever_article,"Gail Sher",published,"2026-03-24 14:55:08 EDT",1774378508,/however/v/n1/gail-sher
+1330,4f25b12e-70d8-419c-82bc-88069e2c0571,how_ever_article,"WHY HOW(ever)?",published,"2026-04-02 15:34:51 EDT",1775158491,/however/v1/n1/why-however-0
+359,74273269-aa26-4ddd-b682-a134d99c9d9b,how_ever_article,"Laura (Riding) Jackson: The Disclaimer of Persons",published,"2026-04-02 15:49:45 EDT",1775159385,/however/v1/n2/alerts/laura-riding-jackson-disclaimer-persons
+348,c13fbd7b-ae04-4ffc-a942-e150984aa67e,how_ever_section,alerts(,published,"2026-04-02 15:54:11 EDT",1775159651,/however/v1/n2/alerts
+360,ea57b8ca-324c-4e80-8274-206faab14145,how_ever_article,"Response to: ""A Renaissance of Women Writers,"" by Jed Rasula",published,"2026-04-02 16:05:58 EDT",1775160358,/however/v1/n2/alerts/response-renaissance-women-writers-jed-rasula
+362,3773ccb2-06d9-42ec-b22a-e50bfa7eba80,how_ever_article,"RE: Lorine Niedecker",published,"2026-04-02 16:13:17 EDT",1775160797,/however/v1/n2/alerts/re-lorine-niedecker
+350,6aef602e-3f0b-4252-95bd-f78a32a39d24,how_ever_section,.endnotes,published,"2026-04-26 11:17:32 EDT",1777216652,/however/v1/n2/endnotes-0
+349,1af09428-743e-4504-8178-69c1bbda2ec6,how_ever_section,postcards,published,"2026-04-26 11:21:45 EDT",1777216905,/however/v1/n2/postcards
+367,ddd85fd7-4cb4-43a7-b5bc-c6c080fe081e,how_ever_section,.endnotes,published,"2026-04-26 11:23:59 EDT",1777217039,/however/v1/n3/endnotes
+1253,cf4787b6-dd88-4ea6-a908-94e4b769fd88,how_ever_article,Masthead,published,"2026-04-26 11:24:23 EDT",1777217063,/however/v1/n3/masthead
+1337,3a33e8af-7789-4787-9516-83f6102e7cb7,how_ever_article,"Daphne Marlatt",published,"2026-04-26 13:12:01 EDT",1777223521,/however/v1/n3/daphne-marlatt
+40,b5691ba8-d27b-4797-9a3b-c8925e9ed5b4,journal_issue,"How(ever) Volume 1 Issue 3",published,"2026-04-26 13:13:30 EDT",1777223610,/however/v1/n3
