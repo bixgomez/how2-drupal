@@ -1,0 +1,38 @@
+uuid: 550e8400-e29b-41d4-a716-446655440203
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_subsection
+    - paragraphs.paragraphs_type.subsection
+id: paragraph.subsection.field_subsection
+field_name: field_subsection
+entity_type: paragraph
+bundle: subsection
+label: Subsection
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      section: section
+    negate: 0
+    target_bundles_drag_drop:
+      article: null
+      issue: null
+      page: null
+      page_facsimiles: null
+      section:
+        weight: 0
+        enabled: true
+      volume: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference
