@@ -10,7 +10,7 @@ third_party_settings:
     parent: ''
 name: Article
 type: article
-description: Unified publication article (However/How2)
+description: 'Unified publication article (However/How2)'
 help: null
 new_revision: false
 preview_mode: 1

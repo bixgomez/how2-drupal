@@ -7,7 +7,7 @@ dependencies:
 id: page_facsimiles
 label: 'Page Facsimiles'
 type: 'canonical_entities:node'
-pattern: '[node:field_journal_name]/v[node:field_volume_number]/n[node:field_issue_number]/page-facsimiles'
+pattern: '/[node:field_journal_name]/v[node:field_volume_number]/n[node:field_issue_number]/page-facsimiles'
 selection_criteria:
   85e7825a-863d-44b8-aceb-2c07e06599fd:
     id: 'entity_bundle:node'

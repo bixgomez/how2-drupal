@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:views_view:views.journal_volumes.page_1'
 name: Volume
 type: volume
-description: Unified publication volume (However/How2)
+description: 'Unified publication volume (However/How2)'
 help: null
 new_revision: true
 preview_mode: 1

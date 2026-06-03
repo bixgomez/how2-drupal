@@ -20,6 +20,11 @@ settings:
   handler_settings:
     target_bundles:
       section: section
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
     negate: 0
     target_bundles_drag_drop:
       article: null
@@ -30,9 +35,4 @@ settings:
         weight: 0
         enabled: true
       volume: null
-    sort:
-      field: _none
-      direction: ASC
-    auto_create: true
-    auto_create_bundle: ''
 field_type: entity_reference
