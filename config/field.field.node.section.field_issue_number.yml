@@ -1,0 +1,23 @@
+uuid: 37294ece-0657-445c-addb-f818de793f7d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_issue_number
+    - node.type.section
+id: node.section.field_issue_number
+field_name: field_issue_number
+entity_type: node
+bundle: section
+label: 'Issue Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

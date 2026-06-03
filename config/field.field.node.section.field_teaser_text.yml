@@ -1,0 +1,22 @@
+uuid: fc24b241-60e8-4f1f-9c40-542334ce2da8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_teaser_text
+    - node.type.section
+  module:
+    - text
+id: node.section.field_teaser_text
+field_name: field_teaser_text
+entity_type: node
+bundle: section
+label: 'Teaser Text'
+description: "Section teaser that's displayed on the issue TOC."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

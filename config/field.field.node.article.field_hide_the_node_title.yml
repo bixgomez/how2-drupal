@@ -1,0 +1,23 @@
+uuid: ef69b357-b53e-49d7-bb0f-6f2cf7a3787d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hide_the_node_title
+    - node.type.article
+id: node.article.field_hide_the_node_title
+field_name: field_hide_the_node_title
+entity_type: node
+bundle: article
+label: 'Hide the node title'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

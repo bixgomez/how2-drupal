@@ -1,4 +1,4 @@
-uuid: 550e8400-e29b-41d4-a716-446655440113
+uuid: 98817265-1e20-42e9-b118-2458aabdd801
 langcode: en
 status: true
 dependencies:
@@ -24,9 +24,11 @@ settings:
     target_bundles_drag_drop:
       article: null
       issue: null
+      journal: null
       page: null
       page_facsimiles: null
       section:
         weight: 0
         enabled: true
+      volume: null
 field_type: entity_reference
