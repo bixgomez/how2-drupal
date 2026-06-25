@@ -1,4 +1,31 @@
-(function (Drupal) {
+(function (Drupal, once) {
+  Drupal.behaviors.howeverSplide = {
+    attach: function (context) {
+      once('however-image-carousel', '.splide--image-carousel', context).forEach(function (el) {
+        new Splide(el, {
+          type: 'loop',
+          arrows: true,
+          pagination: true,
+          accessibility: true,
+        }).mount();
+      });
+
+      once('however-content-carousel', '.block-inline-blockcontent-carousel', context).forEach(function (el) {
+        new Splide(el, {
+          type: 'loop',
+          perPage: 4,
+          arrows: true,
+          pagination: false,
+          accessibility: true,
+          breakpoints: {
+            1024: { perPage: 2 },
+            640:  { perPage: 1 },
+          },
+        }).mount();
+      });
+    },
+  };
+
   Drupal.behaviors.customScripts = {
     attach: function (context, settings) {
       const setMobileMenuBodyClass = () => {
@@ -60,7 +87,7 @@
       });
     },
   };
-})(Drupal);
+})(Drupal, once);
 
 /**
  * Legacy content fixes for migrated HTML.
