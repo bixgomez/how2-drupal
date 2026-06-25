@@ -1,0 +1,19 @@
+uuid: efeea92f-abd0-4997-9ad2-461353ad6bd8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_publication_date_display
+    - node.type.issue
+id: node.issue.field_publication_date_display
+field_name: field_publication_date_display
+entity_type: node
+bundle: issue
+label: 'Publication Date Display'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

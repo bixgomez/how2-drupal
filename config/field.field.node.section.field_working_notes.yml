@@ -1,0 +1,22 @@
+uuid: a1b2b883-8fb3-47a3-bf92-f8ee0e9714b1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_working_notes
+    - node.type.section
+  module:
+    - text
+id: node.section.field_working_notes
+field_name: field_working_notes
+entity_type: node
+bundle: section
+label: 'Working Notes'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

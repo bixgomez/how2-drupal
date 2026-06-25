@@ -1,6 +1,10 @@
 {
   "folders": [
     {
+      "name": "LINODE",
+      "path": "../../../..",
+    },
+    {
       "name": "Site Notes",
       "path": "../../../../home/bixgomez/dev_assets/site_notes/however",
     },
@@ -18,7 +22,7 @@
     },
   ],
   "settings": {
-    "intelephense.environment.phpVersion": "8.1",
+    "intelephense.environment.phpVersion": "8.2",
     "editor.tabSize": 2,
     "files.autoSave": "onFocusChange",
     "editor.formatOnSave": true,
@@ -35,7 +39,7 @@
     "[twig]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
-    "php.version": "8.1",
+    "php.version": "8.2",
   },
   "launch": {
     "configurations": [

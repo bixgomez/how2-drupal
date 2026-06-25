@@ -1,0 +1,34 @@
+uuid: 550e8400-e29b-41d4-a716-446655440303
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_journal
+    - node.type.volume
+id: node.volume.field_journal
+field_name: field_journal
+entity_type: node
+bundle: volume
+label: Journal
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      journal: journal
+    negate: 0
+    target_bundles_drag_drop:
+      article: null
+      issue: null
+      journal:
+        weight: 0
+        enabled: true
+      page: null
+      page_facsimiles: null
+      section: null
+      volume: null
+field_type: entity_reference

@@ -1,0 +1,23 @@
+uuid: 271bed6f-78c9-4b96-9dc6-075dc4e539c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_volume_number
+    - node.type.section
+id: node.section.field_volume_number
+field_name: field_volume_number
+entity_type: node
+bundle: section
+label: 'Volume Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

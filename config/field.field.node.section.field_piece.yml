@@ -1,0 +1,67 @@
+uuid: 49d0dac7-3ad6-4293-b50c-eeae1477c8b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_piece
+    - node.type.section
+    - paragraphs.paragraphs_type.how_ever_subsection
+    - paragraphs.paragraphs_type.how2_section_links
+    - paragraphs.paragraphs_type.how2_subsection
+    - paragraphs.paragraphs_type.link_section_title
+    - paragraphs.paragraphs_type.open_title_text
+    - paragraphs.paragraphs_type.section_links
+    - paragraphs.paragraphs_type.subsection
+  module:
+    - entity_reference_revisions
+id: node.section.field_piece
+field_name: field_piece
+entity_type: node
+bundle: section
+label: Pieces
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      section_links: section_links
+      subsection: subsection
+      link_section_title: link_section_title
+      open_title_text: open_title_text
+    negate: 0
+    target_bundles_drag_drop:
+      body_sections:
+        weight: -12
+        enabled: false
+      how2_section_links:
+        weight: -17
+        enabled: false
+      how2_subsection:
+        weight: -16
+        enabled: false
+      how_ever_subsection:
+        weight: -18
+        enabled: false
+      link_section_title:
+        weight: -14
+        enabled: true
+      open_title_text:
+        weight: -11
+        enabled: true
+      person_bio:
+        weight: -15
+        enabled: false
+      photo_caption:
+        weight: -13
+        enabled: false
+      section_links:
+        weight: -19
+        enabled: true
+      subsection:
+        weight: -17
+        enabled: true
+field_type: entity_reference_revisions

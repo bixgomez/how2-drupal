@@ -1,0 +1,24 @@
+uuid: a0b724d0-81fa-42b3-9316-0126090e2d64
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.section
+  module:
+    - text
+id: node.section.body
+field_name: body
+entity_type: node
+bundle: section
+label: Body
+description: 'Section introduction or working notes displayed on the section detail page (only use this if "Show full section page" above is toggled.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

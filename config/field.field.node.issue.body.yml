@@ -1,0 +1,24 @@
+uuid: 1df3892e-9723-4cde-9ea4-43e22d4af453
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.issue
+  module:
+    - text
+id: node.issue.body
+field_name: body
+entity_type: node
+bundle: issue
+label: Transcript
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

@@ -1,0 +1,21 @@
+uuid: 9c62c3fa-7764-4a2a-8fed-eb263ec9e1d6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_journal_name
+    - node.type.section
+  module:
+    - options
+id: node.section.field_journal_name
+field_name: field_journal_name
+entity_type: node
+bundle: section
+label: 'Journal Name'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

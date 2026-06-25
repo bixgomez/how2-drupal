@@ -3,6 +3,7 @@
 namespace Drupal\however_customizations;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\however_customizations\Service\BundleConfiguration;
 
 /**
  * Service to handle navigation (prev/next links) for publication content.
@@ -17,13 +18,23 @@ class PublicationNavigationService {
   protected $entityTypeManager;
 
   /**
+   * The bundle configuration service.
+   *
+   * @var \Drupal\however_customizations\Service\BundleConfiguration
+   */
+  protected $bundleConfig;
+
+  /**
    * Constructs a PublicationNavigationService object.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
+   * @param \Drupal\however_customizations\Service\BundleConfiguration $bundle_config
+   *   The bundle configuration service.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, BundleConfiguration $bundle_config) {
     $this->entityTypeManager = $entity_type_manager;
+    $this->bundleConfig = $bundle_config;
   }
 
   /**
@@ -40,10 +51,9 @@ class PublicationNavigationService {
       'prev' => NULL,
       'next' => NULL,
     ];
-    
+
     // Only process volume content types.
-    $volume_types = ['however_volume', 'how2_volume'];
-    if (!in_array($node->bundle(), $volume_types)) {
+    if (!$this->bundleConfig->isVolumeBundle($node->bundle())) {
       return $result;
     }
     
@@ -113,10 +123,9 @@ class PublicationNavigationService {
       'prev' => NULL,
       'next' => NULL,
     ];
-    
+
     // Only process issue content types.
-    $issue_types = ['journal_issue', 'how2_issue'];
-    if (!in_array($node->bundle(), $issue_types)) {
+    if (!$this->bundleConfig->isIssueBundle($node->bundle())) {
       return $result;
     }
     
