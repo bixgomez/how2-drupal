@@ -98,4 +98,5 @@
             "tbachert/spi": true,
             "drupal/core-project-message": true
         }
+    }
 }
