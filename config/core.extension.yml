@@ -37,10 +37,6 @@ module:
   however_customizations: 0
   image: 0
   inline_entity_form: 0
-  jquery_ui: 0
-  jquery_ui_datepicker: 0
-  jquery_ui_slider: 0
-  jquery_ui_touch_punch: 0
   layout_builder: 0
   layout_builder_component_attributes: 0
   layout_builder_expose_all_field_blocks: 0
@@ -68,7 +64,6 @@ module:
   text: 0
   token: 0
   toolbar: 0
-  tour: 0
   twig_tweak: 0
   update: 0
   upgrade_status: 0
