@@ -1,12 +1,16 @@
 services:
+  however_customizations.bundle_config:
+    class: Drupal\however_customizations\Service\BundleConfiguration
+
   however_customizations.autocomplete_matcher:
     class: Drupal\however_customizations\EntityAutocompleteMatcher
     decorates: entity.autocomplete_matcher
     arguments:
       - '@plugin.manager.entity_reference_selection'
       - '@entity_type.manager'
-      
+
   however_customizations.publication_navigation:
     class: Drupal\however_customizations\PublicationNavigationService
     arguments:
       - '@entity_type.manager'
+      - '@however_customizations.bundle_config'

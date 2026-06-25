@@ -8,6 +8,8 @@
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Entity\EntityInterface;
 
 /**
  * Implements hook_help().
@@ -19,6 +21,323 @@ function however_customizations_help($route_name, RouteMatchInterface $route_mat
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('Custom functionality for the However project.') . '</p>';
       return $output;
+  }
+}
+
+/**
+ * Helper Functions
+ * ================
+ * Generic, bundle-agnostic helper functions for content operations.
+ * These functions are parametrized by bundle type and use BundleConfiguration
+ * service to determine behavior, avoiding duplication across similar bundles.
+ */
+
+/**
+ * Get bundle type from a Drupal form ID.
+ *
+ * Maps form IDs to their corresponding bundle types, handling both legacy
+ * and unified bundle form variants.
+ *
+ * @param string $form_id
+ *   The form ID from hook_form_alter.
+ *
+ * @return string|null
+ *   The bundle type ('volume', 'issue', 'article', 'section') or NULL if not found.
+ */
+function _however_customizations_get_bundle_type_from_form_id(string $form_id): ?string {
+  $config = \Drupal::service('however_customizations.bundle_config');
+  $mappings = $config->getFormBundleMappings();
+  return $mappings[$form_id] ?? NULL;
+}
+
+/**
+ * Auto-generate title for a node based on its bundle type.
+ *
+ * Generates titles for volume and issue nodes using the title pattern
+ * from configuration. For unified bundles, uses the journal_name field.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ *   The node to generate title for.
+ * @param string $bundle_type
+ *   The bundle type ('volume', 'issue').
+ * @param \Drupal\however_customizations\Service\BundleConfiguration $config
+ *   The bundle configuration service.
+ *
+ * @return string|null
+ *   The generated title or NULL if cannot be generated.
+ */
+function _however_customizations_generate_title(NodeInterface $node, string $bundle_type, $config): ?string {
+  $patterns = $config->getTitlePatterns();
+  $bundle = $node->bundle();
+
+  // Get the title pattern for this bundle
+  if (!isset($patterns[$bundle])) {
+    return NULL;
+  }
+
+  $pattern = $patterns[$bundle];
+
+  if ($bundle_type === 'volume') {
+    if (!$node->hasField('field_volume_number') || $node->field_volume_number->isEmpty()) {
+      return NULL;
+    }
+
+    $volume_number = $node->field_volume_number->value;
+
+    // For legacy bundles, journal is determined from bundle name
+    if ($config->getJournalFromBundle($bundle)) {
+      $title = str_replace('{volume}', $volume_number, $pattern);
+    } else {
+      // For unified bundle, get journal from field_journal reference
+      if (!$node->hasField('field_journal') || $node->field_journal->isEmpty()) {
+        return NULL;
+      }
+      $journal_node = $node->field_journal->entity;
+      $journal_name = $journal_node ? $journal_node->getTitle() : NULL;
+      if (!$journal_name) {
+        return NULL;
+      }
+      $title = str_replace('{journal}', $journal_name, $pattern);
+      $title = str_replace('{volume}', $volume_number, $title);
+    }
+
+    $node->setTitle($title);
+    return $title;
+  }
+
+  if ($bundle_type === 'issue') {
+    if (!$node->hasField('field_volume_number') || $node->field_volume_number->isEmpty() ||
+        !$node->hasField('field_issue_number') || $node->field_issue_number->isEmpty()) {
+      return NULL;
+    }
+
+    $volume_number = $node->field_volume_number->value;
+    $issue_number = $node->field_issue_number->value;
+
+    // For legacy bundles, journal is determined from bundle name
+    if ($config->getJournalFromBundle($bundle)) {
+      $title = str_replace(['{volume}', '{issue}'], [$volume_number, $issue_number], $pattern);
+    } else {
+      // For unified bundle, derive journal from parent volume reference
+      if (!$node->hasField('field_volume_reference') || $node->field_volume_reference->isEmpty()) {
+        return NULL;
+      }
+      $volume_node = $node->field_volume_reference->entity;
+      if (!$volume_node) {
+        return NULL;
+      }
+      // Get journal from volume's field_journal reference
+      if (!$volume_node->hasField('field_journal') || $volume_node->field_journal->isEmpty()) {
+        return NULL;
+      }
+      $journal_node = $volume_node->field_journal->entity;
+      $journal_name = $journal_node ? $journal_node->getTitle() : NULL;
+      if (!$journal_name) {
+        return NULL;
+      }
+      $title = str_replace('{journal}', $journal_name, $pattern);
+      $title = str_replace(['{volume}', '{issue}'], [$volume_number, $issue_number], $title);
+    }
+
+    $node->setTitle($title);
+    return $title;
+  }
+
+  return NULL;
+}
+
+/**
+ * Synchronize fields from a referenced entity to the current node.
+ *
+ * Copies field values from a referenced entity (issue to article/section,
+ * or volume to issue) based on the bundle type configuration.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ *   The node to synchronize fields on.
+ * @param string $bundle_type
+ *   The bundle type ('issue', 'article', 'section').
+ * @param \Drupal\however_customizations\Service\BundleConfiguration $config
+ *   The bundle configuration service.
+ *
+ * @return bool
+ *   TRUE if fields were synchronized, FALSE otherwise.
+ */
+function _however_customizations_sync_fields(NodeInterface $node, string $bundle_type, $config): bool {
+  $bundle = $node->bundle();
+  $mappings = $config->getContentMappings();
+
+  if (!isset($mappings[$bundle])) {
+    return FALSE;
+  }
+
+  $mapping = $mappings[$bundle];
+
+  // Check if reference field has a value
+  if (!$node->hasField($mapping['reference_field']) || $node->{$mapping['reference_field']}->isEmpty()) {
+    return FALSE;
+  }
+
+  $referenced_entity = $node->{$mapping['reference_field']}->entity;
+  if (!$referenced_entity) {
+    return FALSE;
+  }
+
+  $synced = FALSE;
+
+  // Handle single field copy (issue → volume)
+  if (isset($mapping['number_field'])) {
+    if ($referenced_entity->hasField('field_volume_number') && !$referenced_entity->field_volume_number->isEmpty()) {
+      $volume_number = $referenced_entity->field_volume_number->value;
+      $node->{$mapping['number_field']}->value = $volume_number;
+      $synced = TRUE;
+    }
+  }
+
+  // Handle multiple field copy (article/section → issue)
+  if (isset($mapping['copy_fields'])) {
+    foreach ($mapping['copy_fields'] as $source_field => $target_field) {
+      if ($referenced_entity->hasField($source_field) && !$referenced_entity->{$source_field}->isEmpty()) {
+        $field_value = $referenced_entity->{$source_field}->value;
+        $node->{$target_field}->value = $field_value;
+        $synced = TRUE;
+      }
+    }
+  }
+
+  return $synced;
+}
+
+/**
+ * Manage page facsimiles node for an issue.
+ *
+ * Creates or deletes the page_facsimiles node associated with an issue.
+ * Called on issue insert, update, or delete.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ *   The issue node.
+ * @param string $operation
+ *   The operation being performed ('insert', 'update', or 'delete').
+ * @param \Drupal\however_customizations\Service\BundleConfiguration $config
+ *   The bundle configuration service.
+ */
+function _however_customizations_manage_page_facsimiles(NodeInterface $node, string $operation, $config): void {
+  if (!$config->isIssueBundle($node->bundle())) {
+    return;
+  }
+
+  if ($operation === 'delete') {
+    // Find and delete any page_facsimiles nodes that reference this issue
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'page_facsimiles')
+      ->condition('field_issue_reference', $node->id())
+      ->accessCheck(FALSE);
+    $facsimile_nids = $query->execute();
+
+    if (!empty($facsimile_nids)) {
+      $facsimile_nodes = \Drupal\node\Entity\Node::loadMultiple($facsimile_nids);
+      foreach ($facsimile_nodes as $facsimile_node) {
+        $facsimile_node->delete();
+      }
+    }
+    return;
+  }
+
+  // For insert and update: create/update page facsimiles if needed
+  if (!$node->hasField('field_volume_number') || $node->field_volume_number->isEmpty() ||
+      !$node->hasField('field_issue_number') || $node->field_issue_number->isEmpty() ||
+      !$node->hasField('field_journal_page_images_media') || $node->field_journal_page_images_media->isEmpty()) {
+    return;
+  }
+
+  // Check if page facsimiles already exists
+  $query = \Drupal::entityQuery('node')
+    ->condition('type', 'page_facsimiles')
+    ->condition('field_issue_reference', $node->id())
+    ->accessCheck(FALSE);
+  $existing = $query->execute();
+
+  if (!empty($existing)) {
+    return;
+  }
+
+  // Create new page facsimiles node
+  $volume_number = $node->field_volume_number->value;
+  $issue_number = $node->field_issue_number->value;
+
+  // Determine journal name for title
+  $journal_name = 'unknown';
+  if ($config->getJournalFromBundle($node->bundle())) {
+    $journal_name = $config->getJournalFromBundle($node->bundle());
+  } else {
+    // For unified bundle, get from parent volume
+    if ($node->hasField('field_volume_reference') && !$node->field_volume_reference->isEmpty()) {
+      $volume_node = $node->field_volume_reference->entity;
+      if ($volume_node && $volume_node->hasField('field_journal') && !$volume_node->field_journal->isEmpty()) {
+        $journal_node = $volume_node->field_journal->entity;
+        $journal_name = $journal_node ? $journal_node->getTitle() : 'unknown';
+      }
+    }
+  }
+
+  $page_facsimiles = \Drupal\node\Entity\Node::create([
+    'type' => 'page_facsimiles',
+    'title' => ucfirst($journal_name) . " Volume {$volume_number} Issue {$issue_number}: Page Facsimiles",
+    'field_issue_reference' => $node->id(),
+    'field_volume_number' => $volume_number,
+    'field_issue_number' => $issue_number,
+    'field_journal_name' => strtolower($journal_name),
+    'status' => 1,
+  ]);
+
+  $page_facsimiles->save();
+}
+
+/**
+ * Alters forms for a specific bundle type.
+ *
+ * Generic helper that disables appropriate fields and adds descriptions
+ * based on bundle type.
+ *
+ * @param array &$form
+ *   The form array.
+ * @param string $bundle_type
+ *   The bundle type ('volume', 'issue', 'article', 'section').
+ * @param \Drupal\however_customizations\Service\BundleConfiguration $config
+ *   The bundle configuration service.
+ */
+function _however_customizations_alter_form_for_bundle(array &$form, string $bundle_type, $config): void {
+  $disabled_fields = $config->getDisabledFormFields($bundle_type);
+
+  switch ($bundle_type) {
+    case 'volume':
+      if (in_array('title', $disabled_fields) && isset($form['title'])) {
+        $form['title']['widget'][0]['value']['#disabled'] = TRUE;
+        $form['title']['widget'][0]['value']['#description'] = t('This title is automatically generated based on the Volume Number.');
+      }
+      break;
+
+    case 'issue':
+      if (isset($form['field_volume_number'])) {
+        $form['field_volume_number']['widget'][0]['value']['#disabled'] = TRUE;
+        $form['field_volume_number']['widget'][0]['value']['#description'] = t('This will be set automatically from the referenced volume on save.');
+      }
+      if (in_array('title', $disabled_fields) && isset($form['title'])) {
+        $form['title']['widget'][0]['value']['#disabled'] = TRUE;
+        $form['title']['widget'][0]['value']['#description'] = t('This title is automatically generated based on the Volume and Issue Numbers.');
+      }
+      break;
+
+    case 'article':
+    case 'section':
+      if (isset($form['field_volume_number'])) {
+        $form['field_volume_number']['widget'][0]['value']['#disabled'] = TRUE;
+        $form['field_volume_number']['widget'][0]['value']['#description'] = t('This will be set automatically from the referenced issue on save.');
+      }
+      if (isset($form['field_issue_number'])) {
+        $form['field_issue_number']['widget'][0]['value']['#disabled'] = TRUE;
+        $form['field_issue_number']['widget'][0]['value']['#description'] = t('This will be set automatically from the referenced issue on save.');
+      }
+      break;
   }
 }
 
@@ -35,7 +354,6 @@ function however_customizations_form_alter(&$form, FormStateInterface $form_stat
       '#weight' => -1000,
     ];
 
-
     // Hide everything else - all form elements
     foreach ($form as $key => $element) {
       if (strpos($key, '#') !== 0 && $key !== 'prevention_message') {
@@ -46,74 +364,12 @@ function however_customizations_form_alter(&$form, FormStateInterface $form_stat
     return;
   }
 
-  // Target the node edit forms for our volume content types
-  if (in_array($form_id, ['node_however_volume_edit_form', 'node_however_volume_form', 
-                           'node_how2_volume_edit_form', 'node_how2_volume_form'])) {
-    
-    // Get content type name for the message
-    $example = '';
-    if (strpos($form_id, 'however_volume') !== FALSE) {
-      $example = 'How(ever) Volume 1';
-    }
-    else if (strpos($form_id, 'how2_volume') !== FALSE) {
-      $example = 'How2 Volume 1';
-    }
-    
-    // Make the title field disabled (not just readonly)
-    $form['title']['widget'][0]['value']['#disabled'] = TRUE;
-    
-    // Add description to explain the auto-generation
-    $form['title']['widget'][0]['value']['#description'] = t('This title is automatically generated based on the Volume Number. Example: @example', 
-      ['@example' => $example]);
-  }
+  // Use bundle type detection and generic form alteration
+  $config = \Drupal::service('however_customizations.bundle_config');
+  $bundle_type = _however_customizations_get_bundle_type_from_form_id($form_id);
 
-  // Target the node edit forms for our article content types
-  if (in_array($form_id, ['node_how_ever_article_edit_form', 'node_how_ever_article_form',
-                          'node_how2_article_edit_form', 'node_how2_article_form'])) {
-    // Gray out volume and issue number fields
-    $form['field_volume_number']['widget'][0]['value']['#disabled'] = TRUE;
-    $form['field_issue_number']['widget'][0]['value']['#disabled'] = TRUE;
-    
-    // Add helpful descriptions
-    $form['field_volume_number']['widget'][0]['value']['#description'] = t('This will be set automatically from the referenced issue on save.');
-    $form['field_issue_number']['widget'][0]['value']['#description'] = t('This will be set automatically from the referenced issue on save.');
-  }
-
-  // Target the node edit forms for our section content types
-  if (in_array($form_id, ['node_how_ever_section_edit_form', 'node_how_ever_section_form',
-                          'node_how2_section_edit_form', 'node_how2_section_form'])) {
-    // Gray out volume and issue number fields
-    $form['field_volume_number']['widget'][0]['value']['#disabled'] = TRUE;
-    $form['field_issue_number']['widget'][0]['value']['#disabled'] = TRUE;
-    
-    // Add helpful descriptions
-    $form['field_volume_number']['widget'][0]['value']['#description'] = t('This will be set automatically from the referenced issue on save.');
-    $form['field_issue_number']['widget'][0]['value']['#description'] = t('This will be set automatically from the referenced issue on save.');
-  }
-  
-  // Target the node edit forms for our issue content types
-  if (in_array($form_id, ['node_journal_issue_edit_form', 'node_journal_issue_form', 
-                          'node_how2_issue_edit_form', 'node_how2_issue_form'])) {
-    
-    // Gray out volume number field since it's auto-populated from volume reference
-    $form['field_volume_number']['widget'][0]['value']['#disabled'] = TRUE;
-    $form['field_volume_number']['widget'][0]['value']['#description'] = t('This will be set automatically from the referenced volume on save.');
-    
-    // Get content type name for the message
-    $example = '';
-    if (strpos($form_id, 'journal_issue') !== FALSE) {
-      $example = 'How(ever) Volume 1 Issue 1';
-    }
-    else if (strpos($form_id, 'how2_issue') !== FALSE) {
-      $example = 'How2 Volume 1 Issue 1';
-    }
-    
-    // Make the title field disabled (not just readonly)
-    $form['title']['widget'][0]['value']['#disabled'] = TRUE;
-    
-    // Add description to explain the auto-generation
-    $form['title']['widget'][0]['value']['#description'] = t('This title is automatically generated based on the Volume and Issue Numbers. Example: @example', 
-      ['@example' => $example]);
+  if ($bundle_type) {
+    _however_customizations_alter_form_for_bundle($form, $bundle_type, $config);
   }
 }
 
@@ -129,127 +385,33 @@ function however_customizations_volume_form_validate($form, FormStateInterface $
  * Implements hook_entity_presave().
  * To update all nodes, run drush however:update-volume-numbers
  */
-function however_customizations_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+function however_customizations_entity_presave(EntityInterface $entity) {
   // Skip if this is being processed by our batch update
   if ($entity->getEntityTypeId() === 'node' && isset($entity->however_skip_presave)) {
     return;
   }
-  
-  // Auto-generate titles for volume content types
-  if ($entity->getEntityTypeId() === 'node') {
-    // Check if this is one of our volume content types
-    if ($entity->bundle() === 'however_volume' || $entity->bundle() === 'how2_volume') {
-      // Make sure volume number field exists and has a value
-      if ($entity->hasField('field_volume_number') && !$entity->field_volume_number->isEmpty()) {
-        // Get volume number
-        $volume_number = $entity->field_volume_number->value;
-        
-        // Generate title based on content type
-        if ($entity->bundle() === 'however_volume') {
-          $entity->setTitle("How(ever) Volume {$volume_number}");
-        }
-        else if ($entity->bundle() === 'how2_volume') {
-          $entity->setTitle("How2 Volume {$volume_number}");
-        }
-      }
-    }
-    
-    // Check if this is one of our issue content types
-    if ($entity->bundle() === 'journal_issue' || $entity->bundle() === 'how2_issue') {
-      // Make sure volume number and issue number fields exist and have values
-      if ($entity->hasField('field_volume_number') && !$entity->field_volume_number->isEmpty() && 
-          $entity->hasField('field_issue_number') && !$entity->field_issue_number->isEmpty()) {
-        
-        // Get volume number and issue number
-        $volume_number = $entity->field_volume_number->value;
-        $issue_number = $entity->field_issue_number->value;
-        
-        // Generate title based on content type
-        if ($entity->bundle() === 'journal_issue') {
-          $entity->setTitle("How(ever) Volume {$volume_number} Issue {$issue_number}");
-        }
-        else if ($entity->bundle() === 'how2_issue') {
-          $entity->setTitle("How2 Volume {$volume_number} Issue {$issue_number}");
-        }
-      }
-    }
+
+  if (!$entity instanceof NodeInterface) {
+    return;
   }
-  
-  // Define content types and their field mappings
-  $content_mappings = [
-    'how2_issue' => [
-      'reference_field' => 'field_volume_reference',
-      'number_field' => 'field_volume_number',
-    ],
-    'journal_issue' => [
-      'reference_field' => 'field_volume_reference',
-      'number_field' => 'field_volume_number',
-    ],
-    'how_ever_article' => [
-      'reference_field' => 'field_issue_reference', // references an issue
-      'copy_fields' => [
-        'field_volume_number' => 'field_volume_number',
-        'field_issue_number' => 'field_issue_number',
-      ],
-    ],
-    'how2_article' => [
-      'reference_field' => 'field_issue_reference', // references an issue
-      'copy_fields' => [
-        'field_volume_number' => 'field_volume_number',
-        'field_issue_number' => 'field_issue_number',
-      ],
-    ],
-    'how_ever_section' => [
-      'reference_field' => 'field_issue_reference', // references an issue
-      'copy_fields' => [
-        'field_volume_number' => 'field_volume_number',
-        'field_issue_number' => 'field_issue_number',
-      ],
-    ],
-    'how2_section' => [
-      'reference_field' => 'field_issue_reference', // references an issue
-      'copy_fields' => [
-        'field_volume_number' => 'field_volume_number',
-        'field_issue_number' => 'field_issue_number',
-      ],
-    ],
-  ];
-    
-  // Check if this is one of our target content types
-  if ($entity->getEntityTypeId() === 'node' && isset($content_mappings[$entity->bundle()])) {
-    $mapping = $content_mappings[$entity->bundle()];
-    
-    // Check if reference field has a value
-    if (!$entity->{$mapping['reference_field']}->isEmpty()) {
-      
-      // Get the referenced entity
-      $referenced_entity = $entity->{$mapping['reference_field']}->entity;
-      
-      if ($referenced_entity) {
-        
-        // Handle single field copy (existing issues → volumes)
-        if (isset($mapping['number_field'])) {
-          if ($referenced_entity->hasField('field_volume_number') && 
-              !$referenced_entity->field_volume_number->isEmpty()) {
-            
-            $volume_number = $referenced_entity->field_volume_number->value;
-            $entity->{$mapping['number_field']}->value = $volume_number;
-          }
-        }
-        
-        // Handle multiple field copy (new articles & sections → issues)
-        if (isset($mapping['copy_fields'])) {
-          foreach ($mapping['copy_fields'] as $source_field => $target_field) {
-            if ($referenced_entity->hasField($source_field) && 
-                !$referenced_entity->{$source_field}->isEmpty()) {
-              
-              $field_value = $referenced_entity->{$source_field}->value;
-              $entity->{$target_field}->value = $field_value;
-            }
-          }
-        }
-      }
-    }
+
+  $config = \Drupal::service('however_customizations.bundle_config');
+  $bundle = $entity->bundle();
+
+  // Auto-generate titles for volumes
+  if ($config->isVolumeBundle($bundle)) {
+    _however_customizations_generate_title($entity, 'volume', $config);
+  }
+
+  // Auto-generate titles for issues and sync volume number from parent volume
+  if ($config->isIssueBundle($bundle)) {
+    _however_customizations_generate_title($entity, 'issue', $config);
+    _however_customizations_sync_fields($entity, 'issue', $config);
+  }
+
+  // Sync fields from referenced issue for articles and sections
+  if ($config->isArticleBundle($bundle) || $config->isSectionBundle($bundle)) {
+    _however_customizations_sync_fields($entity, $bundle, $config);
   }
 }
 
@@ -258,13 +420,11 @@ function however_customizations_entity_presave(Drupal\Core\Entity\EntityInterfac
  */
 function however_customizations_preprocess_node(&$variables) {
   $node = $variables['node'];
-  
-  // Get navigation service
+  $config = \Drupal::service('however_customizations.bundle_config');
   $navigation_service = \Drupal::service('however_customizations.publication_navigation');
-  
+
   // For volume content types
-  $volume_types = ['however_volume', 'how2_volume'];
-  if (in_array($node->bundle(), $volume_types)) {
+  if ($config->isVolumeBundle($node->bundle())) {
     // Get previous and next volumes
     $navigation = $navigation_service->getVolumeNavigation($node);
 
@@ -274,10 +434,9 @@ function however_customizations_preprocess_node(&$variables) {
       'next' => $navigation['next'],
     ];
   }
-  
+
   // For issue content types
-  $issue_types = ['journal_issue', 'how2_issue'];
-  if (in_array($node->bundle(), $issue_types)) {
+  if ($config->isIssueBundle($node->bundle())) {
     // Get previous and next issues
     $navigation = $navigation_service->getIssueNavigation($node);
 
@@ -290,108 +449,57 @@ function however_customizations_preprocess_node(&$variables) {
 }
 
 /**
- * Automatically creates a corresponding page_facsimiles node when a
- * how2_issue or journal_issue is created or edited (and it has images in 
- * the page facsimiles field). This ensures every issue has a dedicated 
- * page for displaying its page facsimile images at the URL:
- * /[journal]/v[volume]/n[issue]/page-facsimiles
- */
-function however_customizations_ensure_page_facsimiles($node) {
-  if (!in_array($node->bundle(), ['how2_issue', 'journal_issue'])) {
-    return;
-  }
-
-  // Check if page facsimiles already exists
-  $query = \Drupal::entityQuery('node')
-    ->condition('type', 'page_facsimiles')
-    ->condition('field_issue_reference', $node->id())
-    ->accessCheck(FALSE);
-  $existing = $query->execute();
-
-  if (!empty($existing)) {
-    return;
-  }
-
-  // Create a new facsimile page if issue has required fields
-  if (
-    $node->hasField('field_volume_number') && !$node->get('field_volume_number')->isEmpty() &&
-    $node->hasField('field_issue_number') && !$node->get('field_issue_number')->isEmpty() &&
-    $node->hasField('field_journal_page_images_media') && !$node->get('field_journal_page_images_media')->isEmpty()
-  ) {
-
-    $volume_number = $node->get('field_volume_number')->value;
-    $issue_number = $node->get('field_issue_number')->value;
-    $journal_name = ($node->bundle() === 'how2_issue') ? 'how2' : 'however';
-
-    $page_facsimiles = \Drupal\node\Entity\Node::create([
-      'type' => 'page_facsimiles',
-      'title' => ucfirst($journal_name) . " Volume {$volume_number} Issue {$issue_number}: Page Facsimiles",
-      'field_issue_reference' => $node->id(),
-      'field_volume_number' => $volume_number,
-      'field_issue_number' => $issue_number,
-      'field_journal_name' => $journal_name,
-      'status' => 1,
-    ]);
-
-    $page_facsimiles->save();
-  }
-}
-
-/**
  * Implements hook_node_insert().
  */
 function however_customizations_node_insert($node) {
-  // Creates page facsimiles page upon issue creation
-  however_customizations_ensure_page_facsimiles($node);
+  if (!$node instanceof NodeInterface) {
+    return;
+  }
+  $config = \Drupal::service('however_customizations.bundle_config');
+  _however_customizations_manage_page_facsimiles($node, 'insert', $config);
 }
 
 /**
  * Implements hook_node_update().
  */
 function however_customizations_node_update($node) {
-  // Creates page facsimiles page on issue update
-  however_customizations_ensure_page_facsimiles($node);
+  if (!$node instanceof NodeInterface) {
+    return;
+  }
+  $config = \Drupal::service('however_customizations.bundle_config');
+  _however_customizations_manage_page_facsimiles($node, 'update', $config);
 }
 
 /**
  * Implements hook_node_delete().
- * 
- * Automatically deletes the corresponding page_facsimiles node when a
- * how2_issue or journal_issue is deleted.
+ *
+ * Automatically deletes the corresponding page_facsimiles node when an
+ * issue is deleted.
  */
 function however_customizations_node_delete($node) {
-  if (in_array($node->bundle(), ['how2_issue', 'journal_issue'])) {
-    // Find any page_facsimiles nodes that reference this issue
-    $query = \Drupal::entityQuery('node')
-      ->condition('type', 'page_facsimiles')
-      ->condition('field_issue_reference', $node->id())
-      ->accessCheck(FALSE);
-    $facsimile_nids = $query->execute();
-    
-    if (!empty($facsimile_nids)) {
-      // Load and delete the page facsimiles node(s)
-      $facsimile_nodes = \Drupal\node\Entity\Node::loadMultiple($facsimile_nids);
-      foreach ($facsimile_nodes as $facsimile_node) {
-        $facsimile_node->delete();
-      }
-    }
+  if (!$node instanceof NodeInterface) {
+    return;
   }
+  $config = \Drupal::service('however_customizations.bundle_config');
+  _however_customizations_manage_page_facsimiles($node, 'delete', $config);
 }
 
 /**
  * Implements hook_preprocess_menu().
- * 
+ *
  * Dynamically adds journal volume links as submenu items under journal landing pages
  * in the main navigation. For each journal landing page (How(ever) or How2), this finds
  * all published volume nodes with matching journal names and creates dropdown menu items
  * ordered by volume number. Also adds the 'menu-item--expanded' class to enable proper
  * CSS styling for hover dropdowns.
  */
-function however_customizations_preprocess_menu(&$variables)
-{
+function however_customizations_preprocess_menu(&$variables) {
   if ($variables['menu_name'] !== 'main') {
     return;
   }
+
+  $config = \Drupal::service('however_customizations.bundle_config');
+  $volume_types = $config->getVolumeTypes();
 
   foreach ($variables['items'] as &$item) {
     if (isset($item['url']) && $item['url']->getRouteName() === 'entity.node.canonical') {
@@ -402,7 +510,7 @@ function however_customizations_preprocess_menu(&$variables)
         $journal_name = $node->get('field_journal_name')->value;
 
         $query = \Drupal::entityQuery('node')
-          ->condition('type', ['however_volume', 'how2_volume'], 'IN')
+          ->condition('type', $volume_types, 'IN')
           ->condition('field_journal_name', $journal_name)
           ->condition('status', 1)
           ->sort('field_volume_number', 'ASC')
