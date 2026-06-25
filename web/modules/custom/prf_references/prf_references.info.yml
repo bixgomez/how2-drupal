@@ -1,0 +1,5 @@
+name: PRF References
+type: module
+description: 'Custom references stub (disabled, not in use).'
+package: Custom
+core_version_requirement: ^10 || ^11
