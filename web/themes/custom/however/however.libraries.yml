@@ -6,6 +6,8 @@ featherlight:
   js:
     vendor/featherlight/release/featherlight.min.js: {}
     vendor/featherlight-gallery/featherlight.gallery.min.js: {}
+  dependencies:
+    - core/jquery
 
 slick:
   css:
@@ -14,6 +16,8 @@ slick:
       vendor/slick/slick-theme.css: {}
   js:
     vendor/slick/slick.min.js: {}
+  dependencies:
+    - core/jquery
 
 theme-scripts:
   js:
@@ -27,6 +31,7 @@ jquery-scripts:
   dependencies:
     - core/drupal
     - core/jquery
+    - core/once
     - however/slick
     - however/featherlight
 
