@@ -1,0 +1,19 @@
+uuid: 550e8400-e29b-41d4-a716-446655440104
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_issues
+field_name: field_issues
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -7,7 +7,7 @@ dependencies:
 id: person
 label: Person
 type: 'canonical_entities:node'
-pattern: '[node:title]'
+pattern: '/[node:title]'
 selection_criteria:
   2632b6c5-3d42-463c-aa89-31ab62297603:
     id: 'entity_bundle:node'

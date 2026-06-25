@@ -1,0 +1,29 @@
+uuid: 7e3fe25f-5a5e-4d18-9fe0-796e2d34c4ea
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_section_reference
+    - node.type.article
+    - node.type.section
+id: node.article.field_section_reference
+field_name: field_section_reference
+entity_type: node
+bundle: article
+label: 'Section (reference)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      section: section
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

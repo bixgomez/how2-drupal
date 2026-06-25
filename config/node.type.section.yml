@@ -1,0 +1,17 @@
+uuid: 550e8400-e29b-41d4-a716-446655440003
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Section
+type: section
+description: 'Unified publication section (However/How2)'
+help: null
+new_revision: false
+preview_mode: 1
+display_submitted: false

@@ -1,37 +1,45 @@
 {
   "folders": [
-	{
-		"name": "however",
-		"path": "."
-	},
-	{
-		"name": "however_customizations",
-		"path": "web/modules/custom/however_customizations"
-	},
-	{
-		"name": "however",
-		"path": "web/themes/custom/however"
-	}
-],
+    {
+      "name": "LINODE",
+      "path": "../../../..",
+    },
+    {
+      "name": "Site Notes",
+      "path": "../../../../home/bixgomez/dev_assets/site_notes/however",
+    },
+    {
+      "name": "Site Root",
+      "path": ".",
+    },
+    {
+      "name": "Custom Module: however_customizations",
+      "path": "web/modules/custom/however_customizations",
+    },
+    {
+      "name": "Custom Theme",
+      "path": "web/themes/custom/however",
+    },
+  ],
   "settings": {
-    "intelephense.environment.phpVersion": "8.1",
+    "intelephense.environment.phpVersion": "8.2",
     "editor.tabSize": 2,
     "files.autoSave": "onFocusChange",
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[php]": {
-      "editor.defaultFormatter": "junstyle.php-cs-fixer"
+      "editor.defaultFormatter": "junstyle.php-cs-fixer",
     },
     "[css]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[twig]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
-    "php.version": "8.1"
+    "php.version": "8.2",
   },
   "launch": {
     "configurations": [
@@ -42,12 +50,12 @@
         "hostname": "0.0.0.0",
         "port": 9003,
         "pathMappings": {
-          "/var/www/html": "${workspaceFolder}"
+          "/var/www/html": "${workspaceFolder}",
         },
         "preLaunchTask": "DDEV: Enable Xdebug",
-        "postDebugTask": "DDEV: Disable Xdebug"
-      }
-    ]
+        "postDebugTask": "DDEV: Disable Xdebug",
+      },
+    ],
   },
   "tasks": {
     "tasks": [
@@ -57,8 +65,8 @@
         "command": "ddev xdebug on",
         "presentation": {
           "reveal": "silent",
-          "close": true
-        }
+          "close": true,
+        },
       },
       {
         "label": "DDEV: Disable Xdebug",
@@ -66,9 +74,9 @@
         "command": "ddev xdebug off",
         "presentation": {
           "reveal": "silent",
-          "close": true
-        }
-      }
-    ]
-  }
+          "close": true,
+        },
+      },
+    ],
+  },
 }
