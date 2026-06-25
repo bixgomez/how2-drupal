@@ -10,7 +10,7 @@ third_party_settings:
     parent: ''
 name: 'HOW(ever) Section'
 type: how_ever_section
-description: null
+description: 'LEGACY - To be retired. Replaced by: section'
 help: null
 new_revision: false
 preview_mode: 1

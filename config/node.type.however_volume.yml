@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:views_view:views.journal_volumes.page_1'
 name: 'HOW(ever) Volume'
 type: however_volume
-description: null
+description: 'LEGACY - To be retired. Replaced by: volume'
 help: null
 new_revision: true
 preview_mode: 1

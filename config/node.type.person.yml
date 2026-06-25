@@ -10,7 +10,7 @@ third_party_settings:
     parent: ''
 name: Person
 type: person
-description: null
+description: 'KEEPER - Contributor/person profile, referenced by person_bio paragraphs'
 help: null
 new_revision: false
 preview_mode: 1

@@ -10,7 +10,7 @@ third_party_settings:
     parent: ''
 name: 'HOW(ever) Issue'
 type: journal_issue
-description: null
+description: 'LEGACY - To be retired. Replaced by: issue'
 help: null
 new_revision: true
 preview_mode: 1

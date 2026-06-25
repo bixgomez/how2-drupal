@@ -6,6 +6,6 @@ dependencies:
     - paragraphs
 id: paragraph.person_without_bio
 label: 'Person Without Bio'
-description: ''
+description: null
 targetEntityType: paragraph
 cache: true

@@ -6,5 +6,5 @@ id: open_title_text
 label: 'Open title & text'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'KEEPER - Unified paragraph type for open-format title and body text with display options'
 behavior_plugins: {  }

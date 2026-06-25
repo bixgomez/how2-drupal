@@ -10,7 +10,7 @@ third_party_settings:
     parent: ''
 name: Section
 type: section
-description: 'Unified publication section (However/How2)'
+description: 'UNIFIED - Publication section (consolidates how_ever_section + how2_section)'
 help: null
 new_revision: false
 preview_mode: 1

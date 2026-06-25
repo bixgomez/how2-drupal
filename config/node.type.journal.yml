@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 name: 'Journal Landing Page'
 type: journal
-description: null
+description: 'KEEPER - Journal landing page; parent of all volumes in the hierarchy (journal > volume > issue > section > article)'
 help: null
 new_revision: true
 preview_mode: 1

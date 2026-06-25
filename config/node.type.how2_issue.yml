@@ -10,7 +10,7 @@ third_party_settings:
     parent: ''
 name: 'How2 Issue'
 type: how2_issue
-description: null
+description: 'LEGACY - To be retired. Replaced by: issue'
 help: null
 new_revision: true
 preview_mode: 1

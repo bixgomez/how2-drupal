@@ -6,5 +6,5 @@ id: subsection
 label: Subsection
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'UNIFIED paragraph type for subsection references (consolidates how_ever_subsection + how2_subsection)'
 behavior_plugins: {  }

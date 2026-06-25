@@ -11,7 +11,7 @@ third_party_settings:
     parent: ''
 name: Issue
 type: issue
-description: 'Unified publication issue (However/How2)'
+description: 'UNIFIED - Publication issue (consolidates journal_issue + how2_issue)'
 help: null
 new_revision: true
 preview_mode: 1

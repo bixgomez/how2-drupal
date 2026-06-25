@@ -6,5 +6,5 @@ id: link_section_title
 label: 'Link Section TItle'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'KEEPER - Unified paragraph type for a titled link section heading'
 behavior_plugins: {  }

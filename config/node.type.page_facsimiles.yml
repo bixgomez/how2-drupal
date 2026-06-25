@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 name: 'Page Facsimiles'
 type: page_facsimiles
-description: null
+description: 'KEEPER - Stores page facsimile images associated with a volume'
 help: null
 new_revision: true
 preview_mode: 1

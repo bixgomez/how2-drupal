@@ -6,5 +6,5 @@ id: how2_section_links
 label: 'How2 Individual Piece'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'LEGACY - To be retired. Replaced by: section_links'
 behavior_plugins: {  }

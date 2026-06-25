@@ -6,5 +6,5 @@ id: body_sections
 label: 'Body Section'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'KEEPER - Unified paragraph type for body content sections (title, text, references)'
 behavior_plugins: {  }

@@ -6,5 +6,5 @@ id: section_links
 label: 'HOW(ever) Piece'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'UNIFIED paragraph type for article/section links (consolidates section_links + how2_section_links)'
 behavior_plugins: {  }

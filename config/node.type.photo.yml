@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 name: Photo
 type: photo
-description: null
+description: 'KEEPER - Standalone photo node, used for image assets across the site'
 help: null
 new_revision: true
 preview_mode: 1
