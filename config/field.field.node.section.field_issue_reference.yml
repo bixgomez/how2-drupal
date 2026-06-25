@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_issue_reference
     - node.type.section
-    - node.type.journal_issue
+    - node.type.issue
 id: node.section.field_issue_reference
 field_name: field_issue_reference
 entity_type: node
@@ -20,7 +20,7 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
-      journal_issue: journal_issue
+      issue: issue
     sort:
       field: _none
       direction: ASC
