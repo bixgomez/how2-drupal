@@ -7,7 +7,7 @@ logo: assets/images/logo.png
 
 libraries:
   - however/global-styling
-  - however/slick
+  - however/splide
   - however/featherlight
   - however/theme-scripts
   - however/jquery-scripts

@@ -9,21 +9,20 @@ featherlight:
   dependencies:
     - core/jquery
 
-slick:
+splide:
   css:
     theme:
-      vendor/slick/slick.css: {}
-      vendor/slick/slick-theme.css: {}
+      vendor/splide/splide.min.css: {}
   js:
-    vendor/slick/slick.min.js: {}
-  dependencies:
-    - core/jquery
+    vendor/splide/splide.min.js: {}
 
 theme-scripts:
   js:
     dist/js/scripts.min.js: { minified: true }
   dependencies:
     - core/drupal
+    - core/once
+    - however/splide
 
 jquery-scripts:
   js:
@@ -32,7 +31,6 @@ jquery-scripts:
     - core/drupal
     - core/jquery
     - core/once
-    - however/slick
     - however/featherlight
 
 # Updated to use minified CSS from Vite
