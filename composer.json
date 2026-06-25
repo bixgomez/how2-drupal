@@ -97,6 +97,5 @@
             "phpstan/extension-installer": true,
             "tbachert/spi": true,
             "drupal/core-project-message": true
-        },
-	"audit": {"block-insecure": false}}
+        }
 }
