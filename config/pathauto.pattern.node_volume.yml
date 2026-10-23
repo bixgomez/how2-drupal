@@ -1,0 +1,22 @@
+uuid: 0fe1b739-4c62-40ff-acc4-33b57ad7ab84
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_volume
+label: 'Volume'
+type: 'canonical_entities:node'
+pattern: '/[node:field_journal_name]/v[node:field_volume_number]'
+selection_criteria:
+  058ed37d-063c-49b7-a2b9-1b8b0a112d90:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 058ed37d-063c-49b7-a2b9-1b8b0a112d90
+    context_mapping:
+      node: node
+    bundles:
+      volume: volume
+selection_logic: and
+weight: 0
+relationships: {  }

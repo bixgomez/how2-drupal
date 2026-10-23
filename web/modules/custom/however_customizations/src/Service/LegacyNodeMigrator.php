@@ -12,9 +12,11 @@ use Drupal\paragraphs\Entity\Paragraph;
 /**
  * Creates unified nodes from legacy nodes, one migration stage at a time.
  *
- * Legacy nodes are only read. Each unified node is created together with its
- * map row (and, for issues, its facsimiles node) in one transaction, and a legacy node that is already mapped is
- * skipped, so a stage can be run again after a failure or a partial run.
+ * Legacy nodes are not changed, except that their URL aliases are moved under
+ * /old and handed to the unified node (see AliasSwapper). Each unified node is
+ * created together with its map row, its aliases, and (for issues) its
+ * facsimile pages in one transaction, and a legacy node that is already mapped
+ * is skipped, so a stage can be run again after a failure or a partial run.
  */
 class LegacyNodeMigrator {
 
@@ -36,12 +38,15 @@ class LegacyNodeMigrator {
    *   The bundle configuration service.
    * @param \Drupal\however_customizations\Service\MigrationMap $map
    *   The migration map.
+   * @param \Drupal\however_customizations\Service\AliasSwapper $aliasSwapper
+   *   The alias swapper.
    */
   public function __construct(
     protected EntityTypeManagerInterface $entityTypeManager,
     protected Connection $database,
     protected BundleConfiguration $bundleConfig,
     protected MigrationMap $map,
+    protected AliasSwapper $aliasSwapper,
   ) {}
 
   /**
@@ -144,7 +149,7 @@ class LegacyNodeMigrator {
    */
   protected function describe(MigrationStage $stage, NodeInterface $legacy): string {
     $notes = [];
-    if ($stage === MigrationStage::Issue && $this->findFacsimileIds((int) $legacy->id())) {
+    if ($stage === MigrationStage::Issue && $this->aliasSwapper->findFacsimileIds((int) $legacy->id())) {
       $notes[] = 'has a facsimile page';
     }
     if ($stage === MigrationStage::Section) {
@@ -237,11 +242,30 @@ class LegacyNodeMigrator {
   protected function migrateNode(MigrationStage $stage, NodeInterface $legacy): NodeInterface {
     $transaction = $this->database->startTransaction();
     try {
+      // The legacy aliases are moved aside first, so that the unified node (and
+      // its facsimile pages) can take the same alias strings.
+      $legacy_facsimile_ids = $stage === MigrationStage::Issue ? $this->aliasSwapper->findFacsimileIds((int) $legacy->id()) : [];
+      $facsimile_aliases = [];
+      foreach ($legacy_facsimile_ids as $facsimile_id) {
+        $facsimile_aliases[] = $this->aliasSwapper->detach($facsimile_id);
+      }
+      $aliases = $this->aliasSwapper->detach($legacy->id());
+
       $unified = $this->buildUnifiedNode($stage, $legacy);
       $unified->save();
       $this->map->record($stage, $legacy, $unified);
+      $this->aliasSwapper->assign($unified, $aliases);
+
       if ($stage === MigrationStage::Issue) {
         $this->copyFacsimiles($legacy, $unified);
+        // The facsimile pages of the two issues are paired in node ID order.
+        $unified_facsimile_ids = $this->aliasSwapper->findFacsimileIds((int) $unified->id());
+        $facsimiles = $this->entityTypeManager->getStorage('node')->loadMultiple($unified_facsimile_ids);
+        foreach ($unified_facsimile_ids as $index => $facsimile_id) {
+          if (isset($facsimile_aliases[$index])) {
+            $this->aliasSwapper->assign($facsimiles[$facsimile_id], $facsimile_aliases[$index]);
+          }
+        }
       }
     }
     catch (\Throwable $e) {
@@ -388,8 +412,8 @@ class LegacyNodeMigrator {
    *   The saved unified issue.
    */
   protected function copyFacsimiles(NodeInterface $legacy, NodeInterface $unified): void {
-    $legacy_ids = $this->findFacsimileIds((int) $legacy->id());
-    if (!$legacy_ids || $this->findFacsimileIds((int) $unified->id())) {
+    $legacy_ids = $this->aliasSwapper->findFacsimileIds((int) $legacy->id());
+    if (!$legacy_ids || $this->aliasSwapper->findFacsimileIds((int) $unified->id())) {
       return;
     }
 
@@ -410,25 +434,6 @@ class LegacyNodeMigrator {
       }
       $copy->save();
     }
-  }
-
-  /**
-   * Finds the facsimiles nodes that point at an issue.
-   *
-   * @param int $issue_nid
-   *   The issue node ID.
-   *
-   * @return int[]
-   *   The facsimiles node IDs, lowest first.
-   */
-  protected function findFacsimileIds(int $issue_nid): array {
-    $ids = $this->entityTypeManager->getStorage('node')->getQuery()
-      ->accessCheck(FALSE)
-      ->condition('type', 'page_facsimiles')
-      ->condition('field_issue_reference', $issue_nid)
-      ->sort('nid')
-      ->execute();
-    return array_values(array_map('intval', $ids));
   }
 
   /**

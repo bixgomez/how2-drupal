@@ -32,11 +32,14 @@ class MigrationMap {
    *   The entity type manager.
    * @param \Drupal\Component\Datetime\TimeInterface $time
    *   The time service.
+   * @param \Drupal\however_customizations\Service\AliasSwapper $aliasSwapper
+   *   The alias swapper, used to give the legacy aliases back on a rollback.
    */
   public function __construct(
     protected Connection $database,
     protected EntityTypeManagerInterface $entityTypeManager,
     protected TimeInterface $time,
+    protected AliasSwapper $aliasSwapper,
   ) {}
 
   /**
@@ -160,7 +163,9 @@ class MigrationMap {
    * Removes the unified nodes recorded for a stage.
    *
    * Only unified nodes listed in the map are deleted; legacy nodes are never
-   * touched. A stage cannot be rolled back while a later stage still has
+   * deleted. Their aliases are moved back out from under /old (for the issue
+   * stage, also the aliases of the legacy facsimile pages); a legacy node whose
+   * aliases were never moved is left as it is. A stage cannot be rolled back while a later stage still has
    * recorded pairs, because those nodes reference this stage's nodes.
    *
    * @param \Drupal\however_customizations\MigrationStage $stage
@@ -201,6 +206,10 @@ class MigrationMap {
         }
 
         if ($apply) {
+          $this->aliasSwapper->restore($row['old_nid']);
+          if ($stage === MigrationStage::Issue) {
+            $this->aliasSwapper->restoreFacsimiles($row['old_nid']);
+          }
           $this->database->delete(self::TABLE)
             ->condition('old_nid', $row['old_nid'])
             ->execute();

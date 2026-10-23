@@ -2,12 +2,20 @@ services:
   however_customizations.bundle_config:
     class: Drupal\however_customizations\Service\BundleConfiguration
 
+  however_customizations.alias_swapper:
+    class: Drupal\however_customizations\Service\AliasSwapper
+    arguments:
+      - '@entity_type.manager'
+      - '@keyvalue'
+      - '@?pathauto.generator'
+
   however_customizations.migration_map:
     class: Drupal\however_customizations\Service\MigrationMap
     arguments:
       - '@database'
       - '@entity_type.manager'
       - '@datetime.time'
+      - '@however_customizations.alias_swapper'
 
   however_customizations.legacy_node_migrator:
     class: Drupal\however_customizations\Service\LegacyNodeMigrator
@@ -16,6 +24,7 @@ services:
       - '@database'
       - '@however_customizations.bundle_config'
       - '@however_customizations.migration_map'
+      - '@however_customizations.alias_swapper'
 
   however_customizations.autocomplete_matcher:
     class: Drupal\however_customizations\EntityAutocompleteMatcher

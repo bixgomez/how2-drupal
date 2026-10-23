@@ -25,6 +25,7 @@ use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
 use Drupal\node\NodeInterface;
+use Drupal\path_alias\Entity\PathAlias;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\paragraphs\Entity\ParagraphsType;
 use Drupal\user\Entity\User;
@@ -53,6 +54,8 @@ class LegacyNodeMigratorTest extends KernelTestBase {
     'paragraphs',
     'user',
     'system',
+    'path',
+    'path_alias',
   ];
 
   /**
@@ -83,6 +86,7 @@ class LegacyNodeMigratorTest extends KernelTestBase {
     parent::setUp();
     $this->installEntitySchema('node');
     $this->installEntitySchema('user');
+    $this->installEntitySchema('path_alias');
     $this->installEntitySchema('paragraph');
     $this->installSchema('node', ['node_access']);
     $this->installSchema('however_customizations', ['however_migration_map']);
@@ -420,6 +424,63 @@ class LegacyNodeMigratorTest extends KernelTestBase {
   }
 
   /**
+   * Adds an alias row to a node.
+   */
+  protected function addAlias(NodeInterface $node, string $alias): void {
+    PathAlias::create(['path' => '/node/' . $node->id(), 'alias' => $alias, 'langcode' => 'en'])->save();
+  }
+
+  /**
+   * Lists the alias strings of a node, sorted.
+   *
+   * @return string[]
+   *   The aliases.
+   */
+  protected function aliasesOf(int|string $nid): array {
+    $storage = $this->container->get('entity_type.manager')->getStorage('path_alias');
+    $aliases = array_map(fn ($row) => $row->getAlias(), $storage->loadByProperties(['path' => '/node/' . $nid]));
+    sort($aliases);
+    return $aliases;
+  }
+
+  /**
+   * Tests that the volume stage hands the aliases over and a rollback gives them back.
+   *
+   * The alias string is moved verbatim, a suffix included. A volume without an
+   * alias gets none.
+   */
+  public function testAliasesAreSwappedAndRestored(): void {
+    $legacy = $this->createLegacyVolumes();
+    $this->addAlias($legacy['however1'], '/however/v1');
+    $this->addAlias($legacy['however2'], '/however/v2-0');
+
+    $dry = $this->migrator->migrate(MigrationStage::Volume, FALSE);
+    $this->assertSame(['/however/v1'], $this->aliasesOf($legacy['however1']->id()), 'A dry run moves no alias.');
+
+    $this->migrator->migrate(MigrationStage::Volume, TRUE);
+    $this->assertSame(['/old/however/v1'], $this->aliasesOf($legacy['however1']->id()));
+    $this->assertSame(['/old/however/v2-0'], $this->aliasesOf($legacy['however2']->id()));
+    $this->assertSame([], $this->aliasesOf($legacy['how2']->id()));
+
+    $unified = $this->loadUnifiedVolumes();
+    $this->assertSame(['/however/v1'], $this->aliasesOf($unified[1]->id()));
+    $this->assertSame(['/however/v2-0'], $this->aliasesOf($unified[2]->id()));
+    $this->assertSame([], $this->aliasesOf($unified[3]->id()));
+    $unified_ids = array_map(fn ($node) => $node->id(), $unified);
+
+    $this->map->rollback(MigrationStage::Volume, TRUE);
+    $this->assertSame(['/however/v1'], $this->aliasesOf($legacy['however1']->id()));
+    $this->assertSame(['/however/v2-0'], $this->aliasesOf($legacy['however2']->id()));
+    foreach ($unified_ids as $nid) {
+      $this->assertSame([], $this->aliasesOf($nid), 'The unified alias is removed with its node.');
+    }
+
+    $this->migrator->migrate(MigrationStage::Volume, TRUE);
+    $this->assertSame(['/old/however/v1'], $this->aliasesOf($legacy['however1']->id()), 'The swap works again after a rollback.');
+    $this->assertSame(['/however/v1'], $this->aliasesOf($this->loadUnifiedVolumes()[1]->id()));
+  }
+
+  /**
    * Tests that a bundle that is not a legacy publication bundle has no map.
    */
   public function testUnknownBundleHasNoFieldMap(): void {
@@ -614,6 +675,9 @@ class LegacyNodeMigratorTest extends KernelTestBase {
       'field_issue_number' => 2,
       'field_journal_name' => 'however',
     ]);
+    $this->addAlias($old_facsimile, '/however/v1/n2/page-facsimiles');
+    $hooked_facsimile_id = $this->container->get('however_customizations.alias_swapper')->findFacsimileIds((int) $with_images->id())[0];
+    $this->addAlias(Node::load($hooked_facsimile_id), '/however/v1/n1/page-facsimiles-0');
     $no_facsimile = $this->createLegacyIssue([
       'type' => 'how2_issue',
       'field_volume_reference' => $legacy['how2']->id(),
@@ -653,10 +717,17 @@ class LegacyNodeMigratorTest extends KernelTestBase {
     $this->assertSame('however', $journal->get('field_journal_name')->value);
     $this->assertEquals($old_facsimile->id(), $facsimiles_of($without_images->id())[0] ?? NULL, 'The legacy facsimile is untouched.');
 
+    $this->assertSame(['/old/however/v1/n2/page-facsimiles'], $this->aliasesOf($old_facsimile->id()));
+    $this->assertSame(['/however/v1/n2/page-facsimiles'], $this->aliasesOf($copy->id()));
+    $this->assertSame(['/old/however/v1/n1/page-facsimiles-0'], $this->aliasesOf($hooked_facsimile_id));
+    $this->assertSame(['/however/v1/n1/page-facsimiles-0'], $this->aliasesOf($facsimiles_of($issues[$with_images->id()]->id())[0]));
+
     $this->map->rollback(MigrationStage::Issue, TRUE);
 
     $this->assertSame($legacy_before, $all());
     $this->assertNotNull(Node::load($old_facsimile->id()));
+    $this->assertSame(['/however/v1/n2/page-facsimiles'], $this->aliasesOf($old_facsimile->id()));
+    $this->assertSame(['/however/v1/n1/page-facsimiles-0'], $this->aliasesOf($hooked_facsimile_id));
   }
 
   /**

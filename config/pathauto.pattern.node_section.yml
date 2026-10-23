@@ -1,0 +1,22 @@
+uuid: 7d96e10e-4611-4f32-8cd3-d7cdf280b5f7
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_section
+label: 'Section'
+type: 'canonical_entities:node'
+pattern: '/[node:field_journal_name]/v[node:field_volume_reference:entity:field_volume_number]/n[node:field_issue_reference:entity:field_issue_number]/[node:title]'
+selection_criteria:
+  6d35fca2-3d2e-4ef7-b763-0963a48b66ef:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 6d35fca2-3d2e-4ef7-b763-0963a48b66ef
+    context_mapping:
+      node: node
+    bundles:
+      section: section
+selection_logic: and
+weight: 0
+relationships: {  }

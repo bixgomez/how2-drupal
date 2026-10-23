@@ -17,12 +17,15 @@
 namespace Drupal\Tests\however_customizations\Kernel;
 
 use Drupal\Core\Database\IntegrityConstraintViolationException;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\however_customizations\MigrationStage;
 use Drupal\however_customizations\Service\MigrationMap;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
 use Drupal\node\NodeInterface;
+use Drupal\path_alias\Entity\PathAlias;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
@@ -43,6 +46,8 @@ class MigrationMapTest extends KernelTestBase {
     'text',
     'user',
     'system',
+    'path',
+    'path_alias',
   ];
 
   /**
@@ -59,13 +64,27 @@ class MigrationMapTest extends KernelTestBase {
     parent::setUp();
     $this->installEntitySchema('node');
     $this->installEntitySchema('user');
+    $this->installEntitySchema('path_alias');
     $this->installSchema('node', ['node_access']);
     $this->installSchema('however_customizations', ['however_migration_map']);
     $this->installConfig(['system']);
 
-    foreach (['however_volume', 'volume'] as $type) {
+    foreach (['however_volume', 'volume', 'page_facsimiles'] as $type) {
       NodeType::create(['type' => $type, 'name' => $type])->save();
     }
+    // The issue stage rollback looks up the facsimile pages of the legacy issue.
+    FieldStorageConfig::create([
+      'field_name' => 'field_issue_reference',
+      'entity_type' => 'node',
+      'type' => 'entity_reference',
+      'settings' => ['target_type' => 'node'],
+    ])->save();
+    FieldConfig::create([
+      'field_name' => 'field_issue_reference',
+      'entity_type' => 'node',
+      'bundle' => 'page_facsimiles',
+      'label' => 'Issue',
+    ])->save();
 
     $this->map = $this->container->get('however_customizations.migration_map');
   }
@@ -188,6 +207,36 @@ class MigrationMapTest extends KernelTestBase {
     $this->assertNotNull(Node::load($unrelated->id()), 'A node that is not in the map is kept.');
     $this->assertSame(0, $this->map->count());
     $this->assertFalse($this->map->isMapped($old->id()), 'The legacy node can be migrated again.');
+  }
+
+  /**
+   * Tests that a rollback gives back swapped aliases and ignores unswapped ones.
+   */
+  public function testRollbackRestoresLegacyAliases(): void {
+    [$swapped] = $this->recordPair(MigrationStage::Volume);
+    [$unswapped] = $this->recordPair(MigrationStage::Volume);
+    PathAlias::create(['path' => '/node/' . $swapped->id(), 'alias' => '/old/however/v1', 'langcode' => 'en'])->save();
+    PathAlias::create(['path' => '/node/' . $unswapped->id(), 'alias' => '/however/v2', 'langcode' => 'en'])->save();
+
+    $this->map->rollback(MigrationStage::Volume, TRUE);
+
+    $storage = $this->container->get('entity_type.manager')->getStorage('path_alias');
+    $alias_of = fn ($node) => array_map(fn ($row) => $row->getAlias(), array_values($storage->loadByProperties(['path' => '/node/' . $node->id()])));
+    $this->assertSame(['/however/v1'], $alias_of($swapped));
+    $this->assertSame(['/however/v2'], $alias_of($unswapped), 'An alias that was never moved is left as it is.');
+  }
+
+  /**
+   * Tests that a dry run rollback does not move any alias.
+   */
+  public function testRollbackDryRunKeepsAliases(): void {
+    [$old] = $this->recordPair(MigrationStage::Volume);
+    PathAlias::create(['path' => '/node/' . $old->id(), 'alias' => '/old/however/v1', 'langcode' => 'en'])->save();
+
+    $this->map->rollback(MigrationStage::Volume);
+
+    $rows = $this->container->get('entity_type.manager')->getStorage('path_alias')->loadByProperties(['path' => '/node/' . $old->id()]);
+    $this->assertSame('/old/however/v1', reset($rows)->getAlias());
   }
 
   /**

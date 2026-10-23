@@ -1,0 +1,22 @@
+uuid: 5952538e-f05d-46c0-8051-f629f7455b1a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_issue
+label: 'Issue'
+type: 'canonical_entities:node'
+pattern: '/[node:field_journal_name]/v[node:field_volume_number]/n[node:field_issue_number]'
+selection_criteria:
+  18955f4d-20e6-420b-9094-cd58d64e9adc:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 18955f4d-20e6-420b-9094-cd58d64e9adc
+    context_mapping:
+      node: node
+    bundles:
+      issue: issue
+selection_logic: and
+weight: 0
+relationships: {  }
