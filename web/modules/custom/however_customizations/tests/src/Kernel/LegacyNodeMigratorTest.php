@@ -32,7 +32,7 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
- * Tests the migration of legacy volumes, issues, and sections to the unified bundles.
+ * Tests the migration of legacy volumes, issues, sections, and articles to the unified bundles.
  */
 #[Group('however_customizations')]
 #[RunTestsInSeparateProcesses]
@@ -88,7 +88,7 @@ class LegacyNodeMigratorTest extends KernelTestBase {
     $this->installSchema('however_customizations', ['however_migration_map']);
     $this->installConfig(['system']);
 
-    $bundles = ['journal', 'volume', 'however_volume', 'how2_volume', 'issue', 'journal_issue', 'how2_issue', 'page_facsimiles', 'how_ever_section', 'how2_section', 'section'];
+    $bundles = ['journal', 'volume', 'however_volume', 'how2_volume', 'issue', 'journal_issue', 'how2_issue', 'page_facsimiles', 'how_ever_section', 'how2_section', 'section', 'how_ever_article', 'how2_article', 'article'];
     foreach ($bundles as $type) {
       NodeType::create(['type' => $type, 'name' => $type])->save();
     }
@@ -104,6 +104,7 @@ class LegacyNodeMigratorTest extends KernelTestBase {
     $this->addField('field_however_page_facimile_link', 'link', ['however_volume']);
     $this->addIssueFields();
     $this->addSectionFields();
+    $this->addArticleFields();
 
     $this->createNode(['type' => 'journal', 'title' => 'How(ever)', 'field_journal_name' => 'however']);
     $this->createNode(['type' => 'journal', 'title' => 'How2', 'field_journal_name' => 'how2']);
@@ -161,6 +162,29 @@ class LegacyNodeMigratorTest extends KernelTestBase {
 
     ParagraphsType::create(['id' => 'person_bio', 'label' => 'Person bio'])->save();
     $this->addParagraphField('field_override_bio', 'text_long');
+  }
+
+  /**
+   * Creates the article fields and the body sections paragraph type.
+   */
+  protected function addArticleFields(): void {
+    $articles = ['how_ever_article', 'how2_article', 'article'];
+    foreach (['body', 'field_archive_url', 'field_issue_number', 'field_volume_number', 'field_journal_page_images_media', 'field_issue_reference', 'field_volume_reference', 'field_person_bio', 'field_tags', 'field_title_display', 'field_working_notes'] as $name) {
+      $this->addInstances($name, $articles);
+    }
+    $this->addInstances('field_journal', ['article']);
+    $this->addInstances('field_journal_name', ['article']);
+    $this->addField('field_hide_the_node_title', 'boolean', $articles);
+    $this->addField('field_media_type', 'entity_reference', $articles, ['target_type' => 'node', 'cardinality' => -1]);
+    $this->addField('field_section_reference', 'entity_reference', $articles, ['target_type' => 'node']);
+    $this->addField('field_body_sections', 'entity_reference_revisions', $articles, ['target_type' => 'paragraph', 'cardinality' => -1]);
+
+    ParagraphsType::create(['id' => 'body_sections', 'label' => 'Body sections'])->save();
+    foreach (['field_text', 'field_title'] as $name) {
+      FieldConfig::create(['field_name' => $name, 'entity_type' => 'paragraph', 'bundle' => 'body_sections'])->save();
+    }
+    $this->addParagraphField('field_references', 'text_long', ['body_sections']);
+    $this->addParagraphField('field_references_title', 'string', ['body_sections']);
   }
 
   /**
@@ -396,13 +420,13 @@ class LegacyNodeMigratorTest extends KernelTestBase {
   }
 
   /**
-   * Tests that a stage without a field map is refused before anything runs.
+   * Tests that a bundle that is not a legacy publication bundle has no map.
    */
-  public function testStageWithoutFieldMapIsRefused(): void {
-    $this->expectException(\LogicException::class);
-    $this->expectExceptionMessage('article stage cannot be migrated yet');
+  public function testUnknownBundleHasNoFieldMap(): void {
+    $config = $this->container->get('however_customizations.bundle_config');
 
-    $this->migrator->migrate(MigrationStage::Article, TRUE);
+    $this->assertSame([], $config->getMigrationFieldMap('page'));
+    $this->assertSame([], $config->getMigrationReferenceMap('page'));
   }
 
   /**
@@ -850,6 +874,177 @@ class LegacyNodeMigratorTest extends KernelTestBase {
 
     $this->assertSame(0, $this->map->count());
     $this->assertEmpty($this->container->get('entity_type.manager')->getStorage('node')->loadByProperties(['type' => 'section']));
+  }
+
+  /**
+   * Creates a legacy article without running the presave hook.
+   */
+  protected function createLegacyArticle(array $values): NodeInterface {
+    $article = Node::create($values + ['title' => 'An article', 'status' => 1]);
+    $article->however_skip_presave = TRUE;
+    $article->save();
+    return $article;
+  }
+
+  /**
+   * Migrates the volumes, issues, and sections the articles depend on.
+   *
+   * @return array
+   *   The legacy parents: 'issues' (however, how2) and 'sections' (however,
+   *   how2), all legacy nodes.
+   */
+  protected function createArticleParentsAndMigrate(array $legacy): array {
+    $issues = $this->createParentsAndMigrate($legacy);
+    $sections = [
+      'however' => $this->createLegacySection([
+        'type' => 'how_ever_section',
+        'field_issue_reference' => $issues['however']->id(),
+        'field_volume_reference' => $legacy['however1']->id(),
+      ]),
+      'how2' => $this->createLegacySection([
+        'type' => 'how2_section',
+        'field_issue_reference' => $issues['how2']->id(),
+        'field_volume_reference' => $legacy['how2']->id(),
+      ]),
+    ];
+    $this->migrator->migrate(MigrationStage::Section, TRUE);
+    return ['issues' => $issues, 'sections' => $sections];
+  }
+
+  /**
+   * Tests that articles are blocked until their section is migrated.
+   */
+  public function testArticlesAreBlockedUntilTheirSectionIsMigrated(): void {
+    $legacy = $this->createLegacyVolumes();
+    $issues = $this->createParentsAndMigrate($legacy);
+    $section = $this->createLegacySection(['type' => 'how_ever_section', 'field_issue_reference' => $issues['however']->id()]);
+    $this->createLegacyArticle([
+      'type' => 'how_ever_article',
+      'field_issue_reference' => $issues['however']->id(),
+      'field_section_reference' => $section->id(),
+    ]);
+
+    foreach ([FALSE, TRUE] as $execute) {
+      $result = $this->migrator->migrate(MigrationStage::Article, $execute);
+      $this->assertSame(1, $result['counts']['blocked']);
+      $this->assertStringContainsString('field_section_reference', $result['rows'][0]['note']);
+    }
+    $this->assertSame(0, $this->map->count(MigrationStage::Article));
+  }
+
+  /**
+   * Tests that applying creates the unified articles from the legacy ones.
+   */
+  public function testApplyCreatesArticles(): void {
+    $legacy = $this->createLegacyVolumes();
+    $parents = $this->createArticleParentsAndMigrate($legacy);
+    $bio = $this->createPiece('person_bio', ['field_override_bio' => 'A bio']);
+    $body_sections = [
+      $this->createPiece('body_sections', ['field_title' => 'First', 'field_text' => 'Text one', 'field_references' => 'Ref one']),
+      $this->createPiece('body_sections', ['field_title' => 'Second', 'field_text' => 'Text two']),
+    ];
+    $however = $this->createLegacyArticle([
+      'type' => 'how_ever_article',
+      'title' => 'A poem',
+      'field_issue_reference' => $parents['issues']['however']->id(),
+      'field_section_reference' => $parents['sections']['however']->id(),
+      'field_volume_reference' => $legacy['however1']->id(),
+      'field_hide_the_node_title' => 1,
+      'field_working_notes' => 'Notes',
+      'field_body_sections' => $this->refs($body_sections),
+      'field_person_bio' => $this->refs([$bio]),
+      'created' => 5000000,
+    ]);
+    $how2 = $this->createLegacyArticle([
+      'type' => 'how2_article',
+      'title' => 'A How2 piece',
+      'field_issue_reference' => $parents['issues']['how2']->id(),
+      'field_section_reference' => $parents['sections']['how2']->id(),
+      'field_volume_reference' => $legacy['how2']->id(),
+    ]);
+
+    $paragraphs_before = count(Paragraph::loadMultiple());
+    $result = $this->migrator->migrate(MigrationStage::Article, TRUE);
+
+    $this->assertSame(2, $result['counts']['created']);
+    $new = Node::load($this->map->getNewNid($however->id()));
+    $new_how2 = Node::load($this->map->getNewNid($how2->id()));
+
+    $this->assertSame('article', $new->bundle());
+    $this->assertSame('A poem', $new->getTitle());
+    $this->assertSame('1', (string) $new->get('field_hide_the_node_title')->value);
+    $this->assertSame('Notes', $new->get('field_working_notes')->value);
+    $this->assertSame(5000000, (int) $new->getCreatedTime());
+    $this->assertEquals($this->map->getNewNid($parents['issues']['however']->id()), $new->get('field_issue_reference')->target_id);
+    $this->assertEquals($this->map->getNewNid($parents['sections']['however']->id()), $new->get('field_section_reference')->target_id);
+    $this->assertEquals($this->map->getNewNid($legacy['however1']->id()), $new->get('field_volume_reference')->target_id);
+    $this->assertSame('however', $new->get('field_journal_name')->value);
+    $this->assertSame('how2', $new_how2->get('field_journal_name')->value);
+    $this->assertSame('how2', Node::load($new_how2->get('field_journal')->target_id)->get('field_journal_name')->value);
+    // The legacy articles had no numbers; the presave hook fills them from the
+    // unified issue.
+    $this->assertSame('3', (string) $new_how2->get('field_volume_number')->value);
+    $this->assertSame('1', (string) $new_how2->get('field_issue_number')->value);
+
+    // The body sections keep their order; the paragraphs are copies.
+    $copies = $new->get('field_body_sections')->referencedEntities();
+    $this->assertSame(['First', 'Second'], array_map(fn ($p) => $p->get('field_title')->value, $copies));
+    $this->assertSame('Ref one', $copies[0]->get('field_references')->value);
+    $this->assertNotEquals($body_sections[0]->id(), $copies[0]->id());
+    $this->assertNotEquals($bio->id(), $new->get('field_person_bio')->target_id);
+    $this->assertSame('A bio', $new->get('field_person_bio')->entity->get('field_override_bio')->value);
+    $untouched = Node::load($however->id());
+    $this->assertEquals($body_sections[0]->id(), $untouched->get('field_body_sections')->target_id);
+
+    $this->assertGreaterThan($paragraphs_before, count(Paragraph::loadMultiple()));
+    $this->map->rollback(MigrationStage::Article, TRUE);
+    $this->runOrphanPurger();
+    $this->assertSame($paragraphs_before, count(Paragraph::loadMultiple()));
+    $this->assertNotNull(Node::load($however->id()));
+  }
+
+  /**
+   * Tests that a reference to a deleted section is dropped, not blocking.
+   */
+  public function testArticleWithDeletedSectionIsMigratedWithoutIt(): void {
+    $legacy = $this->createLegacyVolumes();
+    $parents = $this->createArticleParentsAndMigrate($legacy);
+    $deleted = $this->createLegacySection(['type' => 'how2_section', 'field_issue_reference' => $parents['issues']['how2']->id()]);
+    $deleted_nid = (int) $deleted->id();
+    $deleted->delete();
+    $article = $this->createLegacyArticle([
+      'type' => 'how2_article',
+      'field_issue_reference' => $parents['issues']['how2']->id(),
+      'field_section_reference' => $deleted_nid,
+    ]);
+
+    $dry = $this->migrator->migrate(MigrationStage::Article, FALSE);
+    $this->assertSame(0, $dry['counts']['blocked']);
+    $this->assertSame(1, $dry['counts']['would_create']);
+    $this->assertStringContainsString('drops field_section_reference', $dry['rows'][0]['note']);
+
+    $result = $this->migrator->migrate(MigrationStage::Article, TRUE);
+
+    $this->assertSame(1, $result['counts']['created']);
+    $new = Node::load($this->map->getNewNid($article->id()));
+    $this->assertTrue($new->get('field_section_reference')->isEmpty());
+    $this->assertEquals($this->map->getNewNid($parents['issues']['how2']->id()), $new->get('field_issue_reference')->target_id);
+  }
+
+  /**
+   * Tests that an article without any parent is migrated without one.
+   */
+  public function testArticleWithoutParentIsMigrated(): void {
+    $orphan = $this->createLegacyArticle(['type' => 'how_ever_article', 'title' => 'Gail Sher']);
+
+    $result = $this->migrator->migrate(MigrationStage::Article, TRUE);
+
+    $this->assertSame(1, $result['counts']['created']);
+    $new = Node::load($this->map->getNewNid($orphan->id()));
+    $this->assertSame('Gail Sher', $new->getTitle());
+    $this->assertTrue($new->get('field_issue_reference')->isEmpty());
+    $this->assertSame('however', $new->get('field_journal_name')->value);
+    $this->assertSame('however', Node::load($new->get('field_journal')->target_id)->get('field_journal_name')->value);
   }
 
 }

@@ -143,17 +143,62 @@ class LegacyNodeMigrator {
    *   A short note, or an empty string.
    */
   protected function describe(MigrationStage $stage, NodeInterface $legacy): string {
+    $notes = [];
     if ($stage === MigrationStage::Issue && $this->findFacsimileIds((int) $legacy->id())) {
-      return 'has a facsimile page';
+      $notes[] = 'has a facsimile page';
     }
     if ($stage === MigrationStage::Section) {
       $pieces = 0;
       foreach ($this->bundleConfig->getMigrationPieceMap($legacy->bundle()) as $legacy_field => $unified_field) {
         $pieces += count($legacy->get($legacy_field));
       }
-      return $pieces ? sprintf('%d %s', $pieces, $pieces === 1 ? 'piece' : 'pieces') : '';
+      if ($pieces) {
+        $notes[] = sprintf('%d %s', $pieces, $pieces === 1 ? 'piece' : 'pieces');
+      }
     }
-    return '';
+    foreach ($this->findDeletedReferences($legacy) as $legacy_field) {
+      $notes[] = sprintf('drops %s (the node is deleted)', $legacy_field);
+    }
+    return implode('; ', $notes);
+  }
+
+  /**
+   * Finds the reference fields that point at nodes that no longer exist.
+   *
+   * @param \Drupal\node\NodeInterface $legacy
+   *   The legacy node.
+   *
+   * @return string[]
+   *   The legacy field names, only the ones that are remapped to parents.
+   */
+  protected function findDeletedReferences(NodeInterface $legacy): array {
+    $fields = [];
+    foreach (array_keys($this->bundleConfig->getMigrationReferenceMap($legacy->bundle())) as $legacy_field) {
+      foreach ($legacy->get($legacy_field)->getValue() as $item) {
+        if (!$this->nodeExists((int) $item['target_id'])) {
+          $fields[] = $legacy_field;
+          break;
+        }
+      }
+    }
+    return $fields;
+  }
+
+  /**
+   * Checks whether a node still exists.
+   *
+   * @param int $nid
+   *   The node ID.
+   *
+   * @return bool
+   *   TRUE if the node exists.
+   */
+  protected function nodeExists(int $nid): bool {
+    return (bool) $this->entityTypeManager->getStorage('node')->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('nid', $nid)
+      ->range(0, 1)
+      ->execute();
   }
 
   /**
@@ -163,12 +208,14 @@ class LegacyNodeMigrator {
    *   The legacy node.
    *
    * @return string|null
-   *   A description of the first parent that is not migrated, or NULL.
+   *   A description of the first parent that is not migrated, or NULL. A
+   *   reference to a node that no longer exists is not a problem; the
+   *   reference is dropped (see describe()).
    */
   protected function findProblem(NodeInterface $legacy): ?string {
     foreach ($this->bundleConfig->getMigrationReferenceMap($legacy->bundle()) as $legacy_field => $target) {
       foreach ($legacy->get($legacy_field)->getValue() as $item) {
-        if (!$this->map->isMapped((int) $item['target_id'])) {
+        if (!$this->map->isMapped((int) $item['target_id']) && $this->nodeExists((int) $item['target_id'])) {
           return sprintf('%s refers to node %d, which is not migrated (%s stage).', $legacy_field, $item['target_id'], $target['stage']->value);
         }
       }
@@ -249,7 +296,10 @@ class LegacyNodeMigrator {
       }
       $values = [];
       foreach ($legacy->get($legacy_field)->getValue() as $item) {
-        $values[] = ['target_id' => $this->map->getNewNid((int) $item['target_id'])];
+        $new_nid = $this->map->getNewNid((int) $item['target_id']);
+        if ($new_nid !== NULL) {
+          $values[] = ['target_id' => $new_nid];
+        }
       }
       $unified->set($target['field'], $values);
     }

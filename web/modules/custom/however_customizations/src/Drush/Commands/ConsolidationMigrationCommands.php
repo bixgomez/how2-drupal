@@ -116,6 +116,37 @@ class ConsolidationMigrationCommands extends DrushCommands {
   }
 
   /**
+   * Migrates the legacy articles to the unified article bundle.
+   *
+   * Choose one mode: --dryrun reports what would be created, --execute creates
+   * the unified articles, --rollback deletes them with their paragraphs. The
+   * volumes, issues, and sections must be migrated first: an article's
+   * volume, issue, and section references are replaced by the unified nodes,
+   * and an article whose parent is not migrated is reported as blocked and is
+   * not created. A reference to a node that no longer exists (a deleted
+   * section) is dropped and noted in the report. The body sections and person
+   * bios are duplicated. The presave hook runs, so the numbers are filled from
+   * the migrated issue. The pieces of the sections that refer to articles are
+   * filled later by the links pass.
+   *
+   * @command however-customizations:migrate-articles
+   * @aliases how-migrate-articles
+   * @option dryrun Report what would be created (or, with --rollback, deleted); change nothing.
+   * @option execute Create the unified articles.
+   * @option rollback Delete the unified articles created by this command, after asking.
+   * @option limit With --dryrun or --execute: process at most this many legacy articles that are not yet migrated.
+   * @usage drush how-migrate-articles --dryrun
+   *   Report the articles that would be created.
+   * @usage drush how-migrate-articles --execute
+   *   Create the unified articles.
+   * @usage drush how-migrate-articles --rollback
+   *   Delete the migrated articles after confirmation.
+   */
+  public function migrateArticles(array $options = ['dryrun' => FALSE, 'execute' => FALSE, 'rollback' => FALSE, 'limit' => NULL]): void {
+    $this->runStage(MigrationStage::Article, $options);
+  }
+
+  /**
    * Works out which mode the command options select.
    *
    * @param array $options

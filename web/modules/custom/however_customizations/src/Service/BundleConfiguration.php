@@ -287,11 +287,25 @@ class BundleConfiguration {
       'field_working_notes' => 'field_working_notes',
     ];
 
+    $article_fields = [
+      'body' => 'body',
+      'field_archive_url' => 'field_archive_url',
+      'field_hide_the_node_title' => 'field_hide_the_node_title',
+      'field_issue_number' => 'field_issue_number',
+      'field_journal_page_images_media' => 'field_journal_page_images_media',
+      'field_media_type' => 'field_media_type',
+      'field_tags' => 'field_tags',
+      'field_title_display' => 'field_title_display',
+      'field_volume_number' => 'field_volume_number',
+      'field_working_notes' => 'field_working_notes',
+    ];
+
     return match ($legacy_bundle) {
       'however_volume' => $volume_fields + ['field_however_page_facimile_link' => 'field_page_facsimile_link'],
       'how2_volume' => $volume_fields + ['field_archive_url' => 'field_archive_url'],
       'journal_issue', 'how2_issue' => $issue_fields,
       'how_ever_section', 'how2_section' => $section_fields,
+      'how_ever_article', 'how2_article' => $article_fields,
       default => [],
     };
   }
@@ -319,6 +333,11 @@ class BundleConfiguration {
         'field_issue_reference' => ['field' => 'field_issue_reference', 'stage' => MigrationStage::Issue],
         'field_volume_reference' => ['field' => 'field_volume_reference', 'stage' => MigrationStage::Volume],
       ],
+      'how_ever_article', 'how2_article' => [
+        'field_issue_reference' => ['field' => 'field_issue_reference', 'stage' => MigrationStage::Issue],
+        'field_section_reference' => ['field' => 'field_section_reference', 'stage' => MigrationStage::Section],
+        'field_volume_reference' => ['field' => 'field_volume_reference', 'stage' => MigrationStage::Volume],
+      ],
       default => [],
     };
   }
@@ -340,6 +359,10 @@ class BundleConfiguration {
       'journal_issue', 'how2_issue' => ['field_person_bio' => 'field_person_bio'],
       'how_ever_section', 'how2_section' => [
         'field_image_caption' => 'field_image_caption',
+        'field_person_bio' => 'field_person_bio',
+      ],
+      'how_ever_article', 'how2_article' => [
+        'field_body_sections' => 'field_body_sections',
         'field_person_bio' => 'field_person_bio',
       ],
       default => [],
