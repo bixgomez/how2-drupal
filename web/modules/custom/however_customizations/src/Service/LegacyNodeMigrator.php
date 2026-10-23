@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\however_customizations\MigrationStage;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Creates unified nodes from legacy nodes, one migration stage at a time.
@@ -94,7 +95,7 @@ class LegacyNodeMigrator {
         'bundle' => $legacy->bundle(),
         'title' => $legacy->getTitle(),
         'new_nid' => $this->map->getNewNid($legacy->id()),
-        'note' => $stage === MigrationStage::Issue && $this->findFacsimileIds((int) $legacy->id()) ? 'has a facsimile page' : '',
+        'note' => $this->describe($stage, $legacy),
       ];
 
       if ($row['new_nid'] !== NULL) {
@@ -128,6 +129,31 @@ class LegacyNodeMigrator {
     }
 
     return $result;
+  }
+
+  /**
+   * Describes what is special about a legacy node for the report.
+   *
+   * @param \Drupal\however_customizations\MigrationStage $stage
+   *   The migration stage.
+   * @param \Drupal\node\NodeInterface $legacy
+   *   The legacy node.
+   *
+   * @return string
+   *   A short note, or an empty string.
+   */
+  protected function describe(MigrationStage $stage, NodeInterface $legacy): string {
+    if ($stage === MigrationStage::Issue && $this->findFacsimileIds((int) $legacy->id())) {
+      return 'has a facsimile page';
+    }
+    if ($stage === MigrationStage::Section) {
+      $pieces = 0;
+      foreach ($this->bundleConfig->getMigrationPieceMap($legacy->bundle()) as $legacy_field => $unified_field) {
+        $pieces += count($legacy->get($legacy_field));
+      }
+      return $pieces ? sprintf('%d %s', $pieces, $pieces === 1 ? 'piece' : 'pieces') : '';
+    }
+    return '';
   }
 
   /**
@@ -239,6 +265,13 @@ class LegacyNodeMigrator {
       $unified->set($unified_field, $copies);
     }
 
+    foreach ($this->bundleConfig->getMigrationPieceMap($legacy->bundle()) as $legacy_field => $unified_field) {
+      if (!$unified->hasField($unified_field)) {
+        throw new \LogicException(sprintf('The %s bundle has no %s field.', $stage->value, $unified_field));
+      }
+      $unified->set($unified_field, $this->convertPieces($legacy, $legacy_field));
+    }
+
     if ($unified->hasField('field_journal')) {
       $unified->set('field_journal', $this->getJournalId($legacy->bundle()));
     }
@@ -246,11 +279,48 @@ class LegacyNodeMigrator {
       $unified->set('field_journal_name', $this->bundleConfig->getJournalFromBundle($legacy->bundle()));
     }
 
-    if ($this->bundleConfig->keepsLegacyTitles($stage)) {
+    if ($this->bundleConfig->skipsPresaveHook($stage)) {
       $unified->however_skip_presave = TRUE;
     }
 
     return $unified;
+  }
+
+  /**
+   * Converts the piece paragraphs of a legacy node to unified paragraphs.
+   *
+   * Each piece becomes a new paragraph of the unified type, in the same order.
+   * Values that refer to articles or sections are left empty (see
+   * BundleConfiguration::getMigrationPieceTypes()).
+   *
+   * @param \Drupal\node\NodeInterface $legacy
+   *   The legacy node.
+   * @param string $legacy_field
+   *   The legacy piece field.
+   *
+   * @return \Drupal\paragraphs\Entity\Paragraph[]
+   *   The new, unsaved paragraphs.
+   *
+   * @throws \LogicException
+   *   If a piece has a paragraph type that has no conversion.
+   */
+  protected function convertPieces(NodeInterface $legacy, string $legacy_field): array {
+    $types = $this->bundleConfig->getMigrationPieceTypes();
+    $converted = [];
+    foreach ($legacy->get($legacy_field)->referencedEntities() as $piece) {
+      if (!isset($types[$piece->bundle()])) {
+        throw new \LogicException(sprintf('Node %d has a %s paragraph, which has no conversion.', $legacy->id(), $piece->bundle()));
+      }
+      $definition = $types[$piece->bundle()];
+      $copy = Paragraph::create(['type' => $definition['type']]);
+      foreach ($definition['fields'] as $from => $to) {
+        if (!$piece->get($from)->isEmpty()) {
+          $copy->set($to, $piece->get($from)->getValue());
+        }
+      }
+      $converted[] = $copy;
+    }
+    return $converted;
   }
 
   /**

@@ -272,10 +272,26 @@ class BundleConfiguration {
       'field_volume_number' => 'field_volume_number',
     ];
 
+    $section_fields = [
+      'body' => 'body',
+      'field_archive_url' => 'field_archive_url',
+      'field_issue_number' => 'field_issue_number',
+      'field_journal_page_images_media' => 'field_journal_page_images_media',
+      'field_links_section_title' => 'field_links_section_title',
+      'field_show_full_section_page' => 'field_show_full_section_page',
+      'field_subtitle' => 'field_subtitle',
+      'field_tags' => 'field_tags',
+      'field_teaser_text' => 'field_teaser_text',
+      'field_title_display' => 'field_title_display',
+      'field_volume_number' => 'field_volume_number',
+      'field_working_notes' => 'field_working_notes',
+    ];
+
     return match ($legacy_bundle) {
       'however_volume' => $volume_fields + ['field_however_page_facimile_link' => 'field_page_facsimile_link'],
       'how2_volume' => $volume_fields + ['field_archive_url' => 'field_archive_url'],
       'journal_issue', 'how2_issue' => $issue_fields,
+      'how_ever_section', 'how2_section' => $section_fields,
       default => [],
     };
   }
@@ -299,6 +315,10 @@ class BundleConfiguration {
       'journal_issue', 'how2_issue' => [
         'field_volume_reference' => ['field' => 'field_volume_reference', 'stage' => MigrationStage::Volume],
       ],
+      'how_ever_section', 'how2_section' => [
+        'field_issue_reference' => ['field' => 'field_issue_reference', 'stage' => MigrationStage::Issue],
+        'field_volume_reference' => ['field' => 'field_volume_reference', 'stage' => MigrationStage::Volume],
+      ],
       default => [],
     };
   }
@@ -318,23 +338,88 @@ class BundleConfiguration {
   public function getMigrationParagraphFields(string $legacy_bundle): array {
     return match ($legacy_bundle) {
       'journal_issue', 'how2_issue' => ['field_person_bio' => 'field_person_bio'],
+      'how_ever_section', 'how2_section' => [
+        'field_image_caption' => 'field_image_caption',
+        'field_person_bio' => 'field_person_bio',
+      ],
       default => [],
     };
   }
 
   /**
-   * Check whether a stage keeps the legacy titles instead of regenerating them.
+   * Get the piece paragraph fields that are converted to unified paragraphs.
    *
-   * The presave hook is skipped for these stages, so the title (including the
-   * custom issue titles) and the numbers are copied exactly as they are.
+   * The pieces of a section are paragraphs of legacy types (for example
+   * how2_section_links) that have to become the unified types, in the same
+   * order. See getMigrationPieceTypes().
+   *
+   * @param string $legacy_bundle
+   *   The legacy bundle machine name.
+   *
+   * @return array
+   *   Legacy field names mapped to unified field names.
+   */
+  public function getMigrationPieceMap(string $legacy_bundle): array {
+    return match ($legacy_bundle) {
+      'how_ever_section' => ['field_how_ever_piece' => 'field_piece'],
+      'how2_section' => ['field_how2_piece' => 'field_piece'],
+      default => [],
+    };
+  }
+
+  /**
+   * Get how each legacy piece paragraph type becomes a unified paragraph.
+   *
+   * Only values that do not refer to other publication nodes are copied. The
+   * unit of a section_links paragraph (an article) and the target of a
+   * subsection paragraph (a section) are left empty; the links pass fills them
+   * once the articles and sections exist, matching the legacy and unified
+   * paragraphs by their position in the piece field.
+   *
+   * @return array
+   *   Legacy paragraph bundles mapped to ['type' => unified paragraph bundle,
+   *   'fields' => legacy field name => unified field name].
+   */
+  public function getMigrationPieceTypes(): array {
+    $links = ['type' => 'section_links', 'fields' => ['field_notes' => 'field_notes']];
+    $subsection = ['type' => 'subsection', 'fields' => []];
+
+    return [
+      'section_links' => $links,
+      'how2_section_links' => $links,
+      'how_ever_subsection' => $subsection,
+      'how2_subsection' => $subsection,
+      'link_section_title' => [
+        'type' => 'link_section_title',
+        'fields' => ['field_link_section_title' => 'field_link_section_title'],
+      ],
+      'open_title_text' => [
+        'type' => 'open_title_text',
+        'fields' => [
+          'field_text' => 'field_text',
+          'field_title' => 'field_title',
+          'field_title_display' => 'field_title_display',
+        ],
+      ],
+    ];
+  }
+
+  /**
+   * Check whether the presave hook is skipped when a stage creates nodes.
+   *
+   * For issues the hook would regenerate the title, so it is skipped to keep
+   * the legacy titles (including the custom ones) and numbers exactly as they
+   * are. For the other stages the hook only fills the volume and issue numbers
+   * from the parent, which many legacy sections lack, so it runs. The
+   * migrator sets the journal itself in both cases.
    *
    * @param \Drupal\however_customizations\MigrationStage $stage
    *   The migration stage.
    *
    * @return bool
-   *   TRUE if the hook that regenerates titles must not run.
+   *   TRUE if the presave hook must not run.
    */
-  public function keepsLegacyTitles(MigrationStage $stage): bool {
+  public function skipsPresaveHook(MigrationStage $stage): bool {
     return $stage === MigrationStage::Issue;
   }
 

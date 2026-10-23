@@ -87,6 +87,35 @@ class ConsolidationMigrationCommands extends DrushCommands {
   }
 
   /**
+   * Migrates the legacy sections to the unified section bundle.
+   *
+   * Choose one mode: --dryrun reports what would be created, --execute creates
+   * the unified sections, --rollback deletes them with their paragraphs. The
+   * volumes and issues must be migrated first: a section's volume and issue
+   * references are replaced by the unified nodes, and a section whose parent
+   * is not migrated is reported as blocked and is not created. The piece
+   * paragraphs are recreated as the unified types in the same order, but the
+   * articles and subsections they refer to are left empty; the links pass
+   * fills them. Titles and numbers are copied as they are.
+   *
+   * @command however-customizations:migrate-sections
+   * @aliases how-migrate-sections
+   * @option dryrun Report what would be created (or, with --rollback, deleted); change nothing.
+   * @option execute Create the unified sections.
+   * @option rollback Delete the unified sections created by this command, after asking.
+   * @option limit With --dryrun or --execute: process at most this many legacy sections that are not yet migrated.
+   * @usage drush how-migrate-sections --dryrun
+   *   Report the sections that would be created.
+   * @usage drush how-migrate-sections --execute
+   *   Create the unified sections.
+   * @usage drush how-migrate-sections --rollback
+   *   Delete the migrated sections after confirmation.
+   */
+  public function migrateSections(array $options = ['dryrun' => FALSE, 'execute' => FALSE, 'rollback' => FALSE, 'limit' => NULL]): void {
+    $this->runStage(MigrationStage::Section, $options);
+  }
+
+  /**
    * Works out which mode the command options select.
    *
    * @param array $options
