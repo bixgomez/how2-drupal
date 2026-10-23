@@ -208,6 +208,115 @@ function _however_customizations_sync_fields(NodeInterface $node, string $bundle
 }
 
 /**
+ * Get the ID of the journal node with the given machine name.
+ *
+ * @param string $journal_name
+ *   The journal machine name ('however' or 'how2').
+ *
+ * @return int|null
+ *   The journal node ID, or NULL if no journal node has that machine name.
+ */
+function _however_customizations_get_journal_id_by_name(string $journal_name): ?int {
+  $ids = \Drupal::entityQuery('node')
+    ->condition('type', 'journal')
+    ->condition('field_journal_name', $journal_name)
+    ->accessCheck(FALSE)
+    ->range(0, 1)
+    ->execute();
+
+  return $ids ? (int) reset($ids) : NULL;
+}
+
+/**
+ * Copy the journal from a parent node to the node's own field_journal.
+ *
+ * Applies to bundles that have a field_journal field and list parent
+ * reference fields in BundleConfiguration::getJournalSourceFields(). A parent
+ * without a field_journal (a legacy bundle) supplies the journal node that
+ * matches its bundle name.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ *   The node to set the journal on.
+ * @param \Drupal\however_customizations\Service\BundleConfiguration $config
+ *   The bundle configuration service.
+ *
+ * @return bool
+ *   TRUE if the journal was copied from a parent, FALSE otherwise.
+ */
+function _however_customizations_sync_journal(NodeInterface $node, $config): bool {
+  if (!$node->hasField('field_journal')) {
+    return FALSE;
+  }
+
+  foreach ($config->getJournalSourceFields($node->bundle()) as $reference_field) {
+    if (!$node->hasField($reference_field) || $node->{$reference_field}->isEmpty()) {
+      continue;
+    }
+
+    $parent = $node->{$reference_field}->entity;
+    if (!$parent) {
+      continue;
+    }
+
+    $journal_id = NULL;
+    if ($parent->hasField('field_journal') && !$parent->field_journal->isEmpty()) {
+      $journal_id = $parent->field_journal->target_id;
+    }
+    elseif ($legacy_name = $config->getJournalFromBundle($parent->bundle())) {
+      $journal_id = _however_customizations_get_journal_id_by_name($legacy_name);
+    }
+
+    if (!$journal_id) {
+      continue;
+    }
+
+    $node->set('field_journal', $journal_id);
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Get the journal machine name ('however' or 'how2') for a node.
+ *
+ * Legacy bundles take it from the bundle name. Unified bundles take it from
+ * the journal node referenced by the node's own field_journal, or by its
+ * volume's field_journal.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ *   The node to look up.
+ * @param \Drupal\however_customizations\Service\BundleConfiguration $config
+ *   The bundle configuration service.
+ *
+ * @return string|null
+ *   The journal machine name, or NULL if it cannot be determined.
+ */
+function _however_customizations_get_journal_name(NodeInterface $node, $config): ?string {
+  $legacy_name = $config->getJournalFromBundle($node->bundle());
+  if ($legacy_name) {
+    return $legacy_name;
+  }
+
+  $journal_node = NULL;
+  if ($node->hasField('field_journal') && !$node->field_journal->isEmpty()) {
+    $journal_node = $node->field_journal->entity;
+  }
+  elseif ($node->hasField('field_volume_reference') && !$node->field_volume_reference->isEmpty()) {
+    $volume_node = $node->field_volume_reference->entity;
+    if ($volume_node && $volume_node->hasField('field_journal') && !$volume_node->field_journal->isEmpty()) {
+      $journal_node = $volume_node->field_journal->entity;
+    }
+  }
+
+  if (!$journal_node || !$journal_node->hasField('field_journal_name') || $journal_node->field_journal_name->isEmpty()) {
+    return NULL;
+  }
+
+  return $journal_node->field_journal_name->value;
+}
+
+/**
  * Manage page facsimiles node for an issue.
  *
  * Creates or deletes the page_facsimiles node associated with an issue.
@@ -264,19 +373,10 @@ function _however_customizations_manage_page_facsimiles(NodeInterface $node, str
   $volume_number = $node->field_volume_number->value;
   $issue_number = $node->field_issue_number->value;
 
-  // Determine journal name for title
-  $journal_name = 'unknown';
-  if ($config->getJournalFromBundle($node->bundle())) {
-    $journal_name = $config->getJournalFromBundle($node->bundle());
-  } else {
-    // For unified bundle, get from parent volume
-    if ($node->hasField('field_volume_reference') && !$node->field_volume_reference->isEmpty()) {
-      $volume_node = $node->field_volume_reference->entity;
-      if ($volume_node && $volume_node->hasField('field_journal') && !$volume_node->field_journal->isEmpty()) {
-        $journal_node = $volume_node->field_journal->entity;
-        $journal_name = $journal_node ? $journal_node->getTitle() : 'unknown';
-      }
-    }
+  $journal_name = _however_customizations_get_journal_name($node, $config);
+  if (!$journal_name) {
+    \Drupal::logger('however_customizations')->warning('Page facsimiles were not created for issue @nid because its journal could not be determined.', ['@nid' => $node->id()]);
+    return;
   }
 
   $page_facsimiles = \Drupal\node\Entity\Node::create([
@@ -285,11 +385,28 @@ function _however_customizations_manage_page_facsimiles(NodeInterface $node, str
     'field_issue_reference' => $node->id(),
     'field_volume_number' => $volume_number,
     'field_issue_number' => $issue_number,
-    'field_journal_name' => strtolower($journal_name),
+    'field_journal_name' => $journal_name,
     'status' => 1,
   ]);
 
   $page_facsimiles->save();
+}
+
+/**
+ * Disables the journal field on a form when the bundle copies it from a parent.
+ *
+ * @param array &$form
+ *   The form array.
+ * @param array $disabled_fields
+ *   Field names disabled for the bundle type.
+ */
+function _however_customizations_lock_journal_field(array &$form, array $disabled_fields): void {
+  if (!in_array('field_journal', $disabled_fields) || !isset($form['field_journal'])) {
+    return;
+  }
+
+  $form['field_journal']['widget']['#disabled'] = TRUE;
+  $form['field_journal']['widget']['#description'] = t('This will be set automatically from the parent on save.');
 }
 
 /**
@@ -325,6 +442,7 @@ function _however_customizations_alter_form_for_bundle(array &$form, string $bun
         $form['title']['widget'][0]['value']['#disabled'] = TRUE;
         $form['title']['widget'][0]['value']['#description'] = t('This title is automatically generated based on the Volume and Issue Numbers.');
       }
+      _however_customizations_lock_journal_field($form, $disabled_fields);
       break;
 
     case 'article':
@@ -337,6 +455,11 @@ function _however_customizations_alter_form_for_bundle(array &$form, string $bun
         $form['field_issue_number']['widget'][0]['value']['#disabled'] = TRUE;
         $form['field_issue_number']['widget'][0]['value']['#description'] = t('This will be set automatically from the referenced issue on save.');
       }
+      _however_customizations_lock_journal_field($form, $disabled_fields);
+      break;
+
+    case 'page_facsimiles':
+      _however_customizations_lock_journal_field($form, $disabled_fields);
       break;
   }
 }
@@ -403,15 +526,23 @@ function however_customizations_entity_presave(EntityInterface $entity) {
     _however_customizations_generate_title($entity, 'volume', $config);
   }
 
-  // Auto-generate titles for issues and sync volume number from parent volume
+  // Sync the volume number from the parent volume, then generate the issue
+  // title from it.
   if ($config->isIssueBundle($bundle)) {
-    _however_customizations_generate_title($entity, 'issue', $config);
     _however_customizations_sync_fields($entity, 'issue', $config);
+    _however_customizations_sync_journal($entity, $config);
+    _however_customizations_generate_title($entity, 'issue', $config);
   }
 
   // Sync fields from referenced issue for articles and sections
   if ($config->isArticleBundle($bundle) || $config->isSectionBundle($bundle)) {
     _however_customizations_sync_fields($entity, $bundle, $config);
+    _however_customizations_sync_journal($entity, $config);
+  }
+
+  // Page facsimiles take their journal from the issue they belong to.
+  if ($bundle === 'page_facsimiles') {
+    _however_customizations_sync_journal($entity, $config);
   }
 }
 

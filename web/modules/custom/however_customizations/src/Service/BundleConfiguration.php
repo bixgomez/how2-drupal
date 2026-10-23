@@ -222,6 +222,38 @@ class BundleConfiguration {
   }
 
   /**
+   * Get the reference fields a node copies its journal from.
+   *
+   * The fields are listed in priority order; the first one that holds a node
+   * with a journal supplies the value for the node's own field_journal.
+   *
+   * @param string $bundle
+   *   The bundle machine name.
+   *
+   * @return array
+   *   Reference field names, or an empty array when the bundle does not copy
+   *   its journal from a parent.
+   */
+  public function getJournalSourceFields(string $bundle): array {
+    switch ($bundle) {
+      case 'page_facsimiles':
+        return ['field_issue_reference'];
+
+      case 'issue':
+        return ['field_volume_reference'];
+
+      case 'section':
+        return ['field_issue_reference', 'field_volume_reference'];
+
+      case 'article':
+        return ['field_issue_reference', 'field_section_reference', 'field_volume_reference'];
+
+      default:
+        return [];
+    }
+  }
+
+  /**
    * Get form ID mappings for bundle type detection.
    *
    * Maps Drupal form IDs to their corresponding bundle types.
@@ -256,6 +288,7 @@ class BundleConfiguration {
       'node_how2_section_edit_form' => 'section',
       'node_section_form' => 'section',
       'node_section_edit_form' => 'section',
+      'node_page_facsimiles_edit_form' => 'page_facsimiles',
     ];
   }
 
@@ -274,11 +307,14 @@ class BundleConfiguration {
         return ['title'];
 
       case 'issue':
-        return ['title', 'field_volume_number'];
+        return ['title', 'field_volume_number', 'field_journal'];
 
       case 'article':
       case 'section':
-        return ['field_volume_number', 'field_issue_number'];
+        return ['field_volume_number', 'field_issue_number', 'field_journal'];
+
+      case 'page_facsimiles':
+        return ['field_journal'];
 
       default:
         return [];

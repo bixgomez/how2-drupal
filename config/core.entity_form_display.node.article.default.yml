@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.article.field_hide_the_node_title
     - field.field.node.article.field_issue_number
     - field.field.node.article.field_issue_reference
+    - field.field.node.article.field_journal
     - field.field.node.article.field_journal_page_images_media
     - field.field.node.article.field_media_type
     - field.field.node.article.field_person_bio
@@ -30,6 +31,7 @@ third_party_settings:
   field_group:
     group_issue_metadata:
       children:
+        - field_journal
         - field_volume_reference
         - field_volume_number
         - field_issue_reference
@@ -106,6 +108,12 @@ content:
   field_issue_reference:
     type: options_select
     weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_journal:
+    type: options_select
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }

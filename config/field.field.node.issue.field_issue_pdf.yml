@@ -1,16 +1,16 @@
-uuid: fc661f1f-4f6a-4663-8a63-cbd22168235a
+uuid: 59761ffa-ad6e-4cfd-9fef-531fd10862ca
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_journal_pdf
+    - field.storage.node.field_issue_pdf
     - media.type.document
     - node.type.issue
-id: node.issue.field_journal_pdf
-field_name: field_journal_pdf
+id: node.issue.field_issue_pdf
+field_name: field_issue_pdf
 entity_type: node
 bundle: issue
-label: 'Journal PDF'
+label: 'Issue PDF'
 description: ''
 required: false
 translatable: false

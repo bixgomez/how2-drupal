@@ -65,14 +65,16 @@ class PublicationNavigationService {
     $volume_number = (int) $node->field_volume_number->value;
     $bundle = $node->bundle();
     
+    $journal_id = $this->getJournalId($node);
+
     // Find previous volume (volume_number - 1).
-    $prev_nodes = $this->findVolumeByNumber($bundle, $volume_number - 1);
+    $prev_nodes = $this->findVolumeByNumber($bundle, $volume_number - 1, $journal_id);
     if (!empty($prev_nodes)) {
       $result['prev'] = reset($prev_nodes);
     }
     
     // Find next volume (volume_number + 1).
-    $next_nodes = $this->findVolumeByNumber($bundle, $volume_number + 1);
+    $next_nodes = $this->findVolumeByNumber($bundle, $volume_number + 1, $journal_id);
     if (!empty($next_nodes)) {
       $result['next'] = reset($next_nodes);
     }
@@ -87,11 +89,13 @@ class PublicationNavigationService {
    *   The bundle (content type).
    * @param int $volume_number
    *   The volume number to find.
+   * @param int|null $journal_id
+   *   The journal node ID to restrict the search to, or NULL for no restriction.
    *
    * @return array
    *   Array of nodes found (usually just one).
    */
-  protected function findVolumeByNumber($bundle, $volume_number) {
+  protected function findVolumeByNumber($bundle, $volume_number, $journal_id = NULL) {
     $query = $this->entityTypeManager->getStorage('node')->getQuery()
       ->condition('type', $bundle)
       ->condition('field_volume_number', $volume_number)
@@ -99,6 +103,10 @@ class PublicationNavigationService {
       ->accessCheck(TRUE)
       ->sort('created', 'ASC')
       ->range(0, 1);
+
+    if ($journal_id) {
+      $query->condition('field_journal', $journal_id);
+    }
       
     $nids = $query->execute();
     
@@ -107,6 +115,24 @@ class PublicationNavigationService {
     }
     
     return $this->entityTypeManager->getStorage('node')->loadMultiple($nids);
+  }
+
+  /**
+   * Get the journal node ID stored on a node's own field_journal.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   The node.
+   *
+   * @return int|null
+   *   The journal node ID, or NULL if the bundle has no field_journal or it is
+   *   empty.
+   */
+  protected function getJournalId($node) {
+    if (!$node->hasField('field_journal') || $node->field_journal->isEmpty()) {
+      return NULL;
+    }
+
+    return (int) $node->field_journal->target_id;
   }
 
   /**
@@ -139,27 +165,29 @@ class PublicationNavigationService {
     $issue_number = (int) $node->field_issue_number->value;
     $bundle = $node->bundle();
     
+    $journal_id = $this->getJournalId($node);
+
     // Find previous issue (in same volume with issue_number - 1)
-    $prev_nodes = $this->findIssueByNumbers($bundle, $volume_number, $issue_number - 1);
+    $prev_nodes = $this->findIssueByNumbers($bundle, $volume_number, $issue_number - 1, $journal_id);
     if (!empty($prev_nodes)) {
       $result['prev'] = reset($prev_nodes);
     } 
     // If no previous issue in same volume, try to find the last issue of previous volume
     else {
-      $last_issue = $this->findLastIssueInVolume($bundle, $volume_number - 1);
+      $last_issue = $this->findLastIssueInVolume($bundle, $volume_number - 1, $journal_id);
       if ($last_issue) {
         $result['prev'] = $last_issue;
       }
     }
     
     // Find next issue (in same volume with issue_number + 1)
-    $next_nodes = $this->findIssueByNumbers($bundle, $volume_number, $issue_number + 1);
+    $next_nodes = $this->findIssueByNumbers($bundle, $volume_number, $issue_number + 1, $journal_id);
     if (!empty($next_nodes)) {
       $result['next'] = reset($next_nodes);
     } 
     // If no next issue in same volume, try to find the first issue of next volume
     else {
-      $first_issue = $this->findFirstIssueInVolume($bundle, $volume_number + 1);
+      $first_issue = $this->findFirstIssueInVolume($bundle, $volume_number + 1, $journal_id);
       if ($first_issue) {
         $result['next'] = $first_issue;
       }
@@ -177,11 +205,13 @@ class PublicationNavigationService {
    *   The volume number to find.
    * @param int $issue_number
    *   The issue number to find.
+   * @param int|null $journal_id
+   *   The journal node ID to restrict the search to, or NULL for no restriction.
    *
    * @return array
    *   Array of nodes found (usually just one).
    */
-  protected function findIssueByNumbers($bundle, $volume_number, $issue_number) {
+  protected function findIssueByNumbers($bundle, $volume_number, $issue_number, $journal_id = NULL) {
     $query = $this->entityTypeManager->getStorage('node')->getQuery()
       ->condition('type', $bundle)
       ->condition('field_volume_number', $volume_number)
@@ -190,6 +220,10 @@ class PublicationNavigationService {
       ->accessCheck(TRUE)
       ->sort('created', 'ASC')
       ->range(0, 1);
+
+    if ($journal_id) {
+      $query->condition('field_journal', $journal_id);
+    }
       
     $nids = $query->execute();
     
@@ -207,11 +241,13 @@ class PublicationNavigationService {
    *   The bundle (content type).
    * @param int $volume_number
    *   The volume number to find.
+   * @param int|null $journal_id
+   *   The journal node ID to restrict the search to, or NULL for no restriction.
    *
    * @return \Drupal\node\Entity\Node|null
    *   The last issue node or NULL if none found.
    */
-  protected function findLastIssueInVolume($bundle, $volume_number) {
+  protected function findLastIssueInVolume($bundle, $volume_number, $journal_id = NULL) {
     $query = $this->entityTypeManager->getStorage('node')->getQuery()
       ->condition('type', $bundle)
       ->condition('field_volume_number', $volume_number)
@@ -219,6 +255,10 @@ class PublicationNavigationService {
       ->accessCheck(TRUE)
       ->sort('field_issue_number', 'DESC')
       ->range(0, 1);
+
+    if ($journal_id) {
+      $query->condition('field_journal', $journal_id);
+    }
       
     $nids = $query->execute();
     
@@ -237,11 +277,13 @@ class PublicationNavigationService {
    *   The bundle (content type).
    * @param int $volume_number
    *   The volume number to find.
+   * @param int|null $journal_id
+   *   The journal node ID to restrict the search to, or NULL for no restriction.
    *
    * @return \Drupal\node\Entity\Node|null
    *   The first issue node or NULL if none found.
    */
-  protected function findFirstIssueInVolume($bundle, $volume_number) {
+  protected function findFirstIssueInVolume($bundle, $volume_number, $journal_id = NULL) {
     $query = $this->entityTypeManager->getStorage('node')->getQuery()
       ->condition('type', $bundle)
       ->condition('field_volume_number', $volume_number)
@@ -249,6 +291,10 @@ class PublicationNavigationService {
       ->accessCheck(TRUE)
       ->sort('field_issue_number', 'ASC')
       ->range(0, 1);
+
+    if ($journal_id) {
+      $query->condition('field_journal', $journal_id);
+    }
       
     $nids = $query->execute();
     
