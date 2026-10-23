@@ -37,21 +37,24 @@
 .node--type-how2-volume .field--name-field-how2-issue,
 .node--type-how2-volume .field--name-field-how-ever-issue,
 .node--type-however-volume .field--name-field-how2-issue,
-.node--type-however-volume .field--name-field-how-ever-issue {
+.node--type-however-volume .field--name-field-how-ever-issue,
+.node--type-volume .field--name-field-issues {
   @apply flex flex-col flex-wrap justify-center gap-[30px];
 }
 
 .node--type-how2-volume .field--name-field-how2-issue > .field__item,
 .node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
 .node--type-however-volume .field--name-field-how2-issue > .field__item,
-.node--type-however-volume .field--name-field-how-ever-issue > .field__item {
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item,
+.node--type-volume .field--name-field-issues > .field__item {
   @apply min-w-[280px];
 }
 
 .node--type-how2-volume .field--name-field-how2-issue > .field__item > article,
 .node--type-how2-volume .field--name-field-how-ever-issue > .field__item > article,
 .node--type-however-volume .field--name-field-how2-issue > .field__item > article,
-.node--type-however-volume .field--name-field-how-ever-issue > .field__item > article {
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item > article,
+.node--type-volume .field--name-field-issues > .field__item > article {
   @apply h-full;
 }
 
@@ -59,14 +62,16 @@
   .node--type-how2-volume .field--name-field-how2-issue,
   .node--type-how2-volume .field--name-field-how-ever-issue,
   .node--type-however-volume .field--name-field-how2-issue,
-  .node--type-however-volume .field--name-field-how-ever-issue {
+  .node--type-however-volume .field--name-field-how-ever-issue,
+  .node--type-volume .field--name-field-issues {
     @apply flex-row;
   }
 
   .node--type-how2-volume .field--name-field-how2-issue > .field__item,
   .node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
   .node--type-however-volume .field--name-field-how2-issue > .field__item,
-  .node--type-however-volume .field--name-field-how-ever-issue > .field__item {
+  .node--type-however-volume .field--name-field-how-ever-issue > .field__item,
+  .node--type-volume .field--name-field-issues > .field__item {
     width: calc(50% - 30px);
   }
 }
@@ -74,39 +79,47 @@
 .node--type-how2-volume .field--name-field-how2-issue > .field__item,
 .node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
 .node--type-however-volume .field--name-field-how2-issue > .field__item,
-.node--type-however-volume .field--name-field-how-ever-issue > .field__item {
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item,
+.node--type-volume .field--name-field-issues > .field__item {
   @apply md:w-[calc(33%-30px)] lg:w-[calc(25%-30px)];
 }
 
-.node--type-journal-issue .issue-tabs ul {
+.node--type-journal-issue .issue-tabs ul,
+.node--type-issue .issue-tabs ul {
   @apply flex flex-row justify-start gap-6 list-none my-6 mx-0 p-0;
 
   margin: 24px 0 36px;
 }
 
-.node--type-journal-issue .issue-tabs ul li {
+.node--type-journal-issue .issue-tabs ul li,
+.node--type-issue .issue-tabs ul li {
   @apply m-0 p-0;
 }
 
-.node--type-journal-issue .issue-tabs ul li a {
+.node--type-journal-issue .issue-tabs ul li a,
+.node--type-issue .issue-tabs ul li a {
   @apply font-black no-underline pb-[3px];
 
   color: var(--color-text);
 }
 
 .node--type-journal-issue .issue-tabs ul li a.active,
-.node--type-journal-issue .issue-tabs ul li a:hover {
+.node--type-journal-issue .issue-tabs ul li a:hover,
+.node--type-issue .issue-tabs ul li a.active,
+.node--type-issue .issue-tabs ul li a:hover {
   border-bottom: 3px solid var(--color-primary);
 }
 
-.node--type-journal-issue .tab-body {
+.node--type-journal-issue .tab-body,
+.node--type-issue .tab-body {
   @apply hidden opacity-0 transition-opacity duration-500 ease-out;
 
   animation-duration: 1s;
   animation-fill-mode: both;
 }
 
-.node--type-journal-issue .tab-body.active {
+.node--type-journal-issue .tab-body.active,
+.node--type-issue .tab-body.active {
   @apply block opacity-100;
 
   animation-name: fadeIn;
@@ -123,31 +136,36 @@
 }
 
 .node--type-how2-section.node--view-mode-full .node__content,
-.node--type-how-ever-section.node--view-mode-full .node__content {
+.node--type-how-ever-section.node--view-mode-full .node__content,
+.node--type-section.node--view-mode-full .node__content {
   @apply max-w-[748px] mx-auto;
 }
 
 .node--type-how2-section.node--view-mode-full .field--name-field-image-caption,
-.node--type-how-ever-section.node--view-mode-full .field--name-field-image-caption {
+.node--type-how-ever-section.node--view-mode-full .field--name-field-image-caption,
+.node--type-section.node--view-mode-full .field--name-field-image-caption {
   @apply float-right w-2/5 max-w-[300px] mb-6 ml-12 mt-0 mr-0;
 }
 
 .node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how2-piece,
 .node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece,
 .node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how2-piece,
-.node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece {
+.node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece,
+.node--type-section.node--view-mode-full > .node__content > .field--name-field-piece {
   @apply mb-[54px];
 }
 
 .node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how2-piece > .field__item,
 .node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece > .field__item,
 .node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how2-piece > .field__item,
-.node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece > .field__item {
+.node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece > .field__item,
+.node--type-section.node--view-mode-full > .node__content > .field--name-field-piece > .field__item {
   @apply mb-[22px];
 }
 
 .node--type-how2-section.node--view-mode-teaser .section-title a,
-.node--type-how-ever-section.node--view-mode-teaser .section-title a {
+.node--type-how-ever-section.node--view-mode-teaser .section-title a,
+.node--type-section.node--view-mode-teaser .section-title a {
   @apply font-bold;
 
   color: var(--color-text);

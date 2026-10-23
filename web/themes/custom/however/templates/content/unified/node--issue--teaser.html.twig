@@ -1,0 +1,16 @@
+{%
+    set classes = [
+    'publication-teaser',
+    'publication-teaser--issue',
+]
+%}
+
+{% include "@publication-teaser/publication-teaser.html.twig" with {
+  classes: classes,
+  title: label,
+  url: url,
+  cover_thumbnail: content.field_cover_thumbnail,
+  volume_issue: volume_issue,
+  issue_number: content.field_issue_number,
+  publication_date_display: content.field_publication_date_display,
+} %}

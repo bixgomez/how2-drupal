@@ -26,6 +26,14 @@ services:
       - '@however_customizations.migration_map'
       - '@however_customizations.alias_swapper'
 
+  however_customizations.legacy_link_migrator:
+    class: Drupal\however_customizations\Service\LegacyLinkMigrator
+    arguments:
+      - '@entity_type.manager'
+      - '@database'
+      - '@however_customizations.bundle_config'
+      - '@however_customizations.migration_map'
+
   however_customizations.autocomplete_matcher:
     class: Drupal\however_customizations\EntityAutocompleteMatcher
     decorates: entity.autocomplete_matcher

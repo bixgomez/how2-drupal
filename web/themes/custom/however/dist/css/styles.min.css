@@ -1406,7 +1406,8 @@ img[src="0.gif"] {
 .node--type-how2-volume .field--name-field-how2-issue,
 .node--type-how2-volume .field--name-field-how-ever-issue,
 .node--type-however-volume .field--name-field-how2-issue,
-.node--type-however-volume .field--name-field-how-ever-issue {
+.node--type-however-volume .field--name-field-how-ever-issue,
+.node--type-volume .field--name-field-issues {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -1416,33 +1417,38 @@ img[src="0.gif"] {
 .node--type-how2-volume .field--name-field-how2-issue > .field__item,
 .node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
 .node--type-however-volume .field--name-field-how2-issue > .field__item,
-.node--type-however-volume .field--name-field-how-ever-issue > .field__item {
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item,
+.node--type-volume .field--name-field-issues > .field__item {
   min-width: 280px;
 }
 .node--type-how2-volume .field--name-field-how2-issue > .field__item > article,
 .node--type-how2-volume .field--name-field-how-ever-issue > .field__item > article,
 .node--type-however-volume .field--name-field-how2-issue > .field__item > article,
-.node--type-however-volume .field--name-field-how-ever-issue > .field__item > article {
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item > article,
+.node--type-volume .field--name-field-issues > .field__item > article {
   height: 100%;
 }
 @media (width >= 480px) {
   .node--type-how2-volume .field--name-field-how2-issue,
   .node--type-how2-volume .field--name-field-how-ever-issue,
   .node--type-however-volume .field--name-field-how2-issue,
-  .node--type-however-volume .field--name-field-how-ever-issue {
+  .node--type-however-volume .field--name-field-how-ever-issue,
+  .node--type-volume .field--name-field-issues {
     flex-direction: row;
   }
   .node--type-how2-volume .field--name-field-how2-issue > .field__item,
   .node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
   .node--type-however-volume .field--name-field-how2-issue > .field__item,
-  .node--type-however-volume .field--name-field-how-ever-issue > .field__item {
+  .node--type-however-volume .field--name-field-how-ever-issue > .field__item,
+  .node--type-volume .field--name-field-issues > .field__item {
     width: calc(50% - 30px);
   }
 }
 .node--type-how2-volume .field--name-field-how2-issue > .field__item,
 .node--type-how2-volume .field--name-field-how-ever-issue > .field__item,
 .node--type-however-volume .field--name-field-how2-issue > .field__item,
-.node--type-however-volume .field--name-field-how-ever-issue > .field__item {
+.node--type-however-volume .field--name-field-how-ever-issue > .field__item,
+.node--type-volume .field--name-field-issues > .field__item {
   @media (width >= 48rem) {
     width: calc(33% - 30px);
   }
@@ -1450,7 +1456,8 @@ img[src="0.gif"] {
     width: calc(25% - 30px);
   }
 }
-.node--type-journal-issue .issue-tabs ul {
+.node--type-journal-issue .issue-tabs ul,
+.node--type-issue .issue-tabs ul {
   margin-inline: calc(var(--spacing) * 0);
   margin-block: calc(var(--spacing) * 6);
   display: flex;
@@ -1461,11 +1468,13 @@ img[src="0.gif"] {
   padding: calc(var(--spacing) * 0);
   margin: 24px 0 36px;
 }
-.node--type-journal-issue .issue-tabs ul li {
+.node--type-journal-issue .issue-tabs ul li,
+.node--type-issue .issue-tabs ul li {
   margin: calc(var(--spacing) * 0);
   padding: calc(var(--spacing) * 0);
 }
-.node--type-journal-issue .issue-tabs ul li a {
+.node--type-journal-issue .issue-tabs ul li a,
+.node--type-issue .issue-tabs ul li a {
   padding-bottom: 3px;
   --tw-font-weight: var(--font-weight-black);
   font-weight: var(--font-weight-black);
@@ -1473,10 +1482,13 @@ img[src="0.gif"] {
   color: var(--color-text);
 }
 .node--type-journal-issue .issue-tabs ul li a.active,
-.node--type-journal-issue .issue-tabs ul li a:hover {
+.node--type-journal-issue .issue-tabs ul li a:hover,
+.node--type-issue .issue-tabs ul li a.active,
+.node--type-issue .issue-tabs ul li a:hover {
   border-bottom: 3px solid var(--color-primary);
 }
-.node--type-journal-issue .tab-body {
+.node--type-journal-issue .tab-body,
+.node--type-issue .tab-body {
   display: none;
   opacity: 0%;
   transition-property: opacity;
@@ -1489,7 +1501,8 @@ img[src="0.gif"] {
   animation-duration: 1s;
   animation-fill-mode: both;
 }
-.node--type-journal-issue .tab-body.active {
+.node--type-journal-issue .tab-body.active,
+.node--type-issue .tab-body.active {
   display: block;
   opacity: 100%;
   animation-name: fadeIn;
@@ -1503,12 +1516,14 @@ img[src="0.gif"] {
   }
 }
 .node--type-how2-section.node--view-mode-full .node__content,
-.node--type-how-ever-section.node--view-mode-full .node__content {
+.node--type-how-ever-section.node--view-mode-full .node__content,
+.node--type-section.node--view-mode-full .node__content {
   margin-inline: auto;
   max-width: 748px;
 }
 .node--type-how2-section.node--view-mode-full .field--name-field-image-caption,
-.node--type-how-ever-section.node--view-mode-full .field--name-field-image-caption {
+.node--type-how-ever-section.node--view-mode-full .field--name-field-image-caption,
+.node--type-section.node--view-mode-full .field--name-field-image-caption {
   float: right;
   margin-top: calc(var(--spacing) * 0);
   margin-right: calc(var(--spacing) * 0);
@@ -1520,17 +1535,20 @@ img[src="0.gif"] {
 .node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how2-piece,
 .node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece,
 .node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how2-piece,
-.node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece {
+.node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece,
+.node--type-section.node--view-mode-full > .node__content > .field--name-field-piece {
   margin-bottom: 54px;
 }
 .node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how2-piece > .field__item,
 .node--type-how2-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece > .field__item,
 .node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how2-piece > .field__item,
-.node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece > .field__item {
+.node--type-how-ever-section.node--view-mode-full > .node__content > .field--name-field-how-ever-piece > .field__item,
+.node--type-section.node--view-mode-full > .node__content > .field--name-field-piece > .field__item {
   margin-bottom: 22px;
 }
 .node--type-how2-section.node--view-mode-teaser .section-title a,
-.node--type-how-ever-section.node--view-mode-teaser .section-title a {
+.node--type-how-ever-section.node--view-mode-teaser .section-title a,
+.node--type-section.node--view-mode-teaser .section-title a {
   --tw-font-weight: var(--font-weight-bold);
   font-weight: var(--font-weight-bold);
   color: var(--color-text);
@@ -1950,7 +1968,8 @@ input[type="tel"]::placeholder {
 .field--name-field-how-2-sections,
 .field--name-field-sections-how2,
 .field--name-field-sections-however,
-.field--name-field-section {
+.field--name-field-section,
+.field--name-field-sections {
   margin-inline: calc(var(--spacing) * 0);
   margin-block: calc(var(--spacing) * 6);
   padding: calc(var(--spacing) * 0);
@@ -1960,7 +1979,8 @@ input[type="tel"]::placeholder {
 .field--name-field-how-2-sections > .field__item,
 .field--name-field-sections-how2 > .field__item,
 .field--name-field-sections-however > .field__item,
-.field--name-field-section > .field__item {
+.field--name-field-section > .field__item,
+.field--name-field-sections > .field__item {
   margin-bottom: 18px;
   box-sizing: border-box;
   display: inline-block;
@@ -1970,14 +1990,16 @@ input[type="tel"]::placeholder {
   background: #fffcf7;
 }
 .field--name-field-archive-url a,
-.field--name-field-however-page-facimile-link a {
+.field--name-field-however-page-facimile-link a,
+.field--name-field-page-facsimile-link a {
   --tw-font-weight: var(--font-weight-semibold);
   font-weight: var(--font-weight-semibold);
   text-decoration-line: none;
   color: var(--color-text);
 }
 .field--name-field-archive-url a:hover,
-.field--name-field-however-page-facimile-link a:hover {
+.field--name-field-however-page-facimile-link a:hover,
+.field--name-field-page-facsimile-link a:hover {
   text-decoration-line: underline;
 }
 .field--name-field-caption p {

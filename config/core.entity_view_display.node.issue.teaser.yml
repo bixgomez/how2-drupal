@@ -1,0 +1,98 @@
+uuid: a60e09cd-7c07-41ef-9a09-52d3461e3bc7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.issue.body
+    - field.field.node.issue.field_archive_url
+    - field.field.node.issue.field_cover_thumbnail
+    - field.field.node.issue.field_issue_number
+    - field.field.node.issue.field_issue_pdf
+    - field.field.node.issue.field_journal
+    - field.field.node.issue.field_journal_name
+    - field.field.node.issue.field_journal_page_images_media
+    - field.field.node.issue.field_masthead
+    - field.field.node.issue.field_person_bio
+    - field.field.node.issue.field_publication_date_display
+    - field.field.node.issue.field_sections
+    - field.field.node.issue.field_short_description
+    - field.field.node.issue.field_volume_number
+    - field.field.node.issue.field_volume_reference
+    - node.type.issue
+  module:
+    - image
+    - text
+    - user
+third_party_settings: {  }
+id: node.issue.teaser
+targetEntityType: node
+bundle: issue
+mode: teaser
+content:
+  field_cover_thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_volume_number:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_issue_number:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_volume_reference:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_publication_date_display:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+hidden:
+  field_archive_url: true
+  field_issue_pdf: true
+  field_journal: true
+  field_journal_name: true
+  field_journal_page_images_media: true
+  field_masthead: true
+  field_person_bio: true
+  field_sections: true
+  field_short_description: true
+  footnotes_group: true
+  links: true
+  search_api_excerpt: true

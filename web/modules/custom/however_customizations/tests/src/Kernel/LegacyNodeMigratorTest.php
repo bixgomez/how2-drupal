@@ -19,6 +19,7 @@ namespace Drupal\Tests\however_customizations\Kernel;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\however_customizations\MigrationStage;
+use Drupal\however_customizations\Service\LegacyLinkMigrator;
 use Drupal\however_customizations\Service\LegacyNodeMigrator;
 use Drupal\however_customizations\Service\MigrationMap;
 use Drupal\KernelTests\KernelTestBase;
@@ -73,6 +74,13 @@ class LegacyNodeMigratorTest extends KernelTestBase {
   protected MigrationMap $map;
 
   /**
+   * The links pass.
+   *
+   * @var \Drupal\however_customizations\Service\LegacyLinkMigrator
+   */
+  protected LegacyLinkMigrator $linker;
+
+  /**
    * The ID of the user that owns the first legacy volume.
    *
    * @var int
@@ -109,12 +117,14 @@ class LegacyNodeMigratorTest extends KernelTestBase {
     $this->addIssueFields();
     $this->addSectionFields();
     $this->addArticleFields();
+    $this->addListFields();
 
     $this->createNode(['type' => 'journal', 'title' => 'How(ever)', 'field_journal_name' => 'however']);
     $this->createNode(['type' => 'journal', 'title' => 'How2', 'field_journal_name' => 'how2']);
 
     $this->map = $this->container->get('however_customizations.migration_map');
     $this->migrator = $this->container->get('however_customizations.legacy_node_migrator');
+    $this->linker = $this->container->get('however_customizations.legacy_link_migrator');
   }
 
   /**
@@ -246,6 +256,19 @@ class LegacyNodeMigratorTest extends KernelTestBase {
     $this->addParagraphField('field_title', 'string', ['open_title_text']);
     $this->addParagraphField('field_title_display', 'text_long', ['open_title_text']);
     $this->addParagraphField('field_caption', 'text_long', ['photo_caption']);
+  }
+
+  /**
+   * Creates the list fields the links pass fills, and their legacy sources.
+   */
+  protected function addListFields(): void {
+    $list = ['target_type' => 'node', 'cardinality' => -1];
+    $this->addField('field_how_ever_issue', 'entity_reference', ['however_volume'], $list);
+    $this->addField('field_how2_issue', 'entity_reference', ['how2_volume'], $list);
+    $this->addField('field_issues', 'entity_reference', ['volume'], $list);
+    $this->addField('field_sections_however', 'entity_reference', ['journal_issue'], $list);
+    $this->addField('field_sections_how2', 'entity_reference', ['how2_issue'], $list);
+    $this->addField('field_sections', 'entity_reference', ['issue'], $list);
   }
 
   /**
@@ -1116,6 +1139,185 @@ class LegacyNodeMigratorTest extends KernelTestBase {
     $this->assertTrue($new->get('field_issue_reference')->isEmpty());
     $this->assertSame('however', $new->get('field_journal_name')->value);
     $this->assertSame('however', Node::load($new->get('field_journal')->target_id)->get('field_journal_name')->value);
+  }
+
+  /**
+   * Returns the target IDs of a reference field as integers.
+   */
+  protected function targets(NodeInterface $node, string $field): array {
+    return array_map('intval', array_column($node->get($field)->getValue(), 'target_id'));
+  }
+
+  /**
+   * Loads the unified twin of a legacy node, fresh from the database.
+   */
+  protected function twin(NodeInterface $legacy): NodeInterface {
+    $this->container->get('entity_type.manager')->getStorage('node')->resetCache();
+    return Node::load($this->map->getNewNid($legacy->id()));
+  }
+
+  /**
+   * Tests that the links pass copies the issue and section lists.
+   *
+   * The legacy list is copied in order through the map. A deleted node and a
+   * repeated entry are dropped; an entry that belongs to another issue is
+   * kept and reported; articles may be in the list.
+   */
+  public function testLinksFillTheListsOfVolumesAndIssues(): void {
+    $legacy = $this->createLegacyVolumes();
+    $issue_a = $this->createLegacyIssue(['type' => 'journal_issue', 'title' => 'A custom issue title', 'field_volume_reference' => $legacy['however1']->id(), 'field_volume_number' => 1, 'field_issue_number' => 1]);
+    $issue_b = $this->createLegacyIssue(['type' => 'journal_issue', 'field_volume_reference' => $legacy['however1']->id(), 'field_volume_number' => 1, 'field_issue_number' => 2]);
+    $issue_c = $this->createLegacyIssue(['type' => 'how2_issue', 'field_volume_reference' => $legacy['how2']->id(), 'field_volume_number' => 3, 'field_issue_number' => 1]);
+    $section_a = $this->createLegacySection(['type' => 'how_ever_section', 'field_issue_reference' => $issue_a->id(), 'field_volume_reference' => $legacy['however1']->id()]);
+    $section_b = $this->createLegacySection(['type' => 'how_ever_section', 'field_issue_reference' => $issue_b->id(), 'field_volume_reference' => $legacy['however1']->id()]);
+    $article = $this->createLegacyArticle(['type' => 'how_ever_article', 'field_issue_reference' => $issue_a->id(), 'field_volume_reference' => $legacy['however1']->id()]);
+    $gone = $this->createNode(['type' => 'how_ever_section']);
+    $gone_id = (int) $gone->id();
+
+    $legacy['however1']->set('field_how_ever_issue', [$issue_a->id(), $issue_b->id()])->save();
+    $legacy['how2']->set('field_how2_issue', [$issue_c->id()])->save();
+    $issue_a->set('field_sections_however', [$section_a->id(), $article->id(), $gone_id, $section_a->id(), $section_b->id()]);
+    $issue_a->however_skip_presave = TRUE;
+    $issue_a->save();
+    $gone->delete();
+
+    foreach ([MigrationStage::Volume, MigrationStage::Issue, MigrationStage::Section, MigrationStage::Article] as $stage) {
+      $this->migrator->migrate($stage, TRUE);
+    }
+    $volume = $this->twin($legacy['however1']);
+    $this->assertSame([], $this->targets($volume, 'field_issues'), 'The stages leave the lists empty.');
+
+    $dry = $this->linker->link(FALSE);
+    $this->assertSame(3, $dry['counts']['would_link'], 'Two volumes and one issue have a list.');
+    $this->assertSame(0, $dry['counts']['linked']);
+    $this->assertSame([], $this->targets($this->twin($legacy['however1']), 'field_issues'), 'A dry run changes nothing.');
+
+    $result = $this->linker->link(TRUE);
+    $this->assertSame(3, $result['counts']['linked']);
+    $this->assertSame(0, $result['counts']['blocked']);
+
+    $this->assertSame([$this->map->getNewNid($issue_a->id()), $this->map->getNewNid($issue_b->id())], $this->targets($this->twin($legacy['however1']), 'field_issues'));
+    $this->assertSame([$this->map->getNewNid($issue_c->id())], $this->targets($this->twin($legacy['how2']), 'field_issues'));
+
+    $unified_issue = $this->twin($issue_a);
+    $this->assertSame([
+      $this->map->getNewNid($section_a->id()),
+      $this->map->getNewNid($article->id()),
+      $this->map->getNewNid($section_b->id()),
+    ], $this->targets($unified_issue, 'field_sections'));
+    $this->assertSame('A custom issue title', $unified_issue->getTitle(), 'Saving the issue keeps its title.');
+    $this->assertSame([], $this->targets($this->twin($issue_b), 'field_sections'));
+
+    $notes = implode(' | ', array_column(array_filter($result['rows'], fn ($row) => $row['old_nid'] === (int) $issue_a->id()), 'note'));
+    $this->assertStringContainsString('3 entries', $notes);
+    $this->assertStringContainsString("drops deleted node $gone_id", $notes);
+    $this->assertStringContainsString('drops repeated node ' . $section_a->id(), $notes);
+    $this->assertStringContainsString('keeps node ' . $section_b->id() . ', which belongs to issue ' . $issue_b->id(), $notes);
+
+    $legacy_after = Node::load($issue_a->id());
+    $this->assertCount(5, $legacy_after->get('field_sections_however'), 'The legacy list is untouched.');
+
+    $again = $this->linker->link(TRUE);
+    $this->assertSame(0, $again['counts']['linked'], 'A second run changes nothing.');
+    $this->assertSame(0, $again['counts']['would_link']);
+
+    $preview = $this->linker->unlink(FALSE);
+    $this->assertSame(['nodes' => 3, 'references' => 6], $preview);
+    $this->assertCount(3, $this->targets($this->twin($issue_a), 'field_sections'), 'The preview clears nothing.');
+    $this->linker->unlink(TRUE);
+    $this->assertSame([], $this->targets($this->twin($issue_a), 'field_sections'));
+    $this->assertSame([], $this->targets($this->twin($legacy['however1']), 'field_issues'));
+    $this->assertSame(['nodes' => 0, 'references' => 0], $this->linker->unlink(FALSE));
+  }
+
+  /**
+   * Tests that the links pass fills the article and subsection references.
+   *
+   * Each unified piece takes the reference of the legacy piece at the same
+   * position. Empty references stay empty, a deleted target is dropped, and
+   * the pieces without references are not touched.
+   */
+  public function testLinksFillThePieceReferences(): void {
+    $legacy = $this->createLegacyVolumes();
+    $issues = $this->createParentsAndMigrate($legacy);
+    $however_article = $this->createLegacyArticle(['type' => 'how_ever_article', 'field_issue_reference' => $issues['however']->id(), 'field_volume_reference' => $legacy['however1']->id()]);
+    $how2_article = $this->createLegacyArticle(['type' => 'how2_article', 'field_issue_reference' => $issues['how2']->id(), 'field_volume_reference' => $legacy['how2']->id()]);
+    $gone = $this->createNode(['type' => 'how_ever_article']);
+    $second = $this->createLegacySection(['type' => 'how_ever_section', 'title' => 'Second', 'field_issue_reference' => $issues['however']->id(), 'field_volume_reference' => $legacy['however1']->id()]);
+
+    $pieces = [
+      $this->createPiece('open_title_text', ['field_title' => 'Opening', 'field_text' => 'Some text']),
+      $this->createPiece('section_links', ['field_notes' => 'One', 'field_unit' => $however_article->id()]),
+      $this->createPiece('how_ever_subsection', ['field_how_ever_subsection' => $second->id()]),
+      $this->createPiece('section_links', ['field_notes' => 'Empty']),
+      $this->createPiece('section_links', ['field_notes' => 'Gone', 'field_unit' => $gone->id()]),
+    ];
+    $first = $this->createLegacySection(['type' => 'how_ever_section', 'title' => 'First', 'field_issue_reference' => $issues['however']->id(), 'field_volume_reference' => $legacy['however1']->id(), 'field_how_ever_piece' => $this->refs($pieces)]);
+    $how2_pieces = [$this->createPiece('how2_section_links', ['field_notes' => 'How2', 'field_unit' => $how2_article->id()])];
+    $how2 = $this->createLegacySection(['type' => 'how2_section', 'field_issue_reference' => $issues['how2']->id(), 'field_volume_reference' => $legacy['how2']->id(), 'field_how2_piece' => $this->refs($how2_pieces)]);
+    $gone->delete();
+
+    $this->migrator->migrate(MigrationStage::Section, TRUE);
+    $this->migrator->migrate(MigrationStage::Article, TRUE);
+
+    $unified = $this->twin($first);
+    foreach ($unified->get('field_piece')->referencedEntities() as $piece) {
+      $this->assertTrue(!$piece->hasField('field_unit') || $piece->get('field_unit')->isEmpty(), 'The stage leaves the references empty.');
+    }
+
+    $dry = $this->linker->link(FALSE);
+    $this->assertSame(2, $dry['counts']['would_link']);
+    $this->assertSame(0, $this->linker->link(FALSE)['counts']['linked']);
+
+    $result = $this->linker->link(TRUE);
+    $this->assertSame(2, $result['counts']['linked']);
+    $this->assertSame(0, $result['counts']['blocked']);
+
+    $pieces_after = $this->twin($first)->get('field_piece')->referencedEntities();
+    $this->assertCount(5, $pieces_after);
+    $this->assertSame('open_title_text', $pieces_after[0]->bundle());
+    $this->assertSame('Some text', $pieces_after[0]->get('field_text')->value);
+    $this->assertSame((int) $this->map->getNewNid($however_article->id()), (int) $pieces_after[1]->get('field_unit')->target_id);
+    $this->assertSame('One', $pieces_after[1]->get('field_notes')->value);
+    $this->assertSame((int) $this->map->getNewNid($second->id()), (int) $pieces_after[2]->get('field_subsection')->target_id);
+    $this->assertTrue($pieces_after[3]->get('field_unit')->isEmpty(), 'An empty legacy reference stays empty.');
+    $this->assertTrue($pieces_after[4]->get('field_unit')->isEmpty(), 'A deleted target is dropped.');
+    $how2_after = $this->twin($how2)->get('field_piece')->referencedEntities();
+    $this->assertSame((int) $this->map->getNewNid($how2_article->id()), (int) $how2_after[0]->get('field_unit')->target_id);
+
+    $notes = implode(' | ', array_column(array_filter($result['rows'], fn ($row) => $row['old_nid'] === (int) $first->id()), 'note'));
+    $this->assertStringContainsString('1 article link, 1 subsection', $notes);
+    $this->assertStringContainsString('drops deleted node ' . $gone->id() . ' (piece 4)', $notes);
+    $this->assertStringContainsString('1 empty reference', $notes);
+
+    $legacy_pieces = Node::load($first->id())->get('field_how_ever_piece')->referencedEntities();
+    $this->assertEquals($however_article->id(), $legacy_pieces[1]->get('field_unit')->target_id, 'The legacy piece is untouched.');
+
+    $this->assertSame(0, $this->linker->link(TRUE)['counts']['linked'], 'A second run changes nothing.');
+
+    $this->assertSame(['nodes' => 2, 'references' => 3], $this->linker->unlink(FALSE));
+    $this->linker->unlink(TRUE);
+    $cleared = $this->twin($first)->get('field_piece')->referencedEntities();
+    $this->assertTrue($cleared[1]->get('field_unit')->isEmpty());
+    $this->assertTrue($cleared[2]->get('field_subsection')->isEmpty());
+    $this->assertSame('One', $cleared[1]->get('field_notes')->value, 'Only the references are cleared.');
+  }
+
+  /**
+   * Tests that a list entry that is not migrated blocks its node.
+   */
+  public function testLinksAreBlockedByANodeThatIsNotMigrated(): void {
+    $legacy = $this->createLegacyVolumes();
+    $this->migrator->migrate(MigrationStage::Volume, TRUE);
+    $issue = $this->createLegacyIssue(['type' => 'journal_issue', 'field_volume_reference' => $legacy['however1']->id(), 'field_volume_number' => 1, 'field_issue_number' => 1]);
+    $legacy['however1']->set('field_how_ever_issue', [$issue->id()])->save();
+
+    $result = $this->linker->link(TRUE);
+
+    $this->assertSame(1, $result['counts']['blocked']);
+    $this->assertSame(0, $result['counts']['linked']);
+    $this->assertStringContainsString('is not migrated', $result['rows'][0]['note']);
+    $this->assertSame([], $this->targets($this->twin($legacy['however1']), 'field_issues'));
   }
 
 }

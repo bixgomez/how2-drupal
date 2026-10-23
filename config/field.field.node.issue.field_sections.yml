@@ -19,16 +19,19 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
+      article: article
       section: section
     negate: 0
     target_bundles_drag_drop:
-      article: null
+      article:
+        weight: 0
+        enabled: true
       issue: null
       journal: null
       page: null
       page_facsimiles: null
       section:
-        weight: 0
+        weight: 1
         enabled: true
       volume: null
 field_type: entity_reference

@@ -1,0 +1,40 @@
+{%
+    set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'card',
+    'node--issue',
+]
+%}
+{% set logo = node.field_journal_name.value == 'however' ? 'however-logo-sm.png' : 'how2-logo-sm.png' %}
+{{ attach_library('classy/node') }}
+<article{{ attributes.addClass(classes) }}>
+
+    <div class="image-top">
+        {# The label "section" is carried over from the legacy How2 issue card. #}
+        <div class="content-type">section</div>
+        <a href="{{ url }}" rel="bookmark">{{ content.field_cover_thumbnail }}</a>
+        <div class="volume-issue">
+            {{ volume }}<br />
+            {{ issue }}
+        </div>
+    </div>
+    <div class="content">
+        <div class="journal-logo"><img src="/themes/custom/however/images/{{ logo }}" alt="{{ journal }} journal logo"></div>
+        {{ content.field_publication_date_display }}
+        {% if label and not page %}
+            <h3{{ title_attributes }}>
+                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            </h3>
+        {% endif %}
+        <div{{ content_attributes.addClass('node__content') }}>
+
+        </div>
+    </div>
+
+
+</article>

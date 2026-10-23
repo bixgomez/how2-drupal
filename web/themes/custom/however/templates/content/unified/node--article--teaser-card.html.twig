@@ -1,0 +1,22 @@
+{%
+  set classes = [
+    'item-teaser',
+    'item-teaser__article',
+  ]
+%}
+
+{# Only How(ever) article cards passed the display title. #}
+{% set is_however = node.field_journal_name.value == 'however' %}
+
+{# Clean the fields before passing to component #}
+{% set clean_subtitle = content.field_subtitle['#items'] ? content.field_subtitle : false %}
+{% set clean_teaser = content.field_teaser_text['#items'] ? content.field_teaser_text : false %}
+
+{% include "@item-teaser/item-teaser.html.twig" with {
+  title: label,
+  title_display: is_however ? content.field_title_display : null,
+  url: url,
+  subtitle: clean_subtitle,
+  teaser_text: clean_teaser,
+  classes: classes,
+} %}

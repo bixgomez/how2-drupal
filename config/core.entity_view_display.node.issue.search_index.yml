@@ -1,0 +1,65 @@
+uuid: e5e22fe7-b739-43fc-8592-3d75169285de
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.issue.body
+    - field.field.node.issue.field_archive_url
+    - field.field.node.issue.field_cover_thumbnail
+    - field.field.node.issue.field_issue_number
+    - field.field.node.issue.field_issue_pdf
+    - field.field.node.issue.field_journal
+    - field.field.node.issue.field_journal_name
+    - field.field.node.issue.field_journal_page_images_media
+    - field.field.node.issue.field_masthead
+    - field.field.node.issue.field_person_bio
+    - field.field.node.issue.field_publication_date_display
+    - field.field.node.issue.field_sections
+    - field.field.node.issue.field_short_description
+    - field.field.node.issue.field_volume_number
+    - field.field.node.issue.field_volume_reference
+    - node.type.issue
+  module:
+    - link
+    - user
+third_party_settings: {  }
+id: node.issue.search_index
+targetEntityType: node
+bundle: issue
+mode: search_index
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+  field_archive_url:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 102
+    region: content
+hidden:
+  body: true
+  field_cover_thumbnail: true
+  field_issue_number: true
+  field_issue_pdf: true
+  field_journal: true
+  field_journal_name: true
+  field_journal_page_images_media: true
+  field_masthead: true
+  field_person_bio: true
+  field_publication_date_display: true
+  field_sections: true
+  field_short_description: true
+  field_volume_number: true
+  field_volume_reference: true
+  footnotes_group: true
+  search_api_excerpt: true

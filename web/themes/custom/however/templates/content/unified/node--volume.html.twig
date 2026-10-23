@@ -1,0 +1,9 @@
+{# Volume page for both journals. How(ever) volumes link to the page facsimiles, How2 volumes to the archive. #}
+{% set is_however = node.field_journal_name.value == 'however' %}
+
+{% include "@volume/volume.html.twig" with {
+  journal: journal,
+  archive_link: is_however ? content.field_page_facsimile_link : content.field_archive_url,
+  issues: content.field_issues,
+  title: label
+} %}

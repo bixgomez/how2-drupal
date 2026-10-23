@@ -447,6 +447,43 @@ class BundleConfiguration {
   }
 
   /**
+   * Gets the lists the links pass copies from a legacy volume or issue.
+   *
+   * @param string $legacy_bundle
+   *   The legacy bundle machine name.
+   *
+   * @return array
+   *   The legacy list field names mapped to the unified field names, or an
+   *   empty array for a bundle without a list. Only the field the legacy page
+   *   renders is copied (not the old section fields).
+   */
+  public function getLinkListFields(string $legacy_bundle): array {
+    return match ($legacy_bundle) {
+      'however_volume' => ['field_how_ever_issue' => 'field_issues'],
+      'how2_volume' => ['field_how2_issue' => 'field_issues'],
+      'journal_issue' => ['field_sections_however' => 'field_sections'],
+      'how2_issue' => ['field_sections_how2' => 'field_sections'],
+      default => [],
+    };
+  }
+
+  /**
+   * Gets the reference fields of the legacy piece paragraphs.
+   *
+   * @return array
+   *   For each legacy piece paragraph type, the legacy reference field and
+   *   the field of the unified paragraph it is copied to.
+   */
+  public function getLinkPieceFields(): array {
+    return [
+      'section_links' => ['field_unit', 'field_unit'],
+      'how2_section_links' => ['field_unit', 'field_unit'],
+      'how_ever_subsection' => ['field_how_ever_subsection', 'field_subsection'],
+      'how2_subsection' => ['field_how2_subsection', 'field_subsection'],
+    ];
+  }
+
+  /**
    * Get the reference fields a node copies its journal from.
    *
    * The fields are listed in priority order; the first one that holds a node

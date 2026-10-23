@@ -1,0 +1,35 @@
+{% set sections_new_entities = [] %}
+{% if content.field_sections[0] is defined %}
+  {% for item in node.field_sections %}
+    {% if item.entity and item.entity.id() != node.id() %}
+      {% set sections_new_entities = sections_new_entities|merge([item.entity]) %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% set person_bio_entities = [] %}
+{% if content.field_person_bio[0] is defined %}
+  {% for item in node.field_person_bio %}
+    {% if item.entity %}
+      {% set person_bio_entities = person_bio_entities|merge([item.entity]) %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% include "@issue/issue.html.twig" with {
+  journal: journal,
+  journal_url: journal_url,
+  volume_num: node.field_volume_reference.entity.field_volume_number.value,
+  issue_num: node.field_issue_number.value,
+  date: node.field_publication_date_display.value,
+  title: label,
+  title_display: content.field_short_description.0['#context'].value,
+  archive_url: node.field_archive_url.uri,
+  featured_image: content.field_cover_thumbnail,
+  masthead: content.field_masthead.0['#text'],
+  short_description: node.field_short_description,
+  sections_new: sections_new_entities,
+  person_bio: person_bio_entities,
+  page_facsimiles: content.field_journal_page_images_media,
+  pdf_url: node.field_issue_pdf[0]|file_url,
+} %}

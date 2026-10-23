@@ -66,7 +66,7 @@ function however_preprocess_node(&$variables, $hook)
   }
 
   // Add section links for articles
-  if (in_array($node->getType(), ['how2_article', 'how_ever_article'])) {
+  if (in_array($node->getType(), ['how2_article', 'how_ever_article', 'article'])) {
     // Debug: let's see what we're working with
     // \Drupal::logger('however')->info('Looking for sections containing article ID: @nid', ['@nid' => $node->id()]);
     $variables['parent_sections'] = get_article_sections($node->id());
@@ -364,6 +364,148 @@ function however_preprocess_node__journal_issue(&$variables, $hook)
 }
 
 /**
+ * Gets the display name and landing page path of a journal.
+ *
+ * The unified bundles serve both journals, so the templates take these from
+ * the node's journal instead of having them written into each template.
+ *
+ * @param string|null $journal_name
+ *   The journal machine name, from field_journal_name.
+ *
+ * @return array
+ *   An array with 'journal' (the display name) and 'journal_url', or an empty
+ *   array for an unknown journal.
+ */
+function however_get_journal_info($journal_name)
+{
+  $journals = [
+    'however' => ['journal' => 'HOW(ever)', 'journal_url' => '/however'],
+    'how2' => ['journal' => 'How2', 'journal_url' => '/how2'],
+  ];
+  return $journals[$journal_name] ?? [];
+}
+
+/**
+ * Sets the journal variables for a unified node.
+ */
+function however_set_journal_variables(&$variables)
+{
+  $node = $variables['node'];
+  if ($node->hasField('field_journal_name')) {
+    foreach (however_get_journal_info($node->get('field_journal_name')->value) as $key => $value) {
+      $variables[$key] = $value;
+    }
+  }
+}
+
+/**
+ * Sets the volume, issue, and volume_issue variables ("vol. 2, no. 3").
+ *
+ * Each part is only set when its number is available, as in the preprocess
+ * functions of the legacy types.
+ */
+function however_set_volume_issue_variables(&$variables, $volume_number, $issue_number)
+{
+  $volume = null;
+  $issue = null;
+
+  if ($volume_number !== null && $volume_number !== '') {
+    $volume = 'vol. ' . $volume_number;
+    $variables['volume'] = $volume;
+  }
+  if ($issue_number !== null && $issue_number !== '') {
+    $issue = 'no. ' . $issue_number;
+    $variables['issue'] = $issue;
+  }
+
+  if (isset($volume) && isset($issue)) {
+    $variables['volume_issue'] = $volume . ', ' . $issue;
+  } elseif (isset($volume)) {
+    $variables['volume_issue'] = $volume;
+  } elseif (isset($issue)) {
+    $variables['volume_issue'] = $issue;
+  }
+}
+
+/**
+ * Process unified volume nodes (How(ever) and How2).
+ * Creates template variables: journal, journal_url.
+ */
+function however_preprocess_node__volume(&$variables, $hook)
+{
+  however_set_journal_variables($variables);
+}
+
+/**
+ * Process unified issue nodes (How(ever) and How2).
+ * Creates template variables: journal, journal_url, volume, issue,
+ * volume_issue, label.
+ */
+function however_preprocess_node__issue(&$variables, $hook)
+{
+  $node = $variables['node'];
+  however_set_journal_variables($variables);
+
+  $volume_number = null;
+  $volume_reference = $node->get('field_volume_reference')->entity;
+  if ($volume_reference && !$volume_reference->get('field_volume_number')->isEmpty()) {
+    $volume_number = $volume_reference->get('field_volume_number')->value;
+  }
+  however_set_volume_issue_variables($variables, $volume_number, $node->get('field_issue_number')->value);
+
+  // Add short description as a label if available
+  if (!$node->get('field_short_description')->isEmpty()) {
+    $variables['label'] = $node->get('field_short_description')->value;
+  }
+}
+
+/**
+ * Sets the variables that sections and articles take from their issue and volume.
+ * Creates template variables: journal, journal_url, issue_pub_date, issue_url,
+ * volume, issue, volume_issue.
+ */
+function however_set_issue_context_variables(&$variables)
+{
+  $node = $variables['node'];
+  however_set_journal_variables($variables);
+
+  $issue_number = null;
+  $issue_node = $node->get('field_issue_reference')->entity;
+  if ($issue_node) {
+    if (!$issue_node->get('field_publication_date_display')->isEmpty()) {
+      $variables['issue_pub_date'] = $issue_node->get('field_publication_date_display')->value;
+    }
+    $variables['issue_url'] = $issue_node->toUrl()->toString();
+    $issue_number = $issue_node->get('field_issue_number')->value;
+  }
+
+  $volume_number = null;
+  $volume_node = $node->get('field_volume_reference')->entity;
+  if ($volume_node && !$volume_node->get('field_volume_number')->isEmpty()) {
+    $volume_number = $volume_node->get('field_volume_number')->value;
+  }
+
+  however_set_volume_issue_variables($variables, $volume_number, $issue_number);
+}
+
+/**
+ * Process unified section nodes (How(ever) and How2).
+ */
+function however_preprocess_node__section(&$variables, $hook)
+{
+  however_set_issue_context_variables($variables);
+}
+
+/**
+ * Process unified article nodes (How(ever) and How2).
+ * The parent sections are added by the dispatcher.
+ */
+function however_preprocess_node__article(&$variables, $hook)
+{
+  however_set_issue_context_variables($variables);
+}
+
+/**
  * Get all sections that reference a given article.
  * 
  * @param int $article_nid
@@ -385,21 +527,21 @@ function get_article_sections($article_nid) {
     return [];
   }
   
-  $sections = [];
-  
-  // Find how_ever_sections that reference these paragraphs
-  $section_query1 = \Drupal::entityQuery('node')
-    ->condition('type', 'how_ever_section')
-    ->condition('field_how_ever_piece', $paragraph_nids, 'IN')
-    ->accessCheck(FALSE);
-  
-  // Find how2_sections that reference these paragraphs  
-  $section_query2 = \Drupal::entityQuery('node')
-    ->condition('type', 'how2_section')
-    ->condition('field_how2_piece', $paragraph_nids, 'IN')
-    ->accessCheck(FALSE);
-  
-  $section_nids = array_merge($section_query1->execute(), $section_query2->execute());
+  // Find the sections that reference these paragraphs: the unified sections
+  // and the legacy ones of each journal.
+  $piece_fields = [
+    'section' => 'field_piece',
+    'how_ever_section' => 'field_how_ever_piece',
+    'how2_section' => 'field_how2_piece',
+  ];
+  $section_nids = [];
+  foreach ($piece_fields as $bundle => $field) {
+    $section_query = \Drupal::entityQuery('node')
+      ->condition('type', $bundle)
+      ->condition($field, $paragraph_nids, 'IN')
+      ->accessCheck(FALSE);
+    $section_nids = array_merge($section_nids, $section_query->execute());
+  }
   
   if ($section_nids) {
     return \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($section_nids);
@@ -418,17 +560,14 @@ function however_preprocess_paragraph__journal_toc(&$variables) {
   // Get the selected journal type
   $journal_type = $paragraph->get('field_journal')->value;
   
-  if ($journal_type === 'however') {
-    $volume_type = 'however_volume';
-  } elseif ($journal_type === 'how2') {
-    $volume_type = 'how2_volume';
-  } else {
+  if (!in_array($journal_type, ['however', 'how2'], TRUE)) {
     return;
   }
   
-  // Get all volumes, sorted by volume number
+  // Get all volumes of the journal, sorted by volume number
   $volume_query = \Drupal::entityQuery('node')
-    ->condition('type', $volume_type)
+    ->condition('type', 'volume')
+    ->condition('field_journal_name', $journal_type)
     ->condition('status', 1)
     ->sort('field_volume_number', 'ASC')
     ->accessCheck(TRUE);

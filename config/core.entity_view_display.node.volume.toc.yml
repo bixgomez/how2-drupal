@@ -1,0 +1,43 @@
+uuid: b9d38bba-1d67-44df-bb6d-b5e0e5ca6bb7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.toc
+    - field.field.node.volume.field_archive_url
+    - field.field.node.volume.field_issues
+    - field.field.node.volume.field_journal
+    - field.field.node.volume.field_journal_name
+    - field.field.node.volume.field_page_facsimile_link
+    - field.field.node.volume.field_volume_number
+    - node.type.volume
+  module:
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.volume.toc
+targetEntityType: node
+bundle: volume
+mode: toc
+content:
+  field_issues:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: toc
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_archive_url: true
+  field_journal: true
+  field_journal_name: true
+  field_page_facsimile_link: true
+  field_volume_number: true
+  footnotes_group: true
+  links: true
+  search_api_excerpt: true

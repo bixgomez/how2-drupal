@@ -28,7 +28,8 @@
 .field--name-field-how-2-sections,
 .field--name-field-sections-how2,
 .field--name-field-sections-however,
-.field--name-field-section {
+.field--name-field-section,
+.field--name-field-sections {
   @apply my-6 mx-0 p-0;
   column-count: 3;
   column-gap: 1.5em;
@@ -37,7 +38,8 @@
 .field--name-field-how-2-sections > .field__item,
 .field--name-field-sections-how2 > .field__item,
 .field--name-field-sections-however > .field__item,
-.field--name-field-section > .field__item {
+.field--name-field-section > .field__item,
+.field--name-field-sections > .field__item {
   @apply inline-block w-full mb-[18px] box-border;
 }
 
@@ -46,13 +48,15 @@
 }
 
 .field--name-field-archive-url a,
-.field--name-field-however-page-facimile-link a {
+.field--name-field-however-page-facimile-link a,
+.field--name-field-page-facsimile-link a {
   @apply font-semibold no-underline;
   color: var(--color-text);
 }
 
 .field--name-field-archive-url a:hover,
-.field--name-field-however-page-facimile-link a:hover {
+.field--name-field-however-page-facimile-link a:hover,
+.field--name-field-page-facsimile-link a:hover {
   @apply underline;
 }
 

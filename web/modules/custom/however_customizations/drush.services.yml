@@ -9,5 +9,6 @@ services:
     arguments:
       - '@however_customizations.legacy_node_migrator'
       - '@however_customizations.migration_map'
+      - '@however_customizations.legacy_link_migrator'
     tags:
       - { name: drush.command }

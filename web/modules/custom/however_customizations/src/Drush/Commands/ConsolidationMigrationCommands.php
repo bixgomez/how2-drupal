@@ -3,6 +3,7 @@
 namespace Drupal\however_customizations\Drush\Commands;
 
 use Drupal\however_customizations\MigrationStage;
+use Drupal\however_customizations\Service\LegacyLinkMigrator;
 use Drupal\however_customizations\Service\LegacyNodeMigrator;
 use Drupal\however_customizations\Service\MigrationMap;
 use Drush\Commands\DrushCommands;
@@ -24,10 +25,13 @@ class ConsolidationMigrationCommands extends DrushCommands {
    *   The legacy node migrator.
    * @param \Drupal\however_customizations\Service\MigrationMap $map
    *   The migration map.
+   * @param \Drupal\however_customizations\Service\LegacyLinkMigrator $linker
+   *   The links pass.
    */
   public function __construct(
     protected LegacyNodeMigrator $migrator,
     protected MigrationMap $map,
+    protected LegacyLinkMigrator $linker,
   ) {
     parent::__construct();
   }
@@ -144,6 +148,43 @@ class ConsolidationMigrationCommands extends DrushCommands {
    */
   public function migrateArticles(array $options = ['dryrun' => FALSE, 'execute' => FALSE, 'rollback' => FALSE, 'limit' => NULL]): void {
     $this->runStage(MigrationStage::Article, $options);
+  }
+
+  /**
+   * Fills the references between the migrated volumes, issues, and sections.
+   *
+   * Run this after the four stages. Choose one mode: --dryrun reports what
+   * would be filled, --execute fills it, --rollback clears it again. It copies
+   * what the legacy pages show: the issues of each volume, the sections and
+   * articles of each issue (the field the legacy page renders), and the
+   * article and subsection references of each section piece, translated to
+   * the unified nodes. References to deleted nodes and repeated entries are
+   * dropped and reported. A node that refers to a node that is not migrated is
+   * reported as blocked. Running it again changes only what is not yet linked.
+   *
+   * @command however-customizations:migrate-links
+   * @aliases how-migrate-links
+   * @option dryrun Report what would be filled (or, with --rollback, cleared); change nothing.
+   * @option execute Fill the references.
+   * @option rollback Clear the references this command fills, after asking.
+   * @option limit With --dryrun or --execute: change at most this many nodes that are not yet linked.
+   * @usage drush how-migrate-links --dryrun
+   *   Report the references that would be filled.
+   * @usage drush how-migrate-links --execute
+   *   Fill the references.
+   * @usage drush how-migrate-links --rollback
+   *   Clear the references after confirmation.
+   */
+  public function migrateLinks(array $options = ['dryrun' => FALSE, 'execute' => FALSE, 'rollback' => FALSE, 'limit' => NULL]): void {
+    $mode = self::parseMode($options);
+
+    if ($mode === 'dryrun' || $mode === 'execute') {
+      $limit = isset($options['limit']) && $options['limit'] !== '' ? (int) $options['limit'] : NULL;
+      $this->linkNodes($mode === 'execute', $limit);
+      return;
+    }
+
+    $this->unlinkNodes($mode === 'rollback-dryrun');
   }
 
   /**
@@ -266,6 +307,62 @@ class ConsolidationMigrationCommands extends DrushCommands {
 
     $result = $this->map->rollback($stage, TRUE);
     $this->io()->success(sprintf('Rolled back the %s stage: %d deleted, %d were already gone.', $stage->value, $result['deleted'], $result['already_gone']));
+  }
+
+  /**
+   * Fills the references and prints a report.
+   *
+   * @param bool $execute
+   *   TRUE to save the references; FALSE for a dry run.
+   * @param int|null $limit
+   *   The most nodes to change, or NULL for no limit.
+   */
+  protected function linkNodes(bool $execute, ?int $limit): void {
+    $result = $this->linker->link($execute, $limit);
+
+    $rows = [];
+    foreach ($result['rows'] as $row) {
+      $rows[] = [$row['action'], $row['stage'], $row['old_nid'], $row['title'], $row['new_nid'], $row['note']];
+    }
+    $this->io()->table(['Action', 'Stage', 'Legacy nid', 'Title', 'Unified nid', 'Note'], $rows);
+
+    $counts = $result['counts'];
+    $this->io()->writeln(sprintf('links: %d linked, %d would be linked, %d already linked or without references, %d blocked.', $counts['linked'], $counts['would_link'], $counts['skipped'], $counts['blocked']));
+    if (!$execute && $counts['would_link']) {
+      $this->io()->note('Dry run. Nothing was changed. Run again with --execute to fill the references.');
+    }
+    if ($counts['blocked']) {
+      throw new \RuntimeException(sprintf('%d nodes are blocked. Migrate the earlier stages first.', $counts['blocked']));
+    }
+  }
+
+  /**
+   * Clears the references the links pass fills, or lists what it would clear.
+   *
+   * @param bool $dryrun
+   *   TRUE to only report.
+   *
+   * @throws \Drush\Exceptions\UserAbortException
+   *   If the user does not confirm.
+   */
+  protected function unlinkNodes(bool $dryrun): void {
+    $preview = $this->linker->unlink(FALSE);
+    $this->io()->table(['Unified nodes with references', 'References'], [[$preview['nodes'], $preview['references']]]);
+
+    if ($dryrun) {
+      $this->io()->note(sprintf('Dry run. Nothing was changed. A rollback would clear %d references in %d unified nodes.', $preview['references'], $preview['nodes']));
+      return;
+    }
+    if (!$preview['nodes']) {
+      $this->io()->note('The links pass has nothing to roll back.');
+      return;
+    }
+    if (!$this->io()->confirm(sprintf('Clear %d references in %d unified nodes? The legacy nodes are not touched.', $preview['references'], $preview['nodes']))) {
+      throw new UserAbortException();
+    }
+
+    $result = $this->linker->unlink(TRUE);
+    $this->io()->success(sprintf('Cleared %d references in %d unified nodes.', $result['references'], $result['nodes']));
   }
 
   /**

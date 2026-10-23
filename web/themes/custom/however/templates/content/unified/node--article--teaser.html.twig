@@ -1,0 +1,34 @@
+{% set items = content.field_person_bio['#items'] %}
+
+{% if items %}
+	{# precompute once #}
+	{% set total = items|length %}
+
+	{# accumulator for all the names #}
+	{% set names = '' %}
+
+	{# single-person case #}
+	{% if total == 1 %}
+		{% set names = items.0.entity.field_person.0.entity.title.value %}
+	{% else %}
+		{# multiple people #}
+		{% for item in items %}
+			{# append the name itself #}
+			{% set names = names ~ item.entity.field_person.0.entity.title.value %}
+
+			{# choose separator: “ & ” if exactly two people, otherwise comma #}
+			{% if total == 2 %}
+				{% set names = names ~ (not loop.last ? ' & ' : '') %}
+			{% else %}
+				{% set names = names ~ (not loop.last ? ', ' : '') %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endif %}
+
+{% include "@article-teaser/article-teaser.html.twig" with {
+    title: label,
+    title_display: content.field_title_display,
+    url: url,
+    names: names
+} %}

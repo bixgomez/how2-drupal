@@ -1,0 +1,23 @@
+uuid: 6f1d3c52-8a47-4e0b-9b7e-2c4a1d9e5f38
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.subsection.field_subsection
+    - paragraphs.paragraphs_type.subsection
+id: paragraph.subsection.default
+targetEntityType: paragraph
+bundle: subsection
+mode: default
+content:
+  field_subsection:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,35 @@
+uuid: 3c51b1e1-b6d7-42bf-b517-65a9ddcc4c86
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.volume.field_archive_url
+    - field.field.node.volume.field_issues
+    - field.field.node.volume.field_journal
+    - field.field.node.volume.field_journal_name
+    - field.field.node.volume.field_page_facsimile_link
+    - field.field.node.volume.field_volume_number
+    - node.type.volume
+  module:
+    - user
+third_party_settings: {  }
+id: node.volume.teaser
+targetEntityType: node
+bundle: volume
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_archive_url: true
+  field_issues: true
+  field_journal: true
+  field_journal_name: true
+  field_page_facsimile_link: true
+  field_volume_number: true
+  footnotes_group: true
+  search_api_excerpt: true
