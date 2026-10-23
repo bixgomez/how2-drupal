@@ -2,6 +2,8 @@
 
 namespace Drupal\however_customizations\Service;
 
+use Drupal\however_customizations\MigrationStage;
+
 /**
  * Service to manage bundle configurations and relationships.
  *
@@ -219,6 +221,50 @@ class BundleConfiguration {
         ],
       ],
     ];
+  }
+
+  /**
+   * Get the legacy bundles that are migrated in a stage.
+   *
+   * @param \Drupal\however_customizations\MigrationStage $stage
+   *   The migration stage.
+   *
+   * @return array
+   *   Legacy bundle machine names. The unified bundle has the stage's name.
+   */
+  public function getLegacyBundles(MigrationStage $stage): array {
+    return match ($stage) {
+      MigrationStage::Volume => ['however_volume', 'how2_volume'],
+      MigrationStage::Issue => ['journal_issue', 'how2_issue'],
+      MigrationStage::Section => ['how_ever_section', 'how2_section'],
+      MigrationStage::Article => ['how_ever_article', 'how2_article'],
+    };
+  }
+
+  /**
+   * Get the field map used to migrate a legacy bundle to its unified bundle.
+   *
+   * Only fields whose value is copied unchanged are listed. References to
+   * other nodes and paragraphs are not part of this map.
+   *
+   * @param string $legacy_bundle
+   *   The legacy bundle machine name.
+   *
+   * @return array
+   *   Legacy field names mapped to unified field names; an empty array for
+   *   bundles whose migration is not defined yet.
+   */
+  public function getMigrationFieldMap(string $legacy_bundle): array {
+    $volume_fields = [
+      'field_volume_number' => 'field_volume_number',
+      'field_journal_name' => 'field_journal_name',
+    ];
+
+    return match ($legacy_bundle) {
+      'however_volume' => $volume_fields + ['field_however_page_facimile_link' => 'field_page_facsimile_link'],
+      'how2_volume' => $volume_fields + ['field_archive_url' => 'field_archive_url'],
+      default => [],
+    };
   }
 
   /**

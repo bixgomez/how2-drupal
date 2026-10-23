@@ -9,6 +9,14 @@ services:
       - '@entity_type.manager'
       - '@datetime.time'
 
+  however_customizations.legacy_node_migrator:
+    class: Drupal\however_customizations\Service\LegacyNodeMigrator
+    arguments:
+      - '@entity_type.manager'
+      - '@database'
+      - '@however_customizations.bundle_config'
+      - '@however_customizations.migration_map'
+
   however_customizations.autocomplete_matcher:
     class: Drupal\however_customizations\EntityAutocompleteMatcher
     decorates: entity.autocomplete_matcher

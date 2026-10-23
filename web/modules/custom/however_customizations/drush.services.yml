@@ -3,3 +3,11 @@ services:
     class: Drupal\however_customizations\Drush\Commands\HoweverCustomizationsCommands
     tags:
       - { name: drush.command }
+
+  however_customizations.migration_commands:
+    class: Drupal\however_customizations\Drush\Commands\ConsolidationMigrationCommands
+    arguments:
+      - '@however_customizations.legacy_node_migrator'
+      - '@however_customizations.migration_map'
+    tags:
+      - { name: drush.command }
