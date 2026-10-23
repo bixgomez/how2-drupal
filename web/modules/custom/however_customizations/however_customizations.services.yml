@@ -2,6 +2,13 @@ services:
   however_customizations.bundle_config:
     class: Drupal\however_customizations\Service\BundleConfiguration
 
+  however_customizations.migration_map:
+    class: Drupal\however_customizations\Service\MigrationMap
+    arguments:
+      - '@database'
+      - '@entity_type.manager'
+      - '@datetime.time'
+
   however_customizations.autocomplete_matcher:
     class: Drupal\however_customizations\EntityAutocompleteMatcher
     decorates: entity.autocomplete_matcher

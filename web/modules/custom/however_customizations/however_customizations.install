@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and schema hooks for however_customizations.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function however_customizations_schema(): array {
+  $schema['however_migration_map'] = [
+    'description' => 'Maps each legacy publication node to the unified node created from it.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'stage' => [
+        'description' => 'The migration stage: volume, issue, section, or article.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ],
+      'old_nid' => [
+        'description' => 'The node ID of the legacy node.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'old_bundle' => [
+        'description' => 'The bundle of the legacy node.',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ],
+      'old_uuid' => [
+        'description' => 'The UUID of the legacy node.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ],
+      'new_nid' => [
+        'description' => 'The node ID of the unified node.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'new_uuid' => [
+        'description' => 'The UUID of the unified node.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ],
+      'created' => [
+        'description' => 'The Unix timestamp when the mapping was recorded.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+    ],
+    'primary key' => ['id'],
+    'unique keys' => [
+      'old_nid' => ['old_nid'],
+    ],
+    'indexes' => [
+      'stage' => ['stage'],
+      'new_nid' => ['new_nid'],
+    ],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Creates the migration map table.
+ */
+function however_customizations_update_11001(): string {
+  $database_schema = \Drupal::database()->schema();
+  if ($database_schema->tableExists('however_migration_map')) {
+    return (string) t('The migration map table already exists.');
+  }
+
+  $schema = however_customizations_schema();
+  $database_schema->createTable('however_migration_map', $schema['however_migration_map']);
+
+  return (string) t('Created the migration map table.');
+}
