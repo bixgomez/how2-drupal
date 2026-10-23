@@ -259,12 +259,83 @@ class BundleConfiguration {
       'field_volume_number' => 'field_volume_number',
       'field_journal_name' => 'field_journal_name',
     ];
+    $issue_fields = [
+      'body' => 'body',
+      'field_archive_url' => 'field_archive_url',
+      'field_cover_thumbnail' => 'field_cover_thumbnail',
+      'field_issue_number' => 'field_issue_number',
+      'field_journal_page_images_media' => 'field_journal_page_images_media',
+      'field_journal_pdf' => 'field_issue_pdf',
+      'field_masthead' => 'field_masthead',
+      'field_publication_date_display' => 'field_publication_date_display',
+      'field_short_description' => 'field_short_description',
+      'field_volume_number' => 'field_volume_number',
+    ];
 
     return match ($legacy_bundle) {
       'however_volume' => $volume_fields + ['field_however_page_facimile_link' => 'field_page_facsimile_link'],
       'how2_volume' => $volume_fields + ['field_archive_url' => 'field_archive_url'],
+      'journal_issue', 'how2_issue' => $issue_fields,
       default => [],
     };
+  }
+
+  /**
+   * Get the node reference fields that are remapped to migrated parents.
+   *
+   * Each legacy reference is replaced by the unified node recorded in the
+   * migration map for the referenced legacy node, so the referenced stage has
+   * to be migrated first.
+   *
+   * @param string $legacy_bundle
+   *   The legacy bundle machine name.
+   *
+   * @return array
+   *   Legacy field names mapped to ['field' => unified field name,
+   *   'stage' => the MigrationStage of the referenced nodes].
+   */
+  public function getMigrationReferenceMap(string $legacy_bundle): array {
+    return match ($legacy_bundle) {
+      'journal_issue', 'how2_issue' => [
+        'field_volume_reference' => ['field' => 'field_volume_reference', 'stage' => MigrationStage::Volume],
+      ],
+      default => [],
+    };
+  }
+
+  /**
+   * Get the paragraph fields that are copied as new paragraphs.
+   *
+   * A paragraph belongs to one host node, so each migrated node receives its
+   * own duplicates and the legacy node keeps its paragraphs.
+   *
+   * @param string $legacy_bundle
+   *   The legacy bundle machine name.
+   *
+   * @return array
+   *   Legacy field names mapped to unified field names.
+   */
+  public function getMigrationParagraphFields(string $legacy_bundle): array {
+    return match ($legacy_bundle) {
+      'journal_issue', 'how2_issue' => ['field_person_bio' => 'field_person_bio'],
+      default => [],
+    };
+  }
+
+  /**
+   * Check whether a stage keeps the legacy titles instead of regenerating them.
+   *
+   * The presave hook is skipped for these stages, so the title (including the
+   * custom issue titles) and the numbers are copied exactly as they are.
+   *
+   * @param \Drupal\however_customizations\MigrationStage $stage
+   *   The migration stage.
+   *
+   * @return bool
+   *   TRUE if the hook that regenerates titles must not run.
+   */
+  public function keepsLegacyTitles(MigrationStage $stage): bool {
+    return $stage === MigrationStage::Issue;
   }
 
   /**

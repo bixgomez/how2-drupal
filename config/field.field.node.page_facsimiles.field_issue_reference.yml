@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_issue_reference
     - node.type.how2_issue
+    - node.type.issue
     - node.type.journal_issue
     - node.type.page_facsimiles
 id: node.page_facsimiles.field_issue_reference
@@ -23,6 +24,7 @@ settings:
     target_bundles:
       journal_issue: journal_issue
       how2_issue: how2_issue
+      issue: issue
     sort:
       field: _none
       direction: ASC

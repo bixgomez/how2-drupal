@@ -12,7 +12,7 @@ use Drupal\node\NodeInterface;
  * Creates unified nodes from legacy nodes, one migration stage at a time.
  *
  * Legacy nodes are only read. Each unified node is created together with its
- * map row in one transaction, and a legacy node that is already mapped is
+ * map row (and, for issues, its facsimiles node) in one transaction, and a legacy node that is already mapped is
  * skipped, so a stage can be run again after a failure or a partial run.
  */
 class LegacyNodeMigrator {
@@ -57,8 +57,9 @@ class LegacyNodeMigrator {
    *
    * @return array
    *   An array with 'rows' (one entry per legacy node visited, each with
-   *   action, old_nid, bundle, title, and new_nid) and 'counts' (created,
-   *   would_create, and skipped).
+   *   action, old_nid, bundle, title, new_nid, and note) and 'counts'
+   *   (created, would_create, skipped, and blocked). A node is blocked when a
+   *   parent it refers to is not migrated yet; it is never created.
    *
    * @throws \LogicException
    *   If the stage has no field map for one of its legacy bundles.
@@ -83,7 +84,7 @@ class LegacyNodeMigrator {
 
     $result = [
       'rows' => [],
-      'counts' => ['created' => 0, 'would_create' => 0, 'skipped' => 0],
+      'counts' => ['created' => 0, 'would_create' => 0, 'skipped' => 0, 'blocked' => 0],
     ];
     $processed = 0;
 
@@ -93,6 +94,7 @@ class LegacyNodeMigrator {
         'bundle' => $legacy->bundle(),
         'title' => $legacy->getTitle(),
         'new_nid' => $this->map->getNewNid($legacy->id()),
+        'note' => $stage === MigrationStage::Issue && $this->findFacsimileIds((int) $legacy->id()) ? 'has a facsimile page' : '',
       ];
 
       if ($row['new_nid'] !== NULL) {
@@ -106,6 +108,14 @@ class LegacyNodeMigrator {
       }
       $processed++;
 
+      $problem = $this->findProblem($legacy);
+      if ($problem) {
+        $row['note'] = $problem;
+        $result['rows'][] = ['action' => 'blocked'] + $row;
+        $result['counts']['blocked']++;
+        continue;
+      }
+
       if ($apply) {
         $row['new_nid'] = (int) $this->migrateNode($stage, $legacy)->id();
         $result['rows'][] = ['action' => 'created'] + $row;
@@ -118,6 +128,26 @@ class LegacyNodeMigrator {
     }
 
     return $result;
+  }
+
+  /**
+   * Finds a reason why a legacy node cannot be migrated yet.
+   *
+   * @param \Drupal\node\NodeInterface $legacy
+   *   The legacy node.
+   *
+   * @return string|null
+   *   A description of the first parent that is not migrated, or NULL.
+   */
+  protected function findProblem(NodeInterface $legacy): ?string {
+    foreach ($this->bundleConfig->getMigrationReferenceMap($legacy->bundle()) as $legacy_field => $target) {
+      foreach ($legacy->get($legacy_field)->getValue() as $item) {
+        if (!$this->map->isMapped((int) $item['target_id'])) {
+          return sprintf('%s refers to node %d, which is not migrated (%s stage).', $legacy_field, $item['target_id'], $target['stage']->value);
+        }
+      }
+    }
+    return NULL;
   }
 
   /**
@@ -137,6 +167,9 @@ class LegacyNodeMigrator {
       $unified = $this->buildUnifiedNode($stage, $legacy);
       $unified->save();
       $this->map->record($stage, $legacy, $unified);
+      if ($stage === MigrationStage::Issue) {
+        $this->copyFacsimiles($legacy, $unified);
+      }
     }
     catch (\Throwable $e) {
       $transaction->rollBack();
@@ -150,8 +183,10 @@ class LegacyNodeMigrator {
    * Builds the unified node for a legacy node without saving it.
    *
    * Copies the title, status, owner, created time, promote and sticky flags,
-   * language, the fields in the legacy bundle's field map, and sets the
-   * journal from the legacy bundle name.
+   * language, and the fields in the legacy bundle's field map. Node references
+   * are replaced by the migrated parents, paragraphs are duplicated, and the
+   * journal and its machine name are set from the legacy bundle name. For the
+   * stages that keep their legacy titles the presave hook is skipped.
    *
    * @param \Drupal\however_customizations\MigrationStage $stage
    *   The migration stage.
@@ -182,11 +217,98 @@ class LegacyNodeMigrator {
       }
     }
 
+    foreach ($this->bundleConfig->getMigrationReferenceMap($legacy->bundle()) as $legacy_field => $target) {
+      if (!$unified->hasField($target['field'])) {
+        throw new \LogicException(sprintf('The %s bundle has no %s field.', $stage->value, $target['field']));
+      }
+      $values = [];
+      foreach ($legacy->get($legacy_field)->getValue() as $item) {
+        $values[] = ['target_id' => $this->map->getNewNid((int) $item['target_id'])];
+      }
+      $unified->set($target['field'], $values);
+    }
+
+    foreach ($this->bundleConfig->getMigrationParagraphFields($legacy->bundle()) as $legacy_field => $unified_field) {
+      if (!$unified->hasField($unified_field)) {
+        throw new \LogicException(sprintf('The %s bundle has no %s field.', $stage->value, $unified_field));
+      }
+      $copies = [];
+      foreach ($legacy->get($legacy_field)->referencedEntities() as $paragraph) {
+        $copies[] = $paragraph->createDuplicate();
+      }
+      $unified->set($unified_field, $copies);
+    }
+
     if ($unified->hasField('field_journal')) {
       $unified->set('field_journal', $this->getJournalId($legacy->bundle()));
     }
+    if ($unified->hasField('field_journal_name') && $unified->get('field_journal_name')->isEmpty()) {
+      $unified->set('field_journal_name', $this->bundleConfig->getJournalFromBundle($legacy->bundle()));
+    }
+
+    if ($this->bundleConfig->keepsLegacyTitles($stage)) {
+      $unified->however_skip_presave = TRUE;
+    }
 
     return $unified;
+  }
+
+  /**
+   * Gives a migrated issue the facsimiles node its legacy issue has.
+   *
+   * Saving an issue with page images already creates a facsimiles node (the
+   * node insert hook). If the unified issue has none after that, each
+   * facsimiles node of the legacy issue is copied and points at the unified
+   * issue. The legacy facsimiles are only read. Deleting the unified issue
+   * deletes the copies, so rolling back the issue stage removes them.
+   *
+   * @param \Drupal\node\NodeInterface $legacy
+   *   The legacy issue.
+   * @param \Drupal\node\NodeInterface $unified
+   *   The saved unified issue.
+   */
+  protected function copyFacsimiles(NodeInterface $legacy, NodeInterface $unified): void {
+    $legacy_ids = $this->findFacsimileIds((int) $legacy->id());
+    if (!$legacy_ids || $this->findFacsimileIds((int) $unified->id())) {
+      return;
+    }
+
+    foreach ($this->entityTypeManager->getStorage('node')->loadMultiple($legacy_ids) as $facsimile) {
+      $copy = Node::create([
+        'type' => 'page_facsimiles',
+        'title' => $facsimile->getTitle(),
+        'status' => $facsimile->isPublished(),
+        'uid' => $facsimile->getOwnerId(),
+        'created' => $facsimile->getCreatedTime(),
+        'langcode' => $facsimile->language()->getId(),
+        'field_issue_reference' => $unified->id(),
+      ]);
+      foreach (['body', 'field_volume_number', 'field_issue_number', 'field_journal_name'] as $field) {
+        if ($copy->hasField($field) && !$facsimile->get($field)->isEmpty()) {
+          $copy->set($field, $facsimile->get($field)->getValue());
+        }
+      }
+      $copy->save();
+    }
+  }
+
+  /**
+   * Finds the facsimiles nodes that point at an issue.
+   *
+   * @param int $issue_nid
+   *   The issue node ID.
+   *
+   * @return int[]
+   *   The facsimiles node IDs, lowest first.
+   */
+  protected function findFacsimileIds(int $issue_nid): array {
+    $ids = $this->entityTypeManager->getStorage('node')->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('type', 'page_facsimiles')
+      ->condition('field_issue_reference', $issue_nid)
+      ->sort('nid')
+      ->execute();
+    return array_values(array_map('intval', $ids));
   }
 
   /**
