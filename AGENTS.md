@@ -19,7 +19,7 @@ Drupal site for the digital archive of the literary journals How(ever) and How2.
 - Custom module: `web/modules/custom/however_customizations` (see its `README.md`).
 - Other custom modules: `web/modules/custom/prf_ckeditor_footnotes`, `web/modules/custom/prf_references`.
 - Custom theme: `web/themes/custom/however` (see its `README.md`; asset build scripts are in its `package.json`).
-- Configuration export: `config/` in the project root.
+- Configuration export and active config sync directory: `config/` in the project root (Drupal reports `config_sync_directory` as `../config`, checked 2026-10-22). `web/sites/default/files/sync` exists but is empty and unused.
 
 ## Environments
 
@@ -29,7 +29,6 @@ Drupal site for the digital archive of the literary journals How(ever) and How2.
 
 ## Unknowns to confirm
 
-- Active config sync directory: `settings.ddev.php` sets `sites/default/files/sync` (not present locally) and `settings.local.php` sets `../config`. Confirm before running any config import or export.
 - Git remote and default branch: not recorded here.
 
 ## Working rules for this project
