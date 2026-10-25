@@ -10,5 +10,6 @@ services:
       - '@however_customizations.legacy_node_migrator'
       - '@however_customizations.migration_map'
       - '@however_customizations.legacy_link_migrator'
+      - '@however_customizations.legacy_text_link_rewriter'
     tags:
       - { name: drush.command }

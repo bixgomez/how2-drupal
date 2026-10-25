@@ -1829,6 +1829,9 @@ a.site-logo img {
   background-color: var(--color-secondary);
   border-bottom: 4px solid var(--color-primary-dark);
 }
+.admin-info:not(:has(ul)) {
+  display: none;
+}
 .home-page-section-1 {
   .layout__region--first {
     display: flex;

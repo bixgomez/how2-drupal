@@ -5,6 +5,7 @@ namespace Drupal\however_customizations\Drush\Commands;
 use Drupal\however_customizations\MigrationStage;
 use Drupal\however_customizations\Service\LegacyLinkMigrator;
 use Drupal\however_customizations\Service\LegacyNodeMigrator;
+use Drupal\however_customizations\Service\LegacyTextLinkRewriter;
 use Drupal\however_customizations\Service\MigrationMap;
 use Drush\Commands\DrushCommands;
 use Drush\Exceptions\UserAbortException;
@@ -27,11 +28,14 @@ class ConsolidationMigrationCommands extends DrushCommands {
    *   The migration map.
    * @param \Drupal\however_customizations\Service\LegacyLinkMigrator $linker
    *   The links pass.
+   * @param \Drupal\however_customizations\Service\LegacyTextLinkRewriter $textLinks
+   *   The rewriter for node links inside text.
    */
   public function __construct(
     protected LegacyNodeMigrator $migrator,
     protected MigrationMap $map,
     protected LegacyLinkMigrator $linker,
+    protected LegacyTextLinkRewriter $textLinks,
   ) {
     parent::__construct();
   }
@@ -185,6 +189,63 @@ class ConsolidationMigrationCommands extends DrushCommands {
     }
 
     $this->unlinkNodes($mode === 'rollback-dryrun');
+  }
+
+  /**
+   * Points the node links inside the text of unified nodes at the unified nodes.
+   *
+   * Run this after the links pass. Choose one mode: --dryrun reports the links
+   * that would be rewritten, --execute rewrites them, --rollback points them
+   * back at the legacy nodes. Only local /node/N links in the text fields of
+   * the unified nodes and their paragraphs are rewritten, using the migration
+   * map. Links to other sites and nodes that are not mapped are left alone, and
+   * the unmapped ones are listed.
+   *
+   * @command however-customizations:migrate-textlinks
+   * @aliases how-migrate-textlinks
+   * @option dryrun Report what would be rewritten (or, with --rollback, restored); change nothing.
+   * @option execute Rewrite the links.
+   * @option rollback Point the links back at the legacy nodes, after asking.
+   * @usage drush how-migrate-textlinks --dryrun
+   *   Report the links that would be rewritten.
+   * @usage drush how-migrate-textlinks --execute
+   *   Rewrite the links.
+   * @usage drush how-migrate-textlinks --rollback
+   *   Point the links back at the legacy nodes after confirmation.
+   */
+  public function migrateTextLinks(array $options = ['dryrun' => FALSE, 'execute' => FALSE, 'rollback' => FALSE]): void {
+    $mode = self::parseMode($options);
+    $reverse = in_array($mode, ['rollback', 'rollback-dryrun'], TRUE);
+    $apply = in_array($mode, ['execute', 'rollback'], TRUE);
+
+    $preview = $this->textLinks->rewrite(FALSE, $reverse);
+    $rows = [];
+    foreach ($preview['fields'] as $field => $count) {
+      $rows[] = [$field, $count];
+    }
+    $this->io()->table(['Field', 'Links'], $rows);
+    foreach (array_slice($preview['unmapped'], 0, 25) as $item) {
+      $this->io()->writeln(sprintf('left alone: node %d, %s, links to node %d, which is not mapped', $item['unified_nid'], $item['field'], $item['nid']));
+    }
+    if (count($preview['unmapped']) > 25) {
+      $this->io()->writeln(sprintf('... and %d more.', count($preview['unmapped']) - 25));
+    }
+    $this->io()->writeln(sprintf('%d links in %d unified nodes %s; %d links to unmapped nodes are left alone.', $preview['links'], $preview['nodes'], $reverse ? 'would be pointed back' : 'would be rewritten', count($preview['unmapped'])));
+
+    if (!$apply) {
+      $this->io()->note('Dry run. Nothing was changed.');
+      return;
+    }
+    if (!$preview['links']) {
+      $this->io()->note('Nothing to do.');
+      return;
+    }
+    if ($reverse && !$this->io()->confirm(sprintf('Point %d links in %d unified nodes back at the legacy nodes?', $preview['links'], $preview['nodes']))) {
+      throw new UserAbortException();
+    }
+
+    $result = $this->textLinks->rewrite(TRUE, $reverse);
+    $this->io()->success(sprintf('%d links changed in %d unified nodes.', $result['links'], $result['nodes']));
   }
 
   /**

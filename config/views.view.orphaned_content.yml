@@ -408,6 +408,8 @@ display:
             how_ever_section: how_ever_section
             how2_section: how2_section
             how2_article: how2_article
+            article: article
+            section: section
           group: 1
           exposed: false
           expose:

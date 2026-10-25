@@ -34,6 +34,14 @@ services:
       - '@however_customizations.bundle_config'
       - '@however_customizations.migration_map'
 
+  however_customizations.legacy_text_link_rewriter:
+    class: Drupal\however_customizations\Service\LegacyTextLinkRewriter
+    arguments:
+      - '@entity_type.manager'
+      - '@database'
+      - '@however_customizations.bundle_config'
+      - '@however_customizations.migration_map'
+
   however_customizations.autocomplete_matcher:
     class: Drupal\however_customizations\EntityAutocompleteMatcher
     decorates: entity.autocomplete_matcher
@@ -46,3 +54,12 @@ services:
     arguments:
       - '@entity_type.manager'
       - '@however_customizations.bundle_config'
+
+  however_customizations.legacy_node_redirect_subscriber:
+    class: Drupal\however_customizations\EventSubscriber\LegacyNodeRedirectSubscriber
+    arguments:
+      - '@config.factory'
+      - '@however_customizations.migration_map'
+      - '@url_generator'
+    tags:
+      - { name: event_subscriber }

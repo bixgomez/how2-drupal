@@ -133,6 +133,9 @@ display:
               how_ever_article: search_result
               how_ever_section: search_result
               journal_issue: search_result
+              article: search_result
+              issue: search_result
+              section: search_result
       pager:
         type: mini
         options:

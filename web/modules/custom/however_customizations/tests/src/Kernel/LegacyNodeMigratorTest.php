@@ -1142,6 +1142,67 @@ class LegacyNodeMigratorTest extends KernelTestBase {
   }
 
   /**
+   * Tests that node links inside text are pointed at the unified nodes.
+   *
+   * Only exact local /node/N links of mapped nodes are rewritten, on the
+   * unified side; other sites, other paths, and unmapped nodes are left alone.
+   * The rewrite can be reversed, and the legacy nodes are never touched.
+   */
+  public function testTextLinksPointAtTheUnifiedNodes(): void {
+    $legacy = $this->createLegacyVolumes();
+    $issues = $this->createParentsAndMigrate($legacy);
+    $article = $this->createLegacyArticle(['type' => 'how_ever_article', 'field_issue_reference' => $issues['however']->id(), 'field_volume_reference' => $legacy['however1']->id()]);
+    $outside = $this->createNode(['type' => 'page']);
+    $a = $article->id();
+    $o = $outside->id();
+
+    $text = [
+      'value' => "<p><a href=\"/node/$a\">one</a> <a href='/node/$a#top'>two</a> <a href=\"/node/$a/edit\">edit</a> "
+        . "<a href=\"http://howeverhow2archive.org/node/$a\">archive</a> <a href=\"/node/$o\">outside</a></p>",
+      'format' => NULL,
+    ];
+    $pieces = [$this->createPiece('open_title_text', ['field_title' => 'Opening', 'field_text' => $text])];
+    $section = $this->createLegacySection(['type' => 'how_ever_section', 'field_issue_reference' => $issues['however']->id(), 'field_volume_reference' => $legacy['however1']->id(), 'field_how_ever_piece' => $this->refs($pieces), 'body' => ['value' => "<a href=\"/node/$a\">body</a>", 'format' => NULL]]);
+
+    $this->migrator->migrate(MigrationStage::Section, TRUE);
+    $this->migrator->migrate(MigrationStage::Article, TRUE);
+    $rewriter = $this->container->get('however_customizations.legacy_text_link_rewriter');
+    $new = $this->map->getNewNid($a);
+
+    $dry = $rewriter->rewrite(FALSE);
+    $this->assertSame(3, $dry['links']);
+    $this->assertSame(1, $dry['nodes']);
+    $this->assertCount(1, $dry['unmapped']);
+    $this->assertSame((int) $o, $dry['unmapped'][0]['nid']);
+    $this->assertStringContainsString("/node/$a\"", $this->twin($section)->get('field_piece')->referencedEntities()[0]->get('field_text')->value, 'A dry run changes nothing.');
+
+    $result = $rewriter->rewrite(TRUE);
+    $this->assertSame(3, $result['links']);
+
+    $unified = $this->twin($section);
+    $changed = $unified->get('field_piece')->referencedEntities()[0]->get('field_text')->value;
+    $this->assertStringContainsString("href=\"/node/$new\">one", $changed);
+    $this->assertStringContainsString("href='/node/$new#top'", $changed);
+    $this->assertStringContainsString("href=\"/node/$a/edit\"", $changed, 'Other paths are left alone.');
+    $this->assertStringContainsString("http://howeverhow2archive.org/node/$a\"", $changed, 'Other sites are left alone.');
+    $this->assertStringContainsString("href=\"/node/$o\">outside", $changed, 'Unmapped nodes are left alone.');
+    $this->assertStringContainsString("href=\"/node/$new\">body", $unified->get('body')->value);
+
+    $legacy_text = Node::load($section->id())->get('field_how_ever_piece')->referencedEntities()[0]->get('field_text')->value;
+    $this->assertStringContainsString("href=\"/node/$a\">one", $legacy_text, 'The legacy piece is untouched.');
+    $this->assertStringContainsString("href=\"/node/$a\">body", Node::load($section->id())->get('body')->value);
+
+    $again = $rewriter->rewrite(TRUE);
+    $this->assertSame(0, $again['links'], 'A second run changes nothing.');
+    $this->assertCount(1, $again['unmapped'], 'Only the outside page is reported; links to unified nodes are already done.');
+
+    $this->assertSame(3, $rewriter->rewrite(TRUE, TRUE)['links']);
+    $restored = $this->twin($section)->get('field_piece')->referencedEntities()[0]->get('field_text')->value;
+    $this->assertStringContainsString("href=\"/node/$a\">one", $restored);
+    $this->assertStringContainsString("href='/node/$a#top'", $restored);
+  }
+
+  /**
    * Returns the target IDs of a reference field as integers.
    */
   protected function targets(NodeInterface $node, string $field): array {

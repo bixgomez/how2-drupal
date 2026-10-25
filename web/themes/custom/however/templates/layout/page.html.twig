@@ -59,7 +59,8 @@
 	</div>
 </header>
 
-{% if page.admin_info|render|striptags|trim is not empty and page.admin_info|render|length > 50 %}
+{# The tabs and actions blocks are lazy built (BigPipe), so the region cannot be rendered here to test for content; it only holds placeholders at this point. #}
+{% if logged_in and page.admin_info %}
 	<section class="admin-info">
 		<div class="container mx-auto px-4">
 			{{ page.admin_info }}

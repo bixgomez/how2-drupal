@@ -28,3 +28,8 @@ a.site-logo img {
   background-color: var(--color-secondary);
   border-bottom: 4px solid var(--color-primary-dark);
 }
+
+/* Hide the bar when the lazy-built blocks turn out to have no tabs or links. */
+.admin-info:not(:has(ul)) {
+  display: none;
+}

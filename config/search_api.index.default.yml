@@ -127,6 +127,9 @@ field_settings:
           how_ever_article: full
           how_ever_section: full
           journal_issue: full
+          article: full
+          issue: full
+          section: full
   title:
     label: Title
     datasource_id: 'entity:node'
@@ -154,6 +157,9 @@ datasource_settings:
         - how_ever_article
         - how_ever_section
         - journal_issue
+        - article
+        - issue
+        - section
     languages:
       default: true
       selected: {  }
