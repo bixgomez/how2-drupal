@@ -1,0 +1,23 @@
+uuid: ac03e402-1652-402d-b14d-2acbab83a8d6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_legacy_html_archive
+    - node.type.how_ever_article
+  module:
+    - link
+id: node.how_ever_article.field_legacy_html_archive
+field_name: field_legacy_html_archive
+entity_type: node
+bundle: how_ever_article
+label: 'Legacy HTML Archive'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

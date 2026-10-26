@@ -1,0 +1,32 @@
+uuid: af5c8b63-849b-4563-8609-c637116aee85
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.cross_post_teaser_card
+    - field.field.node.pdf_archive.field_journal_pdf
+    - node.type.pdf_archive
+  module:
+    - user
+id: node.pdf_archive.cross_post_teaser_card
+targetEntityType: node
+bundle: pdf_archive
+mode: cross_post_teaser_card
+content:
+  field_journal_pdf:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  footnotes_group: true
+  search_api_excerpt: true

@@ -10,6 +10,8 @@ dependencies:
     - field.field.node.how_ever_article.field_issue_number
     - field.field.node.how_ever_article.field_issue_reference
     - field.field.node.how_ever_article.field_journal_page_images_media
+    - field.field.node.how_ever_article.field_journal_pdf
+    - field.field.node.how_ever_article.field_legacy_html_archive
     - field.field.node.how_ever_article.field_media_type
     - field.field.node.how_ever_article.field_person_bio
     - field.field.node.how_ever_article.field_section_reference
@@ -40,7 +42,7 @@ third_party_settings:
       label: Metadata
       region: content
       parent_name: ''
-      weight: 12
+      weight: 13
       format_type: fieldset
       format_settings:
         classes: ''
@@ -55,7 +57,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 13
+    weight: 14
     region: content
     settings:
       rows: 9
@@ -115,6 +117,21 @@ content:
     region: content
     settings:
       media_types: {  }
+    third_party_settings: {  }
+  field_journal_pdf:
+    type: media_library_widget
+    weight: 14
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_legacy_html_archive:
+    type: link_default
+    weight: 12
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_media_type:
     type: options_select

@@ -11,6 +11,8 @@ dependencies:
     - field.field.node.how_ever_article.field_issue_number
     - field.field.node.how_ever_article.field_issue_reference
     - field.field.node.how_ever_article.field_journal_page_images_media
+    - field.field.node.how_ever_article.field_journal_pdf
+    - field.field.node.how_ever_article.field_legacy_html_archive
     - field.field.node.how_ever_article.field_media_type
     - field.field.node.how_ever_article.field_person_bio
     - field.field.node.how_ever_article.field_section_reference
@@ -21,25 +23,12 @@ dependencies:
     - field.field.node.how_ever_article.field_working_notes
     - node.type.how_ever_article
   module:
-    - link
     - user
 id: node.how_ever_article.search_index
 targetEntityType: node
 bundle: how_ever_article
 mode: search_index
 content:
-  field_archive_url:
-    type: link
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    weight: 102
-    region: content
   field_media_type:
     type: entity_reference_label
     label: above
@@ -55,11 +44,14 @@ content:
     region: content
 hidden:
   body: true
+  field_archive_url: true
   field_body_sections: true
   field_hide_the_node_title: true
   field_issue_number: true
   field_issue_reference: true
   field_journal_page_images_media: true
+  field_journal_pdf: true
+  field_legacy_html_archive: true
   field_person_bio: true
   field_section_reference: true
   field_tags: true

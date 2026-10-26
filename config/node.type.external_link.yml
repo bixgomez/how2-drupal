@@ -1,0 +1,18 @@
+uuid: dbee493d-6536-4458-8352-0b052fb2f85f
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:menu_link_content:e7ad4750-748e-4adb-8bbf-70f4e9439780'
+name: 'External Link'
+type: external_link
+description: null
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

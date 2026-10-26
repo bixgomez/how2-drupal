@@ -1,0 +1,31 @@
+uuid: 724bb2ed-f261-4ce0-acaa-20c6997467fb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.pdf_archive.field_journal_pdf
+    - node.type.pdf_archive
+  module:
+    - user
+id: node.pdf_archive.full
+targetEntityType: node
+bundle: pdf_archive
+mode: full
+content:
+  field_journal_pdf:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  footnotes_group: true
+  search_api_excerpt: true

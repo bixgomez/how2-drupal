@@ -11,6 +11,8 @@ dependencies:
     - field.field.node.how_ever_article.field_issue_number
     - field.field.node.how_ever_article.field_issue_reference
     - field.field.node.how_ever_article.field_journal_page_images_media
+    - field.field.node.how_ever_article.field_journal_pdf
+    - field.field.node.how_ever_article.field_legacy_html_archive
     - field.field.node.how_ever_article.field_media_type
     - field.field.node.how_ever_article.field_person_bio
     - field.field.node.how_ever_article.field_section_reference
@@ -71,6 +73,8 @@ hidden:
   field_hide_the_node_title: true
   field_issue_number: true
   field_journal_page_images_media: true
+  field_journal_pdf: true
+  field_legacy_html_archive: true
   field_media_type: true
   field_person_bio: true
   field_tags: true

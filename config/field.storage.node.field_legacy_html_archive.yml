@@ -1,0 +1,19 @@
+uuid: 4b5df82a-84c5-4759-b050-52e007b0401c
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.field_legacy_html_archive
+field_name: field_legacy_html_archive
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

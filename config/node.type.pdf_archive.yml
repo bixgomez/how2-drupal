@@ -1,0 +1,21 @@
+uuid: a12458d4-2990-40c4-bf36-c71375a272c0
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - admin
+      - footer
+      - main
+      - tools
+    parent: 'main:'
+name: 'PDF Archive'
+type: pdf_archive
+description: 'Archive of PDFs for HOW(ever) '
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

@@ -1,0 +1,31 @@
+uuid: 697aaf89-fed8-408f-b626-3e1d76627cdb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.toc
+    - field.field.node.pdf_archive.field_journal_pdf
+    - node.type.pdf_archive
+  module:
+    - user
+id: node.pdf_archive.toc
+targetEntityType: node
+bundle: pdf_archive
+mode: toc
+content:
+  field_journal_pdf:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  footnotes_group: true
+  search_api_excerpt: true
