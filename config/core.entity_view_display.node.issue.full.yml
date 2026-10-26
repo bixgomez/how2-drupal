@@ -26,38 +26,17 @@ dependencies:
     - link
     - text
     - user
-third_party_settings: {  }
 id: node.issue.full
 targetEntityType: node
 bundle: issue
 mode: full
 content:
-  field_cover_thumbnail:
-    type: image
+  body:
+    type: text_default
     label: hidden
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
+    settings: {  }
     third_party_settings: {  }
-    weight: 0
-    region: content
-  field_publication_date_display:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
-  field_issue_pdf:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 2
+    weight: 101
     region: content
   field_archive_url:
     type: link
@@ -71,14 +50,16 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
-  field_volume_number:
-    type: number_integer
-    label: inline
+  field_cover_thumbnail:
+    type: image
+    label: hidden
     settings:
-      thousand_separator: ''
-      prefix_suffix: true
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    weight: 3
+    weight: 0
     region: content
   field_issue_number:
     type: number_integer
@@ -89,14 +70,22 @@ content:
     third_party_settings: {  }
     weight: 4
     region: content
-  field_sections:
+  field_issue_pdf:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_journal_page_images_media:
     type: entity_reference_entity_view
     label: hidden
     settings:
-      view_mode: teaser_card
+      view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 6
+    weight: 11
     region: content
   field_masthead:
     type: text_default
@@ -114,12 +103,22 @@ content:
     third_party_settings: {  }
     weight: 8
     region: content
-  field_volume_reference:
-    type: entity_reference_entity_id
-    label: above
-    settings: {  }
+  field_publication_date_display:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    weight: 9
+    weight: 1
+    region: content
+  field_sections:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser_card
+      link: false
+    third_party_settings: {  }
+    weight: 6
     region: content
   field_short_description:
     type: string
@@ -129,29 +128,30 @@ content:
     third_party_settings: {  }
     weight: 10
     region: content
-  field_journal_page_images_media:
-    type: entity_reference_entity_view
-    label: hidden
+  field_volume_number:
+    type: number_integer
+    label: inline
     settings:
-      view_mode: default
-      link: false
+      thousand_separator: ''
+      prefix_suffix: true
     third_party_settings: {  }
-    weight: 11
+    weight: 3
+    region: content
+  field_volume_reference:
+    type: entity_reference_entity_id
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
     region: content
   footnotes_group:
     settings: {  }
     third_party_settings: {  }
     weight: 13
     region: content
-  body:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 101
-    region: content
 hidden:
   field_journal: true
   field_journal_name: true
+  field_journal_pdf: true
   links: true
   search_api_excerpt: true

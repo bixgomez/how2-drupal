@@ -25,38 +25,17 @@ dependencies:
     - link
     - text
     - user
-third_party_settings: {  }
 id: node.issue.default
 targetEntityType: node
 bundle: issue
 mode: default
 content:
-  field_short_description:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 0
-    region: content
-  field_cover_thumbnail:
-    type: image
+  body:
+    type: text_default
     label: hidden
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
+    settings: {  }
     third_party_settings: {  }
-    weight: 1
-    region: content
-  field_publication_date_display:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 2
+    weight: 11
     region: content
   field_archive_url:
     type: link
@@ -70,23 +49,16 @@ content:
     third_party_settings: {  }
     weight: 3
     region: content
-  field_issue_pdf:
-    type: entity_reference_entity_view
+  field_cover_thumbnail:
+    type: image
     label: hidden
     settings:
-      view_mode: default
-      link: false
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    weight: 4
-    region: content
-  field_volume_number:
-    type: number_integer
-    label: inline
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 5
+    weight: 1
     region: content
   field_issue_number:
     type: number_integer
@@ -97,14 +69,14 @@ content:
     third_party_settings: {  }
     weight: 6
     region: content
-  field_sections:
+  field_issue_pdf:
     type: entity_reference_entity_view
     label: hidden
     settings:
-      view_mode: teaser_card
+      view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 7
+    weight: 4
     region: content
   field_journal_page_images_media:
     type: entity_reference_entity_view
@@ -131,16 +103,44 @@ content:
     third_party_settings: {  }
     weight: 10
     region: content
-  body:
-    type: text_default
+  field_publication_date_display:
+    type: string
     label: hidden
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    weight: 11
+    weight: 2
+    region: content
+  field_sections:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser_card
+      link: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_short_description:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_volume_number:
+    type: number_integer
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 5
     region: content
 hidden:
   field_journal: true
   field_journal_name: true
+  field_journal_pdf: true
   field_volume_reference: true
   footnotes_group: true
   links: true

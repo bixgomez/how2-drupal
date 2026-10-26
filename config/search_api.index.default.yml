@@ -123,12 +123,12 @@ field_settings:
         - anonymous
       view_mode:
         'entity:node':
+          article: full
           how2_article: full
           how_ever_article: full
           how_ever_section: full
-          journal_issue: full
-          article: full
           issue: full
+          journal_issue: full
           section: full
   title:
     label: Title
@@ -151,14 +151,14 @@ datasource_settings:
     bundles:
       default: false
       selected:
+        - article
         - how2_article
         - how2_issue
         - how2_section
         - how_ever_article
         - how_ever_section
-        - journal_issue
-        - article
         - issue
+        - journal_issue
         - section
     languages:
       default: true

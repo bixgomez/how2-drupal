@@ -5,7 +5,7 @@ dependencies:
   module:
     - node
 id: node_volume
-label: 'Volume'
+label: Volume
 type: 'canonical_entities:node'
 pattern: '/[node:field_journal_name]/v[node:field_volume_number]'
 selection_criteria:

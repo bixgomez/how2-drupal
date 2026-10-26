@@ -14,24 +14,11 @@ dependencies:
     - link
     - options
     - user
-third_party_settings: {  }
 id: node.volume.default
 targetEntityType: node
 bundle: volume
 mode: default
 content:
-  field_page_facsimile_link:
-    type: link
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    weight: 0
-    region: content
   field_archive_url:
     type: link
     label: hidden
@@ -59,6 +46,18 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 2
+    region: content
+  field_page_facsimile_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   field_journal: true

@@ -27,12 +27,20 @@ dependencies:
   module:
     - entity_reference_revisions
     - user
-third_party_settings: {  }
 id: node.section.teaser
 targetEntityType: node
 bundle: section
 mode: teaser
 content:
+  field_issue_number:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
   field_person_bio:
     type: entity_reference_revisions_entity_view
     label: hidden
@@ -50,15 +58,6 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 0
-    region: content
-  field_issue_number:
-    type: number_integer
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 1
     region: content
 hidden:
   body: true

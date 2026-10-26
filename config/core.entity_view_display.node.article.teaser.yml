@@ -26,28 +26,11 @@ dependencies:
     - entity_reference_revisions
     - text
     - user
-third_party_settings: {  }
 id: node.article.teaser
 targetEntityType: node
 bundle: article
 mode: teaser
 content:
-  field_title_display:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 0
-    region: content
-  field_volume_number:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 0
-    region: content
   field_issue_number:
     type: number_integer
     label: hidden
@@ -65,6 +48,22 @@ content:
       link: ''
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_title_display:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_volume_number:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   body: true

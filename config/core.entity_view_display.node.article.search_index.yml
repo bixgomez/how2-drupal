@@ -36,11 +36,6 @@ targetEntityType: node
 bundle: article
 mode: search_index
 content:
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 100
-    region: content
   field_archive_url:
     type: link
     label: above
@@ -53,22 +48,13 @@ content:
     third_party_settings: {  }
     weight: 102
     region: content
-  field_person_bio:
-    type: entity_reference_revisions_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    weight: 103
-    region: content
-  field_tags:
+  field_issue_reference:
     type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    weight: 104
+    weight: 108
     region: content
   field_media_type:
     type: entity_reference_label
@@ -78,21 +64,14 @@ content:
     third_party_settings: {  }
     weight: 105
     region: content
-  field_volume_reference:
-    type: entity_reference_label
+  field_person_bio:
+    type: entity_reference_revisions_entity_view
     label: above
     settings:
-      link: true
+      view_mode: default
+      link: ''
     third_party_settings: {  }
-    weight: 107
-    region: content
-  field_issue_reference:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 108
+    weight: 103
     region: content
   field_section_reference:
     type: entity_reference_label
@@ -101,6 +80,27 @@ content:
       link: true
     third_party_settings: {  }
     weight: 109
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_volume_reference:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
     region: content
 hidden:
   body: true

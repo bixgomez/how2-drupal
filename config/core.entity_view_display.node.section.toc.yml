@@ -26,25 +26,24 @@ dependencies:
     - node.type.section
   module:
     - user
-third_party_settings: {  }
 id: node.section.toc
 targetEntityType: node
 bundle: section
 mode: toc
 content:
-  field_volume_number:
-    type: number_unformatted
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 1
-    region: content
   field_issue_number:
     type: number_unformatted
     label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 2
+    region: content
+  field_volume_number:
+    type: number_unformatted
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
     region: content
   links:
     settings: {  }

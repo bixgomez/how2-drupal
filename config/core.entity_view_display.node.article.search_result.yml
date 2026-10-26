@@ -35,6 +35,14 @@ targetEntityType: node
 bundle: article
 mode: search_result
 content:
+  field_issue_reference:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
   field_person_bio:
     type: entity_reference_revisions_entity_view
     label: hidden
@@ -44,22 +52,6 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_volume_reference:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_issue_reference:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 3
-    region: content
   field_tags:
     type: entity_reference_label
     label: inline
@@ -67,6 +59,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 4
+    region: content
+  field_volume_reference:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
     region: content
 hidden:
   body: true

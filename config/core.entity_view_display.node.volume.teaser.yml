@@ -13,7 +13,6 @@ dependencies:
     - node.type.volume
   module:
     - user
-third_party_settings: {  }
 id: node.volume.teaser
 targetEntityType: node
 bundle: volume

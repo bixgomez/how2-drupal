@@ -5,7 +5,7 @@ dependencies:
   module:
     - node
 id: node_section
-label: 'Section'
+label: Section
 type: 'canonical_entities:node'
 pattern: '/[node:field_journal_name]/v[node:field_volume_reference:entity:field_volume_number]/n[node:field_issue_reference:entity:field_issue_number]/[node:title]'
 selection_criteria:

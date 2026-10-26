@@ -23,17 +23,11 @@ dependencies:
   module:
     - link
     - user
-third_party_settings: {  }
 id: node.issue.search_index
 targetEntityType: node
 bundle: issue
 mode: search_index
 content:
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 100
-    region: content
   field_archive_url:
     type: link
     label: above
@@ -46,6 +40,11 @@ content:
     third_party_settings: {  }
     weight: 102
     region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
 hidden:
   body: true
   field_cover_thumbnail: true
@@ -54,6 +53,7 @@ hidden:
   field_journal: true
   field_journal_name: true
   field_journal_page_images_media: true
+  field_journal_pdf: true
   field_masthead: true
   field_person_bio: true
   field_publication_date_display: true

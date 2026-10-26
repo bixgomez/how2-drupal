@@ -229,6 +229,7 @@ content:
 hidden:
   created: true
   field_journal_name: true
+  field_journal_pdf: true
   promote: true
   sticky: true
   uid: true

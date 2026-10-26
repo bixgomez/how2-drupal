@@ -24,7 +24,6 @@ dependencies:
     - node.type.article
   module:
     - user
-third_party_settings: {  }
 id: node.article.cross_post_teaser_card
 targetEntityType: node
 bundle: article
