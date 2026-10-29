@@ -114,10 +114,14 @@ class LegacyNodeAccessTest extends KernelTestBase {
    * Tests that anonymous users and Drush are not affected.
    */
   public function testAnonymousIsNotAffected(): void {
+    Role::create(['id' => 'anonymous', 'label' => 'Anonymous'])->save();
     user_role_grant_permissions('anonymous', ['access content']);
     $legacy = Node::create(['type' => 'how2_article', 'title' => 'Old', 'status' => 1]);
     $legacy->save();
+    $unified = Node::create(['type' => 'article', 'title' => 'New', 'status' => 1]);
+    $unified->save();
     $anonymous = User::getAnonymousUser();
+    $this->assertTrue($unified->access('view', $anonymous), 'Control: anonymous can view a published unified node.');
     $this->assertTrue($legacy->access('view', $anonymous), 'A published legacy node is still public until it is unpublished.');
   }
 
