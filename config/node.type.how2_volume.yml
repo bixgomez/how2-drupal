@@ -9,7 +9,7 @@ third_party_settings:
     available_menus:
       - main
     parent: 'main:views_view:views.journal_volumes.page_2'
-name: 'How2 Volume'
+name: 'Legacy: How2 Volume'
 type: how2_volume
 description: 'LEGACY - To be retired. Replaced by: volume'
 help: null

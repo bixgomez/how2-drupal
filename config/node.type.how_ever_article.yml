@@ -8,7 +8,7 @@ third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
-name: 'HOW(ever) Article'
+name: 'Legacy: HOW(ever) Article'
 type: how_ever_article
 description: 'LEGACY - To be retired. Replaced by: article'
 help: null

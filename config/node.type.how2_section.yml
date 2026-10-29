@@ -8,7 +8,7 @@ third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
-name: 'How2 Section'
+name: 'Legacy: How2 Section'
 type: how2_section
 description: 'LEGACY - To be retired. Replaced by: section'
 help: null
