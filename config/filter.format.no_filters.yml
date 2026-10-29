@@ -15,5 +15,6 @@ filters:
     weight: 0
     settings:
       footnotes_collapse: false
+      footnotes_clean_anchors: false
       footnotes_dialog: false
       footnotes_footer_disable: false

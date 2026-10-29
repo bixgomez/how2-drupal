@@ -18,6 +18,7 @@ filters:
     settings:
       footnotes_footer_disable: false
       footnotes_dialog: false
+      footnotes_clean_anchors: false
   filter_html_escape:
     id: filter_html_escape
     provider: filter

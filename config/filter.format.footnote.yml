@@ -16,6 +16,7 @@ filters:
     settings:
       footnotes_collapse: false
       footnotes_css: true
+      footnotes_clean_anchors: false
       footnotes_dialog: false
       footnotes_footer_disable: false
   filter_html:
