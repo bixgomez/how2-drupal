@@ -242,6 +242,20 @@ class BundleConfiguration {
   }
 
   /**
+   * Get every legacy bundle, across all stages.
+   *
+   * @return array
+   *   Legacy bundle machine names.
+   */
+  public function getAllLegacyBundles(): array {
+    $bundles = [];
+    foreach (MigrationStage::cases() as $stage) {
+      $bundles = array_merge($bundles, $this->getLegacyBundles($stage));
+    }
+    return $bundles;
+  }
+
+  /**
    * Get the field map used to migrate a legacy bundle to its unified bundle.
    *
    * Only fields whose value is copied unchanged are listed. References to
