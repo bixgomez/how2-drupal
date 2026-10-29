@@ -23,13 +23,13 @@ use Drupal\Core\Session\AccountInterface;
  * published legacy pages stay public until they are unpublished.
  */
 function however_customizations_node_access(NodeInterface $node, $op, AccountInterface $account) {
-  if ($account->isAnonymous() || !in_array($node->bundle(), \Drupal::service('however_customizations.bundle_config')->getAllLegacyBundles(), TRUE)) {
-    return AccessResult::neutral()->cachePerUser();
+  if (!in_array($node->bundle(), \Drupal::service('however_customizations.bundle_config')->getAllLegacyBundles(), TRUE)) {
+    return AccessResult::neutral();
   }
-  if ($account->hasPermission('bypass node access')) {
-    return AccessResult::neutral()->cachePerPermissions();
-  }
-  return AccessResult::forbidden('Legacy content is for administrators only.')->cachePerPermissions();
+  $result = $account->isAnonymous() || $account->hasPermission('bypass node access')
+    ? AccessResult::neutral()
+    : AccessResult::forbidden('Legacy content is for administrators only.');
+  return $result->addCacheContexts(['user.roles:anonymous', 'user.permissions']);
 }
 
 /**
